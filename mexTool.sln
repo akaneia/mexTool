@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mexTool", "mexTool\mexTool.csproj", "{F0B49209-4D0D-4627-BB6D-BCF015EB7B8A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{755580A7-D09D-4EEC-9129-2DD7A6951A31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{755580A7-D09D-4EEC-9129-2DD7A6951A31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{755580A7-D09D-4EEC-9129-2DD7A6951A31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{755580A7-D09D-4EEC-9129-2DD7A6951A31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED9126AF-8A1E-465D-840A-8754A945414D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED9126AF-8A1E-465D-840A-8754A945414D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED9126AF-8A1E-465D-840A-8754A945414D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED9126AF-8A1E-465D-840A-8754A945414D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0B49209-4D0D-4627-BB6D-BCF015EB7B8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0B49209-4D0D-4627-BB6D-BCF015EB7B8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0B49209-4D0D-4627-BB6D-BCF015EB7B8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0B49209-4D0D-4627-BB6D-BCF015EB7B8A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2BD7BB9C-DCD8-42F4-ACB2-3D190C1103E1}
+	EndGlobalSection
+EndGlobal

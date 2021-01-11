@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F0B49209-4D0D-4627-BB6D-BCF015EB7B8A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>mexTool</RootNamespace>
+    <AssemblyName>mexTool</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CSCore, Version=1.2.1.2, Culture=neutral, PublicKeyToken=5a08f2b6f4415dea, processorArchitecture=MSIL">
+      <HintPath>..\packages\CSCore.1.2.1.2\lib\net35-client\CSCore.dll</HintPath>
+    </Reference>
+    <Reference Include="GCILib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\GCILib.dll</HintPath>
+    </Reference>
+    <Reference Include="HSDRaw, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\HSDRaw.dll</HintPath>
+    </Reference>
+    <Reference Include="MeleeMedia, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\MeleeMedia.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="YamlDotNet, Version=9.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
+      <HintPath>..\packages\YamlDotNet.9.1.0\lib\net45\YamlDotNet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationSettings.cs" />
+    <Compile Include="Core\MEXMusic.cs" />
+    <Compile Include="Core\ImageResource.cs" />
+    <Compile Include="Core\Installer\MEXDolScrubber.cs" />
+    <Compile Include="Core\Installer\MEXInstaller.cs" />
+    <Compile Include="Core\Installer\MEXInstallerCSS.cs" />
+    <Compile Include="Core\Installer\MEXInstallerFighter.cs" />
+    <Compile Include="Core\Installer\MEXInstallerItem.cs" />
+    <Compile Include="Core\Installer\MEXInstallerKirby.cs" />
+    <Compile Include="Core\Installer\MEXInstallerMisc.cs" />
+    <Compile Include="Core\Installer\MEXInstallerScene.cs" />
+    <Compile Include="Core\Installer\MEXInstallerSound.cs" />
+    <Compile Include="Core\Installer\MEXInstallerStage.cs" />
+    <Compile Include="Core\MEX.cs" />
+    <Compile Include="Core\MEXCommonIcon.cs" />
+    <Compile Include="Core\MEXFighter.cs" />
+    <Compile Include="Core\MEXFighterIcon.cs" />
+    <Compile Include="Core\MEXFighterIDConverter.cs" />
+    <Compile Include="Core\MEXSerialization.cs" />
+    <Compile Include="Core\MEXSoundBank.cs" />
+    <Compile Include="Core\MEXStage.cs" />
+    <Compile Include="Core\MEXPlaylist.cs" />
+    <Compile Include="Core\MEXCostume.cs" />
+    <Compile Include="Core\MEXStageIcon.cs" />
+    <Compile Include="GUI\Controls\ISelectScreenIcon.cs" />
+    <Compile Include="GUI\Controls\ItemEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\ItemEditor.Designer.cs">
+      <DependentUpon>ItemEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\MXButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\MXCostumeEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\MXCostumeEditor.Designer.cs">
+      <DependentUpon>MXCostumeEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\MXEmblemEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\MXEmblemEditor.Designer.cs">
+      <DependentUpon>MXEmblemEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\MXListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\MxMusicPlayer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\MxMusicPlayer.Designer.cs">
+      <DependentUpon>MxMusicPlayer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\MXPictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\MXProgressBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\MXProgressBar.Designer.cs">
+      <DependentUpon>MXProgressBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\MXPropertyGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\MXScrollBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\MXFighterSelectEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\MXFighterSelectEditor.Designer.cs">
+      <DependentUpon>MXFighterSelectEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\MXSemEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\MXSemEditor.Designer.cs">
+      <DependentUpon>MXSemEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\MXSsmEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\MXSsmEditor.Designer.cs">
+      <DependentUpon>MXSsmEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\MXStageSelectEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\MXStageSelectEditor.Designer.cs">
+      <DependentUpon>MXStageSelectEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\MXTabControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\MXTabControl.Designer.cs">
+      <DependentUpon>MXTabControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\MXToolStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\PlaylistEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\PlaylistEditor.Designer.cs">
+      <DependentUpon>PlaylistEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\PlaylistEntry.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\PlaylistEntry.Designer.cs">
+      <DependentUpon>PlaylistEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\SelectScreenRenderer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\SelectScreenRenderer.Designer.cs">
+      <DependentUpon>SelectScreenRenderer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Controls\TransformWidget.cs" />
+    <Compile Include="GUI\DefaultItemNames.cs" />
+    <Compile Include="GUI\MenuColorTable.cs" />
+    <Compile Include="GUI\OpenFolderDialog.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GUI\Pages\FighterPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Pages\FighterPage.Designer.cs">
+      <DependentUpon>FighterPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Pages\MenuPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Pages\MenuPage.Designer.cs">
+      <DependentUpon>MenuPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Pages\MusicPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Pages\MusicPage.Designer.cs">
+      <DependentUpon>MusicPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Pages\SoundPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Pages\SoundPage.Designer.cs">
+      <DependentUpon>SoundPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Pages\StagePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Pages\StagePage.Designer.cs">
+      <DependentUpon>StagePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\ThemeColors.cs" />
+    <Compile Include="MxDtWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MxDtWindow.Designer.cs">
+      <DependentUpon>MxDtWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools\DSPExtensions.cs" />
+    <Compile Include="Tools\DSPPlayer.cs" />
+    <Compile Include="Tools\GraphicExtensions.cs" />
+    <Compile Include="Tools\ImageTools.cs" />
+    <Compile Include="Tools\ObjectExtensions.cs" />
+    <Compile Include="Tools\StageNameGenerator.cs" />
+    <Compile Include="Tools\ZipExtensions.cs" />
+    <EmbeddedResource Include="GUI\Controls\ItemEditor.resx">
+      <DependentUpon>ItemEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\MXCostumeEditor.resx">
+      <DependentUpon>MXCostumeEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\MXEmblemEditor.resx">
+      <DependentUpon>MXEmblemEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\MxMusicPlayer.resx">
+      <DependentUpon>MxMusicPlayer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\MXProgressBar.resx">
+      <DependentUpon>MXProgressBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\MXFighterSelectEditor.resx">
+      <DependentUpon>MXFighterSelectEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\MXSemEditor.resx">
+      <DependentUpon>MXSemEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\MXSsmEditor.resx">
+      <DependentUpon>MXSsmEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\MXStageSelectEditor.resx">
+      <DependentUpon>MXStageSelectEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\MXTabControl.resx">
+      <DependentUpon>MXTabControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\PlaylistEditor.resx">
+      <DependentUpon>PlaylistEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\PlaylistEntry.resx">
+      <DependentUpon>PlaylistEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\SelectScreenRenderer.resx">
+      <DependentUpon>SelectScreenRenderer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Pages\FighterPage.resx">
+      <DependentUpon>FighterPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Pages\MenuPage.resx">
+      <DependentUpon>MenuPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Pages\MusicPage.resx">
+      <DependentUpon>MusicPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Pages\SoundPage.resx">
+      <DependentUpon>SoundPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Pages\StagePage.resx">
+      <DependentUpon>StagePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MxDtWindow.resx">
+      <DependentUpon>MxDtWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="lib\A-OTF_Folk_Pro_H.otf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="lib\codes.gct">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="lib\dol.patch">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="lib\Palatino Linotype.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="lib\resource.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="lib\GCILib.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\HSDRaw.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\MeleeMedia.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\clean.png" />
+    <None Include="Resources\package.png" />
+    <None Include="Resources\image_add.png" />
+    <None Include="Resources\sound_wave.png" />
+    <None Include="Resources\balance.png" />
+    <None Include="Resources\priority.png" />
+    <None Include="Resources\timer.png" />
+    <None Include="Resources\snap_enable.png" />
+    <None Include="Resources\snap_disable.png" />
+    <None Include="Resources\zoom_out.png" />
+    <None Include="Resources\zoom_in.png" />
+    <None Include="Resources\right.png" />
+    <None Include="Resources\left.png" />
+    <None Include="Resources\color.png" />
+    <None Include="Resources\grid.png" />
+    <None Include="Resources\start.png" />
+    <None Include="Resources\end.png" />
+    <None Include="Resources\undo.png" />
+    <None Include="Resources\redo.png" />
+    <None Include="Resources\image_replace.png" />
+    <None Include="Resources\image_export.png" />
+    <None Include="Resources\copy.png" />
+    <None Include="Resources\kirby_costume_no.png" />
+    <None Include="Resources\kirby_costume.png" />
+    <None Include="Resources\up.png" />
+    <None Include="Resources\down.png" />
+    <None Include="Resources\plus.png" />
+    <None Include="Resources\minus.png" />
+    <None Include="Resources\delete_fighter.png" />
+    <None Include="Resources\add_fighter.png" />
+    <None Include="Resources\smashball_red.png" />
+    <None Include="Resources\smashball_purple.png" />
+    <None Include="Resources\smashball_grey.png" />
+    <None Include="Resources\replace.png" />
+    <None Include="Resources\export.png" />
+    <None Include="Resources\playlist.png" />
+    <None Include="Resources\delete.png" />
+    <None Include="Resources\add_music.png" />
+    <None Include="Resources\music.png" />
+    <None Include="Resources\stop.png" />
+    <None Include="Resources\play.png" />
+    <None Include="Resources\pause.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
