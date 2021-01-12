@@ -66,75 +66,63 @@ namespace mexTool.GUI.Pages
             // 
             // deleteButton
             // 
-            this.deleteButton.BackColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
-            this.deleteButton.BackColorLight = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(140)))));
-            this.deleteButton.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.deleteButton.BorderColor = System.Drawing.Color.Black;
             this.deleteButton.CornerRadius = 20;
-            this.deleteButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteButton.ForeColor = System.Drawing.Color.White;
             this.deleteButton.Image = global::mexTool.Properties.Resources.delete;
             this.deleteButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.deleteButton.ImageHeight = 32;
             this.deleteButton.ImageWidth = 32;
-            this.deleteButton.Location = new System.Drawing.Point(482, 10);
+            this.deleteButton.Location = new System.Drawing.Point(380, 10);
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(150, 50);
+            this.deleteButton.Size = new System.Drawing.Size(116, 50);
             this.deleteButton.TabIndex = 5;
-            this.deleteButton.Text = "Delete Music";
+            this.deleteButton.Text = "Delete";
             this.deleteButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // buttonExport
             // 
-            this.buttonExport.BackColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
-            this.buttonExport.BackColorLight = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(140)))));
-            this.buttonExport.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.buttonExport.BorderColor = System.Drawing.Color.Black;
             this.buttonExport.CornerRadius = 20;
-            this.buttonExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonExport.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonExport.ForeColor = System.Drawing.Color.White;
             this.buttonExport.Image = global::mexTool.Properties.Resources.export;
             this.buttonExport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonExport.ImageHeight = 32;
             this.buttonExport.ImageWidth = 32;
-            this.buttonExport.Location = new System.Drawing.Point(170, 10);
+            this.buttonExport.Location = new System.Drawing.Point(136, 10);
             this.buttonExport.Name = "buttonExport";
-            this.buttonExport.Size = new System.Drawing.Size(150, 50);
+            this.buttonExport.Size = new System.Drawing.Size(116, 50);
             this.buttonExport.TabIndex = 4;
-            this.buttonExport.Text = "Export Music";
+            this.buttonExport.Text = "Export";
             this.buttonExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.buttonExport.Click += new System.EventHandler(this.buttonExport_Click);
             // 
             // replaceButton
             // 
-            this.replaceButton.BackColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
-            this.replaceButton.BackColorLight = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(140)))));
-            this.replaceButton.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.replaceButton.BorderColor = System.Drawing.Color.Black;
             this.replaceButton.CornerRadius = 20;
-            this.replaceButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.replaceButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.replaceButton.ForeColor = System.Drawing.Color.White;
             this.replaceButton.Image = global::mexTool.Properties.Resources.replace;
             this.replaceButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.replaceButton.ImageHeight = 30;
             this.replaceButton.ImageWidth = 30;
-            this.replaceButton.Location = new System.Drawing.Point(326, 10);
+            this.replaceButton.Location = new System.Drawing.Point(258, 10);
             this.replaceButton.Name = "replaceButton";
-            this.replaceButton.Size = new System.Drawing.Size(150, 50);
+            this.replaceButton.Size = new System.Drawing.Size(116, 50);
             this.replaceButton.TabIndex = 4;
-            this.replaceButton.Text = "Replace Music";
+            this.replaceButton.Text = "Replace";
             this.replaceButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.replaceButton.Click += new System.EventHandler(this.replaceButton_Click);
             // 
             // importButton
             // 
-            this.importButton.BackColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
-            this.importButton.BackColorLight = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(140)))));
-            this.importButton.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.importButton.BorderColor = System.Drawing.Color.Black;
             this.importButton.CornerRadius = 20;
-            this.importButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.importButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.importButton.ForeColor = System.Drawing.Color.White;
             this.importButton.Image = global::mexTool.Properties.Resources.add_music;
             this.importButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -142,9 +130,9 @@ namespace mexTool.GUI.Pages
             this.importButton.ImageWidth = 32;
             this.importButton.Location = new System.Drawing.Point(14, 10);
             this.importButton.Name = "importButton";
-            this.importButton.Size = new System.Drawing.Size(150, 50);
+            this.importButton.Size = new System.Drawing.Size(116, 50);
             this.importButton.TabIndex = 4;
-            this.importButton.Text = "Import Music";
+            this.importButton.Text = "Import";
             this.importButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.importButton.Click += new System.EventHandler(this.importButton_Click);
             // 

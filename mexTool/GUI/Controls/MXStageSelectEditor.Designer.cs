@@ -258,7 +258,7 @@ namespace mexTool.GUI.Controls
             // stageListBox
             // 
             this.stageListBox.DataSource = null;
-            this.stageListBox.DisplayItemIndices = false;
+            this.stageListBox.DisplayItemIndices = true;
             this.stageListBox.EnableDragReorder = false;
             this.stageListBox.EnableTOBJ = false;
             this.stageListBox.ForeColor = System.Drawing.Color.White;

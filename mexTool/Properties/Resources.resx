@@ -127,6 +127,21 @@
   <data name="balance" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\balance.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="category_fighter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\category_fighter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="category_menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\category_menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="category_music" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\category_music.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="category_sound" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\category_sound.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="category_stage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\category_stage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="clean" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\clean.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

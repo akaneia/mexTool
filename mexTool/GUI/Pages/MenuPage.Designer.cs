@@ -38,10 +38,8 @@ namespace mexTool.GUI.Pages
             // 
             // buttonPlaylistTab
             // 
-            this.buttonPlaylistTab.BackColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
-            this.buttonPlaylistTab.BackColorLight = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(140)))));
-            this.buttonPlaylistTab.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.buttonPlaylistTab.BorderColor = System.Drawing.Color.Black;
+            this.buttonPlaylistTab.CornerRadius = 1;
             this.buttonPlaylistTab.ForeColor = System.Drawing.Color.White;
             this.buttonPlaylistTab.Location = new System.Drawing.Point(16, 15);
             this.buttonPlaylistTab.Name = "buttonPlaylistTab";
@@ -53,10 +51,8 @@ namespace mexTool.GUI.Pages
             // 
             // buttonCSSTab
             // 
-            this.buttonCSSTab.BackColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
-            this.buttonCSSTab.BackColorLight = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(140)))));
-            this.buttonCSSTab.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.buttonCSSTab.BorderColor = System.Drawing.Color.Black;
+            this.buttonCSSTab.CornerRadius = 1;
             this.buttonCSSTab.ForeColor = System.Drawing.Color.White;
             this.buttonCSSTab.Location = new System.Drawing.Point(107, 15);
             this.buttonCSSTab.Name = "buttonCSSTab";
@@ -68,10 +64,8 @@ namespace mexTool.GUI.Pages
             // 
             // buttonSSSTab
             // 
-            this.buttonSSSTab.BackColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
-            this.buttonSSSTab.BackColorLight = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(140)))));
-            this.buttonSSSTab.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.buttonSSSTab.BorderColor = System.Drawing.Color.Black;
+            this.buttonSSSTab.CornerRadius = 1;
             this.buttonSSSTab.ForeColor = System.Drawing.Color.White;
             this.buttonSSSTab.Location = new System.Drawing.Point(188, 15);
             this.buttonSSSTab.Name = "buttonSSSTab";
@@ -93,10 +87,8 @@ namespace mexTool.GUI.Pages
             // 
             // buttonEmblemTab
             // 
-            this.buttonEmblemTab.BackColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
-            this.buttonEmblemTab.BackColorLight = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(140)))));
-            this.buttonEmblemTab.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.buttonEmblemTab.BorderColor = System.Drawing.Color.Black;
+            this.buttonEmblemTab.CornerRadius = 1;
             this.buttonEmblemTab.ForeColor = System.Drawing.Color.White;
             this.buttonEmblemTab.Location = new System.Drawing.Point(269, 15);
             this.buttonEmblemTab.Name = "buttonEmblemTab";

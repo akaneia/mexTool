@@ -29,16 +29,10 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.buttonSound = new System.Windows.Forms.Button();
-            this.buttonMusic = new System.Windows.Forms.Button();
-            this.buttonMenu = new System.Windows.Forms.Button();
-            this.buttonStages = new System.Windows.Forms.Button();
-            this.buttonFighter = new System.Windows.Forms.Button();
             this.headerPanel = new System.Windows.Forms.Panel();
             this.labelGameName = new System.Windows.Forms.Label();
             this.labelSaving = new System.Windows.Forms.Label();
             this.progressBarSaving = new System.Windows.Forms.ProgressBar();
-            this.pictureBoxBanner = new mexTool.GUI.Controls.MXPictureBox();
             this.buttonMin = new System.Windows.Forms.Button();
             this.buttonMinMax = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
@@ -52,10 +46,18 @@
             this.iSOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileSystemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonSound = new System.Windows.Forms.Button();
+            this.buttonMusic = new System.Windows.Forms.Button();
+            this.buttonMenu = new System.Windows.Forms.Button();
+            this.buttonStages = new System.Windows.Forms.Button();
+            this.buttonFighter = new System.Windows.Forms.Button();
+            this.pictureBoxBanner = new mexTool.GUI.Controls.MXPictureBox();
+            this.savePanel = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.headerPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBanner)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBanner)).BeginInit();
+            this.savePanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -66,121 +68,19 @@
             this.panel1.Controls.Add(this.buttonMenu);
             this.panel1.Controls.Add(this.buttonStages);
             this.panel1.Controls.Add(this.buttonFighter);
+            this.panel1.Controls.Add(this.pictureBoxBanner);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.ForeColor = System.Drawing.Color.White;
-            this.panel1.Location = new System.Drawing.Point(0, 99);
+            this.panel1.Location = new System.Drawing.Point(0, 36);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(182, 539);
+            this.panel1.Size = new System.Drawing.Size(201, 602);
             this.panel1.TabIndex = 0;
-            // 
-            // buttonSound
-            // 
-            this.buttonSound.BackColor = System.Drawing.Color.Transparent;
-            this.buttonSound.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonSound.FlatAppearance.BorderSize = 0;
-            this.buttonSound.FlatAppearance.MouseDownBackColor = System.Drawing.Color.RoyalBlue;
-            this.buttonSound.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue;
-            this.buttonSound.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSound.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSound.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonSound.Location = new System.Drawing.Point(0, 208);
-            this.buttonSound.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonSound.Name = "buttonSound";
-            this.buttonSound.Size = new System.Drawing.Size(182, 52);
-            this.buttonSound.TabIndex = 4;
-            this.buttonSound.Text = "Sound";
-            this.buttonSound.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.buttonSound.UseVisualStyleBackColor = false;
-            this.buttonSound.Click += new System.EventHandler(this.buttonSound_Click);
-            // 
-            // buttonMusic
-            // 
-            this.buttonMusic.BackColor = System.Drawing.Color.Transparent;
-            this.buttonMusic.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonMusic.FlatAppearance.BorderSize = 0;
-            this.buttonMusic.FlatAppearance.MouseDownBackColor = System.Drawing.Color.RoyalBlue;
-            this.buttonMusic.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue;
-            this.buttonMusic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonMusic.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonMusic.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonMusic.Location = new System.Drawing.Point(0, 156);
-            this.buttonMusic.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonMusic.Name = "buttonMusic";
-            this.buttonMusic.Size = new System.Drawing.Size(182, 52);
-            this.buttonMusic.TabIndex = 3;
-            this.buttonMusic.Text = "Music";
-            this.buttonMusic.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.buttonMusic.UseVisualStyleBackColor = false;
-            this.buttonMusic.Click += new System.EventHandler(this.buttonMusic_Click);
-            // 
-            // buttonMenu
-            // 
-            this.buttonMenu.BackColor = System.Drawing.Color.Transparent;
-            this.buttonMenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonMenu.FlatAppearance.BorderSize = 0;
-            this.buttonMenu.FlatAppearance.MouseDownBackColor = System.Drawing.Color.RoyalBlue;
-            this.buttonMenu.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue;
-            this.buttonMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonMenu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonMenu.Location = new System.Drawing.Point(0, 104);
-            this.buttonMenu.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonMenu.Name = "buttonMenu";
-            this.buttonMenu.Size = new System.Drawing.Size(182, 52);
-            this.buttonMenu.TabIndex = 2;
-            this.buttonMenu.Text = "Menus";
-            this.buttonMenu.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.buttonMenu.UseVisualStyleBackColor = false;
-            this.buttonMenu.Click += new System.EventHandler(this.buttonMenu_Click);
-            // 
-            // buttonStages
-            // 
-            this.buttonStages.BackColor = System.Drawing.Color.Transparent;
-            this.buttonStages.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonStages.FlatAppearance.BorderSize = 0;
-            this.buttonStages.FlatAppearance.MouseDownBackColor = System.Drawing.Color.RoyalBlue;
-            this.buttonStages.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue;
-            this.buttonStages.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonStages.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonStages.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonStages.Location = new System.Drawing.Point(0, 52);
-            this.buttonStages.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonStages.Name = "buttonStages";
-            this.buttonStages.Size = new System.Drawing.Size(182, 52);
-            this.buttonStages.TabIndex = 1;
-            this.buttonStages.Text = "Stages";
-            this.buttonStages.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.buttonStages.UseVisualStyleBackColor = false;
-            this.buttonStages.Click += new System.EventHandler(this.buttonStages_Click);
-            // 
-            // buttonFighter
-            // 
-            this.buttonFighter.BackColor = System.Drawing.Color.Transparent;
-            this.buttonFighter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonFighter.FlatAppearance.BorderSize = 0;
-            this.buttonFighter.FlatAppearance.MouseDownBackColor = System.Drawing.Color.RoyalBlue;
-            this.buttonFighter.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue;
-            this.buttonFighter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonFighter.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonFighter.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonFighter.Location = new System.Drawing.Point(0, 0);
-            this.buttonFighter.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonFighter.Name = "buttonFighter";
-            this.buttonFighter.Size = new System.Drawing.Size(182, 52);
-            this.buttonFighter.TabIndex = 0;
-            this.buttonFighter.Text = "Fighters";
-            this.buttonFighter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.buttonFighter.UseVisualStyleBackColor = false;
-            this.buttonFighter.Click += new System.EventHandler(this.buttonFighter_Click);
             // 
             // headerPanel
             // 
             this.headerPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
             this.headerPanel.Controls.Add(this.labelGameName);
-            this.headerPanel.Controls.Add(this.labelSaving);
-            this.headerPanel.Controls.Add(this.progressBarSaving);
-            this.headerPanel.Controls.Add(this.pictureBoxBanner);
             this.headerPanel.Controls.Add(this.buttonMin);
             this.headerPanel.Controls.Add(this.buttonMinMax);
             this.headerPanel.Controls.Add(this.buttonClose);
@@ -191,7 +91,7 @@
             this.headerPanel.Location = new System.Drawing.Point(0, 0);
             this.headerPanel.Margin = new System.Windows.Forms.Padding(2);
             this.headerPanel.Name = "headerPanel";
-            this.headerPanel.Size = new System.Drawing.Size(918, 99);
+            this.headerPanel.Size = new System.Drawing.Size(918, 36);
             this.headerPanel.TabIndex = 1;
             this.headerPanel.DoubleClick += new System.EventHandler(this.headerPanel_DoubleClick);
             this.headerPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.headerPanel_MouseDown);
@@ -199,7 +99,7 @@
             // labelGameName
             // 
             this.labelGameName.AutoSize = true;
-            this.labelGameName.Location = new System.Drawing.Point(209, 26);
+            this.labelGameName.Location = new System.Drawing.Point(102, 2);
             this.labelGameName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelGameName.Name = "labelGameName";
             this.labelGameName.Size = new System.Drawing.Size(99, 20);
@@ -209,36 +109,22 @@
             // labelSaving
             // 
             this.labelSaving.AutoSize = true;
-            this.labelSaving.Location = new System.Drawing.Point(206, 71);
+            this.labelSaving.Location = new System.Drawing.Point(-1, 4);
             this.labelSaving.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelSaving.Name = "labelSaving";
             this.labelSaving.Size = new System.Drawing.Size(69, 20);
             this.labelSaving.TabIndex = 6;
             this.labelSaving.Text = "Saving...";
-            this.labelSaving.Visible = false;
             // 
             // progressBarSaving
             // 
             this.progressBarSaving.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBarSaving.Location = new System.Drawing.Point(276, 71);
+            this.progressBarSaving.Location = new System.Drawing.Point(4, 26);
             this.progressBarSaving.Margin = new System.Windows.Forms.Padding(2);
             this.progressBarSaving.Name = "progressBarSaving";
-            this.progressBarSaving.Size = new System.Drawing.Size(633, 19);
+            this.progressBarSaving.Size = new System.Drawing.Size(711, 37);
             this.progressBarSaving.TabIndex = 5;
-            this.progressBarSaving.Visible = false;
-            // 
-            // pictureBoxBanner
-            // 
-            this.pictureBoxBanner.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxBanner.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-            this.pictureBoxBanner.Location = new System.Drawing.Point(9, 25);
-            this.pictureBoxBanner.Margin = new System.Windows.Forms.Padding(2);
-            this.pictureBoxBanner.Name = "pictureBoxBanner";
-            this.pictureBoxBanner.Size = new System.Drawing.Size(192, 65);
-            this.pictureBoxBanner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxBanner.TabIndex = 4;
-            this.pictureBoxBanner.TabStop = false;
             // 
             // buttonMin
             // 
@@ -379,6 +265,150 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.aboutToolStripMenuItem.Text = "About";
             // 
+            // buttonSound
+            // 
+            this.buttonSound.BackColor = System.Drawing.Color.Transparent;
+            this.buttonSound.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonSound.FlatAppearance.BorderSize = 0;
+            this.buttonSound.FlatAppearance.MouseDownBackColor = System.Drawing.Color.RoyalBlue;
+            this.buttonSound.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.buttonSound.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSound.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSound.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(200)))), ((int)(((byte)(220)))));
+            this.buttonSound.Image = global::mexTool.Properties.Resources.category_sound;
+            this.buttonSound.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonSound.Location = new System.Drawing.Point(0, 289);
+            this.buttonSound.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonSound.Name = "buttonSound";
+            this.buttonSound.Size = new System.Drawing.Size(201, 56);
+            this.buttonSound.TabIndex = 4;
+            this.buttonSound.Text = " Sound";
+            this.buttonSound.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonSound.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonSound.UseVisualStyleBackColor = false;
+            this.buttonSound.Click += new System.EventHandler(this.buttonSound_Click);
+            // 
+            // buttonMusic
+            // 
+            this.buttonMusic.BackColor = System.Drawing.Color.Transparent;
+            this.buttonMusic.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonMusic.FlatAppearance.BorderSize = 0;
+            this.buttonMusic.FlatAppearance.MouseDownBackColor = System.Drawing.Color.RoyalBlue;
+            this.buttonMusic.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.buttonMusic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonMusic.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonMusic.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(200)))), ((int)(((byte)(220)))));
+            this.buttonMusic.Image = global::mexTool.Properties.Resources.category_music;
+            this.buttonMusic.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonMusic.Location = new System.Drawing.Point(0, 233);
+            this.buttonMusic.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonMusic.Name = "buttonMusic";
+            this.buttonMusic.Size = new System.Drawing.Size(201, 56);
+            this.buttonMusic.TabIndex = 3;
+            this.buttonMusic.Text = " Music";
+            this.buttonMusic.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonMusic.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonMusic.UseVisualStyleBackColor = false;
+            this.buttonMusic.Click += new System.EventHandler(this.buttonMusic_Click);
+            // 
+            // buttonMenu
+            // 
+            this.buttonMenu.BackColor = System.Drawing.Color.Transparent;
+            this.buttonMenu.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonMenu.FlatAppearance.BorderSize = 0;
+            this.buttonMenu.FlatAppearance.MouseDownBackColor = System.Drawing.Color.RoyalBlue;
+            this.buttonMenu.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.buttonMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonMenu.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonMenu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(200)))), ((int)(((byte)(220)))));
+            this.buttonMenu.Image = global::mexTool.Properties.Resources.category_menu;
+            this.buttonMenu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonMenu.Location = new System.Drawing.Point(0, 177);
+            this.buttonMenu.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonMenu.Name = "buttonMenu";
+            this.buttonMenu.Size = new System.Drawing.Size(201, 56);
+            this.buttonMenu.TabIndex = 2;
+            this.buttonMenu.Text = " Menus";
+            this.buttonMenu.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonMenu.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonMenu.UseVisualStyleBackColor = false;
+            this.buttonMenu.Click += new System.EventHandler(this.buttonMenu_Click);
+            // 
+            // buttonStages
+            // 
+            this.buttonStages.BackColor = System.Drawing.Color.Transparent;
+            this.buttonStages.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonStages.FlatAppearance.BorderSize = 0;
+            this.buttonStages.FlatAppearance.MouseDownBackColor = System.Drawing.Color.RoyalBlue;
+            this.buttonStages.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.buttonStages.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonStages.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonStages.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(200)))), ((int)(((byte)(220)))));
+            this.buttonStages.Image = global::mexTool.Properties.Resources.category_stage;
+            this.buttonStages.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonStages.Location = new System.Drawing.Point(0, 121);
+            this.buttonStages.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonStages.Name = "buttonStages";
+            this.buttonStages.Size = new System.Drawing.Size(201, 56);
+            this.buttonStages.TabIndex = 1;
+            this.buttonStages.Text = " Stages";
+            this.buttonStages.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonStages.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonStages.UseVisualStyleBackColor = false;
+            this.buttonStages.Click += new System.EventHandler(this.buttonStages_Click);
+            // 
+            // buttonFighter
+            // 
+            this.buttonFighter.BackColor = System.Drawing.Color.Transparent;
+            this.buttonFighter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.buttonFighter.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonFighter.FlatAppearance.BorderSize = 0;
+            this.buttonFighter.FlatAppearance.MouseDownBackColor = System.Drawing.Color.RoyalBlue;
+            this.buttonFighter.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.buttonFighter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonFighter.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonFighter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(200)))), ((int)(((byte)(220)))));
+            this.buttonFighter.Image = global::mexTool.Properties.Resources.category_fighter;
+            this.buttonFighter.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonFighter.Location = new System.Drawing.Point(0, 65);
+            this.buttonFighter.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonFighter.Name = "buttonFighter";
+            this.buttonFighter.Size = new System.Drawing.Size(201, 56);
+            this.buttonFighter.TabIndex = 0;
+            this.buttonFighter.Text = " Fighters";
+            this.buttonFighter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonFighter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonFighter.UseVisualStyleBackColor = false;
+            this.buttonFighter.Click += new System.EventHandler(this.buttonFighter_Click);
+            // 
+            // pictureBoxBanner
+            // 
+            this.pictureBoxBanner.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxBanner.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pictureBoxBanner.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            this.pictureBoxBanner.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxBanner.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBoxBanner.Name = "pictureBoxBanner";
+            this.pictureBoxBanner.Size = new System.Drawing.Size(201, 65);
+            this.pictureBoxBanner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxBanner.TabIndex = 4;
+            this.pictureBoxBanner.TabStop = false;
+            // 
+            // savePanel
+            // 
+            this.savePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
+            this.savePanel.Controls.Add(this.progressBarSaving);
+            this.savePanel.Controls.Add(this.labelSaving);
+            this.savePanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.savePanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.savePanel.ForeColor = System.Drawing.Color.White;
+            this.savePanel.Location = new System.Drawing.Point(201, 36);
+            this.savePanel.Margin = new System.Windows.Forms.Padding(2);
+            this.savePanel.Name = "savePanel";
+            this.savePanel.Size = new System.Drawing.Size(717, 65);
+            this.savePanel.TabIndex = 2;
+            this.savePanel.Visible = false;
+            // 
             // MxDtWindow
             // 
             this.AllowDrop = true;
@@ -387,6 +417,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(40)))));
             this.ClientSize = new System.Drawing.Size(918, 638);
             this.ControlBox = false;
+            this.Controls.Add(this.savePanel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.headerPanel);
             this.KeyPreview = true;
@@ -397,9 +428,11 @@
             this.panel1.ResumeLayout(false);
             this.headerPanel.ResumeLayout(false);
             this.headerPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBanner)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBanner)).EndInit();
+            this.savePanel.ResumeLayout(false);
+            this.savePanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -430,5 +463,6 @@
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem iSOToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fileSystemToolStripMenuItem;
+        private System.Windows.Forms.Panel savePanel;
     }
 }

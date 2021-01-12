@@ -105,14 +105,14 @@ namespace mexTool.GUI.Controls
                         _removedGawCostume = MEX.GaWColors[args.NewIndex];
                         MEX.GaWColors.RemoveAt(args.NewIndex);
                     }
-                    /*if (MEX.Fighters.IndexOf(_fighter) == KirbyIndex)
+                    if (MEX.Fighters.IndexOf(_fighter) == KirbyIndex)
                     {
                         foreach (var v in MEX.Fighters)
                         {
                             if (v.KirbyCostumes != null && v.KirbyCostumes.Count > 0)
                                 v.KirbyCostumes.RemoveAt(args.NewIndex);
                         }
-                    }*/
+                    }
                     break;
                 case ListChangedType.ItemAdded:
                     if (MEX.Fighters.IndexOf(_fighter) == GAWIndex)
@@ -127,14 +127,14 @@ namespace mexTool.GUI.Controls
                         _costumes[args.NewIndex].Costume.JointSymbol = "PlyGamewatch5K_Share_joint";
                     }
 
-                    /*if (MEX.Fighters.IndexOf(_fighter) == KirbyIndex)
+                    if (MEX.Fighters.IndexOf(_fighter) == KirbyIndex)
                     {
                         foreach (var v in MEX.Fighters)
                         {
                             if (v.KirbyCostumes != null && v.KirbyCostumes.Count > 0)
                                 v.KirbyCostumes.Insert(args.NewIndex, GenerateCostume());
                         }
-                    }*/
+                    }
                     break;
             }
         }
@@ -279,6 +279,9 @@ namespace mexTool.GUI.Controls
         /// <param name="e"></param>
         private void moveUp_Click(object sender, EventArgs e)
         {
+            if (MEX.Fighters.IndexOf(_fighter) == KirbyIndex)
+                return;
+
             var index = mxListBox1.SelectedIndex;
             if (_costumes.MoveUp(index))
                 mxListBox1.SelectedIndex = index - 1;
@@ -292,6 +295,9 @@ namespace mexTool.GUI.Controls
         /// <param name="e"></param>
         private void moveDown_Click(object sender, EventArgs e)
         {
+            if (MEX.Fighters.IndexOf(_fighter) == KirbyIndex)
+                return;
+
             var index = mxListBox1.SelectedIndex;
             if (_costumes.MoveDown(index))
                 mxListBox1.SelectedIndex = index + 1;

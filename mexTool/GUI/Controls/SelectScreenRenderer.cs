@@ -95,14 +95,20 @@ namespace mexTool.GUI.Controls
         /// <summary>
         /// 
         /// </summary>
-        public void SelectItems(IEnumerable<ISelectScreenIcon> items)
+        public void SelectItems(IEnumerable<ISelectScreenIcon> items, bool add)
         {
             Do();
 
-            _selectedIcons.Clear();
+            if(!add)
+                _selectedIcons.Clear();
 
             foreach (var v in items)
-                _selectedIcons.Add(v);
+            {
+                if (_selectedIcons.Contains(v))
+                    _selectedIcons.Remove(v);
+                else
+                    _selectedIcons.Add(v);
+            }
 
             OnSelectedIconChanged(new PropertyValueChangedEventArgs(null, null));
 
@@ -372,10 +378,13 @@ namespace mexTool.GUI.Controls
                     {
                         var bound = GetIconBounds(icon);
 
-                        e.Graphics.DrawImage(icon.GetImage(), bound, PositionMode == PositionMode.Start ? icon.StartRZ : icon.RZ);
+                        //e.Graphics.DrawImage(icon.GetImage(), bound, PositionMode == PositionMode.Start ? icon.StartRZ : icon.RZ);
 
-                        _transformTool.SetBound(bound);
-                        _transformTool.Draw(e.Graphics);
+                        if (Mode == TransformMode.NONE)
+                        {
+                            _transformTool.SetBound(bound);
+                            _transformTool.Draw(e.Graphics);
+                        }
 
                         // render animation movement preview
                         if (PositionMode == PositionMode.Start)
@@ -406,7 +415,7 @@ namespace mexTool.GUI.Controls
                 {
                     using (var pen = new Pen(Color.White))
                     {
-                        pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+                        pen.DashStyle = DashStyle.Dash;
                         e.Graphics.DrawRectangle(pen, SelectArea);
                     }
                 }
@@ -618,59 +627,58 @@ namespace mexTool.GUI.Controls
                     var focusBound = GetIconBounds(FocusedIcon, true);
                     var focalPoint = new PointF((focusBound.X + focusBound.Width / 2), (focusBound.Y + focusBound.Height / 2));
 
-                    if (Math.Pow(MouseLocation.X - focalPoint.X, 2) +
-                        Math.Pow(MouseLocation.Y - focalPoint.Y, 2) >
-                        Math.Pow(5 * Zoom, 2))
+                    var dis = Math.Pow(MouseLocation.X - focalPoint.X, 2) +
+                        Math.Pow(MouseLocation.Y - focalPoint.Y, 2);
+
+                    if (dis > 3 * Zoom)
                     {
                         deltaMouse = new PointF(
                             (MouseLocation.X - focalPoint.X) / Zoom,
                             (MouseLocation.Y - focalPoint.Y) / Zoom);
                     }
                     else
-                    foreach (var icon in Icons)
-                    {
-                        // skip selected icons
-                        if (_selectedIcons.Contains(icon))
-                            continue;
-
-                        // check edges of focus bound with icon
-                        var iconBounds = GetIconBounds(icon, true);
-
-                        // if edges are within threshold then snap to them 
-                        // (delta = (snap.x - focus) / Zoom)
-
-                        var side = 
-                                focusBound.Y + focusBound.Height > iconBounds.Y && 
-                                focusBound.Y < iconBounds.Y + iconBounds.Height
-                                && Math.Abs(deltaMouse.X) < 0.2f;
-
-                        if (side)
+                        foreach (var icon in Icons)
                         {
-                            var f = focusBound.X + focusBound.Width;
-                            var i = iconBounds.X;
-                            if (Math.Abs(f - i) < 0.4 * Zoom) deltaMouse.X = (i - f) / Zoom;
+                            // skip selected icons
+                            if (_selectedIcons.Contains(icon))
+                                continue;
 
-                            f = focusBound.X;
-                            i = iconBounds.X + iconBounds.Width;
-                            if (Math.Abs(f - i) < 0.4 * Zoom) deltaMouse.X = (i - f) / Zoom;
+                            // check edges of focus bound with icon
+                            var iconBounds = GetIconBounds(icon, true);
+
+                            // if edges are within threshold then snap to them 
+                            // (delta = (snap.x - focus) / Zoom)
+
+                            var side =
+                                    focusBound.Y + focusBound.Height > iconBounds.Y &&
+                                    focusBound.Y < iconBounds.Y + iconBounds.Height;
+
+                            if (side)
+                            {
+                                var f = focusBound.X + focusBound.Width;
+                                var i = iconBounds.X;
+                                if (Math.Abs(f - i) < 0.4 * Zoom) deltaMouse.X = (i - f) / Zoom;
+
+                                f = focusBound.X;
+                                i = iconBounds.X + iconBounds.Width;
+                                if (Math.Abs(f - i) < 0.4 * Zoom) deltaMouse.X = (i - f) / Zoom;
+                            }
+
+                            var top =
+                                    focusBound.X + focusBound.Width > iconBounds.X &&
+                                    focusBound.X < iconBounds.X + iconBounds.Width;
+
+                            if (top)
+                            {
+                                var f = focusBound.Y + focusBound.Height;
+                                var i = iconBounds.Y;
+                                if (Math.Abs(f - i) < 0.4 * Zoom) deltaMouse.Y = (i - f) / Zoom;
+
+                                f = focusBound.Y;
+                                i = iconBounds.Y + iconBounds.Height;
+                                if (Math.Abs(f - i) < 0.4 * Zoom) deltaMouse.Y = (i - f) / Zoom;
+                            }
                         }
-
-                        var top =
-                                focusBound.X + focusBound.Width > iconBounds.X &&
-                                focusBound.X < iconBounds.X + iconBounds.Width
-                                && Math.Abs(deltaMouse.Y) < 0.2f;
-
-                        if (top)
-                        {
-                            var f = focusBound.Y + focusBound.Height;
-                            var i = iconBounds.Y;
-                            if (Math.Abs(f - i) < 0.4 * Zoom) deltaMouse.Y = (i - f) / Zoom;
-
-                            f = focusBound.Y;
-                            i = iconBounds.Y + iconBounds.Height;
-                            if (Math.Abs(f - i) < 0.4 * Zoom) deltaMouse.Y = (i - f) / Zoom;
-                        }
-                    }
                 }
             }
 
@@ -726,7 +734,11 @@ namespace mexTool.GUI.Controls
             // begin transforming
             if (!MovingCamera && e.Button == MouseButtons.Left)
             {
-                Mode = PendingMode;
+
+                if (!(ModifierKeys == Keys.Control || ModifierKeys == Keys.Shift))
+                    Mode = PendingMode;
+                else
+                    Mode = TransformMode.NONE;
 
                 if (Mode != TransformMode.NONE)
                 {
@@ -775,15 +787,16 @@ namespace mexTool.GUI.Controls
                 var selectOne = Math.Sqrt(Math.Pow(MouseLocation.X - StartSelect.X, 2) + Math.Pow(MouseLocation.Y - StartSelect.Y, 2)) < 1;
                 if (Mode == TransformMode.NONE && Selecting)
                 {
-                    
-                    if(selectOne)
+                    bool multiSelect = ModifierKeys == Keys.Control || ModifierKeys == Keys.Shift;
+
+                    if (selectOne)
                     {
                         var selIcon = Icons.LastOrDefault(ico => SelectArea.IntersectsWith(GetIconBounds(ico)));
 
                         if (selIcon != null)
-                            SelectItems(new ISelectScreenIcon[] { selIcon });
+                            SelectItems(new ISelectScreenIcon[] { selIcon }, multiSelect);
                         else
-                            SelectItems(new ISelectScreenIcon[0]);
+                            SelectItems(new ISelectScreenIcon[0], multiSelect);
 
                     }
                     else
@@ -794,7 +807,7 @@ namespace mexTool.GUI.Controls
                             if (SelectArea.IntersectsWith(GetIconBounds(icon)))
                                 selectedIcons.Add(icon);
 
-                        SelectItems(selectedIcons);
+                        SelectItems(selectedIcons, multiSelect);
                     }
                 }
                 else
@@ -1116,6 +1129,16 @@ namespace mexTool.GUI.Controls
                 icon.StartWidth = icon.Width;
             }
 
+            RefreshDraw();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void drawPanel_Resize(object sender, EventArgs e)
+        {
             RefreshDraw();
         }
     }

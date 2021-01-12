@@ -163,7 +163,7 @@ namespace mexTool.GUI.Controls
         [Category("Appearance")]
         [Description("")]
         public Color BackFillColor { get => _backFillColor; set { _backFillColor = value; Invalidate(); } } 
-        private Color _backFillColor = Color.FromArgb(80, 80, 80);
+        private Color _backFillColor = Color.FromArgb(80, 80, 100);
 
         //DefaultSize
         protected override System.Drawing.Size DefaultSize

@@ -36,7 +36,7 @@ namespace mexTool.GUI.Controls
 
             UpdatingSelected = true;
 
-            renderer.SelectItems(UpdatePropertyGrid());
+            renderer.SelectItems(UpdatePropertyGrid(), false);
 
             UpdatingSelected = false;
         }

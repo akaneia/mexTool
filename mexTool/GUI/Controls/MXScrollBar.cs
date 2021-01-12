@@ -7,7 +7,7 @@ namespace mexTool.GUI.Controls
 {
     public class MXScrollBar : UserControl
     {
-        public Color BarColor { get; set; } = Color.FromArgb(35, 35, 50);
+        public Color BarColor { get; set; } = Color.FromArgb(20, 20, 30);
 
         public override Color BackColor { get; set; } = Color.FromArgb(40, 40, 50);
 

@@ -35,6 +35,7 @@ namespace mexTool.GUI.Controls
             this.mxToolStrip1 = new mexTool.GUI.Controls.MXToolStrip();
             this.playButton = new System.Windows.Forms.ToolStripButton();
             this.startEndToggle = new System.Windows.Forms.ToolStripButton();
+            this.buttonResetAnimation = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.undoButton = new System.Windows.Forms.ToolStripButton();
             this.redoButton = new System.Windows.Forms.ToolStripButton();
@@ -52,7 +53,6 @@ namespace mexTool.GUI.Controls
             this.gridWidthBox = new System.Windows.Forms.ToolStripTextBox();
             this.gridHeightLabel = new System.Windows.Forms.ToolStripLabel();
             this.gridHeightBox = new System.Windows.Forms.ToolStripTextBox();
-            this.buttonResetAnimation = new System.Windows.Forms.ToolStripButton();
             this.mxToolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -77,6 +77,7 @@ namespace mexTool.GUI.Controls
             this.drawPanel.MouseLeave += new System.EventHandler(this.drawPanel_MouseLeave);
             this.drawPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.drawPanel_MouseMove);
             this.drawPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.drawPanel_MouseUp);
+            this.drawPanel.Resize += new System.EventHandler(this.drawPanel_Resize);
             // 
             // mxToolStrip1
             // 
@@ -126,6 +127,16 @@ namespace mexTool.GUI.Controls
             this.startEndToggle.Size = new System.Drawing.Size(36, 37);
             this.startEndToggle.Text = "Start/End Position Toggle";
             this.startEndToggle.Click += new System.EventHandler(this.startEndToggle_Click);
+            // 
+            // buttonResetAnimation
+            // 
+            this.buttonResetAnimation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonResetAnimation.Image = global::mexTool.Properties.Resources.replace;
+            this.buttonResetAnimation.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonResetAnimation.Name = "buttonResetAnimation";
+            this.buttonResetAnimation.Size = new System.Drawing.Size(36, 37);
+            this.buttonResetAnimation.Text = "Reset Animation";
+            this.buttonResetAnimation.Click += new System.EventHandler(this.buttonResetAnimation_Click);
             // 
             // toolStripSeparator1
             // 
@@ -273,16 +284,6 @@ namespace mexTool.GUI.Controls
             this.gridHeightBox.Size = new System.Drawing.Size(40, 40);
             this.gridHeightBox.Text = "40";
             this.gridHeightBox.TextChanged += new System.EventHandler(this.xOffTextBox_TextChanged);
-            // 
-            // buttonResetAnimation
-            // 
-            this.buttonResetAnimation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonResetAnimation.Image = global::mexTool.Properties.Resources.replace;
-            this.buttonResetAnimation.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonResetAnimation.Name = "buttonResetAnimation";
-            this.buttonResetAnimation.Size = new System.Drawing.Size(36, 37);
-            this.buttonResetAnimation.Text = "Reset Animation";
-            this.buttonResetAnimation.Click += new System.EventHandler(this.buttonResetAnimation_Click);
             // 
             // SelectScreenRenderer
             // 

@@ -5,8 +5,8 @@ namespace HSDRawViewer.GUI
 {
     public static class ThemeColors
     {
-        public static Color TabColor = Color.FromArgb(80, 80, 80);
-        public static Color TabColorSelected = Color.FromArgb(40, 40, 40);
+        public static Color TabColor = Color.FromArgb(80, 80, 100);
+        public static Color TabColorSelected = Color.FromArgb(40, 40, 60);
 
         public static List<Color> MainColorList = new List<Color>() {
             Color.FromArgb(0x3F, 0x51, 0xB5), // Blue

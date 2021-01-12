@@ -349,6 +349,11 @@
     <Content Include="lib\MeleeMedia.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\category_stage.png" />
+    <None Include="Resources\category_sound.png" />
+    <None Include="Resources\category_music.png" />
+    <None Include="Resources\category_menu.png" />
+    <None Include="Resources\category_fighter.png" />
     <None Include="Resources\clean.png" />
     <None Include="Resources\package.png" />
     <None Include="Resources\image_add.png" />

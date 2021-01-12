@@ -399,11 +399,9 @@ namespace mexTool
                 }
             }
 
-            labelSaving.Visible = true;
-            progressBarSaving.Visible = true;
+            savePanel.Visible = true;
             Enabled = false;
             
-
             _forceMode = mode;
 
             worker.RunWorkerAsync();
@@ -556,8 +554,7 @@ namespace mexTool
                 progressBarSaving.Value = args.ProgressPercentage;
                 if (progressBarSaving.Value == 100)
                 {
-                    progressBarSaving.Visible = false;
-                    labelSaving.Visible = false;
+                    savePanel.Visible = false;
                     Enabled = true;
                 }
                 });
