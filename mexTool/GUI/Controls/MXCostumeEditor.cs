@@ -1,5 +1,6 @@
 ﻿using HSDRaw;
 using HSDRaw.Common;
+using HSDRaw.MEX.Misc;
 using mexTool.Core;
 using System;
 using System.ComponentModel;
@@ -45,6 +46,8 @@ namespace mexTool.GUI.Controls
 
             Disposed += (sender, args) =>
             {
+                _costumes.ListChanged -= CostumeUpdated;
+
                 if (cspBox.Image != null)
                     cspBox.Image.Dispose();
             };
@@ -171,6 +174,8 @@ namespace mexTool.GUI.Controls
                 if (cspBox.Image != null)
                     cspBox.Image.Dispose();
                 cspBox.Image = GraphicExtensions.TOBJToBitmap(costume.CSP);
+
+                gawButton.Visible = MEX.Fighters.IndexOf(_fighter) == GAWIndex;
 
                 if (MEX.Fighters.IndexOf(_fighter) == GAWIndex)
                     mxPropertyGrid1.SelectedObject = MEX.GaWColors[mxListBox1.SelectedIndex];
@@ -592,6 +597,37 @@ namespace mexTool.GUI.Controls
             }
 
             e.Effect = DragDropEffects.None;
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void gawButton_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void gawButton_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine(mxPropertyGrid1.SelectedObject.GetType());
+            if (mxPropertyGrid1.SelectedObject is MEX_GawColor gaw && 
+                mxListBox1.SelectedItem is MEXCostume costume)
+            {
+                using (var bmp = Tools.GawUIGen.GenerateCSP(gaw.FillColor, gaw.OutlineColor))
+                    costume.CSP = bmp.ToTOBJ(HSDRaw.GX.GXTexFmt.CI8, HSDRaw.GX.GXTlutFmt.RGB5A3);
+
+                using (var bmp = Tools.GawUIGen.GenerateStock(gaw.FillColor, gaw.OutlineColor))
+                    costume.FromImage(bmp);
+
+                RefreshSelected();
+            }
         }
     }
 }

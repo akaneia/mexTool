@@ -24,7 +24,9 @@ namespace mexTool.Core.Installer
             data.MenuTable = new MEX_MenuTable();
             data.MenuTable.Parameters = new MEX_MenuParameters()
             {
-                CSSHandScale = 1
+                CSSHandScale = 1,
+                StageSelectCursorStartY = -13
+                
             };
             dol.ExtractDataFromMap(data.MenuTable);
 
