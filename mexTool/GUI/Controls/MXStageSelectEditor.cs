@@ -133,7 +133,7 @@ namespace mexTool.GUI.Controls
             for (int i = 0; i < items.Length; i++)
                 items[i] = (MEXStageIcon)stageListBox.SelectedItems[i];
 
-            if(mxPropertyGrid1 != null)
+            if(mxPropertyGrid1 != null && items.Length > 0)
                 mxPropertyGrid1.SelectedObjects = items;
 
             if(items.Length == 1)

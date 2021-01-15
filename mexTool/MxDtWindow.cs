@@ -57,6 +57,8 @@ namespace mexTool
             worker.WorkerReportsProgress = true;
             worker.DoWork += Save;
 
+            labelGameName.Text = "";
+
             // clear temp files on close
             FormClosing += (sender, args) => { Core.MEX.ImageResource?.ClearTempFiles(); };
         }
@@ -167,11 +169,15 @@ namespace mexTool
             {
                 d.Filter = "Gamecube ISO (*.iso)|*.iso";
                 if (d.ShowDialog() == DialogResult.OK)
+                {
                     if (openedPath == d.FileName)
                         MessageBox.Show("ISO is already opened", "Open ISO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     else
-                    if (Core.MEX.InitFromISO(d.FileName))
-                        FileSystemLoaded(d.FileName);
+                    {
+                        if (Core.MEX.InitFromISO(d.FileName))
+                            FileSystemLoaded(d.FileName);
+                    }
+                }
             }
         }
 
@@ -189,15 +195,20 @@ namespace mexTool
             iSOToolStripMenuItem.Enabled = true;
             saveAsToolStripMenuItem.Enabled = true;
             saveToolStripMenuItem.Enabled = true;
+            closeFileSystemToolStripMenuItem.Enabled = true;
 
             using (OpenFolderDialog d = new OpenFolderDialog())
             {
                 if (d.ShowDialog() == DialogResult.OK)
+                {
                     if (openedPath == d.SelectedPath)
                         MessageBox.Show("File System is already opened", "Open ISO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     else
-                    if (Core.MEX.InitFromFileSystem(d.SelectedPath))
+                    {
+                        if (Core.MEX.InitFromFileSystem(d.SelectedPath))
                             FileSystemLoaded(d.SelectedPath);
+                    }
+                }
             }
         }
 
@@ -206,6 +217,8 @@ namespace mexTool
         /// </summary>
         private void FileSystemLoaded(string path)
         {
+            CloseFileSystem(false);
+
             openedPath = path;
 
             var banner = Core.MEX.ImageResource.GetBanner();
@@ -215,8 +228,6 @@ namespace mexTool
                 labelGameName.Text = banner.MetaData.LongName;
                 pictureBoxBanner.Image = ImageTools.RGBAToBitmap(banner.GetBannerImageRGBA8(), 96, 32);
             }
-
-            RemoveEditorControls();
 
             _fighterPage = new FighterPage();
             _fighterPage.Dock = DockStyle.Fill;
@@ -255,8 +266,24 @@ namespace mexTool
         /// <summary>
         /// 
         /// </summary>
-        private void RemoveEditorControls()
+        private void CloseFileSystem(bool closeMex)
         {
+            if(closeMex)
+            {
+                labelGameName.Text = "";
+                if (pictureBoxBanner.Image != null)
+                    pictureBoxBanner.Image.Dispose();
+                pictureBoxBanner.Image = null;
+
+                fileSystemToolStripMenuItem.Enabled = true;
+                iSOToolStripMenuItem.Enabled = false;
+                saveAsToolStripMenuItem.Enabled = false;
+                saveToolStripMenuItem.Enabled = false;
+                closeFileSystemToolStripMenuItem.Enabled = false;
+
+                openedPath = null;
+            }
+
             _fighterPage?.Dispose();
             _stagePage?.Dispose();
             _menuPage?.Dispose();
@@ -268,6 +295,9 @@ namespace mexTool
             _menuPage = null;
             _musicPage = null;
             _soundPage = null;
+
+            if (closeMex)
+                Core.MEX.Close();
         }
 
         private FighterPage _fighterPage;
@@ -569,6 +599,16 @@ namespace mexTool
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void closeFileSystemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CloseFileSystem(true);
         }
     }
 }

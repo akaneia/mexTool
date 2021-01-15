@@ -74,7 +74,8 @@ namespace mexTool.GUI.Controls
             for (int i = 0; i < items.Length; i++)
                 items[i] = (MEXFighterIcon)fighterListBox.SelectedItems[i];
 
-            mxPropertyGrid1.SelectedObjects = items;
+            if (mxPropertyGrid1 != null && items.Length > 0)
+                mxPropertyGrid1.SelectedObjects = items;
 
             buttonExportIcon.Visible = false;
             buttonImportIcon.Visible = false;

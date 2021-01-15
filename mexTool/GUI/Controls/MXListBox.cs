@@ -244,6 +244,8 @@ namespace mexTool.GUI
             };
 
             AutoScroll = false;
+
+            Disposed += (sender, args) => { _listBox.DataSource = null; _listBox.Dispose(); };
         }
 
         private void AdjustScrollBar()

@@ -15,6 +15,11 @@ namespace mexTool.GUI.Pages
             InitializeComponent();
 
             mxListBox1.DataSource = MEX.BackgroundMusic;
+
+            Disposed += (sender, args) =>
+            {
+                mxListBox1.DataSource = null;
+            };
         }
 
         /// <summary>

@@ -168,6 +168,53 @@ namespace mexTool.Core
 
         public static List<MEX_GawColor> GaWColors = new List<MEX_GawColor>();
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public static void Close()
+        {
+            Initialized = false;
+
+            EffectFiles.Clear();
+            ReservedIcons.Clear();
+            Fighters.Clear();
+            SoundBanks.Clear();
+            BackgroundMusic.Clear();
+            Stages.Clear();
+            StageIDs.Clear();
+            StageIcons.Clear();
+            FighterIcons.Clear();
+            Emblems.Clear();
+            GaWColors.Clear();
+
+            CommonItems = null;
+            StageItems = null;
+            FighterItems = null;
+            PokemonItems = null;
+
+            MainMenuPlaylist = null;
+            MenuParameters = null;
+            SceneData = null;
+
+            PlCoFile = null;
+            IfAllFile = null;
+            CSSFile = null;
+            SSSFile = null;
+            SmSt = null;
+
+            StageIcon1 = null;
+            StageIcon2 = null;
+
+            if (_imageResource != null)
+            {
+                _imageResource.ClearTempFiles();
+                _imageResource.Close();
+                _imageResource = null;
+            }
+
+            // just manually call this to start freeing resources
+            GC.Collect();
+        }
 
         /// <summary>
         /// 
@@ -175,18 +222,9 @@ namespace mexTool.Core
         private static void Init()
         {
             // loads data from mxdt file
-            if (_imageResource == null)
+            if (_imageResource == null || Initialized)
                 return;
 
-            EffectFiles.Clear();
-            ReservedIcons.Clear();
-            Fighters.Clear();
-            SoundBanks.Clear();
-            Stages.Clear();
-            BackgroundMusic.Clear();
-            StageIDs.Clear();
-            StageIcons.Clear();
-            FighterIcons.Clear();
 
             // load other files and resources
             PlCoFile = new HSDRawFile(_imageResource.GetFile("PlCo.dat"));
@@ -517,7 +555,6 @@ namespace mexTool.Core
             // load misc files
             LoadMexMenuFileData(_mexData);
 
-            GaWColors.Clear();
             GaWColors.AddRange(_mexData.MiscData.GawColors.Array);
 
             #region remove events
@@ -1213,10 +1250,13 @@ namespace mexTool.Core
         /// <returns></returns>
         public static bool InitFromISO(string isoPath)
         {
+            Close();
             _imageResource = new ImageResource();
+
             var success = _imageResource.OpenISO(isoPath);
             if (success)
                 Init();
+
             return success;
         }
 
@@ -1227,10 +1267,13 @@ namespace mexTool.Core
         /// <returns></returns>
         public static bool InitFromFileSystem(string folderPath)
         {
+            Close();
             _imageResource = new ImageResource();
+
             var success = _imageResource.OpenFolder(folderPath);
             if (success)
                 Init();
+
             return success;
         }
 

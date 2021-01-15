@@ -72,7 +72,8 @@ namespace mexTool.GUI.Controls
         /// <param name="e"></param>
         private void mxListBox1_SelectedValueChanged(object sender, EventArgs e)
         {
-            mxPropertyGrid1.SelectedObject = SelectedDSP;
+            if (mxListBox1.DataSource != null)
+                mxPropertyGrid1.SelectedObject = SelectedDSP;
         }
 
         /// <summary>

@@ -46,7 +46,8 @@ namespace mexTool.GUI.Controls
 
             Disposed += (sender, args) =>
             {
-                _costumes.ListChanged -= CostumeUpdated;
+                if (_costumes != null)
+                    _costumes.ListChanged -= CostumeUpdated;
 
                 if (cspBox.Image != null)
                     cspBox.Image.Dispose();
