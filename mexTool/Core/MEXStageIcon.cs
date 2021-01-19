@@ -53,6 +53,9 @@ namespace mexTool.Core
         [Category("0 - General"), Description("Height of Outline")]
         public float OutlineHeight { get => _icon.OutlineHeight; set => _icon.OutlineHeight = value; }
 
+        [Category("0 - General"), Description("Indexes the 3d model to display for the stage")]
+        public byte PreviewID { get => _icon.PreviewModelID; set => _icon.PreviewModelID = value; }
+
         /// <summary>
         /// 
         /// </summary>
