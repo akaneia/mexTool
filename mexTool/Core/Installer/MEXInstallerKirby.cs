@@ -53,7 +53,7 @@ namespace mexTool.Core.Installer
             // note: runtimes aren't really needed here
             data.KirbyData.CapFileRuntime = new HSDAccessor() { _s = new HSDStruct(0x100) };
             data.KirbyData.CapFtCmdRuntime = new HSDAccessor() { _s = new HSDStruct(0x100) };
-            data.KirbyData.MoveLogicRuntime = new HSDAccessor() { _s = new HSDStruct(0x100) };
+            data.KirbyFunctions.MoveLogicRuntime = new HSDAccessor() { _s = new HSDStruct(0x100) };
             data.KirbyData.CostumeRuntime = new HSDAccessor() { _s = new HSDStruct(0xB8) };
             data.KirbyData.CostumeRuntime._s.SetReferenceStruct(0x0C, new HSDStruct(0x30));
             data.KirbyData.CostumeRuntime._s.SetReferenceStruct(0x3C, new HSDStruct(0x30));

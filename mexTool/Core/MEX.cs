@@ -797,8 +797,8 @@ namespace mexTool.Core
             // kirby runtimes
             mxdt.KirbyData.CapFileRuntime = new HSDAccessor() { _s = new HSDStruct(4 * Fighters.Count) };
             mxdt.KirbyData.CapFtCmdRuntime = new HSDAccessor() { _s = new HSDStruct(4 * Fighters.Count) };
-            mxdt.KirbyData.MoveLogicRuntime = new HSDAccessor() { _s = new HSDStruct(4 * Fighters.Count) };
             mxdt.KirbyData.CostumeRuntime = new HSDAccessor() { _s = new HSDStruct(4 * Fighters.Count) };
+            mxdt.KirbyFunctions.MoveLogicRuntime = new HSDAccessor() { _s = new HSDStruct(4 * Fighters.Count) };
 
             int internalId = 0;
             foreach (var f in Fighters)
