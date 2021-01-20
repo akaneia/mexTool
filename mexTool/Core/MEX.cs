@@ -538,6 +538,7 @@ namespace mexTool.Core
                 Fighters.Add(fighter);
             }
 
+
             // SubCharacterInternalID and Behavior
             for (int i = 0; i < _mexData.MetaData.NumOfInternalIDs; i++)
             {
@@ -972,6 +973,24 @@ namespace mexTool.Core
 
                 internalId++;
             }
+
+            // 
+            var tb1 = new byte[54]; 
+            var tb2 = new byte[54];
+            tb2[53] = 255;
+            for(byte i = 0; i < 53; i++)
+            {
+                tb1[i] = i;
+                tb2[i] = i;
+            }
+            var commonBoneTable = new SBM_BoneLookupTable()
+            {
+                BoneCount = 53,
+            };
+            commonBoneTable._s.SetReferenceStruct(0x00, new HSDStruct(tb1));
+            commonBoneTable._s.SetReferenceStruct(0x04, new HSDStruct(tb2));
+            FighterCommonData.BoneTables.Set(internalId, commonBoneTable);
+            FighterCommonData.FighterTable.Set(internalId, null);
 
 
             // save stage data
@@ -1410,10 +1429,11 @@ namespace mexTool.Core
             // find existing effect slot and update the symbol if needed
             var effect = EffectFiles.FindIndex(e => e.FileName == filename);
 
-            EffectFiles[effect].Symbol = symbol;
-
             if (effect != -1)
+            {
+                EffectFiles[effect].Symbol = symbol;
                 return effect;
+            }
 
             // find slot for new effect
             var empty = EffectFiles.FindIndex(e => string.IsNullOrEmpty(e.FileName));
@@ -1431,7 +1451,6 @@ namespace mexTool.Core
                 EffectFiles.Add(new MEX_EffectFiles() { FileName = filename, Symbol = symbol });
                 return EffectFiles.Count - 1;
             }
-
 
             // no room for new effects
             System.Windows.Forms.MessageBox.Show($"There is no more room for additional effect banks!\nCannot add {filename}", "Add Effect Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Exclamation);

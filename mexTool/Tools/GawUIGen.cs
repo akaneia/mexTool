@@ -7,10 +7,22 @@ namespace mexTool.Tools
 {
     public class GawUIGen
     {
+        private static Color GammaCorrect(Color c)
+        {
+            double red = c.R / 255d, green = c.G / 255d, blue = c.B / 255d;
+
+            double r_output = Math.Pow(red, 0.454545);
+            double g_output = Math.Pow(green, 0.454545);
+            double b_output = Math.Pow(blue, 0.454545);
+
+            return Color.FromArgb(c.A, (byte)(r_output * byte.MaxValue), (byte)(g_output * byte.MaxValue), (byte)(b_output * byte.MaxValue));
+        }
 
         public static Bitmap GenerateStock(Color fill, Color outline)
         {
             var output = new Bitmap(24, 24);
+
+            fill = GammaCorrect(fill);
 
             // get masks
             using (var outlineBmp = new Bitmap(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lib/gaw_stc_outline_mask.png")))
@@ -29,6 +41,9 @@ namespace mexTool.Tools
         public static Bitmap GenerateCSP(Color fill, Color outline)
         {
             var output = new Bitmap(136, 188);
+
+            // gamma correct
+            fill = GammaCorrect(fill);
 
             // get masks
             using (var outlineBmp = new Bitmap(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lib/gaw_csp_outline_mask.png")))
