@@ -1085,12 +1085,16 @@ namespace mexTool.Core
 
             foreach (var v in FighterIcons)
             {
+                // remove next
                 v._joint.Next = null;
-                mexSelectChr.IconModel.AddChild(v._joint);
-
-                mexSelectChr.IconAnimJoint.AddChild(v.ToAnimJoint());
-
                 v.MaterialAnimation.Next = null;
+
+                // update image
+                v._joint.Dobj.Next.Mobj.Textures = v.Image;
+
+                // add child
+                mexSelectChr.IconModel.AddChild(v._joint);
+                mexSelectChr.IconAnimJoint.AddChild(v.ToAnimJoint());
                 mexSelectChr.IconMatAnimJoint.AddChild(v.MaterialAnimation);
             }
 
