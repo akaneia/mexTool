@@ -2,7 +2,7 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/k82c1ienk9pf75u4?svg=true)](https://ci.appveyor.com/project/Ploaj/mextool)
 
-[Download Latest Commit](https://github.com/akaneia/mexToolreleases)
+[Download Latest Commit](https://github.com/akaneia/mexTool/releases)
 
 [Report a bug/Request a feature](https://github.com/akaneia/mexTool/issues)
 
