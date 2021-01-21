@@ -1436,7 +1436,9 @@ namespace mexTool.Core
             }
 
             // find slot for new effect
-            var empty = EffectFiles.FindIndex(e => string.IsNullOrEmpty(e.FileName));
+            var empty = EffectFiles.FindIndex(e =>
+                e != EffectFiles[30] && 
+                string.IsNullOrEmpty(e.FileName));
 
             if(empty != -1)
             {
@@ -1446,7 +1448,7 @@ namespace mexTool.Core
             }
 
             // add new effect slot
-            if(EffectFiles.Count < 64)
+            if(EffectFiles.Count < 64 && empty != 64)
             {
                 EffectFiles.Add(new MEX_EffectFiles() { FileName = filename, Symbol = symbol });
                 return EffectFiles.Count - 1;
