@@ -53,7 +53,6 @@ namespace mexTool.Core.Installer
             // note: runtimes aren't really needed here
             data.KirbyData.CapFileRuntime = new HSDAccessor() { _s = new HSDStruct(0x100) };
             data.KirbyData.CapFtCmdRuntime = new HSDAccessor() { _s = new HSDStruct(0x100) };
-            data.KirbyFunctions.MoveLogicRuntime = new HSDAccessor() { _s = new HSDStruct(0x100) };
             data.KirbyData.CostumeRuntime = new HSDAccessor() { _s = new HSDStruct(0xB8) };
             data.KirbyData.CostumeRuntime._s.SetReferenceStruct(0x0C, new HSDStruct(0x30));
             data.KirbyData.CostumeRuntime._s.SetReferenceStruct(0x3C, new HSDStruct(0x30));
@@ -70,6 +69,7 @@ namespace mexTool.Core.Installer
             data.KirbyFunctions.OnAbilityLose = new HSDUIntArray() { Array = abtb.Array.Where((e, i) => i % 2 == 1).ToArray() };
             data.KirbyFunctions.KirbyOnHit = new HSDUIntArray() { Array = new uint[data.MetaData.NumOfInternalIDs] };
             data.KirbyFunctions.KirbyOnItemInit = new HSDUIntArray() { Array = new uint[data.MetaData.NumOfInternalIDs] };
+            data.KirbyFunctions.MoveLogicRuntime = new HSDAccessor() { _s = new HSDStruct(0x100) };
         }
     }
 }
