@@ -33,6 +33,7 @@ after_build:
   - 7z a "mexTool.zip" "%APPVEYOR_BUILD_FOLDER%\mexTool\bin\Release\mexUpdater.exe.config"
   - 7z a "mexTool.zip" "%APPVEYOR_BUILD_FOLDER%\mexTool\bin\Release\lib"
   - 7z a "mexTool.zip" "%APPVEYOR_BUILD_FOLDER%\mexTool\bin\Release\CSCore.dll"
+  - 7z a "mexTool.zip" "%APPVEYOR_BUILD_FOLDER%\mexTool\bin\Release\Octokit.dll"
   - 7z a "mexTool.zip" "%APPVEYOR_BUILD_FOLDER%\mexTool\bin\Release\YamlDotNet.dll"
   - 7z rn "mexTool.zip" "CSCore.dll" "lib\CSCore.dll"
   - 7z rn "mexTool.zip" "Octokit.dll" "lib\Octokit.dll"
