@@ -81,6 +81,14 @@ namespace mexTool.GUI.Controls
 
         float StartHeight { get; set; }
 
+        float CollisionWidth { get; set; }
+
+        float CollisionHeight { get; set; }
+
+        float CollisionX { get; set; }
+
+        float CollisionY { get; set; }
+
         public IconUndoState(ISelectScreenIcon icon)
         {
             Icon = icon;
@@ -100,6 +108,20 @@ namespace mexTool.GUI.Controls
             StartRZ = icon.StartRZ;
             StartWidth = icon.StartWidth;
             StartHeight = icon.StartHeight;
+
+            if(icon is Core.MEXFighterIcon fighter)
+            {
+                CollisionWidth = fighter.CollisionWidth;
+                CollisionHeight = fighter.CollisionHeight;
+                CollisionX = fighter.CollisionX;
+                CollisionY = fighter.CollisionY;
+            }
+
+            if (icon is Core.MEXStageIcon stage)
+            {
+                CollisionWidth = stage.CollisionWidth;
+                CollisionHeight = stage.CollisionHeight;
+            }
         }
 
         public void Restore()
@@ -122,6 +144,20 @@ namespace mexTool.GUI.Controls
             Icon.StartRX = StartRX;
             Icon.StartRY = StartRY;
             Icon.StartRZ = StartRZ;
+
+            if (Icon is Core.MEXFighterIcon fighter)
+            {
+                fighter.CollisionHeight = CollisionHeight;
+                fighter.CollisionWidth = CollisionWidth;
+                fighter.CollisionX = CollisionX;
+                fighter.CollisionY = CollisionY;
+            }
+
+            if (Icon is Core.MEXStageIcon stage)
+            {
+                stage.CollisionHeight = CollisionHeight;
+                stage.CollisionWidth = CollisionWidth;
+            }
         }
     }
 

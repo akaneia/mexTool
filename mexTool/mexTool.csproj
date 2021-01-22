@@ -51,6 +51,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\MeleeMedia.dll</HintPath>
     </Reference>
+    <Reference Include="Octokit, Version=0.48.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Octokit.0.48.0\lib\net46\Octokit.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -246,6 +249,7 @@
     <Compile Include="Tools\ObjectExtensions.cs" />
     <Compile Include="Tools\StageNameGenerator.cs" />
     <Compile Include="Tools\ZipExtensions.cs" />
+    <Compile Include="Updater.cs" />
     <EmbeddedResource Include="GUI\Controls\ItemEditor.resx">
       <DependentUpon>ItemEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -328,6 +332,9 @@
     <None Include="lib\resource.dat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="mexUpdater.exe.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -369,6 +376,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="mextool.ico" />
+    <Content Include="mexUpdater.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\gaw.png" />
     <None Include="Resources\category_stage.png" />
     <None Include="Resources\category_sound.png" />

@@ -37,6 +37,7 @@
             this.buttonFighter = new System.Windows.Forms.Button();
             this.pictureBoxBanner = new mexTool.GUI.Controls.MXPictureBox();
             this.headerPanel = new System.Windows.Forms.Panel();
+            this.buttonUpdate = new mexTool.GUI.Controls.MXButton();
             this.labelGameName = new System.Windows.Forms.Label();
             this.buttonMin = new System.Windows.Forms.Button();
             this.buttonMinMax = new System.Windows.Forms.Button();
@@ -211,6 +212,7 @@
             // headerPanel
             // 
             this.headerPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
+            this.headerPanel.Controls.Add(this.buttonUpdate);
             this.headerPanel.Controls.Add(this.labelGameName);
             this.headerPanel.Controls.Add(this.buttonMin);
             this.headerPanel.Controls.Add(this.buttonMinMax);
@@ -226,6 +228,26 @@
             this.headerPanel.TabIndex = 1;
             this.headerPanel.DoubleClick += new System.EventHandler(this.headerPanel_DoubleClick);
             this.headerPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.headerPanel_MouseDown);
+            // 
+            // buttonUpdate
+            // 
+            this.buttonUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.buttonUpdate.BackColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
+            this.buttonUpdate.BackColorLight = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(140)))));
+            this.buttonUpdate.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(100)))));
+            this.buttonUpdate.BorderColor = System.Drawing.Color.Black;
+            this.buttonUpdate.Image = global::mexTool.Properties.Resources.plus;
+            this.buttonUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonUpdate.ImageHeight = 32;
+            this.buttonUpdate.ImageWidth = 32;
+            this.buttonUpdate.Location = new System.Drawing.Point(890, 12);
+            this.buttonUpdate.Name = "buttonUpdate";
+            this.buttonUpdate.Size = new System.Drawing.Size(217, 41);
+            this.buttonUpdate.TabIndex = 8;
+            this.buttonUpdate.Text = "Download Update";
+            this.buttonUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonUpdate.Visible = false;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
             // labelGameName
             // 
@@ -315,14 +337,14 @@
             // 
             this.openISOToolStripMenuItem.Name = "openISOToolStripMenuItem";
             this.openISOToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openISOToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.openISOToolStripMenuItem.Size = new System.Drawing.Size(208, 26);
             this.openISOToolStripMenuItem.Text = "Open ISO";
             this.openISOToolStripMenuItem.Click += new System.EventHandler(this.openISOToolStripMenuItem_Click);
             // 
             // openFileSystemToolStripMenuItem
             // 
             this.openFileSystemToolStripMenuItem.Name = "openFileSystemToolStripMenuItem";
-            this.openFileSystemToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.openFileSystemToolStripMenuItem.Size = new System.Drawing.Size(208, 26);
             this.openFileSystemToolStripMenuItem.Text = "Open File System";
             this.openFileSystemToolStripMenuItem.Click += new System.EventHandler(this.openFileSystemToolStripMenuItem_Click);
             // 
@@ -330,7 +352,7 @@
             // 
             this.closeFileSystemToolStripMenuItem.Enabled = false;
             this.closeFileSystemToolStripMenuItem.Name = "closeFileSystemToolStripMenuItem";
-            this.closeFileSystemToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.closeFileSystemToolStripMenuItem.Size = new System.Drawing.Size(208, 26);
             this.closeFileSystemToolStripMenuItem.Text = "Close File System";
             this.closeFileSystemToolStripMenuItem.Click += new System.EventHandler(this.closeFileSystemToolStripMenuItem_Click);
             // 
@@ -338,14 +360,14 @@
             // 
             this.toolStripSeparator1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(221, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(205, 6);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Enabled = false;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(208, 26);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -355,7 +377,7 @@
             this.iSOToolStripMenuItem,
             this.fileSystemToolStripMenuItem});
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(208, 26);
             this.saveAsToolStripMenuItem.Text = "Export As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
@@ -475,5 +497,6 @@
         private System.Windows.Forms.ToolStripMenuItem fileSystemToolStripMenuItem;
         private System.Windows.Forms.Panel savePanel;
         private System.Windows.Forms.ToolStripMenuItem closeFileSystemToolStripMenuItem;
+        private GUI.Controls.MXButton buttonUpdate;
     }
 }

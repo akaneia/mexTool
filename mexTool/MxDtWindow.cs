@@ -4,9 +4,11 @@ using mexTool.GUI.Pages;
 using mexTool.Tools;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace mexTool
@@ -58,6 +60,16 @@ namespace mexTool
             worker.DoWork += Save;
 
             labelGameName.Text = "";
+
+            Application.Idle += (sender, args) =>
+            {
+                if (mexTool.Updater.UpdateReady)
+                    buttonUpdate.Visible = true;
+            };
+
+            ThreadStart t = new ThreadStart(mexTool.Updater.CheckLatest);
+            Thread thread = new Thread(t);
+            thread.Start();
 
             // clear temp files on close
             FormClosing += (sender, args) => { Core.MEX.ImageResource?.ClearTempFiles(); };
@@ -609,6 +621,47 @@ namespace mexTool
         private void closeFileSystemToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CloseFileSystem(true);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            if (Core.MEX.Initialized)
+            {
+                MessageBox.Show("Please save changes and/or close filesystem before updating.", "Update Notification", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            if (Updater.UpdateReady &&
+                MessageBox.Show(
+                    $"Would you like to download the following update?\n{mexTool.Updater.LatestRelease.Name}\n{Updater.LatestRelease.Body.Substring(Updater.LatestRelease.Body.IndexOf("Message:"))}",
+                    "m-ex Tool Updater", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                RunUpdater();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void RunUpdater()
+        {
+            File.Delete("old_mexUpdater.exe");
+            File.Delete("old_mexUpdater.exe.config");
+
+            File.Move("mexUpdater.exe", "old_mexUpdater.exe");
+            File.Move("mexUpdater.exe.config", "old_mexUpdater.exe.config");
+
+            Process p = new Process();
+            p.StartInfo.FileName = Path.Combine(ApplicationSettings.ExecutablePath, "old_mexUpdater.exe");
+            p.StartInfo.Arguments = $"{Updater.DownloadURL} \"{Updater.Version}\" -r";
+            p.Start();
+
+            Application.Exit();
         }
     }
 }

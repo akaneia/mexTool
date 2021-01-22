@@ -13,6 +13,8 @@ namespace mexTool
     {
         private static List<MMDevice> AudioDevices = new List<MMDevice>();
 
+        public static string ExecutablePath { get; internal set; }
+
         public static MMDevice DefaultDevice { get; set; }
 
         private static PrivateFontCollection _privateFontCollection = new PrivateFontCollection();
@@ -46,6 +48,8 @@ namespace mexTool
         /// </summary>
         public static void Init()
         {
+            ExecutablePath = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+
             using (var mmdeviceEnumerator = new MMDeviceEnumerator())
             {
                 using (var mmdeviceCollection = mmdeviceEnumerator.EnumAudioEndpoints(DataFlow.Render, DeviceState.Active))
@@ -58,8 +62,8 @@ namespace mexTool
                 DefaultDevice = mmdeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
             }
 
-            AddFont(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lib/A-OTF_Folk_Pro_H.otf"));
-            AddFont(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lib/Palatino Linotype.ttf"));
+            AddFont(Path.Combine(ExecutablePath, "lib/A-OTF_Folk_Pro_H.otf"));
+            AddFont(Path.Combine(ExecutablePath, "lib/Palatino Linotype.ttf"));
         }
     }
 }
