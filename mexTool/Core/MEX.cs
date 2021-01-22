@@ -392,54 +392,51 @@ namespace mexTool.Core
                 var hasDemo = internalId < ftData.FtDemo_SymbolNames.Length && ftData.FtDemo_SymbolNames[internalId] != null;
 
                 // load fighter parameters
-                var fighter = new MEXFighter()
-                {
-                    NameText = ftData.NameText[externalId].Value,
-                    FighterDataPath = ftData.CharFiles[internalId].FileName,
-                    FighterDataSymbol = ftData.CharFiles[internalId].Symbol,
-                    AnimCount = ftData.AnimCount[internalId].AnimCount,
-                    AnimFile = ftData.AnimFiles[internalId].Value,
-                    RstAnimFile = ftData.ResultAnimFiles[externalId].Value,
-                    RstAnimCount = ftData.RstRuntime[externalId].AnimMax,
-                    InsigniaID = ftData.InsigniaIDs[externalId],
-                    CanWallJump = ftData.WallJump[internalId] != 0,
-                    EffectFile = ftData.EffectIDs[internalId] < EffectFiles.Count ? EffectFiles[ftData.EffectIDs[internalId]].FileName : null,
-                    EffectSymbol = ftData.EffectIDs[internalId] < EffectFiles.Count ? EffectFiles[ftData.EffectIDs[internalId]].Symbol : null,
-                    AnnouncerCall = ftData.AnnouncerCalls[externalId],
+                var ft = new MEXFighter();
 
-                    SoundBank = ftData.SSMFileIDs[externalId].SSMID < SoundBanks.Count ? SoundBanks[ftData.SSMFileIDs[externalId].SSMID] : null,
-                    SSMBitfield1 = (uint)ftData.SSMFileIDs[externalId].BitField1,
-                    SSMBitfield2 = (uint)ftData.SSMFileIDs[externalId].BitField2,
+                ft.NameText = ftData.NameText[externalId].Value;
+                ft.FighterDataPath = ftData.CharFiles[internalId].FileName;
+                ft.FighterDataSymbol = ftData.CharFiles[internalId].Symbol;
+                ft.AnimCount = ftData.AnimCount[internalId].AnimCount;
+                ft.AnimFile = ftData.AnimFiles[internalId].Value;
+                ft.RstAnimFile = ftData.ResultAnimFiles[externalId].Value;
+                ft.RstAnimCount = ftData.RstRuntime[externalId].AnimMax;
+                ft.InsigniaID = ftData.InsigniaIDs[externalId];
+                ft.CanWallJump = ftData.WallJump[internalId] != 0;
+                ft.EffectFile = ftData.EffectIDs[internalId] < EffectFiles.Count ? EffectFiles[ftData.EffectIDs[internalId]].FileName : null;
+                ft.EffectSymbol = ftData.EffectIDs[internalId] < EffectFiles.Count ? EffectFiles[ftData.EffectIDs[internalId]].Symbol : null;
+                ft.AnnouncerCall = ftData.AnnouncerCalls[externalId];
+                ft.SoundBank = ftData.SSMFileIDs[externalId].SSMID < SoundBanks.Count ? SoundBanks[ftData.SSMFileIDs[externalId].SSMID] : null;
+                ft.SSMBitfield1 = (uint)ftData.SSMFileIDs[externalId].BitField1;
+                ft.SSMBitfield2 = (uint)ftData.SSMFileIDs[externalId].BitField2;
+                ft.KirbyCapFileName = kbData.CapFiles[internalId].FileName;
+                ft.KirbyCapSymbol = kbData.CapFiles[internalId].Symbol;
+                ft.KirbyEffectFile = kbData.KirbyEffectIDs[internalId] < EffectFiles.Count ? EffectFiles[kbData.KirbyEffectIDs[internalId]].FileName : null;
+                ft.KirbyEffectSymbol = kbData.KirbyEffectIDs[internalId] < EffectFiles.Count ? EffectFiles[kbData.KirbyEffectIDs[internalId]].Symbol : null;
+                ft.VictoryTheme = BackgroundMusic[ftData.VictoryThemeIDs[externalId]];
+                ft.FighterSongID1 = ftData.FighterSongIDs[externalId].SongID1 >= 0 && ftData.FighterSongIDs[externalId].SongID1 < BackgroundMusic.Count ? BackgroundMusic[ftData.FighterSongIDs[externalId].SongID1] : null;
+                ft.FighterSongID2 = ftData.FighterSongIDs[externalId].SongID2 >= 0 && ftData.FighterSongIDs[externalId].SongID2 < BackgroundMusic.Count ? BackgroundMusic[ftData.FighterSongIDs[externalId].SongID2] : null;
+                
+                // Note: not all fighters have these
+                ft.DemoEnding = hasDemo ? ftData.FtDemo_SymbolNames[internalId].Ending : "";
+                ft.DemoIntro = hasDemo ? ftData.FtDemo_SymbolNames[internalId].Intro : "";
+                ft.DemoResult = hasDemo ? ftData.FtDemo_SymbolNames[internalId].Result : "";
+                ft.DemoWait = hasDemo ? ftData.FtDemo_SymbolNames[internalId].ViWait : "";
 
-                    KirbyCapFileName = kbData.CapFiles[internalId].FileName,
-                    KirbyCapSymbol = kbData.CapFiles[internalId].Symbol,
-                    KirbyEffectFile = kbData.KirbyEffectIDs[internalId] < EffectFiles.Count ? EffectFiles[kbData.KirbyEffectIDs[internalId]].FileName : null,
-                    KirbyEffectSymbol = kbData.KirbyEffectIDs[internalId] < EffectFiles.Count ? EffectFiles[kbData.KirbyEffectIDs[internalId]].Symbol : null,
+                ft.DemoFile = externalId < ftData.VIFiles.Length && ftData.VIFiles[externalId] != null ? ftData.VIFiles[externalId].Value : "";
+                ft.RedCostumeIndex = externalId < ftData.CostumeIDs.Length ? ftData.CostumeIDs[externalId].RedCostumeIndex : (byte)0;
+                ft.BlueCostumeIndex = externalId < ftData.CostumeIDs.Length ? ftData.CostumeIDs[externalId].BlueCostumeIndex : (byte)0;
+                ft.GreenCostumeIndex = externalId < ftData.CostumeIDs.Length ? ftData.CostumeIDs[externalId].GreenCostumeIndex : (byte)0;
+                ft.ResultScreenScale = externalId < ftData.ResultScale.Length ? ftData.ResultScale[externalId] : 1;
+                ft.TargetTestStage = ftData.TargetTestStageLookups[externalId] < StageIDs.Count ? Stages[StageIDs[ftData.TargetTestStageLookups[externalId]].StageID] : Stages[0];
+                ft.RacetoTheFinishTime = ftData.RaceToFinishTimeLimits[externalId];
+                ft.EndClassicFile = externalId < ftData.EndClassicFiles.Length ? ftData.EndClassicFiles[externalId].Value : "";
+                ft.EndAdventureFile = externalId < ftData.EndAdventureFiles.Length ? ftData.EndAdventureFiles[externalId].Value : "";
+                ft.EndAllStarFile = externalId < ftData.EndAllStarFiles.Length ? ftData.EndAllStarFiles[externalId].Value : "";
+                ft.EndMovieFile = externalId < ftData.EndMovieFiles.Length ? ftData.EndMovieFiles[externalId].Value : "";
+                
 
-                    VictoryTheme = BackgroundMusic[ftData.VictoryThemeIDs[externalId]],
-                    FighterSongID1 = ftData.FighterSongIDs[externalId].SongID1 >= 0 && ftData.FighterSongIDs[externalId].SongID1 < BackgroundMusic.Count ? BackgroundMusic[ftData.FighterSongIDs[externalId].SongID1] : null,
-                    FighterSongID2 = ftData.FighterSongIDs[externalId].SongID2 >= 0 && ftData.FighterSongIDs[externalId].SongID2 < BackgroundMusic.Count ? BackgroundMusic[ftData.FighterSongIDs[externalId].SongID2]: null,
-
-                    // Note: not all fighters have these
-                    DemoEnding = hasDemo ? ftData.FtDemo_SymbolNames[internalId].Ending : "",
-                    DemoIntro = hasDemo ? ftData.FtDemo_SymbolNames[internalId].Intro : "",
-                    DemoResult = hasDemo ? ftData.FtDemo_SymbolNames[internalId].Result : "",
-                    DemoWait = hasDemo ? ftData.FtDemo_SymbolNames[internalId].ViWait : "",
-
-                    DemoFile = externalId < ftData.VIFiles.Length && ftData.VIFiles[externalId] != null ? ftData.VIFiles[externalId].Value : "",
-                    RedCostumeIndex = externalId < ftData.CostumeIDs.Length ? ftData.CostumeIDs[externalId].RedCostumeIndex : (byte)0,
-                    BlueCostumeIndex = externalId < ftData.CostumeIDs.Length ? ftData.CostumeIDs[externalId].BlueCostumeIndex : (byte)0,
-                    GreenCostumeIndex = externalId < ftData.CostumeIDs.Length ? ftData.CostumeIDs[externalId].GreenCostumeIndex : (byte)0,
-                    ResultScreenScale = externalId < ftData.ResultScale.Length ? ftData.ResultScale[externalId] : 1,
-                    TargetTestStage = ftData.TargetTestStageLookups[externalId] < StageIDs.Count ? Stages[StageIDs[ftData.TargetTestStageLookups[externalId]].StageID] : Stages[0],
-                    RacetoTheFinishTime = ftData.RaceToFinishTimeLimits[externalId],
-                    EndClassicFile = externalId < ftData.EndClassicFiles.Length ? ftData.EndClassicFiles[externalId].Value : "",
-                    EndAdventureFile = externalId < ftData.EndAdventureFiles.Length ? ftData.EndAdventureFiles[externalId].Value : "",
-                    EndAllStarFile = externalId < ftData.EndAllStarFiles.Length ? ftData.EndAllStarFiles[externalId].Value : "",
-                    EndMovieFile = externalId < ftData.EndMovieFiles.Length ? ftData.EndMovieFiles[externalId].Value : "",
-                };
-
-                fighter.Functions = new MEXFighterFunctions()
+                ft.Functions = new MEXFighterFunctions()
                 {
                     MoveLogic = ftFunc.MoveLogic[internalId] != null ? ftFunc.MoveLogic[internalId].Array : null,
                     OnLoad = ftFunc.OnLoad[internalId],
@@ -513,29 +510,29 @@ namespace mexTool.Core
                         costume.Icon = fighterIcons[i][k];
 
                     //
-                    fighter.Costumes.Add(costume);
+                    ft.Costumes.Add(costume);
                 }
 
                 // load kirby costumes if they exist
                 if (kbData.KirbyCostumes[internalId] != null)
                     for (int k = 0; k < kbData.KirbyCostumes[internalId].Length; k++)
                     {
-                        fighter.KirbyCostumes.Add(new MEXCostume() { Costume = kbData.KirbyCostumes[internalId][k] });
+                        ft.KirbyCostumes.Add(new MEXCostume() { Costume = kbData.KirbyCostumes[internalId][k] });
                     }
 
 
                 // PlCo bone table
-                fighter.BoneTable = FighterCommonData.BoneTables[i];
-                fighter.UnkTable = FighterCommonData.FighterTable[i];
+                ft.BoneTable = FighterCommonData.BoneTables[i];
+                ft.UnkTable = FighterCommonData.FighterTable[i];
 
 
                 // load items
                 foreach (var lookup in ftData.FighterItemLookup[internalId].Entries)
-                    fighter.Items.Add(mexItem[lookup - MexItemOffset]);
+                    ft.Items.Add(mexItem[lookup - MexItemOffset]);
 
 
                 // add fighter
-                Fighters.Add(fighter);
+                Fighters.Add(ft);
             }
 
 

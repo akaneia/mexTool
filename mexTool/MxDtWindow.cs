@@ -537,7 +537,6 @@ namespace mexTool
         /// </summary>
         private void Save(object sender, DoWorkEventArgs args)
         {
-            ReportProgress(null, new ProgressChangedEventArgs(100, "Error saving file system"));
             try
             {
                 Core.MEX.PrepareSave(ReportProgress);
