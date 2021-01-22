@@ -537,51 +537,59 @@ namespace mexTool
         /// </summary>
         private void Save(object sender, DoWorkEventArgs args)
         {
-            Core.MEX.PrepareSave(ReportProgress);
-
-            if (Core.MEX.ImageResource.SourceIsFileSystem && _forceMode == ForceMode.ISO)
+            ReportProgress(null, new ProgressChangedEventArgs(100, "Error saving file system"));
+            try
             {
-                // build new iso
-                var dol = Core.MEX.ImageResource.GetDOL();
+                Core.MEX.PrepareSave(ReportProgress);
 
-                using (GCILib.GCISO iso = new GCILib.GCISO(Core.MEX.ImageResource.GetBoot(), Core.MEX.ImageResource.GetBin2(), Core.MEX.ImageResource.GetAppLoader(), Core.MEX.ImageResource.GetDOL()))
+                if (Core.MEX.ImageResource.SourceIsFileSystem && _forceMode == ForceMode.ISO)
                 {
-                    foreach(var file in Core.MEX.ImageResource.GetAllFiles())
+                    // build new iso
+                    var dol = Core.MEX.ImageResource.GetDOL();
+
+                    using (GCILib.GCISO iso = new GCILib.GCISO(Core.MEX.ImageResource.GetBoot(), Core.MEX.ImageResource.GetBin2(), Core.MEX.ImageResource.GetAppLoader(), Core.MEX.ImageResource.GetDOL()))
                     {
-                        //Console.WriteLine(Core.MEX.ImageResource.GetRealFilePath(file));
-                        iso.AddFile(file, Core.MEX.ImageResource.GetRealFilePath(file));
+                        foreach (var file in Core.MEX.ImageResource.GetAllFiles())
+                        {
+                            //Console.WriteLine(Core.MEX.ImageResource.GetRealFilePath(file));
+                            iso.AddFile(file, Core.MEX.ImageResource.GetRealFilePath(file));
+                        }
+
+                        iso.Rebuild(rebuildPath, ReportProgress);
+                    }
+                }
+                else if (Core.MEX.ImageResource.SourceIsISO && _forceMode == ForceMode.FileSystem)
+                {
+                    // write system data
+                    Directory.CreateDirectory(rebuildPath + "/sys/");
+                    File.WriteAllBytes(Path.Combine(rebuildPath + "/sys/", "main.dol"), Core.MEX.ImageResource.GetDOL());
+                    File.WriteAllBytes(Path.Combine(rebuildPath + "/sys/", "apploader.img"), Core.MEX.ImageResource.GetAppLoader());
+                    File.WriteAllBytes(Path.Combine(rebuildPath + "/sys/", "boot.bin"), Core.MEX.ImageResource.GetBoot());
+                    File.WriteAllBytes(Path.Combine(rebuildPath + "/sys/", "bi2.bin"), Core.MEX.ImageResource.GetBin2());
+
+                    // write files
+                    var files = Core.MEX.ImageResource.GetAllFiles();
+                    int index = 0;
+                    foreach (var file in files)
+                    {
+                        var output = rebuildPath + "/files" + file;
+                        Directory.CreateDirectory(Path.GetDirectoryName(output));
+                        Core.MEX.ImageResource.DumpFileFromISO(file, output);
+                        //File.WriteAllBytes(output, Core.MEX.ImageResource.GetFile(file));
+                        index++;
+                        ReportProgress(null, new ProgressChangedEventArgs((int)((index / (float)files.Length) * 99), null));
                     }
 
-                    iso.Rebuild(rebuildPath, ReportProgress);
+                    ReportProgress(null, new ProgressChangedEventArgs(100, null));
                 }
-            }
-            else if (Core.MEX.ImageResource.SourceIsISO && _forceMode == ForceMode.FileSystem)
-            {
-                // write system data
-                Directory.CreateDirectory(rebuildPath + "/sys/");
-                File.WriteAllBytes(Path.Combine(rebuildPath + "/sys/", "main.dol"), Core.MEX.ImageResource.GetDOL());
-                File.WriteAllBytes(Path.Combine(rebuildPath + "/sys/", "apploader.img"), Core.MEX.ImageResource.GetAppLoader());
-                File.WriteAllBytes(Path.Combine(rebuildPath + "/sys/", "boot.bin"), Core.MEX.ImageResource.GetBoot());
-                File.WriteAllBytes(Path.Combine(rebuildPath + "/sys/", "bi2.bin"), Core.MEX.ImageResource.GetBin2());
-
-                // write files
-                var files = Core.MEX.ImageResource.GetAllFiles();
-                int index = 0;
-                foreach (var file in files)
+                else
                 {
-                    var output = rebuildPath + "/files" + file;
-                    Directory.CreateDirectory(Path.GetDirectoryName(output));
-                    Core.MEX.ImageResource.DumpFileFromISO(file, output);
-                    //File.WriteAllBytes(output, Core.MEX.ImageResource.GetFile(file));
-                    index++;
-                    ReportProgress(null, new ProgressChangedEventArgs((int)((index / (float)files.Length) * 99), null));
+                    Core.MEX.ImageResource.Save(ReportProgress, rebuildPath, false);
                 }
-
-                ReportProgress(null, new ProgressChangedEventArgs(100, null));
             }
-            else
+            catch (Exception e)
             {
-                Core.MEX.ImageResource.Save(ReportProgress, rebuildPath, false);
+                ReportProgress(null, new ProgressChangedEventArgs(100, e.Message));
             }
         }
 
@@ -598,6 +606,11 @@ namespace mexTool
                 {
                     savePanel.Visible = false;
                     Enabled = true;
+
+                    if(args.UserState is string str && !string.IsNullOrEmpty(str))
+                    {
+                        MessageBox.Show(str, "Error Saving Filesystem", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 });
             progressBarSaving.Invoke(m);

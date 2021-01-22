@@ -869,7 +869,7 @@ namespace mexTool.Core
                 fd.VIFiles.Set(externalId, new HSD_String(f.DemoFile));
 
                 fd.ResultScale[externalId] = f.ResultScreenScale;
-                if (stageToId.ContainsKey(f.TargetTestStage))
+                if (f.TargetTestStage != null && stageToId.ContainsKey(f.TargetTestStage))
                     fd.TargetTestStageLookups[externalId] = (ushort)stageToId[f.TargetTestStage];
                 else
                     fd.TargetTestStageLookups[externalId] = 0;
