@@ -35,6 +35,7 @@ namespace mexTool.GUI.Controls
             this.buttonRemoveSound = new System.Windows.Forms.ToolStripButton();
             this.buttonReplaceSound = new System.Windows.Forms.ToolStripButton();
             this.mxListBox1 = new mexTool.GUI.MXListBox();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.mxToolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,6 +70,7 @@ namespace mexTool.GUI.Controls
             this.mxToolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.buttonAddSound,
             this.buttonRemoveSound,
+            this.toolStripButton1,
             this.buttonReplaceSound});
             this.mxToolStrip1.Location = new System.Drawing.Point(0, 0);
             this.mxToolStrip1.Name = "mxToolStrip1";
@@ -130,6 +132,16 @@ namespace mexTool.GUI.Controls
             this.mxListBox1.SelectedValueChanged += new System.EventHandler(this.mxListBox1_SelectedValueChanged);
             this.mxListBox1.DoubleClicked += new System.EventHandler(this.mxListBox1_DoubleClicked);
             // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = global::mexTool.Properties.Resources.export;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(36, 37);
+            this.toolStripButton1.Text = "Export Sound";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
             // MXSsmEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -153,5 +165,6 @@ namespace mexTool.GUI.Controls
         private System.Windows.Forms.ToolStripButton buttonRemoveSound;
         private System.Windows.Forms.ToolStripButton buttonReplaceSound;
         private MXPropertyGrid mxPropertyGrid1;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }

@@ -252,5 +252,21 @@ namespace mexTool.GUI.Controls
                     MessageBox.Show($"No NULL codes found", "Cleaning Success");
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        public void RemoveSoundID(int id)
+        {
+            foreach (var s in _semBank.Scripts)
+            {
+                if (s.SFXID == id)
+                    s.SFXID = 0;
+
+                if (s.SFXID > id)
+                    s.SFXID -= 1;
+            }
+        }
     }
 }

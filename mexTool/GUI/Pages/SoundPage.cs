@@ -24,6 +24,10 @@ namespace mexTool.GUI.Pages
                 mxMusicPlayer1.DSP = _ssmEditor.SelectedDSP;
                 mxMusicPlayer1.PlaySound();
             };
+            _ssmEditor.RemoveSound += (sender, args) =>
+            {
+                _semEditor.RemoveSoundID((args as SoundRemovedEventArgs).SoundIndex);
+            };
             panel1.Controls.Add(_ssmEditor);
 
             _semEditor = new MXSemEditor();
