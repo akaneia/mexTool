@@ -400,7 +400,7 @@ namespace mexTool.Core
                 ft.AnimCount = ftData.AnimCount[internalId].AnimCount;
                 ft.AnimFile = ftData.AnimFiles[internalId].Value;
                 ft.RstAnimFile = ftData.ResultAnimFiles[externalId].Value;
-                ft.RstAnimCount = ftData.RstRuntime[externalId].AnimMax;
+                ft.RstAnimCount = ftData.RstRuntime[internalId].AnimMax;
                 ft.InsigniaID = ftData.InsigniaIDs[externalId];
                 ft.CanWallJump = ftData.WallJump[internalId] != 0;
                 ft.EffectFile = ftData.EffectIDs[internalId] < EffectFiles.Count ? EffectFiles[ftData.EffectIDs[internalId]].FileName : null;

@@ -60,6 +60,8 @@ namespace mexTool.GUI.Controls
         {
             _ssm = sb;
             mxListBox1.DataSource = sb.Sounds;
+            tbSSMName.DataBindings.Clear();
+            tbSSMName.DataBindings.Add("Text", _ssm, "Name");
         }
 
         /// <summary>
