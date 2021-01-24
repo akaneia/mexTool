@@ -75,7 +75,7 @@ namespace mexTool.Core
                                 o.Write(dat, 0, dat.Length);
                     }
 
-                    if (Icon != null)
+                    if (Icon != null && Icon.ImageData != null)
                     {
                         ZipArchiveEntry stc = archive.CreateEntry("stc.png");
                         using (var img = GraphicExtensions.TOBJToBitmap(Icon))
@@ -83,7 +83,7 @@ namespace mexTool.Core
                             img.Save(o, System.Drawing.Imaging.ImageFormat.Png);
                     }
 
-                    if (CSP != null)
+                    if (CSP != null && CSP.ImageData != null)
                     {
                         ZipArchiveEntry csp = archive.CreateEntry("csp.png");
                         using (var img = GraphicExtensions.TOBJToBitmap(CSP))

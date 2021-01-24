@@ -70,10 +70,17 @@ namespace mexTool.Tools
 
             _waveSource = src;
 
-            _soundOut = new WasapiOut() { Latency = 50, Device = audioDevice };
-            _soundOut.Initialize(_waveSource);
+            try
+            {
+                _soundOut = new WasapiOut() { Latency = 50, Device = audioDevice };
+                _soundOut.Initialize(_waveSource);
 
-            if (PlaybackStopped != null) _soundOut.Stopped += PlaybackStopped;
+                if (PlaybackStopped != null) _soundOut.Stopped += PlaybackStopped;
+            }
+            catch
+            {
+
+            }
         }
 
         /// <summary>

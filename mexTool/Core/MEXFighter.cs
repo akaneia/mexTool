@@ -278,19 +278,20 @@ namespace mexTool.Core
 
 
                 // music (as hps)
-                if (VictoryTheme.IsMexMusic)
+                if (VictoryTheme != null && VictoryTheme.IsMexMusic)
                     archive.AddFile(VictoryTheme.FileName, MEX.ImageResource.GetFile("audio\\" + VictoryTheme.FileName));
 
-                if (FighterSongID1.IsMexMusic)
+                if (FighterSongID1 != null && FighterSongID1.IsMexMusic)
                     archive.AddFile(FighterSongID1.FileName, MEX.ImageResource.GetFile("audio\\" + FighterSongID1.FileName));
 
-                if (FighterSongID2.IsMexMusic)
+                if (FighterSongID2 != null && FighterSongID2.IsMexMusic)
                     archive.AddFile(FighterSongID2.FileName, MEX.ImageResource.GetFile("audio\\" + FighterSongID2.FileName));
 
 
                 // target stage (as stage package)
-                using (var o = archive.CreateEntry(TargetTestStage.FileName).Open())
-                    TargetTestStage.SaveStagePackageToStream(o);
+                if (TargetTestStage != null && TargetTestStage.FileName != null)
+                    using (var o = archive.CreateEntry(TargetTestStage.FileName).Open())
+                        TargetTestStage.SaveStagePackageToStream(o);
             }
         }
 

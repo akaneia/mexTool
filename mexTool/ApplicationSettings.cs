@@ -50,16 +50,23 @@ namespace mexTool
         {
             ExecutablePath = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
 
-            using (var mmdeviceEnumerator = new MMDeviceEnumerator())
+            try
             {
-                using (var mmdeviceCollection = mmdeviceEnumerator.EnumAudioEndpoints(DataFlow.Render, DeviceState.Active))
+                using (var mmdeviceEnumerator = new MMDeviceEnumerator())
                 {
-                    foreach (var device in mmdeviceCollection)
+                    using (var mmdeviceCollection = mmdeviceEnumerator.EnumAudioEndpoints(DataFlow.Render, DeviceState.Active))
                     {
-                        AudioDevices.Add(device);
+                        foreach (var device in mmdeviceCollection)
+                        {
+                            AudioDevices.Add(device);
+                        }
                     }
+                    DefaultDevice = mmdeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
                 }
-                DefaultDevice = mmdeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
+            }
+            catch
+            {
+                System.Windows.Forms.MessageBox.Show("Audio Device Failed to Initialize", "Error Initializing Audio", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Exclamation);
             }
 
             AddFont(Path.Combine(ExecutablePath, "lib/A-OTF_Folk_Pro_H.otf"));
