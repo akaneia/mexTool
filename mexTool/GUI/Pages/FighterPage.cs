@@ -1,4 +1,5 @@
 ﻿using HSDRaw;
+using HSDRaw.Melee;
 using HSDRaw.Melee.Pl;
 using HSDRawViewer.GUI;
 using mexTool.Core;
@@ -19,6 +20,8 @@ namespace mexTool.GUI.Pages
         private ItemEditor _itemEditor;
         private MXButton _copyMoveLogic;
         private MXCostumeEditor _costumeEditor;
+        private MXButton _importBoneYml;
+        private MXButton _exportBoneYml;
 
         /// <summary>
         /// 
@@ -50,8 +53,70 @@ namespace mexTool.GUI.Pages
             _copyMoveLogic.Visible = false;
             _copyMoveLogic.Dock = DockStyle.Top;
             _copyMoveLogic.Click += CopyMoveLogic;
-            _copyMoveLogic.Font = new Font("Microsoft Sans Serif", 12f, FontStyle.Regular);
+            _copyMoveLogic.Font = new Font("Microsoft Sans Serif", 10f, FontStyle.Regular);
             panel1.Controls.Add(_copyMoveLogic);
+
+
+
+            _importBoneYml = new MXButton();
+            _importBoneYml.Text = "Import Bone YAML";
+            _importBoneYml.ForeColor = Color.White;
+            _importBoneYml.Height = 24;
+            _importBoneYml.Visible = false;
+            _importBoneYml.Dock = DockStyle.Top;
+            _importBoneYml.Click += (sender, args) =>
+            {
+                if (fighterListBox.SelectedItem is MEXFighter fighter &&
+                    _propertyGrid.SelectedObject is SBM_BoneLookupTable bones)
+                {
+                    using (OpenFileDialog d = new OpenFileDialog())
+                    {
+                        d.Filter = ApplicationSettings.YAMLFilter;
+                        if (d.ShowDialog() == DialogResult.OK)
+                        {
+                            var serializer = new DeserializerBuilder()
+                            .WithNamingConvention(CamelCaseNamingConvention.Instance)
+                            .WithTypeInspector(inspector => new MEXTypeInspector(inspector))
+                            .Build();
+
+                            using (StreamReader r = new StreamReader(d.FileName))
+                            {
+                                fighter.BoneTable = serializer.Deserialize<SBM_BoneLookupTable>(r.ReadToEnd());
+                                _propertyGrid.SelectedObject = fighter.BoneTable;
+                            }
+                        }
+                    }
+                }
+            };
+            _importBoneYml.Font = new Font("Microsoft Sans Serif", 10f, FontStyle.Regular);
+            panel1.Controls.Add(_importBoneYml);
+
+            _exportBoneYml = new MXButton();
+            _exportBoneYml.Text = "Export Bone YAML";
+            _exportBoneYml.ForeColor = Color.White;
+            _exportBoneYml.Height = 24;
+            _exportBoneYml.Visible = false;
+            _exportBoneYml.Dock = DockStyle.Top;
+            _exportBoneYml.Click += (sender, args) =>
+            {
+                if (_propertyGrid.SelectedObject is SBM_BoneLookupTable bones)
+                    using (SaveFileDialog d = new SaveFileDialog())
+                    {
+                        d.Filter = ApplicationSettings.YAMLFilter;
+                        if (d.ShowDialog() == DialogResult.OK)
+                        {
+                            var serializer = new SerializerBuilder()
+                            .WithNamingConvention(CamelCaseNamingConvention.Instance)
+                            .WithTypeInspector(inspector => new MEXTypeInspector(inspector))
+                            .Build();
+
+                            File.WriteAllText(d.FileName, serializer.Serialize(bones));
+                        }
+                    }
+            };
+            _exportBoneYml.Font = new Font("Microsoft Sans Serif", 10f, FontStyle.Regular);
+            panel1.Controls.Add(_exportBoneYml);
+
 
             fighterListBox.DataSource = MEX.Fighters;
             buttonGeneralTab.PerformClick();
@@ -149,6 +214,8 @@ static struct MoveLogic move_logic[] = {
             _propertyGrid.Visible = false;
             _copyMoveLogic.Visible = false;
             _costumeEditor.Visible = false;
+            _exportBoneYml.Visible = false;
+            _importBoneYml.Visible = false;
 
             if (fighterListBox.SelectedItem is MEXFighter fighter)
             {
@@ -161,6 +228,8 @@ static struct MoveLogic move_logic[] = {
                 {
                     _propertyGrid.Visible = true;
                     _propertyGrid.SelectedObject = fighter.BoneTable;
+                    _exportBoneYml.Visible = true;
+                    _importBoneYml.Visible = true;
                 }
                 if (buttonFunctionTab.BackFillColor == ThemeColors.TabColorSelected)
                 {

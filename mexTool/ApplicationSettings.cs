@@ -13,6 +13,8 @@ namespace mexTool
     {
         private static List<MMDevice> AudioDevices = new List<MMDevice>();
 
+        public static string YAMLFilter { get; } = "YAML (*.yml)|*.yml";
+
         public static string ExecutablePath { get; internal set; }
 
         public static MMDevice DefaultDevice { get; set; }

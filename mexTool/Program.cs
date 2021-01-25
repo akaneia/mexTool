@@ -12,7 +12,15 @@ namespace mexTool
         [STAThread]
         static void Main(string[] args)
         {
-            if (Environment.OSVersion.Version.Major >= 6)
+            bool enableDpi = false;
+
+            foreach(var v in args)
+            {
+                if (v == "-dpi")
+                    enableDpi = true;
+            }
+
+            if (enableDpi && Environment.OSVersion.Version.Major >= 6)
                 SetProcessDPIAware();
 
             Application.EnableVisualStyles();

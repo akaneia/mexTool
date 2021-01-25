@@ -413,7 +413,11 @@ namespace mexTool.Core
                 ft.KirbyCapSymbol = kbData.CapFiles[internalId].Symbol;
                 ft.KirbyEffectFile = kbData.KirbyEffectIDs[internalId] < EffectFiles.Count ? EffectFiles[kbData.KirbyEffectIDs[internalId]].FileName : null;
                 ft.KirbyEffectSymbol = kbData.KirbyEffectIDs[internalId] < EffectFiles.Count ? EffectFiles[kbData.KirbyEffectIDs[internalId]].Symbol : null;
-                ft.VictoryTheme = BackgroundMusic[ftData.VictoryThemeIDs[externalId]];
+                ft.VictoryTheme = externalId < ftData.VictoryThemeIDs.Length &&
+                    ftData.VictoryThemeIDs[externalId] > 0 &&
+                    ftData.VictoryThemeIDs[externalId] < BackgroundMusic.Count ? 
+                    BackgroundMusic[ftData.VictoryThemeIDs[externalId]] : 
+                    BackgroundMusic[0];
                 ft.FighterSongID1 = ftData.FighterSongIDs[externalId].SongID1 >= 0 && ftData.FighterSongIDs[externalId].SongID1 < BackgroundMusic.Count ? BackgroundMusic[ftData.FighterSongIDs[externalId].SongID1] : null;
                 ft.FighterSongID2 = ftData.FighterSongIDs[externalId].SongID2 >= 0 && ftData.FighterSongIDs[externalId].SongID2 < BackgroundMusic.Count ? BackgroundMusic[ftData.FighterSongIDs[externalId].SongID2] : null;
                 
@@ -1369,13 +1373,27 @@ namespace mexTool.Core
             {
                 var icos = new MEXStageIcon();
                 icos._icon = SSSIcons[i];
-                icos._joint = joints[i];
-                icos.FromAnimJoint(animJoints[i]);
-                icos.Image = images[2 + i];
+
+                if (i < joints.Length)
+                    icos._joint = joints[i];
+                else
+                    icos._joint = HSDAccessor.DeepClone<HSD_JOBJ>(joints[0]);
+
+                if (i < animJoints.Length)
+                    icos.FromAnimJoint(animJoints[i]);
+
+                if (i + 2 < images.Length)
+                    icos.Image = images[2 + i];
+                else
+                    icos.Image = images[2];
+
                 icos.IconModel = iconModel;
                 var stageID = StageIDs[SSSIcons[i].ExternalID].StageID;
                 icos.Stage = stageID < Stages.Count ? Stages[stageID] : null;
-                icos._previewText = previews[i];
+
+                if (i < previews.Length)
+                    icos._previewText = previews[i];
+
                 StageIcons.Add(icos);
             }
         }

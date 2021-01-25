@@ -437,9 +437,9 @@ namespace mexTool.Core
 
 
                 // link and add missing music
-                InstallFighterMusic(fighter, archive, fighter.VictoryTheme);
-                InstallFighterMusic(fighter, archive, fighter.FighterSongID1);
-                InstallFighterMusic(fighter, archive, fighter.FighterSongID2);
+                fighter.VictoryTheme = InstallFighterMusic(fighter, archive, fighter.VictoryTheme);
+                fighter.FighterSongID1 = InstallFighterMusic(fighter, archive, fighter.FighterSongID1);
+                fighter.FighterSongID2 = InstallFighterMusic(fighter, archive, fighter.FighterSongID2);
 
 
                 // TODO: install target test stage
@@ -472,15 +472,12 @@ namespace mexTool.Core
         /// <param name="fighter"></param>
         /// <param name="archive"></param>
         /// <param name="bgm"></param>
-        private static void InstallFighterMusic(MEXFighter fighter, ZipArchive archive, MEXMusic bgm)
+        private static MEXMusic InstallFighterMusic(MEXFighter fighter, ZipArchive archive, MEXMusic bgm)
         {
             var music = MEX.BackgroundMusic.FirstOrDefault(e => e.FileName == bgm.FileName);
 
             if (music != null)
-            {
-                bgm.FileName = music.FileName;
-                bgm.Label = music.Label;
-            }
+                return music;
             else
             {
                 // find music in zip
@@ -488,10 +485,12 @@ namespace mexTool.Core
 
                 if (musicFile != null)
                 {
-                    MEX.ImageResource.AddFile("audio\\" + Path.GetFileName(bgm.FileName), musicFile);
                     // add music
+                    MEX.ImageResource.AddFile("audio\\" + Path.GetFileName(bgm.FileName), musicFile);
                     MEX.BackgroundMusic.Add(bgm);
                 }
+
+                return bgm;
             }
         }
 
