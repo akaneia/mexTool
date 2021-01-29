@@ -369,6 +369,15 @@ namespace mexTool.Core
 
             if (_folderPath != null)
             {
+                filestoAdd.Remove(filePath);
+
+                if(filesToRename.Values.Contains(filePath))
+                {
+                    var item = filesToRename.First(kvp => kvp.Value == filePath);
+                    filesToRename.Remove(item.Key);
+                    //filePath = item.Key;
+                }
+
                 if (FileExists(filePath) && !filestoRemove.Contains(filePath))
                     filestoRemove.Add(filePath);
             }
