@@ -22,6 +22,8 @@ namespace mexTool.GUI.Pages
             _propertyGrid.PropertySort = PropertySort.Categorized;
             contentPanel.Controls.Add(_propertyGrid);
 
+            buttonGobjCopy.SendToBack();
+
             _itemEditor = new ItemEditor();
             _itemEditor.Visible = false;
             _itemEditor.Dock = DockStyle.Fill;
@@ -61,11 +63,13 @@ namespace mexTool.GUI.Pages
             _propertyGrid.Visible = false;
             _itemEditor.Visible = false;
             _playListEditor.Visible = false;
+            buttonGobjCopy.Visible = false;
 
             if (listBoxStage.SelectedItem is MEXStage stage)
             {
                 if (buttonGeneralTab.BackFillColor == ThemeColors.TabColorSelected)
                 {
+                    buttonGobjCopy.Visible = true;
                     _propertyGrid.Visible = true;
                     _propertyGrid.SelectedObject = stage;
                 }
@@ -168,6 +172,27 @@ namespace mexTool.GUI.Pages
                         stage.SaveStageToPackage(d.FileName);
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonGobjCopy_Click(object sender, EventArgs e)
+        {
+            if (listBoxStage.SelectedItem is MEXStage stage)
+            {
+                if (stage.MapGOBJs == null || stage.MapGOBJs.Length == 0)
+                {
+                    MessageBox.Show("This MxDt file does not contains map gobj functions", "Nothing to copy", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+                Clipboard.SetText(stage.GetMoveLogicStruct());
+
+                MessageBox.Show("Map GOBJ Functions Copied to Clipboard");
             }
         }
     }

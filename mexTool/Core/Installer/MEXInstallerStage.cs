@@ -10,13 +10,13 @@ namespace mexTool.Core.Installer
         private static readonly uint StageFunctionOffset = 0x3DCEDC;
 
         private static readonly byte[] MapGOBJEntries = new byte[] {
-            0, 4, 21, 8, 12, 8, 11, 3, 12, 6,
-            4, 2, 11, 8, 22, 19, 12, 28, 40, 41,
-            8, 8, 11, 0, 4, 16, 0, 9, 6, 6,
-            4, 4, 8, 4, 38, 4, 8, 11, 2, 3,
+            0, 4, 21, 7, 12, 7, 11, 3, 12, 5,
+            4, 2, 11, 7, 21, 18, 10, 28, 39, 41,
+            6, 7, 11, 0, 4, 16, 0, 9, 6, 6,
+            4, 4, 7, 4, 38, 4, 7, 10, 2, 3,
             4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
             4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
-            4, 4, 4, 4, 4, 4, 6, 14, 3, 3,
+            4, 4, 4, 4, 4, 4, 5, 11, 3, 3,
             3 };
 
         public static void InstallStages(MEXDOLScrubber dol, MEX_Data data, HSDRawFile resourceFile)

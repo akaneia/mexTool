@@ -39,6 +39,8 @@ namespace mexTool.GUI.Pages
             this.buttonExport = new mexTool.GUI.Controls.MXButton();
             this.buttonClone = new mexTool.GUI.Controls.MXButton();
             this.buttonRemove = new mexTool.GUI.Controls.MXButton();
+            this.buttonGobjCopy = new mexTool.GUI.Controls.MXButton();
+            this.contentPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -57,6 +59,7 @@ namespace mexTool.GUI.Pages
             this.contentPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.contentPanel.Controls.Add(this.buttonGobjCopy);
             this.contentPanel.Location = new System.Drawing.Point(224, 119);
             this.contentPanel.Name = "contentPanel";
             this.contentPanel.Size = new System.Drawing.Size(388, 375);
@@ -64,6 +67,9 @@ namespace mexTool.GUI.Pages
             // 
             // buttonPlaylistTab
             // 
+            this.buttonPlaylistTab.BackColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
+            this.buttonPlaylistTab.BackColorLight = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(140)))));
+            this.buttonPlaylistTab.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(100)))));
             this.buttonPlaylistTab.BorderColor = System.Drawing.Color.Black;
             this.buttonPlaylistTab.ForeColor = System.Drawing.Color.White;
             this.buttonPlaylistTab.Location = new System.Drawing.Point(386, 90);
@@ -76,6 +82,9 @@ namespace mexTool.GUI.Pages
             // 
             // buttonItemTab
             // 
+            this.buttonItemTab.BackColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
+            this.buttonItemTab.BackColorLight = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(140)))));
+            this.buttonItemTab.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(100)))));
             this.buttonItemTab.BorderColor = System.Drawing.Color.Black;
             this.buttonItemTab.ForeColor = System.Drawing.Color.White;
             this.buttonItemTab.Location = new System.Drawing.Point(305, 90);
@@ -88,6 +97,9 @@ namespace mexTool.GUI.Pages
             // 
             // buttonGeneralTab
             // 
+            this.buttonGeneralTab.BackColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
+            this.buttonGeneralTab.BackColorLight = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(140)))));
+            this.buttonGeneralTab.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(100)))));
             this.buttonGeneralTab.BorderColor = System.Drawing.Color.Black;
             this.buttonGeneralTab.ForeColor = System.Drawing.Color.White;
             this.buttonGeneralTab.Location = new System.Drawing.Point(224, 90);
@@ -122,6 +134,9 @@ namespace mexTool.GUI.Pages
             // 
             // importButton
             // 
+            this.importButton.BackColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
+            this.importButton.BackColorLight = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(140)))));
+            this.importButton.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(100)))));
             this.importButton.BorderColor = System.Drawing.Color.Black;
             this.importButton.CornerRadius = 20;
             this.importButton.Font = new System.Drawing.Font("Arial", 12F);
@@ -141,6 +156,9 @@ namespace mexTool.GUI.Pages
             // 
             // buttonExport
             // 
+            this.buttonExport.BackColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
+            this.buttonExport.BackColorLight = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(140)))));
+            this.buttonExport.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(100)))));
             this.buttonExport.BorderColor = System.Drawing.Color.Black;
             this.buttonExport.CornerRadius = 20;
             this.buttonExport.Font = new System.Drawing.Font("Arial", 12F);
@@ -161,6 +179,9 @@ namespace mexTool.GUI.Pages
             // 
             // buttonClone
             // 
+            this.buttonClone.BackColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
+            this.buttonClone.BackColorLight = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(140)))));
+            this.buttonClone.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(100)))));
             this.buttonClone.BorderColor = System.Drawing.Color.Black;
             this.buttonClone.CornerRadius = 20;
             this.buttonClone.Font = new System.Drawing.Font("Arial", 12F);
@@ -181,6 +202,9 @@ namespace mexTool.GUI.Pages
             // 
             // buttonRemove
             // 
+            this.buttonRemove.BackColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
+            this.buttonRemove.BackColorLight = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(140)))));
+            this.buttonRemove.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(100)))));
             this.buttonRemove.BorderColor = System.Drawing.Color.Black;
             this.buttonRemove.CornerRadius = 20;
             this.buttonRemove.Font = new System.Drawing.Font("Arial", 12F);
@@ -199,6 +223,21 @@ namespace mexTool.GUI.Pages
             this.buttonRemove.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.buttonRemove.Click += new System.EventHandler(this.buttonRemove_Click);
             // 
+            // buttonGobjCopy
+            // 
+            this.buttonGobjCopy.BackColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
+            this.buttonGobjCopy.BackColorLight = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(140)))));
+            this.buttonGobjCopy.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(100)))));
+            this.buttonGobjCopy.BorderColor = System.Drawing.Color.Black;
+            this.buttonGobjCopy.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonGobjCopy.ForeColor = System.Drawing.Color.White;
+            this.buttonGobjCopy.Location = new System.Drawing.Point(0, 0);
+            this.buttonGobjCopy.Name = "buttonGobjCopy";
+            this.buttonGobjCopy.Size = new System.Drawing.Size(388, 23);
+            this.buttonGobjCopy.TabIndex = 0;
+            this.buttonGobjCopy.Text = "Copy Map GOBJ Struct to Clipboard";
+            this.buttonGobjCopy.Click += new System.EventHandler(this.buttonGobjCopy_Click);
+            // 
             // StagePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -215,6 +254,7 @@ namespace mexTool.GUI.Pages
             this.Controls.Add(this.listBoxStage);
             this.Name = "StagePage";
             this.Size = new System.Drawing.Size(637, 511);
+            this.contentPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -232,5 +272,6 @@ namespace mexTool.GUI.Pages
         private Controls.MXButton buttonExport;
         private Controls.MXButton buttonClone;
         private Controls.MXButton buttonRemove;
+        private Controls.MXButton buttonGobjCopy;
     }
 }

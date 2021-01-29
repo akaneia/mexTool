@@ -10,6 +10,7 @@ using System.IO.Compression;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 using System.Windows.Forms;
+using System.Text;
 
 namespace mexTool.Core
 {
@@ -263,6 +264,39 @@ namespace mexTool.Core
                 // add stage file
                 MEX.Stages.Add(stage);
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string GetMoveLogicStruct()
+        {
+            StringBuilder table = new StringBuilder();
+            int index = 0;
+            foreach (var m in MapGOBJs)
+            {
+                table.AppendLine("\t// map gobj " + index++);
+
+                table.AppendLine(string.Format(
+                    "\t{{" +
+                    "\n\t\t0x{0, -10}// OnCreation" +
+                    "\n\t\t0x{1, -10}// OnDeletion" +
+                    "\n\t\t0x{2, -10}// OnFrame" +
+                    "\n\t\t0x{3, -10}// OnUnk" +
+                    "\n\t\t0x{4, -10}// Bitflags" +
+                    "\n\t}},",
+            m.OnCreation.ToString("X") + ",",
+            m.OnDeletion.ToString("X") + ",",
+            m.OnFrame.ToString("X") + ",",
+            m.OnUnk.ToString("X") + ",",
+            m.Bitflags.ToString("X") + ","
+            ));
+            }
+
+            return @"__attribute__((used))
+static struct map_GOBJDesc map_gobjs[] = {
+" + table.ToString() + @"}; ";
         }
 
         public override string ToString()
