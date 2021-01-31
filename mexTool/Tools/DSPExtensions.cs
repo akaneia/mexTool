@@ -1,6 +1,7 @@
 ﻿using CSCore;
 using CSCore.Codecs.MP3;
 using MeleeMedia.Audio;
+using mexTool.GUI;
 using System.IO;
 
 namespace mexTool.Tools
@@ -40,6 +41,13 @@ namespace mexTool.Tools
                 case "m4a":
                     dsp.FromM4A(File.ReadAllBytes(filePath));
                     break;
+            }
+
+            using (var d = new SoundEditorDialog())
+            {
+                d.SetSound(dsp);
+
+                d.ShowDialog();
             }
 
             return dsp;

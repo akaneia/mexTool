@@ -59,7 +59,7 @@ namespace mexTool.GUI.Controls
 
             _player = new DSPPlayer();
 
-            _player.PlaybackStopped += (sender, args) =>
+            /*_player.PlaybackStopped += (sender, args) =>
             {
                 if (_dsp != null &&
                 _dsp.Channels.Count > 0 &&
@@ -72,7 +72,7 @@ namespace mexTool.GUI.Controls
                 }
                 else
                     PauseSound();
-            };
+            };*/
 
             soundProgressBar.ValueChanged += (sender, args) =>
             {
@@ -80,7 +80,7 @@ namespace mexTool.GUI.Controls
                 {
                     double perc = soundProgressBar.Value / (double)soundProgressBar.Maximum;
                     if(!double.IsNaN(_player.Length.TotalMilliseconds * perc))
-                        _player.Position = TimeSpan.FromMilliseconds(_player.Length.TotalMilliseconds * perc); ;
+                        _player.Position = TimeSpan.FromMilliseconds(_player.Length.TotalMilliseconds * perc);
                 }
             };
 

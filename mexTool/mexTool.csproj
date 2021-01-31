@@ -196,6 +196,12 @@
     <Compile Include="GUI\Controls\SelectScreenRenderer.Designer.cs">
       <DependentUpon>SelectScreenRenderer.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Controls\SoundEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Controls\SoundEditor.Designer.cs">
+      <DependentUpon>SoundEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Controls\TransformWidget.cs" />
     <Compile Include="GUI\DefaultItemNames.cs" />
     <Compile Include="GUI\MenuColorTable.cs" />
@@ -231,6 +237,12 @@
     </Compile>
     <Compile Include="GUI\Pages\StagePage.Designer.cs">
       <DependentUpon>StagePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\SoundEditorDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\SoundEditorDialog.Designer.cs">
+      <DependentUpon>SoundEditorDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\ThemeColors.cs" />
     <Compile Include="MxDtWindow.cs">
@@ -289,6 +301,9 @@
     <EmbeddedResource Include="GUI\Controls\SelectScreenRenderer.resx">
       <DependentUpon>SelectScreenRenderer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Controls\SoundEditor.resx">
+      <DependentUpon>SoundEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Pages\FighterPage.resx">
       <DependentUpon>FighterPage.cs</DependentUpon>
     </EmbeddedResource>
@@ -303,6 +318,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Pages\StagePage.resx">
       <DependentUpon>StagePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\SoundEditorDialog.resx">
+      <DependentUpon>SoundEditorDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MxDtWindow.resx">
       <DependentUpon>MxDtWindow.cs</DependentUpon>

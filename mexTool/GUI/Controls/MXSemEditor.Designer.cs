@@ -33,16 +33,17 @@ namespace mexTool.GUI.Controls
             this.panel2 = new System.Windows.Forms.Panel();
             this.mxListBox1 = new mexTool.GUI.MXListBox();
             this.mxToolStrip1 = new mexTool.GUI.Controls.MXToolStrip();
+            this.buttonAddSound = new System.Windows.Forms.ToolStripButton();
+            this.buttonRemoveSound = new System.Windows.Forms.ToolStripButton();
+            this.buttonClean = new System.Windows.Forms.ToolStripButton();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel1 = new mexTool.GUI.Controls.DoubleBufferedPanel();
             this.scriptListBox = new mexTool.GUI.MXListBox();
             this.mxToolStrip2 = new mexTool.GUI.Controls.MXToolStrip();
-            this.mxPropertyGrid2 = new mexTool.GUI.Controls.MXPropertyGrid();
-            this.buttonAddSound = new System.Windows.Forms.ToolStripButton();
-            this.buttonRemoveSound = new System.Windows.Forms.ToolStripButton();
-            this.buttonClean = new System.Windows.Forms.ToolStripButton();
             this.buttonAddCode = new System.Windows.Forms.ToolStripButton();
             this.buttonRemoveCode = new System.Windows.Forms.ToolStripButton();
+            this.mxPropertyGrid2 = new mexTool.GUI.Controls.MXPropertyGrid();
+            this.buttonCloneScript = new System.Windows.Forms.ToolStripButton();
             this.panel2.SuspendLayout();
             this.mxToolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -99,6 +100,7 @@ namespace mexTool.GUI.Controls
             this.mxToolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.mxToolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.buttonAddSound,
+            this.buttonCloneScript,
             this.buttonRemoveSound,
             this.buttonClean});
             this.mxToolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -106,6 +108,36 @@ namespace mexTool.GUI.Controls
             this.mxToolStrip1.Size = new System.Drawing.Size(270, 40);
             this.mxToolStrip1.TabIndex = 2;
             this.mxToolStrip1.Text = "mxToolStrip1";
+            // 
+            // buttonAddSound
+            // 
+            this.buttonAddSound.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonAddSound.Image = global::mexTool.Properties.Resources.plus;
+            this.buttonAddSound.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonAddSound.Name = "buttonAddSound";
+            this.buttonAddSound.Size = new System.Drawing.Size(36, 37);
+            this.buttonAddSound.Text = "Add Sound";
+            this.buttonAddSound.Click += new System.EventHandler(this.buttonAddSound_Click);
+            // 
+            // buttonRemoveSound
+            // 
+            this.buttonRemoveSound.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonRemoveSound.Image = global::mexTool.Properties.Resources.minus;
+            this.buttonRemoveSound.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonRemoveSound.Name = "buttonRemoveSound";
+            this.buttonRemoveSound.Size = new System.Drawing.Size(36, 37);
+            this.buttonRemoveSound.Text = "Remove Sound";
+            this.buttonRemoveSound.Click += new System.EventHandler(this.buttonRemoveSound_Click);
+            // 
+            // buttonClean
+            // 
+            this.buttonClean.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonClean.Image = global::mexTool.Properties.Resources.clean;
+            this.buttonClean.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonClean.Name = "buttonClean";
+            this.buttonClean.Size = new System.Drawing.Size(36, 37);
+            this.buttonClean.Text = "Clean Scripts";
+            this.buttonClean.Click += new System.EventHandler(this.buttonClean_Click);
             // 
             // textBox1
             // 
@@ -169,6 +201,26 @@ namespace mexTool.GUI.Controls
             this.mxToolStrip2.TabIndex = 3;
             this.mxToolStrip2.Text = "mxToolStrip2";
             // 
+            // buttonAddCode
+            // 
+            this.buttonAddCode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonAddCode.Image = global::mexTool.Properties.Resources.plus;
+            this.buttonAddCode.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonAddCode.Name = "buttonAddCode";
+            this.buttonAddCode.Size = new System.Drawing.Size(36, 37);
+            this.buttonAddCode.Text = "Add Sound";
+            this.buttonAddCode.Click += new System.EventHandler(this.buttonAddCode_Click);
+            // 
+            // buttonRemoveCode
+            // 
+            this.buttonRemoveCode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonRemoveCode.Image = global::mexTool.Properties.Resources.minus;
+            this.buttonRemoveCode.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonRemoveCode.Name = "buttonRemoveCode";
+            this.buttonRemoveCode.Size = new System.Drawing.Size(36, 37);
+            this.buttonRemoveCode.Text = "Remove Sound";
+            this.buttonRemoveCode.Click += new System.EventHandler(this.buttonRemoveCode_Click);
+            // 
             // mxPropertyGrid2
             // 
             this.mxPropertyGrid2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
@@ -193,55 +245,15 @@ namespace mexTool.GUI.Controls
             this.mxPropertyGrid2.ViewForeColor = System.Drawing.Color.White;
             this.mxPropertyGrid2.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.mxPropertyGrid2_PropertyValueChanged);
             // 
-            // buttonAddSound
+            // buttonCloneScript
             // 
-            this.buttonAddSound.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonAddSound.Image = global::mexTool.Properties.Resources.plus;
-            this.buttonAddSound.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonAddSound.Name = "buttonAddSound";
-            this.buttonAddSound.Size = new System.Drawing.Size(36, 37);
-            this.buttonAddSound.Text = "Add Sound";
-            this.buttonAddSound.Click += new System.EventHandler(this.buttonAddSound_Click);
-            // 
-            // buttonRemoveSound
-            // 
-            this.buttonRemoveSound.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonRemoveSound.Image = global::mexTool.Properties.Resources.minus;
-            this.buttonRemoveSound.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonRemoveSound.Name = "buttonRemoveSound";
-            this.buttonRemoveSound.Size = new System.Drawing.Size(36, 37);
-            this.buttonRemoveSound.Text = "Remove Sound";
-            this.buttonRemoveSound.Click += new System.EventHandler(this.buttonRemoveSound_Click);
-            // 
-            // buttonClean
-            // 
-            this.buttonClean.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonClean.Image = global::mexTool.Properties.Resources.clean;
-            this.buttonClean.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonClean.Name = "buttonClean";
-            this.buttonClean.Size = new System.Drawing.Size(36, 37);
-            this.buttonClean.Text = "Clean Scripts";
-            this.buttonClean.Click += new System.EventHandler(this.buttonClean_Click);
-            // 
-            // buttonAddCode
-            // 
-            this.buttonAddCode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonAddCode.Image = global::mexTool.Properties.Resources.plus;
-            this.buttonAddCode.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonAddCode.Name = "buttonAddCode";
-            this.buttonAddCode.Size = new System.Drawing.Size(36, 37);
-            this.buttonAddCode.Text = "Add Sound";
-            this.buttonAddCode.Click += new System.EventHandler(this.buttonAddCode_Click);
-            // 
-            // buttonRemoveCode
-            // 
-            this.buttonRemoveCode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonRemoveCode.Image = global::mexTool.Properties.Resources.minus;
-            this.buttonRemoveCode.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonRemoveCode.Name = "buttonRemoveCode";
-            this.buttonRemoveCode.Size = new System.Drawing.Size(36, 37);
-            this.buttonRemoveCode.Text = "Remove Sound";
-            this.buttonRemoveCode.Click += new System.EventHandler(this.buttonRemoveCode_Click);
+            this.buttonCloneScript.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonCloneScript.Image = global::mexTool.Properties.Resources.copy;
+            this.buttonCloneScript.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonCloneScript.Name = "buttonCloneScript";
+            this.buttonCloneScript.Size = new System.Drawing.Size(36, 37);
+            this.buttonCloneScript.Text = "Clone Script";
+            this.buttonCloneScript.Click += new System.EventHandler(this.buttonCloneScript_Click);
             // 
             // MXSemEditor
             // 
@@ -280,5 +292,6 @@ namespace mexTool.GUI.Controls
         private System.Windows.Forms.ToolStripButton buttonRemoveCode;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ToolStripButton buttonClean;
+        private System.Windows.Forms.ToolStripButton buttonCloneScript;
     }
 }

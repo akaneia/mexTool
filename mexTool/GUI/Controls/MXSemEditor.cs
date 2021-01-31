@@ -268,5 +268,28 @@ namespace mexTool.GUI.Controls
                     s.SFXID -= 1;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonCloneScript_Click(object sender, EventArgs e)
+        {
+            if(mxListBox1.SelectedItem is SEMBankScript script)
+            {
+                mxListBox1.DataSource = null;
+
+                var clone = script.Copy();
+
+                var scripts = _semBank.Scripts;
+                Array.Resize(ref scripts, scripts.Length + 1);
+                scripts[scripts.Length - 1] = clone;
+                _semBank.Scripts = scripts;
+
+                mxListBox1.DataSource = _semBank.Scripts;
+                mxListBox1.SelectedItem = clone;
+            }
+        }
     }
 }

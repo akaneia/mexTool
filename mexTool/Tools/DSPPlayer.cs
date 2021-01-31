@@ -18,7 +18,9 @@ namespace mexTool.Tools
         private IWaveSource _waveSource;
         private MemoryStream _memoryStream;
 
-        public event EventHandler<PlaybackStoppedEventArgs> PlaybackStopped;
+        public bool LoopPlayback { get; set; } = true;
+
+        public TimeSpan LoopPoint { get; set; } = TimeSpan.Zero;
 
         public bool IsPlaying
         {
@@ -52,7 +54,6 @@ namespace mexTool.Tools
 
         public DSPPlayer()
         {
-
         }
 
         ~DSPPlayer()
@@ -75,7 +76,14 @@ namespace mexTool.Tools
                 _soundOut = new WasapiOut() { Latency = 50, Device = audioDevice };
                 _soundOut.Initialize(_waveSource);
 
-                if (PlaybackStopped != null) _soundOut.Stopped += PlaybackStopped;
+                _soundOut.Stopped += (sender, args) =>
+                {
+                    if (LoopPlayback && LoopPoint.TotalMilliseconds != 0 && _soundOut != null && _waveSource.Position == _waveSource.Length)
+                    {
+                        Position = LoopPoint;
+                        Play();
+                    }
+                };
             }
             catch
             {
@@ -128,6 +136,8 @@ namespace mexTool.Tools
         {
             if (dsp == null)
                 return;
+
+            LoopPoint = TimeSpan.Parse(dsp.LoopPoint);
 
             var data = dsp.ToWAVE();
 
