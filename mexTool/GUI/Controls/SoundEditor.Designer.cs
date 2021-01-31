@@ -51,7 +51,6 @@ namespace mexTool.GUI.Controls
             this.endTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.endTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
             this.endTime.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.endTime.Enabled = false;
             this.endTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
             this.endTime.ForeColor = System.Drawing.Color.White;
             this.endTime.Location = new System.Drawing.Point(487, 331);
@@ -155,6 +154,7 @@ namespace mexTool.GUI.Controls
             this.Controls.Add(this.panel1);
             this.Name = "SoundEditor";
             this.Size = new System.Drawing.Size(800, 359);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SoundEditor_KeyPress);
             this.ResumeLayout(false);
             this.PerformLayout();
 

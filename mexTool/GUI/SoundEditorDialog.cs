@@ -23,6 +23,7 @@ namespace mexTool.GUI
 
         private void mxButton1_Click(object sender, System.EventArgs e)
         {
+            editor.ApplyTrimming();
             Close();
         }
     }

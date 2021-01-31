@@ -37,7 +37,9 @@ namespace mexTool.Tools
             }
             set
             {
-                if (_waveSource != null && value < _waveSource.GetLength())
+                if (_waveSource != null && 
+                    value < _waveSource.GetLength() && 
+                    value > TimeSpan.Zero)
                     _waveSource.SetPosition(value);
             }
         }

@@ -40,11 +40,28 @@ namespace mexTool.GUI.Controls
 
             _player = new Tools.DSPPlayer();
 
+            panel1.ForceFocus = false;
+
             Disposed += (sender, args) =>
             {
                 _player.Stop();
                 _player.Dispose();
             };
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void ApplyTrimming()
+        {
+            var len = _dsp.Length;
+            foreach(var c in _dsp.Channels)
+            {
+                var newLength = (EndPoint.TotalMilliseconds / 1750f) * _dsp.Frequency;
+
+                Array.Resize(ref c.Data, (int)newLength);
+                c.NibbleCount = c.Data.Length * 2;
+            }
         }
 
         /// <summary>
@@ -112,6 +129,11 @@ namespace mexTool.GUI.Controls
                     e.Graphics.FillRectangle(region, HandleLeftPosition, 0, HandleRightPosition - HandleLeftPosition, panel1.Height);
                 }
 
+                using (var region = new SolidBrush(Color.FromArgb(120, 0, 0, 0)))
+                {
+                    e.Graphics.FillRectangle(region, HandleRightPosition, 0, panel1.Width - HandleRightPosition, panel1.Height);
+                }
+
                 using (var pen = new Pen(Color.FromArgb(150, 230, 255), 4))
                 using (var selectedPen = new Pen(Color.FromArgb(255, 230, 180), 4))
                 {
@@ -168,9 +190,13 @@ namespace mexTool.GUI.Controls
             else
             {
                 _player.Pause();
+                _player.Position = _player.LoopPoint;
                 mxButton1.Image = Properties.Resources.play;
             }
         }
+
+
+        public TimeSpan EndPoint { get; set; } = TimeSpan.Zero;
 
         /// <summary>
         /// 
@@ -184,7 +210,7 @@ namespace mexTool.GUI.Controls
             if (position > length)
                 length = position;
 
-            timeStamp.Text = String.Format(@"{0:mm\:ss} / {1:mm\:ss}", position, length);
+            timeStamp.Text = $"{position.ToString()} / {length.ToString()}";
 
             if (!_stopSliderUpdate &&
                 length != TimeSpan.Zero &&
@@ -194,6 +220,9 @@ namespace mexTool.GUI.Controls
 
                 panel1.Invalidate();
             }
+
+            if (EndPoint != TimeSpan.Zero && _player.Position > EndPoint)
+                _player.Position = _player.LoopPoint;
 
             if (!Visible)
                 _player.Stop();
@@ -244,31 +273,27 @@ namespace mexTool.GUI.Controls
                     Cursor = Cursors.SizeWE;
                 }
 
-                /*if (Math.Abs(e.X - HandleRightPosition) < 4f)
+                if (Math.Abs(e.X - HandleRightPosition) < 4f)
                 {
                     HandleRightSelected = true;
                     Cursor = Cursors.SizeWE;
-                }*/
+                }
             }
             else
             {
                 Cursor = Cursors.SizeWE;
 
-                var pos = Math.Max(Math.Min(e.X / (float)panel1.Width, 1), 0); ;
+                if (HandleLeftSelected)
+                    loopTime.Text = GetSeekTime(e.X).ToString();
 
                 if (HandleRightSelected)
-                    HandleRight = pos;
-
-                if (HandleLeftSelected)
-                    HandleLeft = pos;
+                    endTime.Text = GetSeekTime(e.X).ToString();
 
                 if (HandleLeft > HandleRight)
                     HandleLeft = HandleRight;
 
                 if (HandleRight < HandleLeft)
                     HandleRight = HandleLeft;
-
-                loopTime.Text = GetSeekTime(e.X).ToString();
             }
 
             panel1.Invalidate();
@@ -332,8 +357,17 @@ namespace mexTool.GUI.Controls
         {
             if(TimeSpan.TryParse(loopTime.Text, out TimeSpan ts))
             {
-                _dsp.SetLoopFromTimeSpan(ts);
-                _player.LoopPoint = ts;
+                if (ts < TimeSpan.Zero)
+                    loopTime.Text = TimeSpan.Zero.ToString();
+                else
+                if (ts > TimeSpan.Parse(_dsp.Length))
+                    loopTime.Text = _dsp.Length;
+                else
+                {
+                    _dsp.SetLoopFromTimeSpan(ts);
+                    _player.LoopPoint = ts;
+                    HandleLeft = (float)(ts.TotalMilliseconds / TimeSpan.Parse(_dsp.Length).TotalMilliseconds);
+                }
             }
             else
             {
@@ -350,12 +384,38 @@ namespace mexTool.GUI.Controls
         {
             if (TimeSpan.TryParse(endTime.Text, out TimeSpan ts))
             {
-                //_dsp.SetLoopFromTimeSpan(ts);
+                if (ts < TimeSpan.Zero)
+                    endTime.Text = TimeSpan.Zero.ToString();
+                else
+                if (ts > TimeSpan.Parse(_dsp.Length))
+                    endTime.Text = _dsp.Length;
+                else
+                {
+                    EndPoint = ts;
+                    HandleRight = (float)(ts.TotalMilliseconds / TimeSpan.Parse(_dsp.Length).TotalMilliseconds);
+                }
             }
             else
             {
-                loopTime.Text = _dsp.LoopPoint;
+                endTime.Text = EndPoint.ToString();
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SoundEditor_KeyPress(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+                mxButton1_Click(mxButton1, new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0));
+
+            if (e.KeyCode == Keys.Left)
+                _player.Position -= TimeSpan.FromMilliseconds(100);
+
+            if (e.KeyCode == Keys.Right)
+                _player.Position += TimeSpan.FromMilliseconds(100);
         }
     }
 }

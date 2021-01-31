@@ -1145,6 +1145,8 @@ namespace mexTool.GUI.Controls
 
     public class DoubleBufferedPanel : Panel
     {
+        public bool ForceFocus { get; set; } = true;
+
         public new event KeyEventHandler KeyDown;
         public DoubleBufferedPanel()
         {
@@ -1154,17 +1156,20 @@ namespace mexTool.GUI.Controls
         }
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            KeyDown.Invoke(this, e);
+            if(KeyDown != null)
+                KeyDown.Invoke(this, e);
             base.OnKeyDown(e);
         }
         protected override void OnMouseEnter(EventArgs e)
         {
-            this.Focus();
+            if(ForceFocus)
+                this.Focus();
             base.OnMouseEnter(e);
         }
         protected override void OnMouseDown(MouseEventArgs e)
         {
-            this.Focus();
+            if (ForceFocus)
+                this.Focus();
             base.OnMouseDown(e);
         }
         protected override bool IsInputKey(Keys keyData)
@@ -1190,7 +1195,7 @@ namespace mexTool.GUI.Controls
             {
                 var rc = this.ClientRectangle;
                 rc.Inflate(-2, -2);
-                ControlPaint.DrawFocusRectangle(pe.Graphics, rc);
+                //ControlPaint.DrawFocusRectangle(pe.Graphics, rc);
             }
         }
     }
