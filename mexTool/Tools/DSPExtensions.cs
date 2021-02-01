@@ -243,7 +243,7 @@ namespace mexTool.Tools
                 }
 
 
-                dsp.LoopPoint = TimeSpan.FromMilliseconds(loopStart / sampleRate * 1000).ToString();
+                dsp.LoopPoint = TimeSpan.FromMilliseconds(loopStart / (double)sampleRate * 1000).ToString();
             }
         }
 

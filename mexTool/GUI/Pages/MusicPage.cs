@@ -148,11 +148,10 @@ namespace mexTool.GUI.Pages
                     {
                         var temp = Path.GetTempFileName();
 
-                        var dsp = new DSP(d.FileName);
+                        var dsp = Tools.DSPExtensions.FromFile(d.FileName);
                         HPS.SaveDSPAsHPS(dsp, temp);
 
                         MEX.ImageResource.AddFile("audio\\" + music.FileName, temp);
-
                     }
                 }
         }

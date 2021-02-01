@@ -1069,6 +1069,7 @@ namespace mexTool.Core
 
             // save stock icon node
             StockManager.GenerateStockData(Fighters.Select(e => e.Costumes.Select(r => r.Icon).ToList()).ToList(), ReservedIcons.ToList());
+            StockManager.CustomStockLength = StockManager.CustomStockEntries.Length;
             // save emblems
             (IfAllFile["Eblm_matanim_joint"].Data as HSD_MatAnimJoint).MaterialAnimation.TextureAnimation.FromTOBJs(Emblems, true);
 
