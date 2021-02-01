@@ -123,7 +123,7 @@ namespace mexTool.Tools
                 if (codec != BRSTM_CODEC.ADPCM_4bit)
                     throw new NotSupportedException("only 4bit ADPCM files currently supported");
 
-                var sampleRate = r.ReadInt16();
+                var sampleRate = r.ReadUInt16();
                 r.Skip(2); // padding
 
                 dsp.Frequency = sampleRate;
@@ -241,6 +241,9 @@ namespace mexTool.Tools
                         channel.NibbleCount = channel.Data.Length * 2;
                     }
                 }
+
+
+                dsp.LoopPoint = TimeSpan.FromMilliseconds(loopStart / sampleRate * 1000).ToString();
             }
         }
 

@@ -355,7 +355,8 @@ namespace mexTool.GUI.Controls
         /// <param name="e"></param>
         private void loopTime_TextChanged(object sender, EventArgs e)
         {
-            if(TimeSpan.TryParse(loopTime.Text, out TimeSpan ts))
+            loopTime.BackColor = Color.FromArgb(40, 40, 60);
+            if (TimeSpan.TryParse(loopTime.Text, out TimeSpan ts))
             {
                 if (ts < TimeSpan.Zero)
                     loopTime.Text = TimeSpan.Zero.ToString();
@@ -371,7 +372,8 @@ namespace mexTool.GUI.Controls
             }
             else
             {
-                loopTime.Text = _dsp.LoopPoint;
+                //loopTime.Text = _dsp.LoopPoint;
+                loopTime.BackColor = Color.Red;
             }
         }
 
@@ -382,6 +384,7 @@ namespace mexTool.GUI.Controls
         /// <param name="e"></param>
         private void endTime_TextChanged(object sender, EventArgs e)
         {
+            endTime.BackColor = Color.FromArgb(40, 40, 60);
             if (TimeSpan.TryParse(endTime.Text, out TimeSpan ts))
             {
                 if (ts < TimeSpan.Zero)
@@ -397,7 +400,8 @@ namespace mexTool.GUI.Controls
             }
             else
             {
-                endTime.Text = EndPoint.ToString();
+                //endTime.Text = EndPoint.ToString();
+                endTime.BackColor = Color.Red;
             }
         }
 
