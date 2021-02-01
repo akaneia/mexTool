@@ -889,7 +889,10 @@ namespace mexTool.Core
                     kb.CostumeRuntime._s.SetReference(internalId * 4, new HSDAccessor() { _s = new HSDStruct(f.KirbyCostumes.Count * 8) });
                 }
                 else
+                {
                     kb.KirbyCostumes.Set(internalId, null);
+                    kb.CostumeRuntime._s.SetReference(internalId * 4, null);
+                }
 
 
                 // Functions
