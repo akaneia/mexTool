@@ -140,6 +140,7 @@ namespace mexTool.Core
         public bool CanWallJump { get; set; }
 
         [Category("6 - Misc"), DisplayName("Sub-Fighter"), Description("The fighter associated with this fighter (Sheik/Zelda and Ice Climbers)")]
+        [TypeConverter(typeof(FighterConverter))]
         [YamlIgnore]
         public MEXFighter SubCharacter { get; set; }
 
