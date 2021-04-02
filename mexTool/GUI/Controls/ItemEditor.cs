@@ -56,7 +56,8 @@ namespace mexTool.GUI.Controls
         /// <param name="e"></param>
         private void mxListBox1_SelectedValueChanged(object sender, EventArgs e)
         {
-            mxPropertyGrid1.SelectedObject = mxListBox1.SelectedItem;
+            if (mxPropertyGrid1 != null && mxListBox1 != null)
+                mxPropertyGrid1.SelectedObject = mxListBox1.SelectedItem;
         }
 
         /// <summary>

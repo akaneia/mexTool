@@ -257,6 +257,7 @@
     <Compile Include="Tools\DSPPlayer.cs" />
     <Compile Include="Tools\GawUIGen.cs" />
     <Compile Include="Tools\GraphicExtensions.cs" />
+    <Compile Include="Tools\HashGen.cs" />
     <Compile Include="Tools\ImageTools.cs" />
     <Compile Include="Tools\ObjectExtensions.cs" />
     <Compile Include="Tools\StageNameGenerator.cs" />

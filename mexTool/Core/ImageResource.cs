@@ -18,6 +18,7 @@ namespace mexTool.Core
         public bool SourceIsFileSystem { get => _folderPath != null; }
 
         private GCISO _iso;
+        private string _isoPath;
 
         private string _folderPath;
 
@@ -34,6 +35,7 @@ namespace mexTool.Core
         {
             Close();
             _iso = new GCISO(isoPath);
+            _isoPath = isoPath;
             return TryInit();
         }
 
@@ -171,6 +173,7 @@ namespace mexTool.Core
             if (_iso != null)
                 _iso.Dispose();
             _iso = null;
+            _isoPath = null;
         }
 
         /// <summary>

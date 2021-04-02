@@ -462,8 +462,8 @@ namespace mexTool.Core
                     OnItemDrop = ftFunc.onItemDrop[internalId],
                     OnItemCatch = ftFunc.onItemCatch[internalId],
                     OnUnknownItemRelated = ftFunc.onUnknownItemRelated[internalId],
-                    OnUnknownCharacterFlags1 = ftFunc.onUnknownCharacterModelFlags1[internalId],
-                    OnUnknownCharacterFlags2 = ftFunc.onUnknownCharacterModelFlags2[internalId],
+                    OnUnknownCharacterFlags1 = ftFunc.onApplyHeadItem[internalId],
+                    OnUnknownCharacterFlags2 = ftFunc.onRemoveHeadItem[internalId],
                     OnHit = ftFunc.onHit[internalId],
                     OnUnknownEyeTextureRelated = ftFunc.onUnknownEyeTextureRelated[internalId],
                     OnFrame = ftFunc.onFrame[internalId],
@@ -921,8 +921,8 @@ namespace mexTool.Core
                 ff.onItemDrop[internalId] = func.OnItemDrop;
                 ff.onItemCatch[internalId] = func.OnItemCatch;
                 ff.onUnknownItemRelated[internalId] = func.OnUnknownItemRelated;
-                ff.onUnknownCharacterModelFlags1[internalId] = func.OnUnknownCharacterFlags1;
-                ff.onUnknownCharacterModelFlags2[internalId] = func.OnUnknownCharacterFlags2;
+                ff.onApplyHeadItem[internalId] = func.OnUnknownCharacterFlags1;
+                ff.onRemoveHeadItem[internalId] = func.OnUnknownCharacterFlags2;
                 ff.onHit[internalId] = func.OnHit;
                 ff.onUnknownEyeTextureRelated[internalId] = func.OnUnknownEyeTextureRelated;
                 ff.onFrame[internalId] = func.OnFrame;
@@ -1408,7 +1408,7 @@ namespace mexTool.Core
         /// <returns></returns>
         private static RectangleF GetModelBounds(HSD_DOBJ dobj)
         {
-            var positionAttribute = dobj.Pobj.Attributes.First(e => e.AttributeName == HSDRaw.GX.GXAttribName.GX_VA_POS);
+            var positionAttribute = dobj.Pobj.ToGXAttributes().First(e => e.AttributeName == HSDRaw.GX.GXAttribName.GX_VA_POS);
 
             float maxX = float.MinValue;
             float maxY = float.MinValue;

@@ -273,6 +273,8 @@ namespace mexTool
             _menuPage.BringToFront();
             _musicPage.BringToFront();
             _soundPage.BringToFront();
+
+            CheckCodeUpdate();
         }
 
         /// <summary>
@@ -674,6 +676,58 @@ namespace mexTool
             p.Start();
 
             Application.Exit();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void updateCodesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Updater.UpdateCodes())
+            {
+                MessageBox.Show("Codes updated!", "Update Codes", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                if (Core.MEX.Initialized)
+                    CheckCodeUpdate();
+            }
+            else
+            {
+                MessageBox.Show("Codes are up to date!", "Update Codes", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private bool CheckCodeUpdate()
+        {
+            var codesPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"lib\codes.gct");
+
+            if (!File.Exists(codesPath))
+                return false;
+
+            var mx_codes = File.ReadAllBytes(codesPath);
+            var fs_codes = Core.MEX.ImageResource.GetFile("codes.gct");
+
+            if (fs_codes != null)
+            {
+                var mxhash = HashGen.ComputeSHA256Hash(mx_codes);
+                var hash = HashGen.ComputeSHA256Hash(fs_codes);
+
+                if (!mxhash.Equals(hash))
+                {
+                    // update codes.gct
+                    if (MessageBox.Show("Update codes file?", "Codes update detected", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        Core.MEX.ImageResource.AddFile("codes.gct", mx_codes);
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }

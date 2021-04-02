@@ -56,6 +56,8 @@
             this.labelSaving = new System.Windows.Forms.Label();
             this.progressBarSaving = new System.Windows.Forms.ProgressBar();
             this.savePanel = new System.Windows.Forms.Panel();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateCodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBanner)).BeginInit();
             this.headerPanel.SuspendLayout();
@@ -75,7 +77,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.ForeColor = System.Drawing.Color.White;
             this.panel1.Location = new System.Drawing.Point(0, 47);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(201, 591);
             this.panel1.TabIndex = 0;
@@ -93,7 +95,7 @@
             this.buttonSound.Image = global::mexTool.Properties.Resources.category_sound;
             this.buttonSound.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonSound.Location = new System.Drawing.Point(0, 289);
-            this.buttonSound.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonSound.Margin = new System.Windows.Forms.Padding(2);
             this.buttonSound.Name = "buttonSound";
             this.buttonSound.Size = new System.Drawing.Size(201, 56);
             this.buttonSound.TabIndex = 4;
@@ -116,7 +118,7 @@
             this.buttonMusic.Image = global::mexTool.Properties.Resources.category_music;
             this.buttonMusic.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonMusic.Location = new System.Drawing.Point(0, 233);
-            this.buttonMusic.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonMusic.Margin = new System.Windows.Forms.Padding(2);
             this.buttonMusic.Name = "buttonMusic";
             this.buttonMusic.Size = new System.Drawing.Size(201, 56);
             this.buttonMusic.TabIndex = 3;
@@ -139,7 +141,7 @@
             this.buttonMenu.Image = global::mexTool.Properties.Resources.category_menu;
             this.buttonMenu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonMenu.Location = new System.Drawing.Point(0, 177);
-            this.buttonMenu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonMenu.Margin = new System.Windows.Forms.Padding(2);
             this.buttonMenu.Name = "buttonMenu";
             this.buttonMenu.Size = new System.Drawing.Size(201, 56);
             this.buttonMenu.TabIndex = 2;
@@ -162,7 +164,7 @@
             this.buttonStages.Image = global::mexTool.Properties.Resources.category_stage;
             this.buttonStages.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonStages.Location = new System.Drawing.Point(0, 121);
-            this.buttonStages.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonStages.Margin = new System.Windows.Forms.Padding(2);
             this.buttonStages.Name = "buttonStages";
             this.buttonStages.Size = new System.Drawing.Size(201, 56);
             this.buttonStages.TabIndex = 1;
@@ -186,7 +188,7 @@
             this.buttonFighter.Image = global::mexTool.Properties.Resources.category_fighter;
             this.buttonFighter.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonFighter.Location = new System.Drawing.Point(0, 65);
-            this.buttonFighter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonFighter.Margin = new System.Windows.Forms.Padding(2);
             this.buttonFighter.Name = "buttonFighter";
             this.buttonFighter.Size = new System.Drawing.Size(201, 56);
             this.buttonFighter.TabIndex = 0;
@@ -202,7 +204,7 @@
             this.pictureBoxBanner.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBoxBanner.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             this.pictureBoxBanner.Location = new System.Drawing.Point(0, 0);
-            this.pictureBoxBanner.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBoxBanner.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBoxBanner.Name = "pictureBoxBanner";
             this.pictureBoxBanner.Size = new System.Drawing.Size(201, 65);
             this.pictureBoxBanner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -222,7 +224,7 @@
             this.headerPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.headerPanel.ForeColor = System.Drawing.Color.White;
             this.headerPanel.Location = new System.Drawing.Point(0, 0);
-            this.headerPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.headerPanel.Margin = new System.Windows.Forms.Padding(2);
             this.headerPanel.Name = "headerPanel";
             this.headerPanel.Size = new System.Drawing.Size(918, 47);
             this.headerPanel.TabIndex = 1;
@@ -242,7 +244,7 @@
             this.buttonUpdate.ImageHeight = 32;
             this.buttonUpdate.ImageWidth = 32;
             this.buttonUpdate.Location = new System.Drawing.Point(654, 2);
-            this.buttonUpdate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonUpdate.Margin = new System.Windows.Forms.Padding(2);
             this.buttonUpdate.Name = "buttonUpdate";
             this.buttonUpdate.Size = new System.Drawing.Size(177, 41);
             this.buttonUpdate.TabIndex = 8;
@@ -269,7 +271,7 @@
             this.buttonMin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonMin.Location = new System.Drawing.Point(835, 2);
-            this.buttonMin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonMin.Margin = new System.Windows.Forms.Padding(2);
             this.buttonMin.Name = "buttonMin";
             this.buttonMin.Size = new System.Drawing.Size(24, 26);
             this.buttonMin.TabIndex = 1;
@@ -284,7 +286,7 @@
             this.buttonMinMax.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonMinMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonMinMax.Location = new System.Drawing.Point(863, 2);
-            this.buttonMinMax.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonMinMax.Margin = new System.Windows.Forms.Padding(2);
             this.buttonMinMax.Name = "buttonMinMax";
             this.buttonMinMax.Size = new System.Drawing.Size(24, 26);
             this.buttonMinMax.TabIndex = 1;
@@ -299,7 +301,7 @@
             this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonClose.Location = new System.Drawing.Point(892, 2);
-            this.buttonClose.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonClose.Margin = new System.Windows.Forms.Padding(2);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(24, 26);
             this.buttonClose.TabIndex = 1;
@@ -313,6 +315,7 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
+            this.optionsToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -424,7 +427,7 @@
             this.progressBarSaving.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBarSaving.Location = new System.Drawing.Point(4, 26);
-            this.progressBarSaving.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.progressBarSaving.Margin = new System.Windows.Forms.Padding(2);
             this.progressBarSaving.Name = "progressBarSaving";
             this.progressBarSaving.Size = new System.Drawing.Size(711, 37);
             this.progressBarSaving.TabIndex = 5;
@@ -438,11 +441,27 @@
             this.savePanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.savePanel.ForeColor = System.Drawing.Color.White;
             this.savePanel.Location = new System.Drawing.Point(201, 47);
-            this.savePanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.savePanel.Margin = new System.Windows.Forms.Padding(2);
             this.savePanel.Name = "savePanel";
             this.savePanel.Size = new System.Drawing.Size(717, 65);
             this.savePanel.TabIndex = 2;
             this.savePanel.Visible = false;
+            // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.updateCodesToolStripMenuItem});
+            this.optionsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.optionsToolStripMenuItem.Text = "Options";
+            // 
+            // updateCodesToolStripMenuItem
+            // 
+            this.updateCodesToolStripMenuItem.Name = "updateCodesToolStripMenuItem";
+            this.updateCodesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.updateCodesToolStripMenuItem.Text = "Update Codes";
+            this.updateCodesToolStripMenuItem.Click += new System.EventHandler(this.updateCodesToolStripMenuItem_Click);
             // 
             // MxDtWindow
             // 
@@ -457,7 +476,7 @@
             this.Controls.Add(this.headerPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(540, 390);
             this.Name = "MxDtWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -502,5 +521,7 @@
         private System.Windows.Forms.Panel savePanel;
         private System.Windows.Forms.ToolStripMenuItem closeFileSystemToolStripMenuItem;
         private GUI.Controls.MXButton buttonUpdate;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem updateCodesToolStripMenuItem;
     }
 }

@@ -1,7 +1,9 @@
-﻿using Octokit;
+﻿using mexTool.Tools;
+using Octokit;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace mexTool
@@ -16,6 +18,30 @@ namespace mexTool
         public static string Version;
 
         public static bool UpdateReady;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static bool UpdateCodes()
+        {
+            // https://github.com/akaneia/m-ex/raw/master/asm/codes.gct
+            var codesPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"\lib\codes.gct");
+
+            if (!File.Exists(codesPath))
+                return false;
+
+            var mxhash = HashGen.ComputeSHA256Hash(File.ReadAllBytes(codesPath));
+
+            using (var client = new WebClient())
+                client.DownloadFile(@"https://github.com/akaneia/m-ex/raw/master/asm/codes.gct", codesPath);
+
+            var newhash = HashGen.ComputeSHA256Hash(File.ReadAllBytes(codesPath));
+
+            if (!mxhash.Equals(newhash))
+                return true;
+
+            return false;
+        }
 
         /// <summary>
         /// 

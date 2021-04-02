@@ -390,7 +390,7 @@ namespace mexTool.Core.Installer
                                 }
                             }
 
-                            dobj.Pobj = compressor.CreatePOBJsFromTriangleList(triList, dobj.Pobj.Attributes.Select(e => e.AttributeName).ToArray(), null, null);
+                            dobj.Pobj = compressor.CreatePOBJsFromTriangleList(triList, dobj.Pobj.ToGXAttributes().Select(e => e.AttributeName).ToArray(), null, null);
                         }
                     }
             }
