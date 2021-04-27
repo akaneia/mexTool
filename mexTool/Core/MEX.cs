@@ -1097,6 +1097,13 @@ namespace mexTool.Core
                 // update image
                 v._joint.Dobj.Next.Mobj.Textures = v.Image;
 
+                // remove no zupdate flag
+                //v._joint.Dobj.Mobj.RenderFlags &= ~RENDER_MODE.NO_ZUPDATE;
+                //v._joint.Dobj.Next.Mobj.RenderFlags &= ~RENDER_MODE.NO_ZUPDATE;
+                
+                v._joint.Dobj.Mobj.RenderFlags |= RENDER_MODE.NO_ZUPDATE;
+                v._joint.Dobj.Next.Mobj.RenderFlags |= RENDER_MODE.NO_ZUPDATE;
+
                 // add child
                 mexSelectChr.IconModel.AddChild(v._joint);
                 mexSelectChr.IconAnimJoint.AddChild(v.ToAnimJoint());

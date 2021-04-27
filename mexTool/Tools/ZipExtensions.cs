@@ -26,6 +26,9 @@ namespace mexTool.Tools
         /// <param name="data"></param>
         public static byte[] GetFile(this ZipArchive zip, string filePath)
         {
+            if (filePath == null)
+                return null;
+
             var entry = zip.GetEntry(filePath);
 
             if (entry == null)
