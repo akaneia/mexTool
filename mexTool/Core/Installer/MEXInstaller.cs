@@ -20,7 +20,9 @@ namespace mexTool.Core.Installer
         public static bool InstallMEX(ImageResource resource)
         {
             // patch dol
-            using (var src = new MemoryStream(resource.GetDOL()))
+            resource.SetDOL(MEXDolPatcher.ApplyPatch(resource.GetDOL(), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lib/dol.patch")));
+
+            /*using (var src = new MemoryStream(resource.GetDOL()))
             using (System.Security.Cryptography.MD5CryptoServiceProvider md5 = new System.Security.Cryptography.MD5CryptoServiceProvider())
             {
                 byte[] vanillaFullHash = new byte[] { 39, 123, 108, 9, 132, 118, 2, 32, 152, 149, 208, 17, 197, 163, 163, 139 };
@@ -48,7 +50,7 @@ namespace mexTool.Core.Installer
 
                         resource.SetDOL(dest.ToArray());
                     }
-            }
+            }*/
 
             // generate mex files
             using (MEXDOLScrubber dol = new MEXDOLScrubber(resource.GetDOL()))

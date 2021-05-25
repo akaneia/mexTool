@@ -1079,14 +1079,14 @@ namespace mexTool.Core
 
             mexSelectChr.IconModel = new HSD_JOBJ()
             {
-                Flags = JOBJ_FLAG.CLASSICAL_SCALING | JOBJ_FLAG.ROOT_XLU,
+                Flags = JOBJ_FLAG.CLASSICAL_SCALING | JOBJ_FLAG.ROOT_XLU | JOBJ_FLAG.ROOT_TEXEDGE,
                 SX = 1,
                 SY = 1,
                 SZ = 1
             };
-            mexSelectChr.IconAnimJoint = new HSDRaw.Common.Animation.HSD_AnimJoint();
+            mexSelectChr.IconAnimJoint = new HSD_AnimJoint();
 
-            mexSelectChr.IconMatAnimJoint = new HSDRaw.Common.Animation.HSD_MatAnimJoint();
+            mexSelectChr.IconMatAnimJoint = new HSD_MatAnimJoint();
 
             foreach (var v in FighterIcons)
             {
@@ -1098,11 +1098,13 @@ namespace mexTool.Core
                 v._joint.Dobj.Next.Mobj.Textures = v.Image;
 
                 // remove no zupdate flag
-                //v._joint.Dobj.Mobj.RenderFlags &= ~RENDER_MODE.NO_ZUPDATE;
-                //v._joint.Dobj.Next.Mobj.RenderFlags &= ~RENDER_MODE.NO_ZUPDATE;
+                v._joint.Flags |= JOBJ_FLAG.TEXEDGE;
+
+                v._joint.Dobj.Mobj.RenderFlags &= ~RENDER_MODE.NO_ZUPDATE;
+                v._joint.Dobj.Next.Mobj.RenderFlags &= ~RENDER_MODE.NO_ZUPDATE;
                 
-                v._joint.Dobj.Mobj.RenderFlags |= RENDER_MODE.NO_ZUPDATE;
-                v._joint.Dobj.Next.Mobj.RenderFlags |= RENDER_MODE.NO_ZUPDATE;
+                v._joint.Dobj.Mobj.RenderFlags |= RENDER_MODE.DF_ALL;
+                v._joint.Dobj.Next.Mobj.RenderFlags |= RENDER_MODE.DF_ALL;
 
                 // add child
                 mexSelectChr.IconModel.AddChild(v._joint);

@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationSettings.cs" />
+    <Compile Include="Core\Installer\MEXDolPatcher.cs" />
     <Compile Include="Core\MEXMusic.cs" />
     <Compile Include="Core\ImageResource.cs" />
     <Compile Include="Core\Installer\MEXDolScrubber.cs" />
