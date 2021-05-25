@@ -1,4 +1,5 @@
-﻿using System;
+﻿using mexTool.Tools;
+using System;
 using System.IO;
 using System.IO.Compression;
 
@@ -17,6 +18,7 @@ namespace mexTool.Core.Installer
 
         // TODO: there is no error checking or anything
         // Assumes dol is 1.02
+
 
         /// <summary>
         /// 
@@ -81,16 +83,50 @@ namespace mexTool.Core.Installer
                 if (r.ReadByte() != 0x44 || r.ReadByte() != 0x4F || r.ReadByte() != 0x4C || r.ReadByte() != 0x50)
                     return dol;
 
-                while (s.Position < s.Length)
+                while (true)
                 {
                     var offset = (r.ReadByte() & 0xFF) | ((r.ReadByte() & 0xFF) << 8) | ((r.ReadByte() & 0xFF) << 16) | ((r.ReadByte() & 0xFF) << 24);
                     var length = (r.ReadByte() & 0xFF) | ((r.ReadByte() & 0xFF) << 8) | ((r.ReadByte() & 0xFF) << 16) | ((r.ReadByte() & 0xFF) << 24);
+
+                    if (offset == -1 && length == -1)
+                        break;
 
                     for (int i = 0; i < length; i++)
                         dol[offset + i] = (byte)r.ReadByte();
                 }
             }
             return dol;
+        }
+
+        /// <summary>
+        /// Returns true if patch is already applied to dol
+        /// </summary>
+        /// <param name="dol"></param>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        public static bool CheckPatchApplied(byte[] dol, string filePath)
+        {
+            using (FileStream s = new FileStream(filePath, FileMode.Open))
+            using (DeflateStream r = new DeflateStream(s, CompressionMode.Decompress))
+            {
+                // header check
+                if (r.ReadByte() != 0x44 || r.ReadByte() != 0x4F || r.ReadByte() != 0x4C || r.ReadByte() != 0x50)
+                    return true;
+
+                while (true)
+                {
+                    var offset = (r.ReadByte() & 0xFF) | ((r.ReadByte() & 0xFF) << 8) | ((r.ReadByte() & 0xFF) << 16) | ((r.ReadByte() & 0xFF) << 24);
+                    var length = (r.ReadByte() & 0xFF) | ((r.ReadByte() & 0xFF) << 8) | ((r.ReadByte() & 0xFF) << 16) | ((r.ReadByte() & 0xFF) << 24);
+
+                    if (offset == -1 && length == -1)
+                        break;
+
+                    for (int i = 0; i < length; i++)
+                        if (dol[offset + i] != r.ReadByte())
+                            return false;
+                }
+            }
+            return true;
         }
 
     }

@@ -731,9 +731,11 @@ namespace mexTool.Core
 
 
             // update external fighter ids
-            foreach (var v in FighterIcons)
+            // z order icons
+            var sortedIcons = FighterIcons.OrderBy(e => e.Z);
+            foreach (var v in sortedIcons)
                 v.Icon.ExternalCharID = (byte)MEXFighterIDConverter.ToExternalID(Fighters.IndexOf(v.Fighter), Fighters.Count);
-            mxdt.MenuTable.CSSIconData = new MEX_IconData() { Icons = FighterIcons.Select(e => e.Icon).ToArray() };
+            mxdt.MenuTable.CSSIconData = new MEX_IconData() { Icons = sortedIcons.Select(e => e.Icon).ToArray() };
 
 
 
@@ -1088,7 +1090,7 @@ namespace mexTool.Core
 
             mexSelectChr.IconMatAnimJoint = new HSD_MatAnimJoint();
 
-            foreach (var v in FighterIcons)
+            foreach (var v in sortedIcons)
             {
                 // remove next
                 v._joint.Next = null;
@@ -1100,11 +1102,11 @@ namespace mexTool.Core
                 // remove no zupdate flag
                 v._joint.Flags |= JOBJ_FLAG.TEXEDGE;
 
-                v._joint.Dobj.Mobj.RenderFlags &= ~RENDER_MODE.NO_ZUPDATE;
-                v._joint.Dobj.Next.Mobj.RenderFlags &= ~RENDER_MODE.NO_ZUPDATE;
+                //v._joint.Dobj.Mobj.RenderFlags &= ~RENDER_MODE.NO_ZUPDATE;
+                //v._joint.Dobj.Next.Mobj.RenderFlags &= ~RENDER_MODE.NO_ZUPDATE;
                 
-                v._joint.Dobj.Mobj.RenderFlags |= RENDER_MODE.DF_ALL;
-                v._joint.Dobj.Next.Mobj.RenderFlags |= RENDER_MODE.DF_ALL;
+                v._joint.Dobj.Mobj.RenderFlags |= RENDER_MODE.NO_ZUPDATE;
+                v._joint.Dobj.Next.Mobj.RenderFlags |= RENDER_MODE.NO_ZUPDATE;
 
                 // add child
                 mexSelectChr.IconModel.AddChild(v._joint);

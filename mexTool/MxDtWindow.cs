@@ -703,14 +703,25 @@ namespace mexTool
         /// </summary>
         private bool CheckCodeUpdate()
         {
+            var dolPatchPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lib/dol.patch");
+            Console.WriteLine(Core.Installer.MEXDolPatcher.CheckPatchApplied(Core.MEX.ImageResource.GetDOL(), dolPatchPath));
+            if (!Core.Installer.MEXDolPatcher.CheckPatchApplied(Core.MEX.ImageResource.GetDOL(), dolPatchPath))
+            {
+                // update dol
+                if (MessageBox.Show("Update DOL file?\nRecommended", "DOL update detected", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    Core.MEX.ImageResource.SetDOL(Core.Installer.MEXDolPatcher.ApplyPatch(Core.MEX.ImageResource.GetDOL(), dolPatchPath));
+                }
+            }
+
             var codesPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"lib\codes.gct");
 
             if (!File.Exists(codesPath))
                 return false;
 
+
             var mx_codes = File.ReadAllBytes(codesPath);
             var fs_codes = Core.MEX.ImageResource.GetFile("codes.gct");
-
             if (fs_codes != null)
             {
                 var mxhash = HashGen.ComputeSHA256Hash(mx_codes);

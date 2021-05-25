@@ -31,5 +31,19 @@ namespace mexTool.Tools
                 return builder.ToString();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static byte[] ComputeSHA256HashBytes(byte[] data)
+        {
+            // Create a SHA256   
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                return sha256Hash.ComputeHash(data);
+            }
+        }
     }
 }
