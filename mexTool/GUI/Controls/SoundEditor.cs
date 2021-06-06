@@ -79,7 +79,8 @@ namespace mexTool.GUI.Controls
             endTime.Text = dsp.Length;
 
             channel0 = Sample(GcAdpcmDecoder.Decode(_dsp.Channels[0].Data, _dsp.Channels[0].COEF));
-            channel1 = Sample(GcAdpcmDecoder.Decode(_dsp.Channels[1].Data, _dsp.Channels[1].COEF));
+            if (_dsp.Channels.Count > 1)
+                channel1 = Sample(GcAdpcmDecoder.Decode(_dsp.Channels[1].Data, _dsp.Channels[1].COEF));
         }
 
         private short[] channel0;
@@ -116,7 +117,10 @@ namespace mexTool.GUI.Controls
                 e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
                 DrawChannel(e.Graphics, channel0, Color.FromArgb(0, 195, 255), true);
-                DrawChannel(e.Graphics, channel1, Color.FromArgb(0, 115, 255), false);
+                if (channel1 != null)
+                    DrawChannel(e.Graphics, channel1, Color.FromArgb(0, 115, 255), false);
+                else
+                    DrawChannel(e.Graphics, channel0, Color.FromArgb(0, 115, 255), false);
 
                 using (var pen = new Pen(Color.FromArgb(150, 230, 255), 2))
                 {
