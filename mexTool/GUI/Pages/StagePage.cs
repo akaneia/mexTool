@@ -144,11 +144,13 @@ namespace mexTool.GUI.Pages
         {
             using (OpenFileDialog d = new OpenFileDialog())
             {
+                d.Multiselect = true;
                 d.Filter = "MEX Stage (*.zip)|*.zip";
 
                 if (d.ShowDialog() == DialogResult.OK)
                 {
-                    MEXStage.InstallStageFromFile(d.FileName);
+                    foreach (var f in d.FileNames)
+                        MEXStage.InstallStageFromFile(f);
                     listBoxStage.Invalidate();
                 }
             }
@@ -165,6 +167,7 @@ namespace mexTool.GUI.Pages
             {
                 using (SaveFileDialog d = new SaveFileDialog())
                 {
+                    d.FileName = stage.StageName.Replace(" ", "_") + ".zip";
                     d.Filter = "MEX Stage (*.zip)|*.zip";
 
                     if (d.ShowDialog() == DialogResult.OK)

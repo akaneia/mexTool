@@ -333,6 +333,7 @@ static struct MoveLogic move_logic[] = {
             {
                 using (SaveFileDialog d = new SaveFileDialog())
                 {
+                    d.FileName = fighter.NameText.Replace(" ", "_") + ".zip";
                     d.Filter = "MEX Fighter (*.zip)|*.zip";
 
                     if (d.ShowDialog() == DialogResult.OK)

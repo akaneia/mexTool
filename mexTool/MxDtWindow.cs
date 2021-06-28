@@ -343,31 +343,31 @@ namespace mexTool
                 _soundPage.Visible = false;
             }
 
-            if (pageID == 0)
+            if (pageID == 1)
             {
                 if (_fighterPage != null)
                     _fighterPage.Visible = true;
                 buttonFighter.BackColor = ThemeColors.SecondColorList[0];
             }
-            if (pageID == 1)
+            if (pageID == 2)
             {
                 if (_stagePage != null)
                     _stagePage.Visible = true;
                 buttonStages.BackColor = ThemeColors.SecondColorList[1];
             }
-            if (pageID == 2)
+            if (pageID == 3)
             {
                 if (_menuPage != null)
                     _menuPage.Visible = true;
                 buttonMenu.BackColor = ThemeColors.SecondColorList[2];
             }
-            if (pageID == 3)
+            if (pageID == 4)
             {
                 if (_musicPage != null)
                     _musicPage.Visible = true;
                 buttonMusic.BackColor = ThemeColors.SecondColorList[3];
             }
-            if (pageID == 4)
+            if (pageID == 5)
             {
                 if (_soundPage != null)
                     _soundPage.Visible = true;
@@ -375,29 +375,64 @@ namespace mexTool
             }
         }
 
-        private void buttonFighter_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonFileSystem_Click(object sender, EventArgs e)
         {
-            SelectPage(0);
+
         }
 
-        private void buttonStages_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonFighter_Click(object sender, EventArgs e)
         {
             SelectPage(1);
         }
 
-        private void buttonMenu_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonStages_Click(object sender, EventArgs e)
         {
             SelectPage(2);
         }
 
-        private void buttonMusic_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonMenu_Click(object sender, EventArgs e)
         {
             SelectPage(3);
         }
 
-        private void buttonSound_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonMusic_Click(object sender, EventArgs e)
         {
             SelectPage(4);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonSound_Click(object sender, EventArgs e)
+        {
+            SelectPage(5);
         }
 
 

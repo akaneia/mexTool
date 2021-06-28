@@ -64,7 +64,6 @@ namespace mexTool.GUI.Controls
             this.renderer.EnableSnap = true;
             this.renderer.Frame = 0;
             this.renderer.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
-            this.renderer.GridEnabled = true;
             this.renderer.GridHeight = 40;
             this.renderer.GridWidth = 40;
             this.renderer.Location = new System.Drawing.Point(0, 0);

@@ -31,6 +31,7 @@ namespace mexTool.GUI.Pages
         {
             this.label1 = new System.Windows.Forms.Label();
             this.contentPanel = new System.Windows.Forms.Panel();
+            this.buttonGobjCopy = new mexTool.GUI.Controls.MXButton();
             this.buttonPlaylistTab = new mexTool.GUI.Controls.MXButton();
             this.buttonItemTab = new mexTool.GUI.Controls.MXButton();
             this.buttonGeneralTab = new mexTool.GUI.Controls.MXButton();
@@ -39,7 +40,6 @@ namespace mexTool.GUI.Pages
             this.buttonExport = new mexTool.GUI.Controls.MXButton();
             this.buttonClone = new mexTool.GUI.Controls.MXButton();
             this.buttonRemove = new mexTool.GUI.Controls.MXButton();
-            this.buttonGobjCopy = new mexTool.GUI.Controls.MXButton();
             this.contentPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,6 +64,21 @@ namespace mexTool.GUI.Pages
             this.contentPanel.Name = "contentPanel";
             this.contentPanel.Size = new System.Drawing.Size(388, 375);
             this.contentPanel.TabIndex = 2;
+            // 
+            // buttonGobjCopy
+            // 
+            this.buttonGobjCopy.BackColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
+            this.buttonGobjCopy.BackColorLight = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(140)))));
+            this.buttonGobjCopy.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(100)))));
+            this.buttonGobjCopy.BorderColor = System.Drawing.Color.Black;
+            this.buttonGobjCopy.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonGobjCopy.ForeColor = System.Drawing.Color.White;
+            this.buttonGobjCopy.Location = new System.Drawing.Point(0, 0);
+            this.buttonGobjCopy.Name = "buttonGobjCopy";
+            this.buttonGobjCopy.Size = new System.Drawing.Size(388, 23);
+            this.buttonGobjCopy.TabIndex = 0;
+            this.buttonGobjCopy.Text = "Copy Map GOBJ Struct to Clipboard";
+            this.buttonGobjCopy.Click += new System.EventHandler(this.buttonGobjCopy_Click);
             // 
             // buttonPlaylistTab
             // 
@@ -222,21 +237,6 @@ namespace mexTool.GUI.Pages
             this.buttonRemove.Text = "Remove";
             this.buttonRemove.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.buttonRemove.Click += new System.EventHandler(this.buttonRemove_Click);
-            // 
-            // buttonGobjCopy
-            // 
-            this.buttonGobjCopy.BackColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
-            this.buttonGobjCopy.BackColorLight = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(140)))));
-            this.buttonGobjCopy.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(100)))));
-            this.buttonGobjCopy.BorderColor = System.Drawing.Color.Black;
-            this.buttonGobjCopy.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonGobjCopy.ForeColor = System.Drawing.Color.White;
-            this.buttonGobjCopy.Location = new System.Drawing.Point(0, 0);
-            this.buttonGobjCopy.Name = "buttonGobjCopy";
-            this.buttonGobjCopy.Size = new System.Drawing.Size(388, 23);
-            this.buttonGobjCopy.TabIndex = 0;
-            this.buttonGobjCopy.Text = "Copy Map GOBJ Struct to Clipboard";
-            this.buttonGobjCopy.Click += new System.EventHandler(this.buttonGobjCopy_Click);
             // 
             // StagePage
             // 

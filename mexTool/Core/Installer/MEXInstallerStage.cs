@@ -11,8 +11,8 @@ namespace mexTool.Core.Installer
 
         private static readonly byte[] MapGOBJEntries = new byte[] {
             0, 4, 21, 7, 12, 7, 11, 3, 12, 5,
-            4, 2, 11, 7, 21, 18, 10, 28, 39, 41,
-            6, 7, 11, 0, 4, 16, 0, 9, 6, 6,
+            4, 2, 11, 7, 19, 16, 10, 28, 39, 41,
+            6, 7, 11, 0, 4, 16, 0, 9, 9, 6,
             4, 4, 7, 4, 38, 4, 7, 10, 2, 3,
             4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
             4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
@@ -67,6 +67,7 @@ namespace mexTool.Core.Installer
             {
                 var mapGOBJStride = 20;
                 var stages = data.StageFunctions.Array;
+
                 for (int i = 0; i < stages.Length; i++)
                 {
                     var off = (uint)stages[i]._s.GetInt32(0x04);

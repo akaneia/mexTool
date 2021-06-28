@@ -65,6 +65,7 @@ namespace mexTool.GUI.Controls
             // 
             this.drawPanel.BackColor = System.Drawing.Color.DimGray;
             this.drawPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.drawPanel.ForceFocus = true;
             this.drawPanel.ForeColor = System.Drawing.Color.Black;
             this.drawPanel.Location = new System.Drawing.Point(0, 40);
             this.drawPanel.Name = "drawPanel";
@@ -237,7 +238,6 @@ namespace mexTool.GUI.Controls
             // snapButton
             // 
             this.snapButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.snapButton.Enabled = false;
             this.snapButton.Image = global::mexTool.Properties.Resources.snap_enable;
             this.snapButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.snapButton.Name = "snapButton";
@@ -264,7 +264,6 @@ namespace mexTool.GUI.Controls
             // 
             // gridWidthBox
             // 
-            this.gridWidthBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.gridWidthBox.Name = "gridWidthBox";
             this.gridWidthBox.Size = new System.Drawing.Size(40, 40);
             this.gridWidthBox.Text = "40";
@@ -279,7 +278,6 @@ namespace mexTool.GUI.Controls
             // 
             // gridHeightBox
             // 
-            this.gridHeightBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.gridHeightBox.Name = "gridHeightBox";
             this.gridHeightBox.Size = new System.Drawing.Size(40, 40);
             this.gridHeightBox.Text = "40";

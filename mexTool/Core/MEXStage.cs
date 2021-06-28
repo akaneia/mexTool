@@ -197,6 +197,7 @@ namespace mexTool.Core
         /// <returns></returns>
         public static void InstallStageFromStream(Stream stream)
         {
+            int index = -1;
             using (ZipArchive archive = new ZipArchive(stream, ZipArchiveMode.Read))
             {
                 var stageEntry = archive.GetEntry("stage.yml");
@@ -214,8 +215,25 @@ namespace mexTool.Core
                 if (stage == null)
                     return;
 
+                // check if stage already exists
+                foreach (var mstage in MEX.Stages)
+                {
+                    if (mstage.FileName == stage.FileName)
+                    {
+                        if (MessageBox.Show($"A stage with the filename {stage.FileName} already exists.\nWould you like to overwrite?", "Stage Import", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question) != DialogResult.Yes)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            index = MEX.Stages.IndexOf(mstage);
+                            break;
+                        }    
+                    }
+                }
+    
                 // add stage file to file system
-                var stageFile = archive.GetFile(Path.GetFileName(stage.Stage.StageFileName));
+                    var stageFile = archive.GetFile(Path.GetFileName(stage.Stage.StageFileName));
                 if(stageFile != null)
                     MEX.ImageResource.AddFile(Path.GetFileName(stage.Stage.StageFileName), stageFile);
 
@@ -262,7 +280,10 @@ namespace mexTool.Core
                 }
 
                 // add stage file
-                MEX.Stages.Add(stage);
+                if (index == -1)
+                    MEX.Stages.Add(stage);
+                else
+                    MEX.Stages[index] = stage;
             }
         }
 
@@ -280,22 +301,26 @@ namespace mexTool.Core
 
                 table.AppendLine(string.Format(
                     "\t{{" +
-                    "\n\t\t0x{0, -10}// OnCreation" +
-                    "\n\t\t0x{1, -10}// OnDeletion" +
-                    "\n\t\t0x{2, -10}// OnFrame" +
-                    "\n\t\t0x{3, -10}// OnUnk" +
-                    "\n\t\t0x{4, -10}// Bitflags" +
+                    "\n\t\t.onCreation = 0x{0, -8}," +
+                    "\n\t\t.onDeletion = 0x{1, -8}," +
+                    "\n\t\t.onFrame = 0x{2, -8}," +
+                    "\n\t\t.onUnk = 0x{3, -8}," +
+                    "\n\t\t.is_lobj = {4}," +
+                    "\n\t\t.is_fog = {5}," +
+                    "\n\t\t.is_cobj = {6}," +
                     "\n\t}},",
-            m.OnCreation.ToString("X") + ",",
-            m.OnDeletion.ToString("X") + ",",
-            m.OnFrame.ToString("X") + ",",
-            m.OnUnk.ToString("X") + ",",
-            m.Bitflags.ToString("X") + ","
+            m.OnCreation.ToString("X"),
+            m.OnDeletion.ToString("X"),
+            m.OnFrame.ToString("X"),
+            m.OnUnk.ToString("X"),
+            (m.Bitflags & 0x80000000) == 0 ? 0 : 1,
+            (m.Bitflags & 0x40000000) == 0 ? 0 : 1,
+            (m.Bitflags & 0x20000000) == 0 ? 0 : 1
             ));
             }
 
             return @"__attribute__((used))
-static struct map_GOBJDesc map_gobjs[] = {
+static struct MapDesc map_gobjs[] = {
 " + table.ToString() + @"}; ";
         }
 

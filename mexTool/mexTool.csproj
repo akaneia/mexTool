@@ -399,6 +399,7 @@
     <Content Include="mexUpdater.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\category_filesystem.png" />
     <None Include="Resources\gaw.png" />
     <None Include="Resources\category_stage.png" />
     <None Include="Resources\category_sound.png" />

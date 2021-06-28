@@ -1460,6 +1460,9 @@ namespace mexTool.Core
         /// <returns></returns>
         private static int GetEffectID(string filename, string symbol)
         {
+            if (string.IsNullOrEmpty(filename) || string.IsNullOrEmpty(symbol))
+                return -1;
+
             // find existing effect slot and update the symbol if needed
             var effect = EffectFiles.FindIndex(e => e.FileName == filename);
 
