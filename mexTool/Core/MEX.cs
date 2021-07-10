@@ -795,6 +795,7 @@ namespace mexTool.Core
 
             // runtime fighter pointer struct
             mxdt.FighterData._s.GetCreateReference<HSDAccessor>(0x40)._s.Resize(Fighters.Count * 8);
+            mxdt.FighterData.RuntimeIntroParamLookup._s.Resize(Fighters.Count * 4);
 
 
             // kirby runtimes
