@@ -399,6 +399,10 @@
     <Content Include="mexUpdater.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\stc_replace.png" />
+    <None Include="Resources\stc_export.png" />
+    <None Include="Resources\csp_replace.png" />
+    <None Include="Resources\csp_export.png" />
     <None Include="Resources\category_filesystem.png" />
     <None Include="Resources\gaw.png" />
     <None Include="Resources\category_stage.png" />

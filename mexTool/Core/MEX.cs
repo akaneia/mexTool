@@ -732,7 +732,7 @@ namespace mexTool.Core
 
             // update external fighter ids
             // z order icons
-            var sortedIcons = FighterIcons.OrderBy(e => e.Z);
+            var sortedIcons = FighterIcons;//.OrderBy(e => e.Z);
             foreach (var v in sortedIcons)
                 v.Icon.ExternalCharID = (byte)MEXFighterIDConverter.ToExternalID(Fighters.IndexOf(v.Fighter), Fighters.Count);
             mxdt.MenuTable.CSSIconData = new MEX_IconData() { Icons = sortedIcons.Select(e => e.Icon).ToArray() };
@@ -770,7 +770,13 @@ namespace mexTool.Core
             // update external stage ids
             mxdt.MenuTable.SSSIconData = new HSDArrayAccessor<MEX_StageIconData>() { Array = StageIcons.Select(e => e._icon).ToArray() };
             mxdt.MenuTable.Parameters = MenuParameters;
+            
+            // random stage select bitfield
+            mxdt.MenuTable.SSSBitField = new SSSBitfield() { _s = new HSDStruct(StageIcons.Count / 8 + 1) };
 
+            // store random enabled
+            for (int i = 0; i < StageIcons.Count; i++)
+                mxdt.MenuTable.SSSBitField.SetField(i, StageIcons[i].RandomEnabled);
 
 
             // scene data
@@ -1409,6 +1415,9 @@ namespace mexTool.Core
 
                 if (i < previews.Length)
                     icos._previewText = previews[i];
+
+                if (_mexData.MenuTable._s.Length > 0 && _mexData.MenuTable.SSSBitField != null)
+                    icos.RandomEnabled = _mexData.MenuTable.SSSBitField.GetField(i);
 
                 StageIcons.Add(icos);
             }

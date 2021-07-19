@@ -44,6 +44,13 @@ namespace mexTool.Core.Installer
                 stageIcons[i].ExternalID = sss.GetByte(i * 0x1C + 0x0B);
             }
             data.MenuTable.SSSIconData.Array = stageIcons;
+
+            // generate random bitfield
+            var bitfield = new byte[stageIcons.Length / 8 + 1];
+            for (int i = 0; i < bitfield.Length; i++)
+                bitfield[i] = 0xFF;
+            data.MenuTable.SSSBitField = new SSSBitfield() { Array = bitfield };
+
         }
 
         /// <summary>

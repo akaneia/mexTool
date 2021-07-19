@@ -19,6 +19,9 @@ namespace mexTool.Core
         public MEXStage Stage { get; set; }
 
 
+        [Category("0 - General"), DisplayName("Random Enabled"), Description("Determines if this stage can be selected by random by default.")]
+        public bool RandomEnabled { get; set; }
+
 
         [Category("2 - End Location"), DisplayName("Width"), Description("")]
         public override float Width
