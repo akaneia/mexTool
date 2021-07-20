@@ -68,7 +68,7 @@ namespace mexTool.Core
                 using (ZipArchive archive = new ZipArchive(zipToOpen, ZipArchiveMode.Create))
                 {
                     {
-                        var dat = MEX.ImageResource.GetFile(FileName);
+                        var dat = MEX.ImageResource.GetFileData(FileName);
                         ZipArchiveEntry file = archive.CreateEntry(FileName);
                         if (dat != null && dat.Length > 0)
                             using (var o = file.Open())

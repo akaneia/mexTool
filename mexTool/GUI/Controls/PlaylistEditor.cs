@@ -84,7 +84,7 @@ namespace mexTool.GUI.Controls
                 {
                     var music = ((PlaylistEntry)sender).SelectedMusic;
 
-                    var data = MEX.ImageResource.GetFile("audio\\" + music.FileName);
+                    var data = MEX.ImageResource.GetFileData("audio\\" + music.FileName);
 
                     if (data != null)
                     {

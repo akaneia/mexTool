@@ -130,9 +130,9 @@ namespace mexTool.Core.Installer
 
                 // generate sss and css symbols
                 GetIconFromDOL(dol, data);
-                var cssFile = new HSDRawFile(resource.GetFile("MnSlChr.usd"));
-                var sssFile = new HSDRawFile(resource.GetFile("MnSlMap.usd"));
-                var ifallFile = new HSDRawFile(resource.GetFile("IfAll.usd"));
+                var cssFile = new HSDRawFile(resource.GetFileData("MnSlChr.usd"));
+                var sssFile = new HSDRawFile(resource.GetFileData("MnSlMap.usd"));
+                var ifallFile = new HSDRawFile(resource.GetFileData("IfAll.usd"));
 
 
                 // mexSelectChr
@@ -185,7 +185,7 @@ namespace mexTool.Core.Installer
                 resource.AddFile("codes.gct", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lib\\codes.gct"));
 
                 // null ssm file
-                resource.AddFile("audio/us/null.ssm", resource.GetFile("audio/us/end.ssm"));
+                resource.AddFile("audio/us/null.ssm", resource.GetFileData("audio/us/end.ssm"));
 
                 using (MemoryStream dat = new MemoryStream())
                 {

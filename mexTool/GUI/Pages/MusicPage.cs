@@ -39,7 +39,7 @@ namespace mexTool.GUI.Pages
         {
             if (mxListBox1.SelectedItem is MEXMusic music)
             {
-                var data = MEX.ImageResource.GetFile("audio\\" + music.FileName);
+                var data = MEX.ImageResource.GetFileData("audio\\" + music.FileName);
                 if (data != null)
                 {
                     soundPlayer.NowPlaying = music.ToString();
@@ -126,7 +126,7 @@ namespace mexTool.GUI.Pages
 
                     if(d.ShowDialog() == DialogResult.OK)
                     {
-                        var data = MEX.ImageResource.GetFile("audio\\" + music.FileName);
+                        var data = MEX.ImageResource.GetFileData("audio\\" + music.FileName);
                         HPS.ToDSP(data).ExportFormat(d.FileName);
                     }
                 }

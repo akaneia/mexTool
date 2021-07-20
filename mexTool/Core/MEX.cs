@@ -207,7 +207,7 @@ namespace mexTool.Core
 
             if (_imageResource != null)
             {
-                _imageResource.ClearTempFiles();
+                _imageResource.DeleteTempFiles();
                 _imageResource.Close();
                 _imageResource = null;
             }
@@ -227,11 +227,14 @@ namespace mexTool.Core
 
 
             // load other files and resources
-            PlCoFile = new HSDRawFile(_imageResource.GetFile("PlCo.dat"));
-            IfAllFile = new HSDRawFile(_imageResource.GetFile("IfAll.usd"));
-            CSSFile = new HSDRawFile(_imageResource.GetFile("MnSlChr.usd"));
-            SSSFile = new HSDRawFile(_imageResource.GetFile("MnSlMap.usd"));
-            SmSt = new HSDRawFile(_imageResource.GetFile("SmSt.dat"));
+            PlCoFile = new HSDRawFile(_imageResource.GetFileData("PlCo.dat"));
+            IfAllFile = new HSDRawFile(_imageResource.GetFileData("IfAll.usd"));
+            CSSFile = new HSDRawFile(_imageResource.GetFileData("MnSlChr.usd"));
+            SSSFile = new HSDRawFile(_imageResource.GetFileData("MnSlMap.usd"));
+            SmSt = new HSDRawFile(_imageResource.GetFileData("SmSt.dat"));
+
+            Console.WriteLine(IfAllFile["Stc_icns"]);
+            File.WriteAllBytes("test.dat", _imageResource.GetFileData("IfAll.usd"));
 
 
             // load ui
@@ -245,7 +248,7 @@ namespace mexTool.Core
 
 
             // load mex data
-            var _mexData = new HSDRawFile(_imageResource.GetFile("MxDt.dat")).Roots[0].Data as MEX_Data;
+            var _mexData = new HSDRawFile(_imageResource.GetFileData("MxDt.dat")).Roots[0].Data as MEX_Data;
 
 
             // meta data
@@ -271,12 +274,12 @@ namespace mexTool.Core
             var smst = SmSt.Roots[0].Data as smSoundTestLoadData;
             var soundNames = smst.SoundNames;
             var soundids = smst.SoundIDs;
-            var semBanks = SEM.ReadSEMFile(ImageResource.GetFile("audio/us/smash2.sem"));
+            var semBanks = SEM.ReadSEMFile(ImageResource.GetFileData("audio/us/smash2.sem"));
             var ssmFiles = _mexData.SSMTable.SSM_SSMFiles.Array;
 
             for (int i = 0; i < ssmFiles.Length; i++)
             {
-                var ssmFile = ImageResource.GetFile("audio/us/" + ssmFiles[i].Value);
+                var ssmFile = ImageResource.GetFileData("audio/us/" + ssmFiles[i].Value);
 
                 if (ssmFile == null)
                     break;

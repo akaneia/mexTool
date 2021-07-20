@@ -139,7 +139,7 @@ namespace mexTool.GUI.Pages
                     return;
                 }
 
-                var ftDataFile = MEX.ImageResource.GetFile(fighter.FighterDataPath);
+                var ftDataFile = MEX.ImageResource.GetFileData(fighter.FighterDataPath);
 
                 SBM_FighterData fighterData = null;
 

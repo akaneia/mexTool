@@ -219,17 +219,17 @@ namespace mexTool.Core
 
 
                 // effect file (as dat files)
-                archive.AddFile(EffectFile, MEX.ImageResource.GetFile(EffectFile));
-                archive.AddFile(KirbyEffectFile, MEX.ImageResource.GetFile(KirbyEffectFile));
+                archive.AddFile(EffectFile, MEX.ImageResource.GetFileData(EffectFile));
+                archive.AddFile(KirbyEffectFile, MEX.ImageResource.GetFileData(KirbyEffectFile));
 
 
                 // pl + aj + result anim
-                archive.AddFile(FighterDataPath, MEX.ImageResource.GetFile(FighterDataPath));
-                archive.AddFile(AnimFile, MEX.ImageResource.GetFile(AnimFile));
-                archive.AddFile(RstAnimFile, MEX.ImageResource.GetFile(RstAnimFile));
+                archive.AddFile(FighterDataPath, MEX.ImageResource.GetFileData(FighterDataPath));
+                archive.AddFile(AnimFile, MEX.ImageResource.GetFileData(AnimFile));
+                archive.AddFile(RstAnimFile, MEX.ImageResource.GetFileData(RstAnimFile));
 
                 // ViWaitAJ
-                archive.AddFile(DemoWait, MEX.ImageResource.GetFile(DemoWait));
+                archive.AddFile(DemoWait, MEX.ImageResource.GetFileData(DemoWait));
 
                 // costumes
                 foreach (var c in Costumes)
@@ -241,15 +241,15 @@ namespace mexTool.Core
                 }
 
                 // kirby hat
-                archive.AddFile(KirbyCapFileName, MEX.ImageResource.GetFile(KirbyCapFileName));
+                archive.AddFile(KirbyCapFileName, MEX.ImageResource.GetFileData(KirbyCapFileName));
 
                 // movie
-                archive.AddFile(EndMovieFile, MEX.ImageResource.GetFile(EndMovieFile));
+                archive.AddFile(EndMovieFile, MEX.ImageResource.GetFileData(EndMovieFile));
 
                 // images
-                archive.AddFile(EndAdventureFile, MEX.ImageResource.GetFile(EndAdventureFile));
-                archive.AddFile(EndAllStarFile, MEX.ImageResource.GetFile(EndAllStarFile));
-                archive.AddFile(EndClassicFile, MEX.ImageResource.GetFile(EndClassicFile));
+                archive.AddFile(EndAdventureFile, MEX.ImageResource.GetFileData(EndAdventureFile));
+                archive.AddFile(EndAllStarFile, MEX.ImageResource.GetFileData(EndAllStarFile));
+                archive.AddFile(EndClassicFile, MEX.ImageResource.GetFileData(EndClassicFile));
 
                 // TODO: demo symbols (these are embedded in certain files)
 
@@ -280,13 +280,13 @@ namespace mexTool.Core
 
                 // music (as hps)
                 if (VictoryTheme != null && VictoryTheme.IsMexMusic)
-                    archive.AddFile(VictoryTheme.FileName, MEX.ImageResource.GetFile("audio\\" + VictoryTheme.FileName));
+                    archive.AddFile(VictoryTheme.FileName, MEX.ImageResource.GetFileData("audio\\" + VictoryTheme.FileName));
 
                 if (FighterSongID1 != null && FighterSongID1.IsMexMusic)
-                    archive.AddFile(FighterSongID1.FileName, MEX.ImageResource.GetFile("audio\\" + FighterSongID1.FileName));
+                    archive.AddFile(FighterSongID1.FileName, MEX.ImageResource.GetFileData("audio\\" + FighterSongID1.FileName));
 
                 if (FighterSongID2 != null && FighterSongID2.IsMexMusic)
-                    archive.AddFile(FighterSongID2.FileName, MEX.ImageResource.GetFile("audio\\" + FighterSongID2.FileName));
+                    archive.AddFile(FighterSongID2.FileName, MEX.ImageResource.GetFileData("audio\\" + FighterSongID2.FileName));
 
 
                 // target stage (as stage package)

@@ -1,32 +1,29 @@
 ﻿using GCILib;
+using mexTool.Core.FileSystem;
 using mexTool.Core.Installer;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace mexTool.Core
 {
     public class ImageResource
     {
-        public bool Initialized { get; internal set; } = false;
+        /// <summary>
+        /// File System interface
+        /// </summary>
+        private IFS _fileSystem;
 
-        public bool SourceIsISO { get => _iso != null; }
+        /// <summary>
+        /// temp file manager
+        /// </summary>
+        private TempFileManager _tempManager = new TempFileManager();
 
-        public bool SourceIsFileSystem { get => _folderPath != null; }
-
-        private GCISO _iso;
-        private string _isoPath;
-
-        private string _folderPath;
-
-        private Dictionary<string, string> filesToRename = new Dictionary<string, string>();
-        private Dictionary<string, string> filestoAdd = new Dictionary<string, string>();
-        private List<string> filestoRemove = new List<string>();
-
-        public bool IsoNeedsRebuild { get => _iso != null && _iso.NeedsRebuild; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public Type SourceType { get => _fileSystem == null ? null : _fileSystem.GetType(); }
 
         /// <summary>
         /// 
@@ -34,40 +31,46 @@ namespace mexTool.Core
         public bool OpenISO(string isoPath)
         {
             Close();
-            _iso = new GCISO(isoPath);
-            _isoPath = isoPath;
-            return TryInit();
+
+            _fileSystem = new FS_ISO();
+
+            return TryInstallMex(_fileSystem, isoPath);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public bool OpenFolder(string filePath)
+        /// <param name="folderPath"></param>
+        /// <returns></returns>
+        public bool OpenFolder(string folderPath)
         {
             Close();
-            _folderPath = filePath;
-            return TryInit();
+
+            _fileSystem = new FS_Extracted();
+
+            return TryInstallMex(_fileSystem, folderPath);
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        private bool TryInit()
+        private bool TryInstallMex(IFS fs, string filepath)
         {
-            System.Diagnostics.Debug.WriteLine(IsMexISO() + " " + IsMeleeISO());
-            if (IsMexISO())
-            {
+            if (!fs.TryOpen(filepath))
+                return false;
+
+            if (IsMexISO(fs))
                 return true;
-            }
-            else
-            if (IsMeleeISO())
+
+            if (IsMeleeISO(fs))
             {
                 if(MessageBox.Show("Vanilla melee image detected.\nInstall m-ex system?", "Install m-ex?", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
                 {
                     return MEXInstaller.InstallMEX(this);
                 }
             }
+
             Close();
             return false;
         }
@@ -75,93 +78,20 @@ namespace mexTool.Core
         /// <summary>
         /// 
         /// </summary>
-        public void ClearTempFiles()
+        public void DeleteTempFiles()
         {
-            foreach (var v in tempPaths)
-                File.Delete(v);
-            tempPaths.Clear();
+            _tempManager.DeleteTempFiles();
         }
-
 
         /// <summary>
         /// 
         /// </summary>
         public void Save(ProgressChangedEventHandler progress, string filePath, bool saveAs)
         {
-            if (_iso != null)
-            {
-                if (filePath != null)
-                    _iso.Rebuild(filePath, progress);
-                else
-                    _iso.Save(progress);
+            if (_fileSystem == null)
+                return;
 
-                ClearTempFiles();
-            }
-
-            if(_folderPath != null)
-            {
-                Dictionary<string, string> tempToNew = new Dictionary<string, string>();
-
-                // add files
-                foreach (var f in filestoAdd)
-                {
-                    var realPath = GetFolderPath(f.Key);
-
-                    if (f.Value == realPath)
-                        continue;
-
-                    if (!File.Exists(f.Value))
-                        continue;
-
-                    if (File.Exists(realPath))
-                        File.Delete(realPath);
-
-                    File.Move(f.Value, realPath);
-                }
-                progress.Invoke(null, new ProgressChangedEventArgs(25, null));
-
-                // rename files
-                foreach (var f in filesToRename)
-                {
-                    if(File.Exists(f.Key))
-                    {
-                        var temp = GenerateTempFile(f.Key);
-                        tempToNew.Add(temp, GetFolderPath(f.Value));
-                        File.Move(GetFolderPath(f.Key), temp);
-                    }
-                }
-                foreach (var f in tempToNew)
-                {
-                    if(!File.Exists(f.Value))
-                        File.Move(f.Key, f.Value);
-                }
-                progress.Invoke(null, new ProgressChangedEventArgs(50, null));
-
-                // delete files
-                foreach (var v in filestoRemove)
-                    File.Delete(GetFolderPath(v));
-
-                progress.Invoke(null, new ProgressChangedEventArgs(75, null));
-
-                // reset
-                filesToRename.Clear();
-                filestoAdd.Clear();
-                filestoRemove.Clear();
-
-                ClearTempFiles();
-
-                progress.Invoke(null, new ProgressChangedEventArgs(100, null));
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="rootPath"></param>
-        /// <returns></returns>
-        private string GetFolderPath(string rootPath)
-        {
-            return Path.Combine(_folderPath + "\\files", rootPath);
+            _fileSystem.Save(progress, filePath, saveAs, _tempManager);
         }
 
         /// <summary>
@@ -169,36 +99,34 @@ namespace mexTool.Core
         /// </summary>
         public void Close()
         {
-            _folderPath = null;
-            if (_iso != null)
-                _iso.Dispose();
-            _iso = null;
-            _isoPath = null;
+            _fileSystem?.Close();
         }
 
         /// <summary>
-        /// 
+        /// Returns true if this iso appears to contain a 
+        /// melee filesystem with m-ex installed
         /// </summary>
         /// <returns></returns>
-        private bool IsMexISO()
+        private bool IsMexISO(IFS fs)
         {
             // MxDt exists
-            return FileExists("MxDt.dat") && IsMeleeISO();
+            return fs.FileExists("MxDt.dat") && IsMeleeISO(fs);
         }
 
         /// <summary>
-        /// 
+        /// Returns true if the file system appears to be from melee
+        /// Determines by checking the existance of key files
         /// </summary>
         /// <returns></returns>
-        private bool IsMeleeISO()
+        private bool IsMeleeISO(IFS fs)
         {
-            return FileExists("IfAll.usd") &&
-                FileExists("PlCo.dat") &&
-                FileExists("SmSt.dat") &&
-                FileExists("audio/smash2.sem") && 
-                FileExists("audio/us/smash2.sem") &&
-                FileExists("MnSlChr.usd") &&
-                FileExists("MnSlMap.usd");
+            return fs.FileExists("IfAll.usd") &&
+                fs.FileExists("PlCo.dat") &&
+                fs.FileExists("SmSt.dat") &&
+                fs.FileExists("audio/smash2.sem") &&
+                fs.FileExists("audio/us/smash2.sem") &&
+                fs.FileExists("MnSlChr.usd") &&
+                fs.FileExists("MnSlMap.usd");
         }
 
 
@@ -209,25 +137,13 @@ namespace mexTool.Core
         /// <returns></returns>
         public bool FileExists(string filePath)
         {
-            if (_iso != null)
-                return _iso.FileExists(filePath);
+            if (_fileSystem == null)
+                return false;
 
-            if (_folderPath != null && filePath != null)
-            {
-                if (filestoRemove.Contains(filePath))
-                    return true;
-                else
-                if (filestoAdd.ContainsKey(filePath))
-                    return true;
-                else
-                if(!filesToRename.ContainsKey(filePath))
-                    return File.Exists(Path.Combine(_folderPath + "\\files", filePath));
-                else
-                    return filesToRename.Values.Contains(filePath);
+            if (_tempManager.FileIsRemoved(filePath))
+                return false;
 
-            }
-
-            return false;
+            return _fileSystem.FileExists(_tempManager.GetRenamedFile(filePath)) || _tempManager.FileExists(filePath);
         }
 
         /// <summary>
@@ -235,72 +151,17 @@ namespace mexTool.Core
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public byte[] GetFile(string path)
+        public byte[] GetFileData(string path)
         {
-            if (_iso != null)
-                return _iso.GetFileData(path);
+            var tempData = _tempManager.GetFileData(path);
 
-            if (_folderPath != null && FileExists(path))
-            {
-                if (filestoAdd.ContainsKey(path))
-                    return File.ReadAllBytes(filestoAdd[path]);
-                else
-                if (!filesToRename.ContainsKey(path))
-                    return File.ReadAllBytes(Path.Combine(_folderPath + "\\files", path));
-                else
-                    return File.ReadAllBytes(Path.Combine(_folderPath + "\\files", filesToRename[path]));
-            }
+            if (tempData != null)
+                return tempData;
 
-            return null;
-        }
+            if (_fileSystem == null)
+                return null;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        public string GetRealFilePath(string path)
-        {
-            if (_folderPath != null)
-            {
-                if (filestoAdd.ContainsKey(path))
-                    return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filestoAdd[path]);
-                else
-                if (filesToRename.ContainsKey(path))
-                    return filesToRename[path];
-                else
-                    return Path.Combine(_folderPath + "\\files\\", path);
-            }
-
-            return "";
-        }
-
-        private List<string> tempPaths = new List<string>();
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        private string GenerateTempFile(string sourceName)
-        {
-            var tempdir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp\\");
-
-            var fname = Path.GetFileName(sourceName);
-            int index = 0;
-
-            while (File.Exists(Path.Combine(tempdir, fname + index)))
-                index++;
-
-            fname = Path.Combine(tempdir, fname + index);
-
-            tempdir = Path.GetDirectoryName(fname);
-
-            if (!Directory.Exists(tempdir))
-                Directory.CreateDirectory(tempdir);
-
-            tempPaths.Add(fname);
-
-            return fname;
+            return _fileSystem.GetFileData(_tempManager.GetRenamedFile(path));
         }
 
         /// <summary>
@@ -311,11 +172,7 @@ namespace mexTool.Core
         /// <returns></returns>
         public bool AddFile(string filePath, byte[] data)
         {
-            var temp = GenerateTempFile(filePath);
-
-            File.WriteAllBytes(temp, data);
-
-            return AddFileTempPath(filePath, temp);
+            return _tempManager.AddFile(filePath, data);
         }
 
 
@@ -327,38 +184,7 @@ namespace mexTool.Core
         /// <returns></returns>
         public bool AddFile(string filePath, string diskFilePath)
         {
-            // copy to temp folder
-            var temp = GenerateTempFile(diskFilePath);
-
-            File.Copy(diskFilePath, temp);
-
-            return AddFileTempPath(filePath, temp);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="filePath"></param>
-        /// <param name="diskFilePath"></param>
-        /// <returns></returns>
-        private bool AddFileTempPath(string filePath, string diskFilePath)
-        {
-            if (_iso != null)
-            {
-                return _iso.AddFile(filePath, diskFilePath);
-            }
-
-            if (_folderPath != null)
-            {
-                if (filestoAdd.ContainsKey(filePath))
-                    filestoAdd[filePath] = diskFilePath;
-                else
-                    filestoAdd.Add(filePath, diskFilePath);
-
-                return true;
-            }
-
-            return false;
+            return _tempManager.AddFile(filePath, diskFilePath);
         }
 
         /// <summary>
@@ -367,39 +193,7 @@ namespace mexTool.Core
         /// <param name="filePath"></param>
         public void DeleteFile(string filePath)
         {
-            if (_iso != null)
-                _iso.DeleteFileOrFolder(filePath);
-
-            if (_folderPath != null)
-            {
-                filestoAdd.Remove(filePath);
-
-                if(filesToRename.Values.Contains(filePath))
-                {
-                    var item = filesToRename.First(kvp => kvp.Value == filePath);
-                    filesToRename.Remove(item.Key);
-                    //filePath = item.Key;
-                }
-
-                if (FileExists(filePath) && !filestoRemove.Contains(filePath))
-                    filestoRemove.Add(filePath);
-            }
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public GCBanner GetBanner()
-        {
-            if (_iso != null)
-                return _iso.FindBanner();
-
-            if (_folderPath != null)
-                return new GCBanner(File.ReadAllBytes(Path.Combine(_folderPath + "\\files", "opening.bnr")));
-
-            return null;
+            _tempManager.DeleteFile(filePath);
         }
 
         /// <summary>
@@ -408,33 +202,25 @@ namespace mexTool.Core
         /// </summary>
         public bool RenameFile(string src, string dest)
         {
-            if (_iso != null)
-                return _iso.RenameFile(src, dest);
+            if (FileExists(dest))
+                return false;
 
-            if (_folderPath != null)
-            {
-                var keys = filesToRename.Where(kvp => kvp.Value == src).ToList();
+            if (!FileExists(src))
+                return false;
 
-                foreach (var item in keys)
-                {
-                    if(item.Key == dest)
-                    {
-                        filesToRename.Remove(item.Key);
-                    }else
-                    {
-                        filesToRename[item.Key] = dest;
-                    }
-                }
+            return _tempManager.RenameFile(src, dest);
+        }
 
-                if (keys.Count == 0)
-                    filesToRename.Add(src, dest);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public GCBanner GetBanner()
+        {
+            if (_fileSystem == null)
+                return null;
 
-                filestoRemove.Remove(dest);
-
-                return true;
-            }
-
-            return false;
+            return _fileSystem.GetBanner();
         }
 
         /// <summary>
@@ -443,13 +229,10 @@ namespace mexTool.Core
         /// <returns></returns>
         public byte[] GetDOL()
         {
-            if (SourceIsISO)
-                return _iso.DOLData;
+            if (_fileSystem == null)
+                return null;
 
-            if (SourceIsFileSystem)
-                return File.ReadAllBytes(_folderPath + @"\sys\main.dol");
-
-            return null;
+            return _fileSystem.GetDOL();
         }
 
         /// <summary>
@@ -458,11 +241,10 @@ namespace mexTool.Core
         /// <returns></returns>
         public void SetDOL(byte[] dol)
         {
-            if (SourceIsISO)
-                _iso.DOLData = dol;
+            if (_fileSystem == null)
+                return;
 
-            if (SourceIsFileSystem)
-                File.WriteAllBytes(_folderPath + @"\sys\main.dol", dol);
+            _fileSystem.SetDOL(dol);
         }
 
         /// <summary>
@@ -471,13 +253,10 @@ namespace mexTool.Core
         /// <returns></returns>
         public byte[] GetAppLoader()
         {
-            if (SourceIsISO)
-                return _iso.AppLoader;
+            if (_fileSystem == null)
+                return null;
 
-            if (SourceIsFileSystem)
-                return File.ReadAllBytes(_folderPath + @"\sys\apploader.img");
-
-            return null;
+            return _fileSystem.GetAppLoader();
         }
 
         /// <summary>
@@ -486,13 +265,10 @@ namespace mexTool.Core
         /// <returns></returns>
         public byte[] GetBin2()
         {
-            if (SourceIsISO)
-                return _iso.Boot2;
+            if (_fileSystem == null)
+                return null;
 
-            if (SourceIsFileSystem)
-                return File.ReadAllBytes(_folderPath + @"\sys\bi2.bin");
-
-            return null;
+            return _fileSystem.GetBin2();
         }
 
         /// <summary>
@@ -501,13 +277,10 @@ namespace mexTool.Core
         /// <returns></returns>
         public byte[] GetBoot()
         {
-            if (SourceIsISO)
-                return _iso.Boot;
+            if (_fileSystem == null)
+                return null;
 
-            if (SourceIsFileSystem)
-                return File.ReadAllBytes(_folderPath + @"\sys\boot.bin");
-
-            return null;
+            return _fileSystem.GetBoot();
         }
 
         /// <summary>
@@ -516,41 +289,41 @@ namespace mexTool.Core
         /// <returns></returns>
         public string[] GetAllFiles()
         {
-            if (SourceIsISO)
-                return _iso.GetAllFilePaths().ToArray();
+            if (_fileSystem == null)
+                return new string[0];
 
-            if (SourceIsFileSystem)
-                return Directory.GetFiles(_folderPath + @"\files\", "*", SearchOption.AllDirectories).Select(e=>e.Replace(_folderPath + @"\files\", "")).ToArray();
+            return _fileSystem.GetFileList();
+        }
 
-            return new string[0];
+        /// <summary>
+        /// Fasters than load files into ram then dumping
+        /// </summary>
+        public void DumpFileFromISO(string internalPath, string filePath)
+        {
+            if (_fileSystem is FS_ISO iso_fs)
+            {
+                if (iso_fs.FileExists(internalPath))
+                {
+                    iso_fs.DumpFileFromISO(internalPath, filePath);
+                }
+                else
+                {
+                    File.WriteAllBytes(filePath, GetFileData(internalPath));
+                }
+            }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public void DumpFileFromISO(string internalPath, string filePath)
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public string GetRealFilePath(string path)
         {
-            if(_iso != null)
-            {
-                if (_iso.SeekFileStream(internalPath, out Stream stream, out uint size))
-                {
-                    int read = 0;
-                    byte[] buffer = new byte[2048];
-                    using (var fstream = new FileStream(filePath, FileMode.Create))
-                    {
-                        while(read < size)
-                        {
-                            var toRead = Math.Min((int)size - read, buffer.Length);
-                            read += stream.Read(buffer, 0, toRead);
-                            fstream.Write(buffer, 0, toRead);
-                        }
-                    }
-                }
-                else
-                {
-                    File.WriteAllBytes(filePath, GetFile(internalPath));
-                }
-            }
+            if (SourceType == typeof(FS_Extracted))
+                return _tempManager.GetRealFilePath(path, (FS_Extracted)_fileSystem);
+
+            return "";
         }
     }
 }

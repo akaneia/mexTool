@@ -160,7 +160,7 @@ namespace mexTool.Core
                     writer.Write(serializer.Serialize(this));
 
                 // add stage file
-                archive.AddFile(Path.GetFileName(FileName), MEX.ImageResource.GetFile(Path.GetFileName(FileName)));
+                archive.AddFile(Path.GetFileName(FileName), MEX.ImageResource.GetFileData(Path.GetFileName(FileName)));
 
                 // sound
                 if (SoundBank != null && SoundBank.SoundBank.Name != "null.ssm")
@@ -176,7 +176,7 @@ namespace mexTool.Core
                 foreach (var p in Playlist.Entries)
                 {
                     if (p.Music.IsMexMusic)
-                        archive.AddFile(p.MusicFileName, MEX.ImageResource.GetFile("audio\\" + p.Music.FileName));
+                        archive.AddFile(p.MusicFileName, MEX.ImageResource.GetFileData("audio\\" + p.Music.FileName));
                 }
             }
         }

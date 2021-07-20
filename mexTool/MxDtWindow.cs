@@ -1,4 +1,5 @@
 ﻿using HSDRawViewer.GUI;
+using mexTool.Core.FileSystem;
 using mexTool.GUI;
 using mexTool.GUI.Pages;
 using mexTool.Tools;
@@ -72,7 +73,7 @@ namespace mexTool
             thread.Start();
 
             // clear temp files on close
-            FormClosing += (sender, args) => { Core.MEX.ImageResource?.ClearTempFiles(); };
+            FormClosing += (sender, args) => { Core.MEX.ImageResource?.DeleteTempFiles(); };
         }
 
         /// <summary>
@@ -496,25 +497,6 @@ namespace mexTool
             if (worker.IsBusy || !Core.MEX.Initialized)
                 return;
 
-            rebuildPath = null;
-
-            if (Core.MEX.ImageResource.IsoNeedsRebuild)
-            {
-                MessageBox.Show("ISO need to be rebuilt", "Rebuild ISO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-                using (var d = new SaveFileDialog())
-                {
-                    d.Title = "Choose new iso file path";
-                    d.Filter = "Gamecube ISO (*.iso)|*.iso";
-
-                    if (d.ShowDialog() == DialogResult.OK)
-                        rebuildPath = d.FileName;
-                }
-            }
-
-            if (Core.MEX.ImageResource.IsoNeedsRebuild && rebuildPath == null)
-                return;
-
             BeginSaving(ForceMode.Normal);
         }
 
@@ -578,7 +560,7 @@ namespace mexTool
             {
                 Core.MEX.PrepareSave(ReportProgress);
 
-                if (Core.MEX.ImageResource.SourceIsFileSystem && _forceMode == ForceMode.ISO)
+                if (Core.MEX.ImageResource.SourceType == typeof(FS_Extracted) && _forceMode == ForceMode.ISO)
                 {
                     // build new iso
                     var dol = Core.MEX.ImageResource.GetDOL();
@@ -594,7 +576,7 @@ namespace mexTool
                         iso.Rebuild(rebuildPath, ReportProgress);
                     }
                 }
-                else if (Core.MEX.ImageResource.SourceIsISO && _forceMode == ForceMode.FileSystem)
+                else if (Core.MEX.ImageResource.SourceType == typeof(FS_ISO) && _forceMode == ForceMode.FileSystem)
                 {
                     // write system data
                     Directory.CreateDirectory(rebuildPath + "/sys/");
@@ -756,7 +738,7 @@ namespace mexTool
 
 
             var mx_codes = File.ReadAllBytes(codesPath);
-            var fs_codes = Core.MEX.ImageResource.GetFile("codes.gct");
+            var fs_codes = Core.MEX.ImageResource.GetFileData("codes.gct");
             if (fs_codes != null)
             {
                 var mxhash = HashGen.ComputeSHA256Hash(mx_codes);

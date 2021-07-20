@@ -76,6 +76,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationSettings.cs" />
+    <Compile Include="Core\FileSystem\FS_Extracted.cs" />
+    <Compile Include="Core\FileSystem\FS_ISO.cs" />
+    <Compile Include="Core\FileSystem\FS_Base.cs" />
+    <Compile Include="Core\FileSystem\TempFileManager.cs" />
     <Compile Include="Core\Installer\MEXDolPatcher.cs" />
     <Compile Include="Core\MEXMusic.cs" />
     <Compile Include="Core\ImageResource.cs" />
