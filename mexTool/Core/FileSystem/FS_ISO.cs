@@ -81,25 +81,55 @@ namespace mexTool.Core.FileSystem
                     _iso.DeleteFileOrFolder(rem);
                 }
 
+
                 // save
-                if (_iso.NeedsRebuild)
+                if (_iso.NeedsRebuild || !string.IsNullOrEmpty(filePath))
                 {
-                    MessageBox.Show("ISO need to be rebuilt", "Rebuild ISO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    if (string.IsNullOrEmpty(filePath))
+                        filePath = _isoPath;
 
-                    using (var d = new SaveFileDialog())
+
+                    if (filePath == _isoPath)
                     {
-                        d.Title = "Choose new iso file path";
-                        d.Filter = "Gamecube ISO (*.iso)|*.iso";
-
-                        if (d.ShowDialog() == DialogResult.OK)
+                        if (!File.Exists(_isoPath))
                         {
-                            _iso.Rebuild(d.FileName, progress);
-                            _isoPath = d.FileName;
+                            MessageBox.Show($"Source iso at\n{_isoPath}\mnot found\n\nAborting saving", "ISO Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
                         }
+                        int index = 0;
+                        string newFileName = "";
+                        while (index == 0 || File.Exists(newFileName))
+                        {
+                            newFileName = Path.GetDirectoryName(filePath) + "\\" + Path.GetFileNameWithoutExtension(filePath) + $"_{index}" + Path.GetExtension(filePath);
+                            index++;
+                        }
+                        filePath = newFileName;
+
+                        MessageBox.Show($"ISO will be rebuilt to\n{newFileName}\nbecause of filesize", "Rebuild ISO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                        //using (var d = new SaveFileDialog())
+                        //{
+                        //    d.Title = "Choose new iso file path";
+                        //    d.Filter = "Gamecube ISO (*.iso)|*.iso";
+
+                        //    if (d.ShowDialog() == DialogResult.OK)
+                        //    {
+                        //        _iso.Rebuild(d.FileName, progress);
+                        //        _isoPath = d.FileName;
+                        //    }
+                        //}
                     }
+
+                    _iso.Rebuild(filePath, progress);
+                    _isoPath = filePath;
                 }
                 else
                 {
+                    if (!File.Exists(_isoPath))
+                    {
+                        MessageBox.Show($"Source iso at\n{_isoPath}\mnot found\n\nAborting saving", "ISO Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                     _iso.Save(progress);
                 }
 

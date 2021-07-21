@@ -233,9 +233,6 @@ namespace mexTool.Core
             SSSFile = new HSDRawFile(_imageResource.GetFileData("MnSlMap.usd"));
             SmSt = new HSDRawFile(_imageResource.GetFileData("SmSt.dat"));
 
-            Console.WriteLine(IfAllFile["Stc_icns"]);
-            File.WriteAllBytes("test.dat", _imageResource.GetFileData("IfAll.usd"));
-
 
             // load ui
             StockManager.GetFighterIcons(out List<List<HSD_TOBJ>> fighterIcons, out List<HSD_TOBJ> reservedIcons);
