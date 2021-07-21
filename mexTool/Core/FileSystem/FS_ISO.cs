@@ -93,7 +93,7 @@ namespace mexTool.Core.FileSystem
                     {
                         if (!File.Exists(_isoPath))
                         {
-                            MessageBox.Show($"Source iso at\n{_isoPath}\mnot found\n\nAborting saving", "ISO Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show($"Source iso at\n{_isoPath}\nnot found\n\nAborting saving", "ISO Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
                         int index = 0;
@@ -127,7 +127,7 @@ namespace mexTool.Core.FileSystem
                 {
                     if (!File.Exists(_isoPath))
                     {
-                        MessageBox.Show($"Source iso at\n{_isoPath}\mnot found\n\nAborting saving", "ISO Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show($"Source iso at\n{_isoPath}\nnot found\n\nAborting saving", "ISO Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     _iso.Save(progress);
