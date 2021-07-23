@@ -114,10 +114,11 @@ namespace mexTool.GUI.Pages
         /// <param name="e"></param>
         private void bankListBox_SelectedValueChanged(object sender, EventArgs e)
         {
-            if(bankListBox.SelectedItem is MEXSoundBank bank)
+            if (bankListBox.SelectedItem is MEXSoundBank bank)
             {
                 _semEditor.SetScript(bank.ScriptBank, MEX.SoundBanks.IndexOf(bank));
                 _ssmEditor.SetSSM(bank.SoundBank);
+                mexbankPropertyGrid.SelectedObject = bank;
             }
         }
 

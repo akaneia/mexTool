@@ -34,6 +34,7 @@ namespace mexTool.GUI.Controls
             this.mxListBox1 = new mexTool.GUI.MXListBox();
             this.mxToolStrip1 = new mexTool.GUI.Controls.MXToolStrip();
             this.buttonAddSound = new System.Windows.Forms.ToolStripButton();
+            this.buttonCloneScript = new System.Windows.Forms.ToolStripButton();
             this.buttonRemoveSound = new System.Windows.Forms.ToolStripButton();
             this.buttonClean = new System.Windows.Forms.ToolStripButton();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -43,7 +44,6 @@ namespace mexTool.GUI.Controls
             this.buttonAddCode = new System.Windows.Forms.ToolStripButton();
             this.buttonRemoveCode = new System.Windows.Forms.ToolStripButton();
             this.mxPropertyGrid2 = new mexTool.GUI.Controls.MXPropertyGrid();
-            this.buttonCloneScript = new System.Windows.Forms.ToolStripButton();
             this.panel2.SuspendLayout();
             this.mxToolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -57,9 +57,9 @@ namespace mexTool.GUI.Controls
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(279, 8);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 26);
+            this.label1.Size = new System.Drawing.Size(77, 26);
             this.label1.TabIndex = 6;
-            this.label1.Text = "Script";
+            this.label1.Text = "Name:";
             // 
             // panel2
             // 
@@ -119,6 +119,16 @@ namespace mexTool.GUI.Controls
             this.buttonAddSound.Text = "Add Sound";
             this.buttonAddSound.Click += new System.EventHandler(this.buttonAddSound_Click);
             // 
+            // buttonCloneScript
+            // 
+            this.buttonCloneScript.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonCloneScript.Image = global::mexTool.Properties.Resources.copy;
+            this.buttonCloneScript.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonCloneScript.Name = "buttonCloneScript";
+            this.buttonCloneScript.Size = new System.Drawing.Size(36, 37);
+            this.buttonCloneScript.Text = "Clone Script";
+            this.buttonCloneScript.Click += new System.EventHandler(this.buttonCloneScript_Click);
+            // 
             // buttonRemoveSound
             // 
             this.buttonRemoveSound.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -161,6 +171,7 @@ namespace mexTool.GUI.Controls
             this.panel1.Controls.Add(this.scriptListBox);
             this.panel1.Controls.Add(this.mxToolStrip2);
             this.panel1.Controls.Add(this.mxPropertyGrid2);
+            this.panel1.ForceFocus = true;
             this.panel1.Location = new System.Drawing.Point(280, 46);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(387, 442);
@@ -244,16 +255,6 @@ namespace mexTool.GUI.Controls
             this.mxPropertyGrid2.ViewBorderColor = System.Drawing.Color.Transparent;
             this.mxPropertyGrid2.ViewForeColor = System.Drawing.Color.White;
             this.mxPropertyGrid2.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.mxPropertyGrid2_PropertyValueChanged);
-            // 
-            // buttonCloneScript
-            // 
-            this.buttonCloneScript.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonCloneScript.Image = global::mexTool.Properties.Resources.copy;
-            this.buttonCloneScript.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonCloneScript.Name = "buttonCloneScript";
-            this.buttonCloneScript.Size = new System.Drawing.Size(36, 37);
-            this.buttonCloneScript.Text = "Clone Script";
-            this.buttonCloneScript.Click += new System.EventHandler(this.buttonCloneScript_Click);
             // 
             // MXSemEditor
             // 
