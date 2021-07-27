@@ -318,6 +318,7 @@ namespace mexTool.GUI.Controls
             this.toolStripButton5.Name = "toolStripButton5";
             this.toolStripButton5.Size = new System.Drawing.Size(36, 40);
             this.toolStripButton5.Text = "Export Stock Icon";
+            this.toolStripButton5.Click += new System.EventHandler(this.mxButton2_Click);
             // 
             // panel1
             // 

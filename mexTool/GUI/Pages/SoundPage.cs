@@ -1,4 +1,5 @@
 ﻿using HSDRawViewer.GUI;
+using MeleeMedia.Audio;
 using mexTool.Core;
 using mexTool.GUI.Controls;
 using System;
@@ -196,6 +197,30 @@ namespace mexTool.GUI.Pages
                         bank.SaveAsPackage(d.FileName);
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cleanAllButton_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Cleaning scripts removes unused commands and results in smaller filesize", "Clean Scripts?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                int removed = 0;
+
+                foreach (var b in MEX.SoundBanks)
+                    foreach (var s in b.ScriptBank.Scripts)
+                    {
+                        removed += s.Codes.RemoveAll(d => d.Code == SEM_CODE.NULL);
+                    }
+
+                if (removed != 0)
+                    MessageBox.Show($"Removed {removed} unused codes!", "Cleaning Success");
+                else
+                    MessageBox.Show($"No NULL codes found", "Cleaning Success");
             }
         }
     }

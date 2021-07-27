@@ -41,6 +41,7 @@ namespace mexTool.GUI.Pages
             this.scriptTabButton = new mexTool.GUI.Controls.MXButton();
             this.bankTabButton = new mexTool.GUI.Controls.MXButton();
             this.bankListBox = new mexTool.GUI.MXListBox();
+            this.cleanAllButton = new mexTool.GUI.Controls.MXButton();
             this.SuspendLayout();
             // 
             // panel1
@@ -255,6 +256,28 @@ namespace mexTool.GUI.Pages
             this.bankListBox.TabIndex = 0;
             this.bankListBox.SelectedValueChanged += new System.EventHandler(this.bankListBox_SelectedValueChanged);
             // 
+            // cleanAllButton
+            // 
+            this.cleanAllButton.BackColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
+            this.cleanAllButton.BackColorLight = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(140)))));
+            this.cleanAllButton.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(100)))));
+            this.cleanAllButton.BorderColor = System.Drawing.Color.Black;
+            this.cleanAllButton.CornerRadius = 20;
+            this.cleanAllButton.Font = new System.Drawing.Font("Arial", 12F);
+            this.cleanAllButton.ForeColor = System.Drawing.Color.White;
+            this.cleanAllButton.Image = global::mexTool.Properties.Resources.clean;
+            this.cleanAllButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cleanAllButton.ImageHeight = 32;
+            this.cleanAllButton.ImageWidth = 32;
+            this.cleanAllButton.ImageXOffset = 10;
+            this.cleanAllButton.Location = new System.Drawing.Point(512, 8);
+            this.cleanAllButton.Name = "cleanAllButton";
+            this.cleanAllButton.Size = new System.Drawing.Size(142, 52);
+            this.cleanAllButton.TabIndex = 8;
+            this.cleanAllButton.Text = "Clean All";
+            this.cleanAllButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.cleanAllButton.Click += new System.EventHandler(this.cleanAllButton_Click);
+            // 
             // SoundPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -263,6 +286,7 @@ namespace mexTool.GUI.Pages
             this.Controls.Add(this.mexbankPropertyGrid);
             this.Controls.Add(this.mxMusicPlayer1);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.cleanAllButton);
             this.Controls.Add(this.buttonExport);
             this.Controls.Add(this.buttonClone);
             this.Controls.Add(this.buttonRemove);
@@ -292,5 +316,6 @@ namespace mexTool.GUI.Pages
         private Controls.MXButton importButton;
         private Controls.MXPropertyGrid mexbankPropertyGrid;
         private System.Windows.Forms.Label label2;
+        private Controls.MXButton cleanAllButton;
     }
 }
