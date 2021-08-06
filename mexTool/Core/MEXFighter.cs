@@ -229,7 +229,7 @@ namespace mexTool.Core
                 archive.AddFile(RstAnimFile, MEX.ImageResource.GetFileData(RstAnimFile));
 
                 // ViWaitAJ
-                archive.AddFile(DemoWait, MEX.ImageResource.GetFileData(DemoWait));
+                archive.AddFile(DemoFile, MEX.ImageResource.GetFileData(DemoFile));
 
                 // costumes
                 foreach (var c in Costumes)
@@ -344,7 +344,7 @@ namespace mexTool.Core
 
 
                 // ViWaitAJ
-                InstallFile(archive, fighter.DemoWait);
+                InstallFile(archive, fighter.DemoFile);
 
                 // costumes
                 foreach(var c in fighter.Costumes)

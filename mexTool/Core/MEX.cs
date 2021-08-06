@@ -886,7 +886,7 @@ namespace mexTool.Core
                 fd.RaceToFinishTimeLimits[externalId] = f.RacetoTheFinishTime;
                 fd.EndClassicFiles.Set(externalId, new HSD_String(f.EndClassicFile));
                 fd.EndAdventureFiles.Set(externalId, new HSD_String(f.EndAdventureFile));
-                fd.EndAllStarFiles.Set(externalId, new HSD_String(f.EndAdventureFile));
+                fd.EndAllStarFiles.Set(externalId, new HSD_String(f.EndAllStarFile));
                 fd.EndMovieFiles.Set(externalId, new HSD_String(f.EndMovieFile));
 
                 // Kirby
