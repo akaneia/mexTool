@@ -669,22 +669,25 @@ namespace mexTool.Core
 
 
 
-        [TypeConverter(typeof(HexType)), DisplayName("Kirby N Special"), Category("Kirby"), Description("")]
+        [TypeConverter(typeof(HexType)), DisplayName("N Special"), Category("Kirby"), Description("")]
         public uint KirbySpecialN { get; set; }
 
-        [TypeConverter(typeof(HexType)), DisplayName("Kirby N Air Special"), Category("Kirby"), Description("")]
+        [TypeConverter(typeof(HexType)), DisplayName("N Air Special"), Category("Kirby"), Description("")]
         public uint KirbySpecialNAir { get; set; }
 
-        [TypeConverter(typeof(HexType)), DisplayName("Kirby OnSwallow"), Category("Kirby"), Description("")]
+        [TypeConverter(typeof(HexType)), DisplayName("OnSwallow"), Category("Kirby"), Description("")]
         public uint KirbyOnSwallow { get; set; }
 
-        [TypeConverter(typeof(HexType)), DisplayName("Kirby OnLoseAbility"), Category("Kirby"), Description("")]
+        [TypeConverter(typeof(HexType)), DisplayName("OnLoseAbility"), Category("Kirby"), Description("")]
         public uint KirbyOnLoseAbility { get; set; }
 
-        [TypeConverter(typeof(HexType)), DisplayName("Kirby OnHit"), Category("Kirby"), Description("")]
+        [TypeConverter(typeof(HexType)), DisplayName("OnHit"), Category("Kirby"), Description("")]
         public uint KirbyOnHit { get; set; }
 
-        [TypeConverter(typeof(HexType)), DisplayName("Kirby OnItemInit"), Category("Kirby"), Description("")]
+        [TypeConverter(typeof(HexType)), DisplayName("OnItemInit"), Category("Kirby"), Description("")]
         public uint KirbyOnItemInit { get; set; }
+
+        [TypeConverter(typeof(HexType)), DisplayName("OnFrame"), Category("Kirby"), Description("")]
+        public uint KirbyOnFrame { get; set; }
     }
 }

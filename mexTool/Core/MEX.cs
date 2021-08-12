@@ -438,7 +438,7 @@ namespace mexTool.Core
                 ft.EndAdventureFile = externalId < ftData.EndAdventureFiles.Length ? ftData.EndAdventureFiles[externalId].Value : "";
                 ft.EndAllStarFile = externalId < ftData.EndAllStarFiles.Length ? ftData.EndAllStarFiles[externalId].Value : "";
                 ft.EndMovieFile = externalId < ftData.EndMovieFiles.Length ? ftData.EndMovieFiles[externalId].Value : "";
-                
+
 
                 ft.Functions = new MEXFighterFunctions()
                 {
@@ -497,6 +497,7 @@ namespace mexTool.Core
                     KirbyOnSwallow = kbFunc.OnAbilityGain[internalId],
                     KirbySpecialN = kbFunc.KirbySpecialN[internalId],
                     KirbySpecialNAir = kbFunc.KirbySpecialNAir[internalId],
+                    KirbyOnFrame = kbFunc != null && internalId < kbFunc.KirbyOnFrame.Length ? kbFunc.KirbyOnFrame[internalId] : 0
                 };
 
 
@@ -732,7 +733,7 @@ namespace mexTool.Core
 
             // update external fighter ids
             // z order icons
-            var sortedIcons = FighterIcons;//.OrderBy(e => e.Z);
+            var sortedIcons = FighterIcons.OrderBy(e => e.Z);
             foreach (var v in sortedIcons)
                 v.Icon.ExternalCharID = (byte)MEXFighterIDConverter.ToExternalID(Fighters.IndexOf(v.Fighter), Fighters.Count);
             mxdt.MenuTable.CSSIconData = new MEX_IconData() { Icons = sortedIcons.Select(e => e.Icon).ToArray() };
@@ -966,8 +967,7 @@ namespace mexTool.Core
                 kff.OnAbilityGain[internalId] = func.KirbyOnSwallow;
                 kff.KirbySpecialN[internalId] = func.KirbySpecialN;
                 kff.KirbySpecialNAir[internalId] = func.KirbySpecialNAir;
-
-
+                kff.KirbyOnFrame[internalId] = func.KirbyOnFrame;
 
                 // save items
                 var itemEntries = new ushort[f.Items.Count];
