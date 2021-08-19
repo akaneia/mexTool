@@ -497,7 +497,7 @@ namespace mexTool.Core
                     KirbyOnSwallow = kbFunc.OnAbilityGain[internalId],
                     KirbySpecialN = kbFunc.KirbySpecialN[internalId],
                     KirbySpecialNAir = kbFunc.KirbySpecialNAir[internalId],
-                    KirbyOnFrame = kbFunc != null && internalId < kbFunc.KirbyOnFrame.Length ? kbFunc.KirbyOnFrame[internalId] : 0
+                    KirbyOnFrame = kbFunc.KirbyOnFrame != null && internalId < kbFunc.KirbyOnFrame.Length ? kbFunc.KirbyOnFrame[internalId] : 0
                 };
 
 
