@@ -142,7 +142,13 @@ namespace mexTool.GUI.Controls
             mxListBox1.DataSource = _ssm.Sounds;
 
             // select added dsp
-            mxListBox1.SelectedIndex = selectedIndex;
+            if (selectedIndex < mxListBox1.Items.Count)
+                mxListBox1.SelectedIndex = selectedIndex;
+            else
+            if (mxListBox1.Items.Count > 0)
+                mxListBox1.SelectedIndex = mxListBox1.Items.Count - 1;
+            else
+                mxListBox1.SelectedIndex = -1;
 
             OnRemoveSound(new SoundRemovedEventArgs() { SoundIndex = selectedIndex });
         }
