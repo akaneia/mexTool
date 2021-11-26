@@ -71,7 +71,7 @@ namespace mexTool.GUI.Controls
                     d.FileName = "emblem.png";
 
                     if (d.ShowDialog() == DialogResult.OK)
-                        using (var bmp = GraphicExtensions.TOBJToBitmap(tobj))
+                        using (var bmp = tobj.ToBitmap())
                             bmp.Save(d.FileName);
                 }
             }

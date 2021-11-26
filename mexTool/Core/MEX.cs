@@ -680,6 +680,11 @@ namespace mexTool.Core
             SmSt.Save("temp//SmSt.dat");
             ImageResource.AddFile("SmSt.dat", "temp//SmSt.dat");
 
+            HSDRawFile cssSymbol = new HSDRawFile();
+            cssSymbol.Roots.Add(new HSDRootNode() { Name = "mexSelectChr", Data = CSSFile["mexSelectChr"].Data });
+            cssSymbol.Save("temp//mexSelectChr.dat", trim: true);
+            ImageResource.AddFile("mexSelectChr.dat", "temp//mexSelectChr.dat");
+
             // generate mxdt
             HSDRawFile f = new HSDRawFile();
             f.Roots.Add(new HSDRootNode()
@@ -1153,8 +1158,6 @@ namespace mexTool.Core
             mexSelectChr.CSPStride = stride;
 
             CSSFile["mexSelectChr"].Data = mexSelectChr;
-
-
 
 
             // generate stage select data

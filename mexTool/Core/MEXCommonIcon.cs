@@ -111,7 +111,7 @@ namespace mexTool.Core
                 _renderImage.Dispose();
 
             if (_image != null)
-                _renderImage = GraphicExtensions.TOBJToBitmap(_image);
+                _renderImage = _image.ToBitmap();
             else
                 _renderImage = null;
         }

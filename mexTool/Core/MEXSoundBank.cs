@@ -25,25 +25,25 @@ namespace mexTool.Core
         public SoundBankGroupType Group 
         {
             get => (SoundBankGroupType)((GroupFlags >> 24) & 0xFF);
-            set => GroupFlags = (GroupFlags & 0xFF000000) | (((uint)value & 0xFF) << 24);
+            set => GroupFlags = (GroupFlags & ~0xFF000000) | (((uint)value & 0xFF) << 24);
         }
 
         public byte GroupFlag1
         {
             get => (byte)((GroupFlags >> 16) & 0xFF);
-            set => GroupFlags = (GroupFlags & 0x00FF0000) | (((uint)value & 0xFF) << 16);
+            set => GroupFlags = (uint)((GroupFlags & ~0x00FF0000) | (((uint)value & 0xFF) << 16));
         }
 
         public byte GroupFlag2
         {
             get => (byte)((GroupFlags >> 8) & 0xFF);
-            set => GroupFlags = (GroupFlags & 0x0000FF00) | (((uint)value & 0xFF) << 8);
+            set => GroupFlags = (uint)((GroupFlags & ~0x0000FF00) | (((uint)value & 0xFF) << 8));
         }
 
         public byte GroupFlag3
         {
             get => (byte)(GroupFlags & 0xFF);
-            set => GroupFlags = (GroupFlags & 0x000000FF) | ((uint)value & 0xFF);
+            set => GroupFlags = (uint)((GroupFlags & ~0x000000FF) | ((uint)value & 0xFF));
         }
 
         /// <summary>

@@ -53,7 +53,7 @@ namespace mexTool.Core
             if (Icon == null)
                 return null;
 
-            return GraphicExtensions.TOBJToBitmap(Icon);
+            return Icon.ToBitmap();
         }
 
 
@@ -78,7 +78,7 @@ namespace mexTool.Core
                     if (Icon != null && Icon.ImageData != null)
                     {
                         ZipArchiveEntry stc = archive.CreateEntry("stc.png");
-                        using (var img = GraphicExtensions.TOBJToBitmap(Icon))
+                        using (var img = Icon.ToBitmap())
                         using (var o = stc.Open())
                             img.Save(o, System.Drawing.Imaging.ImageFormat.Png);
                     }
@@ -86,7 +86,7 @@ namespace mexTool.Core
                     if (CSP != null && CSP.ImageData != null)
                     {
                         ZipArchiveEntry csp = archive.CreateEntry("csp.png");
-                        using (var img = GraphicExtensions.TOBJToBitmap(CSP))
+                        using (var img = CSP.ToBitmap())
                         using (var o = csp.Open())
                             img.Save(o, System.Drawing.Imaging.ImageFormat.Png);
                     }
@@ -117,7 +117,16 @@ namespace mexTool.Core
                 Blending = 1
             };
 
-            Icon.EncodeImageData(bmp.GetBGRAData(), bmp.Width, bmp.Height, GXTexFmt.CI4, GXTlutFmt.RGB5A3);
+            if (bmp.Width > 24 || bmp.Height > 24)
+            {
+                using (var resize = bmp.Resize(24, 24))
+                    Icon.EncodeImageData(resize.GetBGRAData(), bmp.Width, bmp.Height, GXTexFmt.CI4, GXTlutFmt.RGB5A3);
+            }
+            else
+            {
+                Icon.EncodeImageData(bmp.GetBGRAData(), bmp.Width, bmp.Height, GXTexFmt.CI4, GXTlutFmt.RGB5A3);
+            }
+
         }
 
         /// <summary>

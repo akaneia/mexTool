@@ -757,5 +757,32 @@ namespace mexTool
 
             return false;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var abount = new About())
+                abount.ShowDialog();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cSPCompressorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!Core.MEX.Initialized)
+                return;
+
+            using (GUI.Controls.CSPCompressorGUI comp = new GUI.Controls.CSPCompressorGUI())
+            {
+                comp.ShowDialog();
+            }
+        }
     }
 }

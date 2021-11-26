@@ -104,6 +104,18 @@
     <Compile Include="Core\MEXPlaylist.cs" />
     <Compile Include="Core\MEXCostume.cs" />
     <Compile Include="Core\MEXStageIcon.cs" />
+    <Compile Include="GUI\About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\CSPCompressorGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\CSPCompressorGUI.Designer.cs">
+      <DependentUpon>CSPCompressorGUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Controls\ISelectScreenIcon.cs" />
     <Compile Include="GUI\Controls\ItemEditor.cs">
       <SubType>UserControl</SubType>
@@ -258,6 +270,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools\CSPCompressor.cs" />
     <Compile Include="Tools\DSPExtensions.cs" />
     <Compile Include="Tools\DSPPlayer.cs" />
     <Compile Include="Tools\GawUIGen.cs" />
@@ -268,6 +281,9 @@
     <Compile Include="Tools\StageNameGenerator.cs" />
     <Compile Include="Tools\ZipExtensions.cs" />
     <Compile Include="Updater.cs" />
+    <EmbeddedResource Include="GUI\About.resx">
+      <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ItemEditor.resx">
       <DependentUpon>ItemEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -309,6 +325,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\SoundEditor.resx">
       <DependentUpon>SoundEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\CSPCompressorGUI.resx">
+      <DependentUpon>CSPCompressorGUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Pages\FighterPage.resx">
       <DependentUpon>FighterPage.cs</DependentUpon>
@@ -403,6 +422,9 @@
     <Content Include="mexUpdater.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\logo_mex.png" />
+    <None Include="Resources\logo_akaneia.png" />
+    <None Include="Resources\csp_preview.png" />
     <None Include="Resources\stc_replace.png" />
     <None Include="Resources\stc_export.png" />
     <None Include="Resources\csp_replace.png" />

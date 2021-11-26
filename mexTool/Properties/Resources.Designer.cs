@@ -193,6 +193,16 @@ namespace mexTool.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap csp_preview {
+            get {
+                object obj = ResourceManager.GetObject("csp_preview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap csp_replace {
             get {
                 object obj = ResourceManager.GetObject("csp_replace", resourceCulture);
@@ -326,6 +336,26 @@ namespace mexTool.Properties {
         internal static System.Drawing.Bitmap left {
             get {
                 object obj = ResourceManager.GetObject("left", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logo_akaneia {
+            get {
+                object obj = ResourceManager.GetObject("logo_akaneia", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logo_mex {
+            get {
+                object obj = ResourceManager.GetObject("logo_mex", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -172,7 +172,7 @@ namespace mexTool.GUI.Controls
                 if (nameTagBox.Image != null)
                     nameTagBox.Image.Dispose();
 
-                nameTagBox.Image = GraphicExtensions.TOBJToBitmap(icon._previewText);
+                nameTagBox.Image = icon._previewText.ToBitmap();
 
                 iconBox.Image = icon.GetImage();
             }

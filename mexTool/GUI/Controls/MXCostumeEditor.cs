@@ -13,6 +13,10 @@ namespace mexTool.GUI.Controls
 {
     public partial class MXCostumeEditor : UserControl
     {
+        private static readonly int CSPWidth = 136;
+        private static readonly int CSPHeight = 188;
+        private static bool SizeWarning = true;
+
         private MEXFighter _fighter;
         private BindingList<MEXCostume> _costumes;
         private BindingList<MEXCostume> _kirbyCostumes;
@@ -174,7 +178,7 @@ namespace mexTool.GUI.Controls
             {
                 if (cspBox.Image != null)
                     cspBox.Image.Dispose();
-                cspBox.Image = GraphicExtensions.TOBJToBitmap(costume.CSP);
+                cspBox.Image = costume.CSP.ToBitmap();
 
                 gawButton.Visible = MEX.Fighters.IndexOf(_fighter) == GAWIndex;
 
@@ -512,7 +516,16 @@ namespace mexTool.GUI.Controls
                     if (d.ShowDialog() == DialogResult.OK)
                         using (var bmp = new Bitmap(d.FileName))
                         {
-                            costume.CSP = bmp.ToTOBJ(HSDRaw.GX.GXTexFmt.CI8, HSDRaw.GX.GXTlutFmt.RGB5A3);
+                            if ((bmp.Width > 256 || bmp.Height > 256) &&
+                                MessageBox.Show("Resize Image?", "Image is too large", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) == DialogResult.Yes)
+                            {
+                                using (var resize = bmp.Resize(true, false, CSPWidth, 0))
+                                    costume.CSP = resize.ToTOBJ(HSDRaw.GX.GXTexFmt.CI8, HSDRaw.GX.GXTlutFmt.RGB5A3);
+                            }
+                            else
+                            {
+                                costume.CSP = bmp.ToTOBJ(HSDRaw.GX.GXTexFmt.CI8, HSDRaw.GX.GXTlutFmt.RGB5A3);
+                            }
                             RefreshSelected();
                         }
                 }
@@ -533,7 +546,7 @@ namespace mexTool.GUI.Controls
                     d.Filter = "PNG (*.png)|*.png";
 
                     if (d.ShowDialog() == DialogResult.OK)
-                        using (var bmp = GraphicExtensions.TOBJToBitmap(costume.CSP))
+                        using (var bmp = costume.CSP.ToBitmap())
                             bmp.Save(d.FileName);
                 }
             }
@@ -557,7 +570,18 @@ namespace mexTool.GUI.Controls
                             var filename = ((string[])data)[0];
 
                             using (var bmp = new Bitmap(filename))
-                                costume.CSP = bmp.ToTOBJ(HSDRaw.GX.GXTexFmt.CI8, HSDRaw.GX.GXTlutFmt.RGB5A3);
+                            {
+                                if ((bmp.Width > 256 || bmp.Height > 256) &&
+                                    MessageBox.Show("Resize Image?", "Image is too large", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) == DialogResult.Yes)
+                                {
+                                    using (var resize = bmp.Resize(true, false, CSPWidth, 0))
+                                        costume.CSP = resize.ToTOBJ(HSDRaw.GX.GXTexFmt.CI8, HSDRaw.GX.GXTlutFmt.RGB5A3);
+                                }
+                                else
+                                {
+                                    costume.CSP = bmp.ToTOBJ(HSDRaw.GX.GXTexFmt.CI8, HSDRaw.GX.GXTlutFmt.RGB5A3);
+                                }
+                            }
 
                             RefreshSelected();
                         }

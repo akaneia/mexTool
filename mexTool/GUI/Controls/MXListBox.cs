@@ -318,7 +318,7 @@ namespace mexTool.GUI
                 //
                 if (item is HSD_TOBJ tobj)
                 {
-                    using (var img = GraphicExtensions.TOBJToBitmap(tobj))
+                    using (var img = tobj.ToBitmap())
                     {
                         var width = img.Width * ImageHeight / (float)img.Height;
 
