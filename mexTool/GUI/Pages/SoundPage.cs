@@ -65,6 +65,8 @@ namespace mexTool.GUI.Pages
 
             bankListBox.DataSource = MEX.SoundBanks;
 
+            mxMusicPlayer1.ProgressBarVisible = false;
+
             scriptTabButton.BackFillColor = ThemeColors.TabColorSelected;
             LoadTab();
         }

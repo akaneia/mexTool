@@ -55,6 +55,7 @@
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateCodesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.editBannerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cSPCompressorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.labelSaving = new System.Windows.Forms.Label();
@@ -203,6 +204,7 @@
             // pictureBoxBanner
             // 
             this.pictureBoxBanner.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxBanner.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBoxBanner.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBoxBanner.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             this.pictureBoxBanner.Location = new System.Drawing.Point(0, 0);
@@ -212,6 +214,7 @@
             this.pictureBoxBanner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxBanner.TabIndex = 4;
             this.pictureBoxBanner.TabStop = false;
+            this.pictureBoxBanner.Click += new System.EventHandler(this.pictureBoxBanner_Click);
             // 
             // headerPanel
             // 
@@ -412,6 +415,7 @@
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.updateCodesToolStripMenuItem,
             this.toolStripSeparator2,
+            this.editBannerToolStripMenuItem,
             this.cSPCompressorToolStripMenuItem});
             this.optionsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
@@ -421,19 +425,26 @@
             // updateCodesToolStripMenuItem
             // 
             this.updateCodesToolStripMenuItem.Name = "updateCodesToolStripMenuItem";
-            this.updateCodesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.updateCodesToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.updateCodesToolStripMenuItem.Text = "Update Codes";
             this.updateCodesToolStripMenuItem.Click += new System.EventHandler(this.updateCodesToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(153, 6);
+            // 
+            // editBannerToolStripMenuItem
+            // 
+            this.editBannerToolStripMenuItem.Name = "editBannerToolStripMenuItem";
+            this.editBannerToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.editBannerToolStripMenuItem.Text = "Edit Banner";
+            this.editBannerToolStripMenuItem.Click += new System.EventHandler(this.editBannerToolStripMenuItem_Click);
             // 
             // cSPCompressorToolStripMenuItem
             // 
             this.cSPCompressorToolStripMenuItem.Name = "cSPCompressorToolStripMenuItem";
-            this.cSPCompressorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cSPCompressorToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.cSPCompressorToolStripMenuItem.Text = "Compress CSPs";
             this.cSPCompressorToolStripMenuItem.Click += new System.EventHandler(this.cSPCompressorToolStripMenuItem_Click);
             // 
@@ -542,5 +553,6 @@
         private System.Windows.Forms.ToolStripMenuItem updateCodesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem cSPCompressorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editBannerToolStripMenuItem;
     }
 }

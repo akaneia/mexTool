@@ -209,6 +209,31 @@ namespace System.Drawing
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="bmp"></param>
+        /// <returns></returns>
+        public static byte[] GetRGBAData(this Bitmap bmp)
+        {
+            var bitmapData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
+            var length = bitmapData.Stride * bitmapData.Height;
+
+            byte[] bytes = new byte[length];
+
+            Marshal.Copy(bitmapData.Scan0, bytes, 0, length);
+            bmp.UnlockBits(bitmapData);
+
+            for (int i = 0; i < bytes.Length; i+=4)
+            {
+                var temp = bytes[i];
+                bytes[i] = bytes[i + 2];
+                bytes[i + 2] = temp;
+            }
+
+            return bytes;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="graphics"></param>
         /// <param name="bound"></param>
         /// <param name="fill"></param>

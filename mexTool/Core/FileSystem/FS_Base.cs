@@ -15,8 +15,6 @@ namespace mexTool.Core.FileSystem
 
         byte[] GetFileData(string path);
 
-        GCBanner GetBanner();
-
         byte[] GetDOL();
 
         void SetDOL(byte[] dol);

@@ -103,15 +103,6 @@ namespace mexTool.Core.FileSystem
         /// 
         /// </summary>
         /// <returns></returns>
-        public GCBanner GetBanner()
-        {
-            return new GCBanner(File.ReadAllBytes(Path.Combine(_folderPath + "\\files", "opening.bnr")));
-        }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
         public byte[] GetBin2()
         {
             return File.ReadAllBytes(_folderPath + @"\sys\bi2.bin");

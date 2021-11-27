@@ -110,6 +110,12 @@
     <Compile Include="GUI\About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\BannerEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\BannerEditor.Designer.cs">
+      <DependentUpon>BannerEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\CSPCompressorGUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -283,6 +289,9 @@
     <Compile Include="Updater.cs" />
     <EmbeddedResource Include="GUI\About.resx">
       <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\BannerEditor.resx">
+      <DependentUpon>BannerEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Controls\ItemEditor.resx">
       <DependentUpon>ItemEditor.cs</DependentUpon>

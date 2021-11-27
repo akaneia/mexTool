@@ -17,6 +17,8 @@ namespace mexTool.GUI.Controls
 
         public Color RoundBackColor { get; set; } = Color.FromArgb(216, 0, 115);
 
+        public bool ProgressBarVisible { get => soundProgressBar.Visible; set => soundProgressBar.Visible = value; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -58,6 +60,8 @@ namespace mexTool.GUI.Controls
             InitializeComponent();
 
             _player = new DSPPlayer();
+
+            DoubleBuffered = true;
 
             /*_player.PlaybackStopped += (sender, args) =>
             {

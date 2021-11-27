@@ -29,18 +29,19 @@ namespace mexTool.GUI.Controls
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CSPCompressorGUI));
             this.saveProgressBar = new System.Windows.Forms.ProgressBar();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.mxPictureBox1 = new mexTool.GUI.Controls.MXPictureBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.mxPictureBox2 = new mexTool.GUI.Controls.MXPictureBox();
             this.saveLabel = new System.Windows.Forms.Label();
             this.mxPropertyGrid1 = new mexTool.GUI.Controls.MXPropertyGrid();
             this.mxButton1 = new mexTool.GUI.Controls.MXButton();
-            this.mxPictureBox2 = new mexTool.GUI.Controls.MXPictureBox();
-            this.mxPictureBox1 = new mexTool.GUI.Controls.MXPictureBox();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mxPictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mxPictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mxPictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // saveProgressBar
@@ -65,6 +66,17 @@ namespace mexTool.GUI.Controls
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Before";
             // 
+            // mxPictureBox1
+            // 
+            this.mxPictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.mxPictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mxPictureBox1.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            this.mxPictureBox1.Location = new System.Drawing.Point(3, 16);
+            this.mxPictureBox1.Name = "mxPictureBox1";
+            this.mxPictureBox1.Size = new System.Drawing.Size(194, 266);
+            this.mxPictureBox1.TabIndex = 0;
+            this.mxPictureBox1.TabStop = false;
+            // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -77,6 +89,17 @@ namespace mexTool.GUI.Controls
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "After";
+            // 
+            // mxPictureBox2
+            // 
+            this.mxPictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.mxPictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mxPictureBox2.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            this.mxPictureBox2.Location = new System.Drawing.Point(3, 16);
+            this.mxPictureBox2.Name = "mxPictureBox2";
+            this.mxPictureBox2.Size = new System.Drawing.Size(194, 266);
+            this.mxPictureBox2.TabIndex = 0;
+            this.mxPictureBox2.TabStop = false;
             // 
             // saveLabel
             // 
@@ -132,28 +155,6 @@ namespace mexTool.GUI.Controls
             this.mxButton1.Text = "Compress CSPs";
             this.mxButton1.Click += new System.EventHandler(this.mxButton1_Click);
             // 
-            // mxPictureBox2
-            // 
-            this.mxPictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.mxPictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mxPictureBox2.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-            this.mxPictureBox2.Location = new System.Drawing.Point(3, 16);
-            this.mxPictureBox2.Name = "mxPictureBox2";
-            this.mxPictureBox2.Size = new System.Drawing.Size(194, 266);
-            this.mxPictureBox2.TabIndex = 0;
-            this.mxPictureBox2.TabStop = false;
-            // 
-            // mxPictureBox1
-            // 
-            this.mxPictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.mxPictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mxPictureBox1.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-            this.mxPictureBox1.Location = new System.Drawing.Point(3, 16);
-            this.mxPictureBox1.Name = "mxPictureBox1";
-            this.mxPictureBox1.Size = new System.Drawing.Size(194, 266);
-            this.mxPictureBox1.TabIndex = 0;
-            this.mxPictureBox1.TabStop = false;
-            // 
             // CSPCompressorGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -167,12 +168,13 @@ namespace mexTool.GUI.Controls
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.saveProgressBar);
             this.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CSPCompressorGUI";
             this.Text = "CSP Compressor";
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.mxPictureBox1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mxPictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mxPictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

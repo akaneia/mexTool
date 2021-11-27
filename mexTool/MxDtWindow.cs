@@ -234,13 +234,7 @@ namespace mexTool
 
             openedPath = path;
 
-            var banner = Core.MEX.ImageResource.GetBanner();
-
-            if (banner != null)
-            {
-                labelGameName.Text = banner.MetaData.LongName;
-                pictureBoxBanner.Image = ImageTools.RGBAToBitmap(banner.GetBannerImageRGBA8(), 96, 32);
-            }
+            RefreshBanner();
 
             _fighterPage = new FighterPage();
             _fighterPage.Dock = DockStyle.Fill;
@@ -276,6 +270,24 @@ namespace mexTool
             _soundPage.BringToFront();
 
             CheckCodeUpdate();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void RefreshBanner()
+        {
+            var banner = Core.MEX.ImageResource.GetBanner();
+
+            if (banner != null)
+            {
+                labelGameName.Text = banner.MetaData.LongName;
+
+                if (pictureBoxBanner.Image != null)
+                    pictureBoxBanner.Image.Dispose();
+
+                pictureBoxBanner.Image = ImageTools.RGBAToBitmap(banner.GetBannerImageRGBA8(), 96, 32);
+            }
         }
 
         /// <summary>
@@ -383,7 +395,7 @@ namespace mexTool
         /// <param name="e"></param>
         private void buttonFileSystem_Click(object sender, EventArgs e)
         {
-
+            SelectPage(0);
         }
 
         /// <summary>
@@ -783,6 +795,48 @@ namespace mexTool
             {
                 comp.ShowDialog();
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void editBannerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenEditBanner();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pictureBoxBanner_Click(object sender, EventArgs e)
+        {
+            OpenEditBanner();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void OpenEditBanner()
+        {
+            if (!Core.MEX.Initialized)
+                return;
+
+            var banner = Core.MEX.ImageResource.GetBanner();
+
+            if (banner != null)
+                using (BannerEditor edit = new BannerEditor())
+                {
+                    edit.SetBanner(banner);
+                    if (edit.ShowDialog() == DialogResult.OK)
+                    {
+                        Core.MEX.ImageResource.AddFile("opening.bnr", edit.GetBanner().GetData());
+                        RefreshBanner();
+                    }
+                }
         }
     }
 }

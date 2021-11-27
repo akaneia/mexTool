@@ -220,7 +220,10 @@ namespace mexTool.Core
             if (_fileSystem == null)
                 return null;
 
-            return _fileSystem.GetBanner();
+            if (FileExists("opening.bnr"))
+                return new GCBanner(GetFileData("opening.bnr"));
+            else
+                return null;
         }
 
         /// <summary>
