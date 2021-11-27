@@ -472,7 +472,12 @@ namespace mexTool.Core
                     OnModelRender = ftFunc.onModelRender[internalId],
                     OnShadowRender = ftFunc.onShadowRender[internalId],
                     OnUnknownMultijump = ftFunc.onUnknownMultijump[internalId],
-                    OnActionStateChangeWhileEyeTextureIsChanged = ftFunc.onActionStateChangeWhileEyeTextureIsChanged[internalId],
+                    OnActionStateChangeWhileEyeTextureIsChanged1 =
+                        internalId * 2 < ftFunc.onActionStateChangeWhileEyeTextureIsChanged.Length ?
+                        ftFunc.onActionStateChangeWhileEyeTextureIsChanged[internalId * 2] : 0,
+                    OnActionStateChangeWhileEyeTextureIsChanged2 = 
+                        internalId * 2 + 1 < ftFunc.onActionStateChangeWhileEyeTextureIsChanged.Length ?
+                        ftFunc.onActionStateChangeWhileEyeTextureIsChanged[internalId * 2 + 1] : 0,
                     OnTwoEntryTable1 = ftFunc.onTwoEntryTable[internalId * 2],
                     OnTwoEntryTable2 = ftFunc.onTwoEntryTable[internalId * 2 + 1],
                     OnLand = ftFunc.onLand[internalId],
@@ -946,7 +951,8 @@ namespace mexTool.Core
                 ff.onModelRender[internalId] = func.OnModelRender;
                 ff.onShadowRender[internalId] = func.OnShadowRender;
                 ff.onUnknownMultijump[internalId] = func.OnUnknownMultijump;
-                ff.onActionStateChangeWhileEyeTextureIsChanged[internalId] = func.OnActionStateChangeWhileEyeTextureIsChanged;
+                ff.onActionStateChangeWhileEyeTextureIsChanged[internalId * 2] = func.OnActionStateChangeWhileEyeTextureIsChanged1;
+                ff.onActionStateChangeWhileEyeTextureIsChanged[internalId * 2 + 1] = func.OnActionStateChangeWhileEyeTextureIsChanged2;
                 ff.onTwoEntryTable[internalId * 2] = func.OnTwoEntryTable1;
                 ff.onTwoEntryTable[internalId * 2 + 1] = func.OnTwoEntryTable2;
                 ff.onLand[internalId] = func.OnLand;

@@ -71,7 +71,7 @@ namespace mexTool.Core.Installer
             { "onModelRender", new Tuple<int, int>(0x3BF0CC, 0x84) },
             { "onShadowRender", new Tuple<int, int>(0x3BF150, 0x84) },
             { "onUnknownMultijump", new Tuple<int, int>(0x3BF1D4, 0x84) },
-            { "onActionStateChangeWhileEyeTextureIsChanged", new Tuple<int, int>(0x3BF258, 0x84) },
+            { "onActionStateChangeWhileEyeTextureIsChanged", new Tuple<int, int>(0x3BF258, 0x108) },
             { "onTwoEntryTable", new Tuple<int, int>(0x3BF5F4, 0x108) },
             { "onExtRstAnim", new Tuple<int, int>(0x3BF4EC, 0x84) },
             { "onIndexExtResultAnim", new Tuple<int, int>(0x3BF570, 0x84) },

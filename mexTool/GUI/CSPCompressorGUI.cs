@@ -91,16 +91,30 @@ namespace mexTool.GUI.Controls
         private void Save(object sender, DoWorkEventArgs args)
         {
             // loop through all costume csps and apply resize settings
-            float fighterCount = Core.MEX.Fighters.Count;
-            float fighterIndex = 0;
-            foreach (var fighter in Core.MEX.Fighters)
+            int costumeCount = 0;
+            foreach (var f in Core.MEX.Fighters)
+                costumeCount += f.Costumes.Count;
+
+            int toProcess = costumeCount;
+            using (ManualResetEvent resetEvent = new ManualResetEvent(false))
             {
-                ReportProgress(null, new ProgressChangedEventArgs((int)((fighterIndex / fighterCount) * 100), $"Compressing {fighter.NameText}..."));
+                foreach (var fighter in Core.MEX.Fighters)
+                {
+                    foreach (var costume in fighter.Costumes)
+                        ThreadPool.QueueUserWorkItem(
+                           new WaitCallback(x =>
+                           {
+                               ReportProgress(null, new ProgressChangedEventArgs((int)(((costumeCount - toProcess) / (float)costumeCount) * 100), $"Compressing {fighter.NameText}..."));
 
-                foreach (var costume in fighter.Costumes)
-                    ThreadPool.QueueUserWorkItem(CompressCSPThread, costume);
+                               CompressCSPThread(x);
 
-                fighterIndex++;
+                               if (Interlocked.Decrement(ref toProcess) == 0)
+                                   resetEvent.Set();
+
+                           }), costume);
+                }
+
+                resetEvent.WaitOne();
             }
 
             ReportProgress(null, new ProgressChangedEventArgs(100, "Done!"));

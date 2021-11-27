@@ -626,7 +626,10 @@ namespace mexTool.Core
         public uint OnUnknownMultijump { get; set; }
 
         [TypeConverter(typeof(HexType)), Category("Fighter")]
-        public uint OnActionStateChangeWhileEyeTextureIsChanged { get; set; }
+        public uint OnActionStateChangeWhileEyeTextureIsChanged1 { get; set; }
+
+        [TypeConverter(typeof(HexType)), Category("Fighter")]
+        public uint OnActionStateChangeWhileEyeTextureIsChanged2 { get; set; }
 
         [TypeConverter(typeof(HexType)), Category("Fighter")]
         public uint OnTwoEntryTable1 { get; set; }
