@@ -41,6 +41,8 @@ namespace mexTool.GUI
                 if (mxPictureBox1.Image != null)
                     mxPictureBox1.Image.Dispose();
             };
+
+            CenterToScreen();
         }
 
         /// <summary>

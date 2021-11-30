@@ -63,10 +63,12 @@ namespace mexTool.Core.FileSystem
         {
             using (var _iso = new GCISO(_isoPath))
             {
-                // add
-                foreach (var add in manager.FileToAdd)
+                HashSet<string> newFiles = new HashSet<string>();
+
+                // remove
+                foreach (var rem in manager.FileToRemove)
                 {
-                    _iso.AddFile(add.ImagePath, add.TempPath);
+                    _iso.DeleteFileOrFolder(rem);
                 }
 
                 // rename
@@ -75,10 +77,11 @@ namespace mexTool.Core.FileSystem
                     _iso.RenameFile(ren.OriginalName, ren.NewName);
                 }
 
-                // remove
-                foreach (var rem in manager.FileToRemove)
+                // add
+                foreach (var add in manager.FileToAdd)
                 {
-                    _iso.DeleteFileOrFolder(rem);
+                    _iso.AddFile(add.ImagePath, add.TempPath);
+                    newFiles.Add(add.ImagePath);
                 }
 
 
@@ -218,11 +221,25 @@ namespace mexTool.Core.FileSystem
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public uint GetFileSize(string path)
+        {
+            using (var _iso = new GCISO(_isoPath))
+            {
+                _iso.SeekFileStream(path, out Stream stream, out uint size);
+                return size;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <returns></returns>
         public string[] GetFileList()
         {
             using (var _iso = new GCISO(_isoPath))
-                return _iso.GetAllFilePaths().ToArray();
+                return _iso.GetAllFilePaths().Select(e=>e.Replace("/", "\\").TrimStart('\\')).ToArray();
         }
 
         /// <summary>

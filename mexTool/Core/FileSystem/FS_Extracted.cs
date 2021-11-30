@@ -1,4 +1,5 @@
 ﻿using GCILib;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -36,6 +37,22 @@ namespace mexTool.Core.FileSystem
         /// <param name="saveAs"></param>
         public void Save(ProgressChangedEventHandler progress, string filePath, bool saveAs, TempFileManager manager)
         {
+            HashSet<string> newFiles = new HashSet<string>();
+
+            // remove
+            foreach (var rem in manager.FileToRemove)
+            {
+                File.Delete(GetFolderPath(rem));
+            }
+            progress.Invoke(null, new ProgressChangedEventArgs(25, null));
+
+            // rename
+            foreach (var ren in manager.FileToRename)
+            {
+                File.Move(GetFolderPath(ren.OriginalName), GetFolderPath(ren.NewName));
+            }
+            progress.Invoke(null, new ProgressChangedEventArgs(50, null));
+
             // add
             foreach (var add in manager.FileToAdd)
             {
@@ -51,21 +68,8 @@ namespace mexTool.Core.FileSystem
                     File.Delete(realPath);
 
                 File.Move(add.TempPath, realPath);
-            }
-            progress.Invoke(null, new ProgressChangedEventArgs(25, null));
 
-            // rename
-            foreach (var ren in manager.FileToRename)
-            {
-                // TODO: conflicting renames?
-                File.Move(GetFolderPath(ren.OriginalName), GetFolderPath(ren.NewName));
-            }
-            progress.Invoke(null, new ProgressChangedEventArgs(50, null));
-
-            // remove
-            foreach (var rem in manager.FileToRemove)
-            {
-                File.Delete(GetFolderPath(rem));
+                newFiles.Add(add.ImagePath);
             }
             progress.Invoke(null, new ProgressChangedEventArgs(75, null));
 
@@ -143,6 +147,16 @@ namespace mexTool.Core.FileSystem
         public byte[] GetFileData(string path)
         {
             return File.ReadAllBytes(GetFolderPath(path));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public uint GetFileSize(string path)
+        {
+            return (uint)new FileInfo(GetFolderPath(path)).Length;
         }
 
         /// <summary>

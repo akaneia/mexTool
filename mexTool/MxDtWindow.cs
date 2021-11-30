@@ -40,6 +40,9 @@ namespace mexTool
                 }
             }
 
+            buttonFileSystem.FlatAppearance.MouseOverBackColor = ThemeColors.MainColorList[5];
+            buttonFileSystem.FlatAppearance.MouseDownBackColor = ThemeColors.SecondColorList[5];
+
             buttonFighter.FlatAppearance.MouseOverBackColor = ThemeColors.MainColorList[0];
             buttonFighter.FlatAppearance.MouseDownBackColor = ThemeColors.SecondColorList[0];
 
@@ -236,6 +239,9 @@ namespace mexTool
 
             RefreshBanner();
 
+            _fileSystemPage = new FileSystemPage();
+            _fileSystemPage.Dock = DockStyle.Fill;
+
             _fighterPage = new FighterPage();
             _fighterPage.Dock = DockStyle.Fill;
 
@@ -251,25 +257,28 @@ namespace mexTool
             _soundPage = new SoundPage();
             _soundPage.Dock = DockStyle.Fill;
 
+            _fileSystemPage.Visible = false;
             _fighterPage.Visible = false;
             _musicPage.Visible = false;
             _menuPage.Visible = false;
             _stagePage.Visible = false;
             _soundPage.Visible = false;
 
+            Controls.Add(_fileSystemPage);
             Controls.Add(_fighterPage);
             Controls.Add(_stagePage);
             Controls.Add(_menuPage);
             Controls.Add(_musicPage);
             Controls.Add(_soundPage);
 
+            _fileSystemPage.BringToFront();
             _fighterPage.BringToFront();
             _stagePage.BringToFront();
             _menuPage.BringToFront();
             _musicPage.BringToFront();
             _soundPage.BringToFront();
 
-            CheckCodeUpdate();
+            //CheckCodeUpdate();
         }
 
         /// <summary>
@@ -311,12 +320,14 @@ namespace mexTool
                 openedPath = null;
             }
 
+            _fileSystemPage?.Dispose();
             _fighterPage?.Dispose();
             _stagePage?.Dispose();
             _menuPage?.Dispose();
             _musicPage?.Dispose();
             _soundPage?.Dispose();
 
+            _fileSystemPage = null;
             _fighterPage = null;
             _stagePage = null;
             _menuPage = null;
@@ -327,6 +338,7 @@ namespace mexTool
                 Core.MEX.Close();
         }
 
+        private FileSystemPage _fileSystemPage;
         private FighterPage _fighterPage;
         private StagePage _stagePage;
         private MenuPage _menuPage;
@@ -341,6 +353,7 @@ namespace mexTool
         {
             _musicPage?.StopSound();
 
+            buttonFileSystem.BackColor = Color.Transparent;
             buttonFighter.BackColor = Color.Transparent;
             buttonStages.BackColor = Color.Transparent;
             buttonMusic.BackColor = Color.Transparent;
@@ -349,6 +362,7 @@ namespace mexTool
 
             if(_fighterPage != null)
             {
+                _fileSystemPage.Visible = false;
                 _fighterPage.Visible = false;
                 _musicPage.Visible = false;
                 _menuPage.Visible = false;
@@ -356,6 +370,12 @@ namespace mexTool
                 _soundPage.Visible = false;
             }
 
+            if (pageID == 0)
+            {
+                if (_fileSystemPage != null)
+                    _fileSystemPage.Visible = true;
+                buttonFileSystem.BackColor = ThemeColors.SecondColorList[5];
+            }
             if (pageID == 1)
             {
                 if (_fighterPage != null)

@@ -4,6 +4,7 @@ using mexTool.Core.Installer;
 using System;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace mexTool.Core
@@ -140,10 +141,11 @@ namespace mexTool.Core
             if (_fileSystem == null)
                 return false;
 
-            if (_tempManager.FileIsRemoved(filePath))
-                return false;
+            //if (_tempManager.FileIsRemoved(filePath))
+            //    return false;
+            //_fileSystem.FileExists(_tempManager.GetRenamedFile(filePath)) || 
 
-            return _fileSystem.FileExists(_tempManager.GetRenamedFile(filePath)) || _tempManager.FileExists(filePath);
+            return _tempManager.FileExists(_fileSystem.GetFileList(), filePath);
         }
 
         /// <summary>
@@ -162,6 +164,27 @@ namespace mexTool.Core
                 return null;
 
             return _fileSystem.GetFileData(_tempManager.GetRenamedFile(path));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public uint GetFileSize(string path)
+        {
+            if (_fileSystem == null)
+                return 0;
+
+            if (!FileExists(path))
+                return 0;
+
+            var tempData = _tempManager.GetFileSize(path);
+
+            if (tempData != 0)
+                return tempData;
+
+            return _fileSystem.GetFileSize(_tempManager.GetRenamedFile(path));
         }
 
         /// <summary>
@@ -295,7 +318,47 @@ namespace mexTool.Core
             if (_fileSystem == null)
                 return new string[0];
 
-            return _fileSystem.GetFileList();
+            return _tempManager.GetFileList(_fileSystem.GetFileList()).ToArray();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="directory"></param>
+        /// <returns></returns>
+        public string[] GetFilesInDirectory(string directory, bool sorted = true, bool includeSubdirectories = false)
+        {
+            // check temp files
+            var fs =
+                includeSubdirectories ? 
+                _tempManager.GetFileList(_fileSystem.GetFileList()).Where(e=>System.IO.Path.GetDirectoryName(e).StartsWith(directory))
+                :
+                _tempManager.GetFileList(_fileSystem.GetFileList()).Where(e => System.IO.Path.GetDirectoryName(e).Equals(directory))
+                ;
+
+            if (sorted)
+                fs = fs.OrderBy(s => s);
+
+            return fs.ToArray();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="directory"></param>
+        /// <returns></returns>
+        public string[] GetFoldersInDirectory(string directory, bool sorted = true)
+        {
+            // this is super ugly
+            var fs = _tempManager.GetFileList(_fileSystem.GetFileList())
+                .GroupBy(x => Path.GetDirectoryName(x))
+                .Select(g => Path.GetDirectoryName(g.First()))
+                .Where(e => !string.IsNullOrEmpty(e) && Path.GetDirectoryName(e) != null && Path.GetDirectoryName(e).Equals(directory));
+
+            if (sorted)
+                fs = fs.OrderBy(s => s);
+
+            return fs.ToArray();
         }
 
         /// <summary>
@@ -327,6 +390,16 @@ namespace mexTool.Core
                 return _tempManager.GetRealFilePath(path, (FS_Extracted)_fileSystem);
 
             return "";
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public bool IsAddedFile(string path)
+        {
+            return _tempManager.IsNewFile(path);
         }
     }
 }

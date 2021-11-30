@@ -7,10 +7,12 @@ namespace mexTool.Tools
     public class CSPCompressorSettings
     {
         [DisplayName("Max Width")]
-        public int MaxWidth { get; set; } = 136;
+        public int MaxWidth { get => _maxWidth; set => _maxWidth = value < 8 ? 8 : value; }
+        private int _maxWidth = 136;
 
         [DisplayName("Max Height")]
-        public int MaxHeight { get; set; } = 188;
+        public int MaxHeight { get => _maxHeight; set => _maxHeight = value < 8 ? 8 : value; }
+        private int _maxHeight = 188;
 
         [DisplayName("Preserve Aspect Ratio")]
         public bool PreserveAspect { get; set; } = true;

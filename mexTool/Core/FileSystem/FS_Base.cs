@@ -15,6 +15,8 @@ namespace mexTool.Core.FileSystem
 
         byte[] GetFileData(string path);
 
+        uint GetFileSize(string path);
+
         byte[] GetDOL();
 
         void SetDOL(byte[] dol);

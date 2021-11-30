@@ -88,9 +88,9 @@ namespace mexTool.GUI
             this.label1.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.label1.Location = new System.Drawing.Point(199, 81);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(197, 26);
+            this.label1.Size = new System.Drawing.Size(206, 26);
             this.label1.TabIndex = 2;
-            this.label1.Text = "mexTool is manager for the m-ex system \r\ncreated by Team Akaneia";
+            this.label1.Text = "mexTool is a manager for the m-ex system \r\ncreated by Team Akaneia";
             // 
             // linkLabel3
             // 

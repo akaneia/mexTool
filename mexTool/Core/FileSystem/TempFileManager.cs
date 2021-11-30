@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace mexTool.Core.FileSystem
 {
@@ -44,14 +45,54 @@ namespace mexTool.Core.FileSystem
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="fileList"></param>
+        /// <returns></returns>
+        public List<string> GetFileList(string[] fileList)
+        {
+            List<string> files = new List<string>();
+
+            // add original files
+            files.AddRange(fileList);
+
+            // remove deleted files
+            foreach (var f in FileToRemove)
+                files.Remove(f);
+
+            // rename files
+            foreach (var f in FileToRename)
+            {
+                for (int i = 0; i < files.Count; i++)
+                {
+                    if (files[i].Equals(f.OriginalName))
+                        files[i] = f.NewName;
+                }
+            }
+
+            //
+            HashSet<string> hashes = new HashSet<string>();
+            foreach (var v in files)
+                hashes.Add(v);
+
+            // add new files
+            foreach (var f in FileToAdd)
+                if (!hashes.Contains(f.ImagePath))
+                    files.Add(f.ImagePath);
+
+            return files;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public bool FileExists(string path)
+        public bool FileExists(string[] fileList, string path)
         {
-            return (
-                toRename.Find(r => r.NewName.Equals(path)) != null || 
-                toAdd.Find(e => e.ImagePath.Equals(path)) != null) && 
-                !toRemove.Contains(path);
+            return GetFileList(fileList).Contains(path);
+            //return (
+            //    toRename.Find(r => r.NewName.Equals(path)) != null || 
+            //    toAdd.Find(e => e.ImagePath.Equals(path)) != null) && 
+            //    !toRemove.Contains(path);
         }
 
         /// <summary>
@@ -100,7 +141,7 @@ namespace mexTool.Core.FileSystem
             if (addedFile != null)
             {
                 addedFile.ImagePath = dest;
-                toRemove.Remove(dest);
+                //toRemove.Remove(dest);
                 return true;
             }
 
@@ -108,18 +149,20 @@ namespace mexTool.Core.FileSystem
             if (targetName != null)
             {
                 targetName.NewName = dest;
-                toRemove.Remove(dest);
+                //toRemove.Remove(dest);
                 return true;
             }
 
             var alreadyRenamed = toRename.Find(e => e.NewName.Equals(src));
             if (alreadyRenamed != null)
             {
-                toRename.Remove(alreadyRenamed);
+                alreadyRenamed.NewName = dest;
+                //toRename.Remove(alreadyRenamed);
+                return true;
             }
 
             toRename.Add(new FileRename(src, dest));
-            toRemove.Remove(dest);
+            //toRemove.Remove(dest);
             return true;
         }
 
@@ -150,6 +193,20 @@ namespace mexTool.Core.FileSystem
                 return File.ReadAllBytes(dataAdd.TempPath);
 
             return null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public uint GetFileSize(string path)
+        {
+            var dataAdd = toAdd.Find(e => e.ImagePath.Equals(path));
+
+            if (dataAdd != null)
+                return (uint)new FileInfo(dataAdd.TempPath).Length;
+
+            return 0;
         }
 
         /// <summary>
@@ -196,7 +253,7 @@ namespace mexTool.Core.FileSystem
             if (add != null)
                 add.TempPath = diskFilePath;
 
-            toRemove.Remove(filePath);
+            //toRemove.Remove(filePath);
             toAdd.Add(new FileAdd(diskFilePath, filePath));
 
             return true;
@@ -218,10 +275,10 @@ namespace mexTool.Core.FileSystem
 
             fname = Path.Combine(tempdir, fname + index);
 
-            tempdir = Path.GetDirectoryName(fname);
+            //tempdir = Path.GetDirectoryName(fname);
 
-            if (!Directory.Exists(tempdir))
-                Directory.CreateDirectory(tempdir);
+            //if (!Directory.Exists(tempdir))
+            //    Directory.CreateDirectory(tempdir);
 
             tempPaths.Add(fname);
 
@@ -260,6 +317,16 @@ namespace mexTool.Core.FileSystem
                 return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, toAdd.Find(e=>e.ImagePath.Equals(path)).TempPath);
 
             return fs.GetFolderPath(path);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public bool IsNewFile(string path)
+        {
+            return toAdd.Exists(e => e.ImagePath == path);
         }
     }
 }

@@ -9,11 +9,12 @@ namespace HSDRawViewer.GUI
         public static Color TabColorSelected = Color.FromArgb(40, 40, 60);
 
         public static List<Color> MainColorList = new List<Color>() {
-            Color.FromArgb(0x3F, 0x51, 0xB5), // Blue
+            Color.FromArgb(0, 106, 255), // Purple
             Color.FromArgb(0x00, 0x96, 0x88), // Green
-            Color.FromArgb(0xFF, 0x57, 0x22), // Orange
+            Color.FromArgb(0xE0, 0x50, 0x20), // Orange
             Color.FromArgb(0xd8, 0x00, 0x73), // Pink
             Color.FromArgb(106, 0, 255), // Indigo
+            Color.FromArgb(0xb0, 0x2e, 0x0c), // Blue
         };
 
         public static List<Color> SecondColorList

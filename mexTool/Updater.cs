@@ -25,7 +25,7 @@ namespace mexTool
         public static bool UpdateCodes()
         {
             // https://github.com/akaneia/m-ex/raw/master/asm/codes.gct
-            var codesPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"\lib\codes.gct");
+            var codesPath = AppDomain.CurrentDomain.BaseDirectory + "\\lib\\codes.gct";
 
             if (!File.Exists(codesPath))
                 return false;
@@ -34,7 +34,7 @@ namespace mexTool
 
             using (var client = new WebClient())
                 client.DownloadFile(@"https://github.com/akaneia/m-ex/raw/master/asm/codes.gct", codesPath);
-
+            
             var newhash = HashGen.ComputeSHA256Hash(File.ReadAllBytes(codesPath));
 
             if (!mxhash.Equals(newhash))

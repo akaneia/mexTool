@@ -227,6 +227,10 @@
     </Compile>
     <Compile Include="GUI\Controls\TransformWidget.cs" />
     <Compile Include="GUI\DefaultItemNames.cs" />
+    <Compile Include="GUI\FileSystem\FileNode.cs" />
+    <Compile Include="GUI\FileSystem\FolderNode.cs" />
+    <Compile Include="GUI\FileSystem\NodeBase.cs" />
+    <Compile Include="GUI\FileSystem\RootNode.cs" />
     <Compile Include="GUI\MenuColorTable.cs" />
     <Compile Include="GUI\OpenFolderDialog.cs">
       <SubType>Component</SubType>
@@ -236,6 +240,12 @@
     </Compile>
     <Compile Include="GUI\Pages\FighterPage.Designer.cs">
       <DependentUpon>FighterPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Pages\FileSystemPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Pages\FileSystemPage.Designer.cs">
+      <DependentUpon>FileSystemPage.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Pages\MenuPage.cs">
       <SubType>UserControl</SubType>
@@ -341,6 +351,9 @@
     <EmbeddedResource Include="GUI\Pages\FighterPage.resx">
       <DependentUpon>FighterPage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Pages\FileSystemPage.resx">
+      <DependentUpon>FileSystemPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Pages\MenuPage.resx">
       <DependentUpon>MenuPage.cs</DependentUpon>
     </EmbeddedResource>
@@ -431,6 +444,9 @@
     <Content Include="mexUpdater.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\ico_disc.png" />
+    <None Include="Resources\ico_folder.png" />
+    <None Include="Resources\ico_file.png" />
     <None Include="Resources\logo_mex.png" />
     <None Include="Resources\logo_akaneia.png" />
     <None Include="Resources\csp_preview.png" />
