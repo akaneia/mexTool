@@ -175,12 +175,6 @@ namespace mexTool
         {
             if (worker.IsBusy)
                 return;
-
-            fileSystemToolStripMenuItem.Enabled = true;
-            iSOToolStripMenuItem.Enabled = true;
-            saveAsToolStripMenuItem.Enabled = true;
-            saveToolStripMenuItem.Enabled = true;
-
             using (OpenFileDialog d = new OpenFileDialog())
             {
                 d.Filter = "Gamecube ISO (*.iso)|*.iso";
@@ -191,7 +185,15 @@ namespace mexTool
                     else
                     {
                         if (Core.MEX.InitFromISO(d.FileName))
+                        {
+                            fileSystemToolStripMenuItem.Enabled = true;
+                            iSOToolStripMenuItem.Enabled = true;
+                            saveAsToolStripMenuItem.Enabled = true;
+                            saveToolStripMenuItem.Enabled = true;
+
+
                             FileSystemLoaded(d.FileName);
+                        }
                     }
                 }
             }
@@ -207,12 +209,6 @@ namespace mexTool
             if (worker.IsBusy)
                 return;
 
-            fileSystemToolStripMenuItem.Enabled = false;
-            iSOToolStripMenuItem.Enabled = true;
-            saveAsToolStripMenuItem.Enabled = true;
-            saveToolStripMenuItem.Enabled = true;
-            closeFileSystemToolStripMenuItem.Enabled = true;
-
             using (OpenFolderDialog d = new OpenFolderDialog())
             {
                 if (d.ShowDialog() == DialogResult.OK)
@@ -222,7 +218,15 @@ namespace mexTool
                     else
                     {
                         if (Core.MEX.InitFromFileSystem(d.SelectedPath))
+                        {
+                            fileSystemToolStripMenuItem.Enabled = false;
+                            iSOToolStripMenuItem.Enabled = true;
+                            saveAsToolStripMenuItem.Enabled = true;
+                            saveToolStripMenuItem.Enabled = true;
+                            closeFileSystemToolStripMenuItem.Enabled = true;
+
                             FileSystemLoaded(d.SelectedPath);
+                        }
                     }
                 }
             }
@@ -233,6 +237,7 @@ namespace mexTool
         /// </summary>
         private void FileSystemLoaded(string path)
         {
+
             CloseFileSystem(false);
 
             openedPath = path;
@@ -622,7 +627,7 @@ namespace mexTool
                     int index = 0;
                     foreach (var file in files)
                     {
-                        var output = rebuildPath + "/files" + file;
+                        var output = rebuildPath + "/files/" + file;
                         Directory.CreateDirectory(Path.GetDirectoryName(output));
                         Core.MEX.ImageResource.DumpFileFromISO(file, output);
                         //File.WriteAllBytes(output, Core.MEX.ImageResource.GetFile(file));

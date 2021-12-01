@@ -91,7 +91,7 @@ namespace mexTool.Core.FileSystem
         /// <returns></returns>
         public bool FileExists(string filePath)
         {
-            return File.Exists(Path.Combine(_folderPath + "\\files", filePath));
+            return File.Exists(Path.Combine(_folderPath + "\\files\\", filePath));
         }
 
         /// <summary>

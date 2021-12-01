@@ -252,7 +252,7 @@ namespace mexTool.Core.FileSystem
                 if (_iso.SeekFileStream(internalPath, out Stream stream, out uint size))
                 {
                     int read = 0;
-                    byte[] buffer = new byte[2048];
+                    byte[] buffer = new byte[4096];
                     using (var fstream = new FileStream(filePath, FileMode.Create))
                     {
                         while (read < size)
