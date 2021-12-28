@@ -124,6 +124,15 @@ namespace mexTool.Core.FileSystem
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="dol"></param>
+        public void SetBoot(byte[] boot)
+        {
+            File.WriteAllBytes(_folderPath + @"\sys\boot.bin", boot);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <returns></returns>
         public byte[] GetDOL()
         {

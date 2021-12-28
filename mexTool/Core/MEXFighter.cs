@@ -399,17 +399,19 @@ namespace mexTool.Core
                     var dsp = new DSP();
                     dsp.FromFormat(entry, "wav");
                     var announcerIndex = MEX.SoundBanks[51].SoundBank.Sounds.Length;
+                    var script_index = MEX.SoundBanks[51].ScriptBank.Scripts.Length;
                     MEX.SoundBanks[51].SoundBank.AddSound(dsp);
                     var scripts = MEX.SoundBanks[51].ScriptBank.Scripts;
-                    Array.Resize(ref scripts, announcerIndex + 1);
-                    scripts[announcerIndex] = new SEMBankScript();
-                    scripts[announcerIndex].Codes.Add(new SEMCode(SEM_CODE.SET_SFXID) { Value = announcerIndex });
-                    scripts[announcerIndex].Codes.Add(new SEMCode(SEM_CODE.SET_REVERB1) { Value = 48 });
-                    scripts[announcerIndex].Codes.Add(new SEMCode(SEM_CODE.SET_PRIORITY) { Value = 15 });
-                    scripts[announcerIndex].Codes.Add(new SEMCode(SEM_CODE.PLAY) { Value = 229 });
-                    scripts[announcerIndex].Codes.Add(new SEMCode(SEM_CODE.END_PLAYBACK));
+                    Array.Resize(ref scripts, script_index + 1);
+                    var script = new SEMBankScript();
+                    script.Codes.Add(new SEMCode(SEM_CODE.SET_SFXID) { Value = announcerIndex });
+                    script.Codes.Add(new SEMCode(SEM_CODE.SET_REVERB1) { Value = 48 });
+                    script.Codes.Add(new SEMCode(SEM_CODE.SET_PRIORITY) { Value = 15 });
+                    script.Codes.Add(new SEMCode(SEM_CODE.PLAY) { Value = 229 });
+                    script.Codes.Add(new SEMCode(SEM_CODE.END_PLAYBACK));
+                    scripts[script_index] = script;
                     MEX.SoundBanks[51].ScriptBank.Scripts = scripts;
-                    fighter.AnnouncerCall = 51000 + announcerIndex;
+                    fighter.AnnouncerCall = 510000 + script_index;
                 }
 
 
@@ -527,10 +529,10 @@ namespace mexTool.Core
         public uint OnLoad { get; set; }
 
         [TypeConverter(typeof(HexType)), Category("Fighter")]
-        public uint OnDeath { get; set; }
+        public uint OnRespawn { get; set; }
 
         [TypeConverter(typeof(HexType)), Category("Fighter")]
-        public uint OnUnk { get; set; }
+        public uint OnDestroy { get; set; }
 
         [Category("Fighter")]
         public MEX_MoveLogic[] MoveLogic { get; set; }
@@ -566,13 +568,13 @@ namespace mexTool.Core
         public uint SpecialSAir { get; set; }
 
         [TypeConverter(typeof(HexType)), Category("Fighter")]
-        public uint SmashUp { get; set; }
+        public uint OnSmashHi { get; set; }
 
         [TypeConverter(typeof(HexType)), Category("Fighter")]
-        public uint SmashDown { get; set; }
+        public uint OnSmashLw { get; set; }
 
         [TypeConverter(typeof(HexType)), Category("Fighter")]
-        public uint SmashSide { get; set; }
+        public uint OnSmashF { get; set; }
 
         [TypeConverter(typeof(HexType)), Category("Fighter")]
         public uint OnAbsorb { get; set; }
@@ -587,7 +589,7 @@ namespace mexTool.Core
         public uint OnMakeItemVisible { get; set; }
 
         [TypeConverter(typeof(HexType)), Category("Fighter")]
-        public uint OnItemDrop { get; set; }
+        public uint OnItemRelease { get; set; }
 
         [TypeConverter(typeof(HexType)), Category("Fighter")]
         public uint OnItemCatch { get; set; }
@@ -596,16 +598,16 @@ namespace mexTool.Core
         public uint OnUnknownItemRelated { get; set; }
 
         [TypeConverter(typeof(HexType)), Category("Fighter")]
-        public uint OnUnknownCharacterFlags1 { get; set; }
+        public uint OnApplyHeadItem { get; set; }
 
         [TypeConverter(typeof(HexType)), Category("Fighter")]
-        public uint OnUnknownCharacterFlags2 { get; set; }
+        public uint OnRemoveHeadItem { get; set; }
 
         [TypeConverter(typeof(HexType)), Category("Fighter")]
-        public uint OnHit { get; set; }
+        public uint EyeTextureDamaged { get; set; }
 
         [TypeConverter(typeof(HexType)), Category("Fighter")]
-        public uint OnUnknownEyeTextureRelated { get; set; }
+        public uint EyeTextureNormal { get; set; }
 
         [TypeConverter(typeof(HexType)), Category("Fighter")]
         public uint OnFrame { get; set; }
@@ -614,7 +616,7 @@ namespace mexTool.Core
         public uint OnActionStateChange { get; set; }
 
         [TypeConverter(typeof(HexType)), Category("Fighter")]
-        public uint OnRespawn { get; set; }
+        public uint ResetAttribute { get; set; }
 
         [TypeConverter(typeof(HexType)), Category("Fighter")]
         public uint OnModelRender { get; set; }
@@ -638,7 +640,7 @@ namespace mexTool.Core
         public uint OnTwoEntryTable2 { get; set; }
 
         [TypeConverter(typeof(HexType)), Category("Fighter")]
-        public uint OnLand { get; set; }
+        public uint OnLanding { get; set; }
 
         [TypeConverter(typeof(HexType)), Category("Fighter")]
         public uint OnExtRstAnim { get; set; }
@@ -655,20 +657,20 @@ namespace mexTool.Core
         [TypeConverter(typeof(HexType)), Category("Fighter")]
         public uint EnterTether { get; set; }
 
-        [TypeConverter(typeof(HexType)), DisplayName("On Throw Forward"), Category("Fighter"), Description("")]
-        public uint onThrowFw { get; set; }
+        [TypeConverter(typeof(HexType)), Category("Fighter"), Description("")]
+        public uint OnThrowFw { get; set; }
 
-        [TypeConverter(typeof(HexType)), DisplayName("On Throw Back"), Category("Fighter"), Description("")]
-        public uint onThrowBk { get; set; }
+        [TypeConverter(typeof(HexType)), Category("Fighter"), Description("")]
+        public uint OnThrowBk { get; set; }
 
-        [TypeConverter(typeof(HexType)), DisplayName("On Throw High"), Category("Fighter"), Description("")]
-        public uint onThrowHi { get; set; }
+        [TypeConverter(typeof(HexType)), Category("Fighter"), Description("")]
+        public uint OnThrowHi { get; set; }
 
-        [TypeConverter(typeof(HexType)), DisplayName("On Throw Low"), Category("Fighter"), Description("")]
-        public uint onThrowLw { get; set; }
+        [TypeConverter(typeof(HexType)), Category("Fighter"), Description("")]
+        public uint OnThrowLw { get; set; }
 
-        [TypeConverter(typeof(HexType)), DisplayName("Get Sword Trail"), Category("Fighter"), Description("")]
-        public uint getSwordTrail { get; set; }
+        [TypeConverter(typeof(HexType)), Category("Fighter"), Description("")]
+        public uint GetSwordTrail { get; set; }
 
 
 
@@ -686,6 +688,9 @@ namespace mexTool.Core
 
         [TypeConverter(typeof(HexType)), DisplayName("OnHit"), Category("Kirby"), Description("")]
         public uint KirbyOnHit { get; set; }
+
+        [TypeConverter(typeof(HexType)), DisplayName("OnDeath"), Category("Kirby"), Description("")]
+        public uint KirbyOnDeath { get; set; }
 
         [TypeConverter(typeof(HexType)), DisplayName("OnItemInit"), Category("Kirby"), Description("")]
         public uint KirbyOnItemInit { get; set; }

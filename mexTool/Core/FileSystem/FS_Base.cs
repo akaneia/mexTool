@@ -26,6 +26,7 @@ namespace mexTool.Core.FileSystem
         byte[] GetBin2();
 
         byte[] GetBoot();
+        void SetBoot(byte[] boot);
 
         string[] GetFileList();
     }

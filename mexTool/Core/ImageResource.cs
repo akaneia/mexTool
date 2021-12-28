@@ -313,6 +313,18 @@ namespace mexTool.Core
         /// 
         /// </summary>
         /// <returns></returns>
+        public void SetBoot(byte[] boot)
+        {
+            if (boot == null)
+                return;
+
+            _fileSystem.SetBoot(boot);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public string[] GetAllFiles()
         {
             if (_fileSystem == null)

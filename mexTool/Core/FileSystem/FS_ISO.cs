@@ -192,6 +192,15 @@ namespace mexTool.Core.FileSystem
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="dol"></param>
+        public void SetBoot(byte[] boot)
+        {
+            this.boot = boot;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <returns></returns>
         public byte[] GetDOL()
         {

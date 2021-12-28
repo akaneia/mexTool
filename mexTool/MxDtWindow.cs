@@ -856,9 +856,11 @@ namespace mexTool
                 using (BannerEditor edit = new BannerEditor())
                 {
                     edit.SetBanner(banner);
+                    edit.SetBoot(Core.MEX.ImageResource.GetBoot());
                     if (edit.ShowDialog() == DialogResult.OK)
                     {
                         Core.MEX.ImageResource.AddFile("opening.bnr", edit.GetBanner().GetData());
+                        Core.MEX.ImageResource.SetBoot(edit.GetBoot());
                         RefreshBanner();
                     }
                 }

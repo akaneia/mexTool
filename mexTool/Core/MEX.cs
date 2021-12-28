@@ -444,8 +444,8 @@ namespace mexTool.Core
                 {
                     MoveLogic = ftFunc.MoveLogic[internalId] != null ? ftFunc.MoveLogic[internalId].Array : null,
                     OnLoad = ftFunc.OnLoad[internalId],
-                    OnDeath = ftFunc.OnDeath[internalId],
-                    OnUnk = ftFunc.OnUnknown[internalId],
+                    OnRespawn = ftFunc.OnDeath[internalId],
+                    OnDestroy = ftFunc.OnUnknown[internalId],
                     DemoMoveLogicPointer = ftFunc.DemoMoveLogic[internalId],
                     SpecialN = ftFunc.SpecialN[internalId],
                     SpecialNAir = ftFunc.SpecialNAir[internalId],
@@ -459,16 +459,16 @@ namespace mexTool.Core
                     OnItemPickup = ftFunc.onItemPickup[internalId],
                     OnMakeItemInvisible = ftFunc.onMakeItemInvisible[internalId],
                     OnMakeItemVisible = ftFunc.onMakeItemVisible[internalId],
-                    OnItemDrop = ftFunc.onItemDrop[internalId],
+                    OnItemRelease = ftFunc.onItemDrop[internalId],
                     OnItemCatch = ftFunc.onItemCatch[internalId],
                     OnUnknownItemRelated = ftFunc.onUnknownItemRelated[internalId],
-                    OnUnknownCharacterFlags1 = ftFunc.onApplyHeadItem[internalId],
-                    OnUnknownCharacterFlags2 = ftFunc.onRemoveHeadItem[internalId],
-                    OnHit = ftFunc.onHit[internalId],
-                    OnUnknownEyeTextureRelated = ftFunc.onUnknownEyeTextureRelated[internalId],
+                    OnApplyHeadItem = ftFunc.onApplyHeadItem[internalId],
+                    OnRemoveHeadItem = ftFunc.onRemoveHeadItem[internalId],
+                    EyeTextureDamaged = ftFunc.onHit[internalId],
+                    EyeTextureNormal = ftFunc.onUnknownEyeTextureRelated[internalId],
                     OnFrame = ftFunc.onFrame[internalId],
                     OnActionStateChange = ftFunc.onActionStateChange[internalId],
-                    OnRespawn = ftFunc.onRespawn[internalId],
+                    ResetAttribute = ftFunc.onRespawn[internalId],
                     OnModelRender = ftFunc.onModelRender[internalId],
                     OnShadowRender = ftFunc.onShadowRender[internalId],
                     OnUnknownMultijump = ftFunc.onUnknownMultijump[internalId],
@@ -480,21 +480,21 @@ namespace mexTool.Core
                         ftFunc.onActionStateChangeWhileEyeTextureIsChanged[internalId * 2 + 1] : 0,
                     OnTwoEntryTable1 = ftFunc.onTwoEntryTable[internalId * 2],
                     OnTwoEntryTable2 = ftFunc.onTwoEntryTable[internalId * 2 + 1],
-                    OnLand = ftFunc.onLand[internalId],
+                    OnLanding = ftFunc.onLand[internalId],
                     OnExtRstAnim = ftFunc.onExtRstAnim[internalId],
                     OnIndexExtRstAnim = ftFunc.onIndexExtResultAnim[internalId],
 
-                    SmashDown = ftFunc.onSmashDown[internalId],
-                    SmashUp = ftFunc.onSmashUp[internalId],
-                    SmashSide = ftFunc.onSmashForward[internalId],
+                    OnSmashLw = ftFunc.onSmashDown[internalId],
+                    OnSmashHi = ftFunc.onSmashUp[internalId],
+                    OnSmashF = ftFunc.onSmashForward[internalId],
                     EnterFloat = ftFunc.enterFloat[internalId],
                     EnterDoubleJump = ftFunc.enterSpecialDoubleJump[internalId],
                     EnterTether = ftFunc.enterTether[internalId],
-                    onThrowBk = ftFunc.onThrowBk[internalId],
-                    onThrowFw = ftFunc.onThrowFw[internalId],
-                    onThrowHi = ftFunc.onThrowHi[internalId],
-                    onThrowLw = ftFunc.onThrowLw[internalId],
-                    getSwordTrail = ftFunc.getTrailData[internalId],
+                    OnThrowBk = ftFunc.onThrowBk[internalId],
+                    OnThrowFw = ftFunc.onThrowFw[internalId],
+                    OnThrowHi = ftFunc.onThrowHi[internalId],
+                    OnThrowLw = ftFunc.onThrowLw[internalId],
+                    GetSwordTrail = ftFunc.getTrailData[internalId],
 
                     KirbyOnHit = kbFunc.KirbyOnHit[internalId],
                     KirbyOnItemInit = kbFunc.KirbyOnItemInit[internalId],
@@ -502,7 +502,8 @@ namespace mexTool.Core
                     KirbyOnSwallow = kbFunc.OnAbilityGain[internalId],
                     KirbySpecialN = kbFunc.KirbySpecialN[internalId],
                     KirbySpecialNAir = kbFunc.KirbySpecialNAir[internalId],
-                    KirbyOnFrame = kbFunc.KirbyOnFrame != null && internalId < kbFunc.KirbyOnFrame.Length ? kbFunc.KirbyOnFrame[internalId] : 0
+                    KirbyOnFrame = kbFunc.KirbyOnFrame != null && internalId < kbFunc.KirbyOnFrame.Length ? kbFunc.KirbyOnFrame[internalId] : 0,
+                    KirbyOnDeath = kbFunc._s.Length > 0x20 && kbFunc.KirbyOnDeath != null && internalId < kbFunc.KirbyOnDeath.Length ? kbFunc.KirbyOnDeath[internalId] : 0
                 };
 
 
@@ -922,8 +923,8 @@ namespace mexTool.Core
                 if (func.MoveLogic != null)
                     ff.MoveLogic.Set(internalId, new HSDArrayAccessor<MEX_MoveLogic>() { Array = func.MoveLogic });
                 ff.OnLoad[internalId] = func.OnLoad;
-                ff.OnDeath[internalId] = func.OnDeath;
-                ff.OnUnknown[internalId] = func.OnUnk;
+                ff.OnDeath[internalId] = func.OnRespawn;
+                ff.OnUnknown[internalId] = func.OnDestroy;
                 ff.DemoMoveLogic[internalId] = func.DemoMoveLogicPointer;
                 ff.SpecialN[internalId] = func.SpecialN;
                 ff.SpecialNAir[internalId] = func.SpecialNAir;
@@ -938,16 +939,16 @@ namespace mexTool.Core
                 ff.onMakeItemInvisible[internalId] = func.OnMakeItemInvisible;
                 ff.onMakeItemVisible[internalId] = func.OnMakeItemVisible;
                 ff.onItemPickup[internalId] = func.OnItemPickup;
-                ff.onItemDrop[internalId] = func.OnItemDrop;
+                ff.onItemDrop[internalId] = func.OnItemRelease;
                 ff.onItemCatch[internalId] = func.OnItemCatch;
                 ff.onUnknownItemRelated[internalId] = func.OnUnknownItemRelated;
-                ff.onApplyHeadItem[internalId] = func.OnUnknownCharacterFlags1;
-                ff.onRemoveHeadItem[internalId] = func.OnUnknownCharacterFlags2;
-                ff.onHit[internalId] = func.OnHit;
-                ff.onUnknownEyeTextureRelated[internalId] = func.OnUnknownEyeTextureRelated;
+                ff.onApplyHeadItem[internalId] = func.OnApplyHeadItem;
+                ff.onRemoveHeadItem[internalId] = func.OnRemoveHeadItem;
+                ff.onHit[internalId] = func.EyeTextureDamaged;
+                ff.onUnknownEyeTextureRelated[internalId] = func.EyeTextureNormal;
                 ff.onFrame[internalId] = func.OnFrame;
                 ff.onActionStateChange[internalId] = func.OnActionStateChange;
-                ff.onRespawn[internalId] = func.OnRespawn;
+                ff.onRespawn[internalId] = func.ResetAttribute;
                 ff.onModelRender[internalId] = func.OnModelRender;
                 ff.onShadowRender[internalId] = func.OnShadowRender;
                 ff.onUnknownMultijump[internalId] = func.OnUnknownMultijump;
@@ -955,21 +956,21 @@ namespace mexTool.Core
                 ff.onActionStateChangeWhileEyeTextureIsChanged[internalId * 2 + 1] = func.OnActionStateChangeWhileEyeTextureIsChanged2;
                 ff.onTwoEntryTable[internalId * 2] = func.OnTwoEntryTable1;
                 ff.onTwoEntryTable[internalId * 2 + 1] = func.OnTwoEntryTable2;
-                ff.onLand[internalId] = func.OnLand;
+                ff.onLand[internalId] = func.OnLanding;
                 ff.onExtRstAnim[internalId] = func.OnExtRstAnim;
                 ff.onIndexExtResultAnim[internalId] = func.OnIndexExtRstAnim;
 
-                ff.onSmashDown[internalId] = func.SmashDown;
-                ff.onSmashUp[internalId] = func.SmashUp;
-                ff.onSmashForward[internalId] = func.SmashSide;
+                ff.onSmashDown[internalId] = func.OnSmashLw;
+                ff.onSmashUp[internalId] = func.OnSmashHi;
+                ff.onSmashForward[internalId] = func.OnSmashF;
                 ff.enterFloat[internalId] = func.EnterFloat;
                 ff.enterSpecialDoubleJump[internalId] = func.EnterDoubleJump;
                 ff.enterTether[internalId] = func.EnterTether;
-                ff.onThrowBk[internalId] = func.onThrowBk;
-                ff.onThrowFw[internalId] = func.onThrowFw;
-                ff.onThrowHi[internalId] = func.onThrowHi;
-                ff.onThrowLw[internalId] = func.onThrowLw;
-                ff.getTrailData[internalId] = func.getSwordTrail;
+                ff.onThrowBk[internalId] = func.OnThrowBk;
+                ff.onThrowFw[internalId] = func.OnThrowFw;
+                ff.onThrowHi[internalId] = func.OnThrowHi;
+                ff.onThrowLw[internalId] = func.OnThrowLw;
+                ff.getTrailData[internalId] = func.GetSwordTrail;
 
                 var kff = mxdt.KirbyFunctions;
                 kff.KirbyOnHit[internalId] = func.KirbyOnHit;
@@ -979,6 +980,7 @@ namespace mexTool.Core
                 kff.KirbySpecialN[internalId] = func.KirbySpecialN;
                 kff.KirbySpecialNAir[internalId] = func.KirbySpecialNAir;
                 kff.KirbyOnFrame[internalId] = func.KirbyOnFrame;
+                kff.KirbyOnDeath[internalId] = func.KirbyOnDeath;
 
                 // save items
                 var itemEntries = new ushort[f.Items.Count];

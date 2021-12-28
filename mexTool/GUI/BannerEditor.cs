@@ -17,6 +17,9 @@ namespace mexTool.GUI
         {
             public GCILib.GCBanner.MetaFooter meta = new GCILib.GCBanner.MetaFooter();
 
+            [DisplayName("Boot Game Name")]
+            public string BootGameName { get; set; }
+
             public string LongName { get => meta.LongName; set => meta.LongName = value; }
 
             public string LongMaker { get => meta.LongMaker; set => meta.LongMaker = value; }
@@ -29,6 +32,7 @@ namespace mexTool.GUI
         }
 
         private GCILib.GCBanner _banner;
+        private byte[] _bootdata;
         private ProxyMetaData _metadata = new ProxyMetaData();
         public DialogResult Result { get; internal set; } = DialogResult.None;
 
@@ -69,6 +73,28 @@ namespace mexTool.GUI
         {
             _banner.MetaData = _metadata.meta;
             return _banner;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="banner"></param>
+        public void SetBoot(byte[] bootdata)
+        {
+            _bootdata = bootdata;
+            _metadata.BootGameName = Encoding.UTF8.GetString(bootdata, 0x20, 0x3e0);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public byte[] GetBoot()
+        {
+            var str = Encoding.UTF8.GetBytes(_metadata.BootGameName);
+            Array.Resize(ref str, 0x3e0);
+            Array.Copy(str, 0, _bootdata, 0x20, str.Length);
+            return _bootdata;
         }
 
         /// <summary>
