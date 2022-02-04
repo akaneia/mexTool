@@ -40,9 +40,6 @@ namespace mexTool
                 }
             }
 
-            buttonFileSystem.FlatAppearance.MouseOverBackColor = ThemeColors.MainColorList[5];
-            buttonFileSystem.FlatAppearance.MouseDownBackColor = ThemeColors.SecondColorList[5];
-
             buttonFighter.FlatAppearance.MouseOverBackColor = ThemeColors.MainColorList[0];
             buttonFighter.FlatAppearance.MouseDownBackColor = ThemeColors.SecondColorList[0];
 
@@ -57,6 +54,12 @@ namespace mexTool
 
             buttonSound.FlatAppearance.MouseOverBackColor = ThemeColors.MainColorList[4];
             buttonSound.FlatAppearance.MouseDownBackColor = ThemeColors.SecondColorList[4];
+
+            buttonCodes.FlatAppearance.MouseOverBackColor = ThemeColors.MainColorList[5];
+            buttonCodes.FlatAppearance.MouseDownBackColor = ThemeColors.SecondColorList[5];
+
+            buttonFileSystem.FlatAppearance.MouseOverBackColor = ThemeColors.MainColorList[6];
+            buttonFileSystem.FlatAppearance.MouseDownBackColor = ThemeColors.SecondColorList[6];
 
             DoubleBuffered = true;
 
@@ -247,6 +250,9 @@ namespace mexTool
             _fileSystemPage = new FileSystemPage();
             _fileSystemPage.Dock = DockStyle.Fill;
 
+            _codesPage = new CodesPage();
+            _codesPage.Dock = DockStyle.Fill;
+
             _fighterPage = new FighterPage();
             _fighterPage.Dock = DockStyle.Fill;
 
@@ -263,6 +269,7 @@ namespace mexTool
             _soundPage.Dock = DockStyle.Fill;
 
             _fileSystemPage.Visible = false;
+            _codesPage.Visible = false;
             _fighterPage.Visible = false;
             _musicPage.Visible = false;
             _menuPage.Visible = false;
@@ -270,6 +277,7 @@ namespace mexTool
             _soundPage.Visible = false;
 
             Controls.Add(_fileSystemPage);
+            Controls.Add(_codesPage);
             Controls.Add(_fighterPage);
             Controls.Add(_stagePage);
             Controls.Add(_menuPage);
@@ -277,6 +285,7 @@ namespace mexTool
             Controls.Add(_soundPage);
 
             _fileSystemPage.BringToFront();
+            _codesPage.BringToFront();
             _fighterPage.BringToFront();
             _stagePage.BringToFront();
             _menuPage.BringToFront();
@@ -326,6 +335,7 @@ namespace mexTool
             }
 
             _fileSystemPage?.Dispose();
+            _codesPage?.Dispose();
             _fighterPage?.Dispose();
             _stagePage?.Dispose();
             _menuPage?.Dispose();
@@ -333,6 +343,7 @@ namespace mexTool
             _soundPage?.Dispose();
 
             _fileSystemPage = null;
+            _codesPage = null;
             _fighterPage = null;
             _stagePage = null;
             _menuPage = null;
@@ -344,6 +355,7 @@ namespace mexTool
         }
 
         private FileSystemPage _fileSystemPage;
+        private CodesPage _codesPage;
         private FighterPage _fighterPage;
         private StagePage _stagePage;
         private MenuPage _menuPage;
@@ -359,6 +371,7 @@ namespace mexTool
             _musicPage?.StopSound();
 
             buttonFileSystem.BackColor = Color.Transparent;
+            buttonCodes.BackColor = Color.Transparent;
             buttonFighter.BackColor = Color.Transparent;
             buttonStages.BackColor = Color.Transparent;
             buttonMusic.BackColor = Color.Transparent;
@@ -368,6 +381,7 @@ namespace mexTool
             if(_fighterPage != null)
             {
                 _fileSystemPage.Visible = false;
+                _codesPage.Visible = false;
                 _fighterPage.Visible = false;
                 _musicPage.Visible = false;
                 _menuPage.Visible = false;
@@ -379,7 +393,7 @@ namespace mexTool
             {
                 if (_fileSystemPage != null)
                     _fileSystemPage.Visible = true;
-                buttonFileSystem.BackColor = ThemeColors.SecondColorList[5];
+                buttonFileSystem.BackColor = ThemeColors.SecondColorList[6];
             }
             if (pageID == 1)
             {
@@ -410,6 +424,12 @@ namespace mexTool
                 if (_soundPage != null)
                     _soundPage.Visible = true;
                 buttonSound.BackColor = ThemeColors.SecondColorList[4];
+            }
+            if (pageID == 6)
+            {
+                if (_codesPage != null)
+                    _codesPage.Visible = true;
+                buttonCodes.BackColor = ThemeColors.SecondColorList[5];
             }
         }
 
@@ -471,6 +491,16 @@ namespace mexTool
         private void buttonSound_Click(object sender, EventArgs e)
         {
             SelectPage(5);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonCodes_Click(object sender, EventArgs e)
+        {
+            SelectPage(6);
         }
 
 
@@ -596,6 +626,13 @@ namespace mexTool
             try
             {
                 Core.MEX.PrepareSave(ReportProgress);
+
+                string[] failed = null;
+                _codesPage?.SaveCodes(out failed);
+                if (failed != null && failed.Length > 0)
+                {
+                    MessageBox.Show(string.Join("\n", failed), "Failed to add following code(s)", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
 
                 if (Core.MEX.ImageResource.SourceType == typeof(FS_Extracted) && _forceMode == ForceMode.ISO)
                 {
@@ -742,6 +779,9 @@ namespace mexTool
             if (Updater.UpdateCodes())
             {
                 MessageBox.Show("Codes updated!", "Update Codes", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                if (_codesPage != null)
+                    _codesPage.InitMEXCodes();
 
                 if (Core.MEX.Initialized)
                     CheckCodeUpdate();

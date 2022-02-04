@@ -19,6 +19,13 @@ namespace mexTool.GUI
         Image ToImage();
     }
 
+    public interface ICheckable
+    {
+        bool IsChecked();
+
+        void SetCheckState(bool state);
+    }
+
     public class DoubleBufferedListBox : ListBox
     {
         public DoubleBufferedListBox()
@@ -57,7 +64,10 @@ namespace mexTool.GUI
                 }
             }
         }
+
+        public Size CheckboxSize { get; set; } = new Size(24, 24);
         public bool DisplayItemIndices { get; set; } = false;
+        public bool EnableCheckBoxes { get; set; } = false;
 
         public int StartingItemIndex { get; set; } = 0;
 
@@ -189,6 +199,19 @@ namespace mexTool.GUI
 
             _listBox.HorizontalScrollbar = false;
 
+            _listBox.MouseClick += (sender, args) =>
+            {
+                var index = _listBox.IndexFromPoint(args.Location);
+
+                if (index != -1 && 
+                    _listBox.Items[index] is ICheckable checkable && 
+                    args.X < CheckboxSize.Width)
+                {
+                    checkable.SetCheckState(!checkable.IsChecked());
+                    _listBox.Invalidate();
+                }
+            };
+
             _listBox.MouseMove += (sender, args) =>
             {
                 if (_enableDragReorder && args.Button == MouseButtons.Left)
@@ -311,6 +334,20 @@ namespace mexTool.GUI
                     e.Graphics.DrawString(indText, e.Font, numbrush, indexBound, StringFormat.GenericDefault);
 
                     offset += indSize.Width;
+                }
+
+                // draw checkbox
+                if (item is ICheckable checkable)
+                {
+                    if (checkable.IsChecked())
+                    {
+                        e.Graphics.DrawImage(Properties.Resources.ico_checked, e.Bounds.X + offset, e.Bounds.Y, CheckboxSize.Width, CheckboxSize.Height);
+                    }
+                    else
+                    {
+                        e.Graphics.DrawImage(Properties.Resources.ico_unchecked, e.Bounds.X + offset, e.Bounds.Y, CheckboxSize.Width, CheckboxSize.Height);
+                    }
+                    offset += CheckboxSize.Width;
                 }
 
                 //

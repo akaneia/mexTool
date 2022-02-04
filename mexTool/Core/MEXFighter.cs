@@ -220,7 +220,8 @@ namespace mexTool.Core
 
                 // effect file (as dat files)
                 archive.AddFile(EffectFile, MEX.ImageResource.GetFileData(EffectFile));
-                archive.AddFile(KirbyEffectFile, MEX.ImageResource.GetFileData(KirbyEffectFile));
+                if (!string.IsNullOrEmpty(KirbyEffectFile))
+                    archive.AddFile(KirbyEffectFile, MEX.ImageResource.GetFileData(KirbyEffectFile));
 
 
                 // pl + aj + result anim
@@ -285,7 +286,7 @@ namespace mexTool.Core
                 if (FighterSongID1 != null && FighterSongID1.IsMexMusic)
                     archive.AddFile(FighterSongID1.FileName, MEX.ImageResource.GetFileData("audio\\" + FighterSongID1.FileName));
 
-                if (FighterSongID2 != null && FighterSongID2.IsMexMusic)
+                if (FighterSongID2 != null && FighterSongID2.IsMexMusic && FighterSongID1 != FighterSongID2)
                     archive.AddFile(FighterSongID2.FileName, MEX.ImageResource.GetFileData("audio\\" + FighterSongID2.FileName));
 
 

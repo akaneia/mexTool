@@ -13,6 +13,8 @@ namespace mexTool
     {
         private static List<MMDevice> AudioDevices = new List<MMDevice>();
 
+        public static string MexCodePath;
+
         public static string YAMLFilter { get; } = "YAML (*.yml)|*.yml";
 
         public static string ExecutablePath { get; internal set; }
@@ -52,6 +54,11 @@ namespace mexTool
         {
             ExecutablePath = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
 
+            var tempdir = Path.Combine(ExecutablePath, @"temp/");
+
+            if (!Directory.Exists(tempdir))
+                Directory.CreateDirectory(tempdir);
+
             try
             {
                 using (var mmdeviceEnumerator = new MMDeviceEnumerator())
@@ -71,6 +78,7 @@ namespace mexTool
                 System.Windows.Forms.MessageBox.Show("Audio Device Failed to Initialize", "Error Initializing Audio", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Exclamation);
             }
 
+            MexCodePath = Path.Combine(ExecutablePath, "lib/codes.gct");
             AddFont(Path.Combine(ExecutablePath, "lib/A-OTF_Folk_Pro_H.otf"));
             AddFont(Path.Combine(ExecutablePath, "lib/Palatino Linotype.ttf"));
         }

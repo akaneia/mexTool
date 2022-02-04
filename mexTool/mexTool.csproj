@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationSettings.cs" />
+    <Compile Include="Core\CodesManager.cs" />
     <Compile Include="Core\FileSystem\FS_Extracted.cs" />
     <Compile Include="Core\FileSystem\FS_ISO.cs" />
     <Compile Include="Core\FileSystem\FS_Base.cs" />
@@ -241,6 +242,12 @@
     <Compile Include="GUI\Pages\FighterPage.Designer.cs">
       <DependentUpon>FighterPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Pages\CodesPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Pages\CodesPage.Designer.cs">
+      <DependentUpon>CodesPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Pages\FileSystemPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -351,6 +358,9 @@
     <EmbeddedResource Include="GUI\Pages\FighterPage.resx">
       <DependentUpon>FighterPage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Pages\CodesPage.resx">
+      <DependentUpon>CodesPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Pages\FileSystemPage.resx">
       <DependentUpon>FileSystemPage.cs</DependentUpon>
     </EmbeddedResource>
@@ -444,6 +454,9 @@
     <Content Include="mexUpdater.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\ico_unchecked.png" />
+    <None Include="Resources\ico_checked.png" />
+    <None Include="Resources\category_code.png" />
     <None Include="Resources\ico_disc.png" />
     <None Include="Resources\ico_folder.png" />
     <None Include="Resources\ico_file.png" />

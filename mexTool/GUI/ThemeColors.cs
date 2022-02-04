@@ -14,6 +14,7 @@ namespace HSDRawViewer.GUI
             Color.FromArgb(0xE0, 0x50, 0x20), // Orange
             Color.FromArgb(0xd8, 0x00, 0x73), // Pink
             Color.FromArgb(106, 0, 255), // Indigo
+            Color.FromArgb(110, 110, 0), // Yellow ish
             Color.FromArgb(0xb0, 0x2e, 0x0c), // Blue
         };
 

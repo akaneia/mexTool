@@ -14,7 +14,7 @@ namespace mexTool
         {
             bool enableDpi = false;
 
-            foreach(var v in args)
+            foreach (var v in args)
             {
                 if (v == "-dpi")
                     enableDpi = true;

@@ -93,6 +93,16 @@ namespace mexTool.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap category_code {
+            get {
+                object obj = ResourceManager.GetObject("category_code", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap category_fighter {
             get {
                 object obj = ResourceManager.GetObject("category_fighter", resourceCulture);
@@ -283,6 +293,16 @@ namespace mexTool.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ico_checked {
+            get {
+                object obj = ResourceManager.GetObject("ico_checked", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ico_disc {
             get {
                 object obj = ResourceManager.GetObject("ico_disc", resourceCulture);
@@ -306,6 +326,16 @@ namespace mexTool.Properties {
         internal static System.Drawing.Bitmap ico_folder {
             get {
                 object obj = ResourceManager.GetObject("ico_folder", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ico_unchecked {
+            get {
+                object obj = ResourceManager.GetObject("ico_unchecked", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

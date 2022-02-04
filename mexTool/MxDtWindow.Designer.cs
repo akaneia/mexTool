@@ -30,12 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MxDtWindow));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonFileSystem = new System.Windows.Forms.Button();
+            this.buttonCodes = new System.Windows.Forms.Button();
             this.buttonSound = new System.Windows.Forms.Button();
             this.buttonMusic = new System.Windows.Forms.Button();
             this.buttonMenu = new System.Windows.Forms.Button();
             this.buttonStages = new System.Windows.Forms.Button();
             this.buttonFighter = new System.Windows.Forms.Button();
-            this.buttonFileSystem = new System.Windows.Forms.Button();
             this.pictureBoxBanner = new mexTool.GUI.Controls.MXPictureBox();
             this.headerPanel = new System.Windows.Forms.Panel();
             this.buttonUpdate = new mexTool.GUI.Controls.MXButton();
@@ -73,6 +74,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(50)))));
             this.panel1.Controls.Add(this.buttonFileSystem);
+            this.panel1.Controls.Add(this.buttonCodes);
             this.panel1.Controls.Add(this.buttonSound);
             this.panel1.Controls.Add(this.buttonMusic);
             this.panel1.Controls.Add(this.buttonMenu);
@@ -86,6 +88,54 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(201, 591);
             this.panel1.TabIndex = 0;
+            // 
+            // buttonFileSystem
+            // 
+            this.buttonFileSystem.BackColor = System.Drawing.Color.Transparent;
+            this.buttonFileSystem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.buttonFileSystem.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonFileSystem.FlatAppearance.BorderSize = 0;
+            this.buttonFileSystem.FlatAppearance.MouseDownBackColor = System.Drawing.Color.RoyalBlue;
+            this.buttonFileSystem.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.buttonFileSystem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonFileSystem.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonFileSystem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(200)))), ((int)(((byte)(220)))));
+            this.buttonFileSystem.Image = global::mexTool.Properties.Resources.category_filesystem;
+            this.buttonFileSystem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonFileSystem.Location = new System.Drawing.Point(0, 401);
+            this.buttonFileSystem.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonFileSystem.Name = "buttonFileSystem";
+            this.buttonFileSystem.Size = new System.Drawing.Size(201, 56);
+            this.buttonFileSystem.TabIndex = 5;
+            this.buttonFileSystem.Text = " Filesystem";
+            this.buttonFileSystem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonFileSystem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonFileSystem.UseVisualStyleBackColor = false;
+            this.buttonFileSystem.Click += new System.EventHandler(this.buttonFileSystem_Click);
+            // 
+            // buttonCodes
+            // 
+            this.buttonCodes.BackColor = System.Drawing.Color.Transparent;
+            this.buttonCodes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.buttonCodes.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonCodes.FlatAppearance.BorderSize = 0;
+            this.buttonCodes.FlatAppearance.MouseDownBackColor = System.Drawing.Color.RoyalBlue;
+            this.buttonCodes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.buttonCodes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonCodes.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCodes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(200)))), ((int)(((byte)(220)))));
+            this.buttonCodes.Image = global::mexTool.Properties.Resources.category_code;
+            this.buttonCodes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonCodes.Location = new System.Drawing.Point(0, 345);
+            this.buttonCodes.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonCodes.Name = "buttonCodes";
+            this.buttonCodes.Size = new System.Drawing.Size(201, 56);
+            this.buttonCodes.TabIndex = 6;
+            this.buttonCodes.Text = " Codes";
+            this.buttonCodes.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonCodes.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonCodes.UseVisualStyleBackColor = false;
+            this.buttonCodes.Click += new System.EventHandler(this.buttonCodes_Click);
             // 
             // buttonSound
             // 
@@ -202,30 +252,6 @@
             this.buttonFighter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonFighter.UseVisualStyleBackColor = false;
             this.buttonFighter.Click += new System.EventHandler(this.buttonFighter_Click);
-            // 
-            // buttonFileSystem
-            // 
-            this.buttonFileSystem.BackColor = System.Drawing.Color.Transparent;
-            this.buttonFileSystem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.buttonFileSystem.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonFileSystem.FlatAppearance.BorderSize = 0;
-            this.buttonFileSystem.FlatAppearance.MouseDownBackColor = System.Drawing.Color.RoyalBlue;
-            this.buttonFileSystem.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue;
-            this.buttonFileSystem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonFileSystem.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonFileSystem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(200)))), ((int)(((byte)(220)))));
-            this.buttonFileSystem.Image = global::mexTool.Properties.Resources.category_filesystem;
-            this.buttonFileSystem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonFileSystem.Location = new System.Drawing.Point(0, 345);
-            this.buttonFileSystem.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonFileSystem.Name = "buttonFileSystem";
-            this.buttonFileSystem.Size = new System.Drawing.Size(201, 56);
-            this.buttonFileSystem.TabIndex = 5;
-            this.buttonFileSystem.Text = " Filesystem";
-            this.buttonFileSystem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.buttonFileSystem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonFileSystem.UseVisualStyleBackColor = false;
-            this.buttonFileSystem.Click += new System.EventHandler(this.buttonFileSystem_Click);
             // 
             // pictureBoxBanner
             // 
@@ -581,5 +607,6 @@
         private System.Windows.Forms.ToolStripMenuItem cSPCompressorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editBannerToolStripMenuItem;
         private System.Windows.Forms.Button buttonFileSystem;
+        private System.Windows.Forms.Button buttonCodes;
     }
 }
