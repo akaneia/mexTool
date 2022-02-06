@@ -219,11 +219,11 @@ namespace mexTool.Core
         /// <summary>
         /// 
         /// </summary>
-        private static void Init()
+        private static bool Init()
         {
             // loads data from mxdt file
             if (_imageResource == null || Initialized)
-                return;
+                return false;
 
 
             // load other files and resources
@@ -232,6 +232,9 @@ namespace mexTool.Core
             CSSFile = new HSDRawFile(_imageResource.GetFileData("MnSlChr.usd"));
             SSSFile = new HSDRawFile(_imageResource.GetFileData("MnSlMap.usd"));
             SmSt = new HSDRawFile(_imageResource.GetFileData("SmSt.dat"));
+
+            if (StockManager == null)
+                return false;
 
 
             // load ui
@@ -653,6 +656,8 @@ namespace mexTool.Core
 
             // Done
             Initialized = true;
+
+            return true;
         }
 
         /// <summary>
@@ -1312,7 +1317,11 @@ namespace mexTool.Core
 
             var success = _imageResource.OpenISO(isoPath);
             if (success)
-                Init();
+                if(!Init())
+                {
+                    Close();
+                    return false;
+                }
 
             return success;
         }
@@ -1329,7 +1338,11 @@ namespace mexTool.Core
 
             var success = _imageResource.OpenFolder(folderPath);
             if (success)
-                Init();
+                if (!Init())
+                {
+                    Close();
+                    return false;
+                }
 
             return success;
         }

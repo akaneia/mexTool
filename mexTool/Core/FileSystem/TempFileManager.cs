@@ -326,7 +326,7 @@ namespace mexTool.Core.FileSystem
         /// <returns></returns>
         public bool IsNewFile(string path)
         {
-            return toAdd.Exists(e => e.ImagePath == path);
+            return toAdd.Exists(e => e.ImagePath == path) || toRename.Exists(e => e.NewName == path);
         }
     }
 }

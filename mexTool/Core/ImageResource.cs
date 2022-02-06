@@ -49,7 +49,15 @@ namespace mexTool.Core
 
             _fileSystem = new FS_Extracted();
 
-            return TryInstallMex(_fileSystem, folderPath);
+            if (TryInstallMex(_fileSystem, folderPath))
+            {
+                if (!IsMexISO(_fileSystem))
+                    return false;
+
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -111,7 +119,7 @@ namespace mexTool.Core
         private bool IsMexISO(IFS fs)
         {
             // MxDt exists
-            return fs.FileExists("MxDt.dat") && IsMeleeISO(fs);
+            return fs.FileExists("MxDt.dat") && fs.FileExists("codes.gct") && IsMeleeISO(fs);
         }
 
         /// <summary>
@@ -380,7 +388,7 @@ namespace mexTool.Core
         {
             if (_fileSystem is FS_ISO iso_fs)
             {
-                if (iso_fs.FileExists(internalPath))
+                if (iso_fs.FileExists(internalPath) && !IsAddedFile(internalPath))
                 {
                     iso_fs.DumpFileFromISO(internalPath, filePath);
                 }
