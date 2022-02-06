@@ -1,4 +1,5 @@
 ﻿using GCILib;
+using HSDRaw;
 using mexTool.Core.FileSystem;
 using mexTool.Core.Installer;
 using System;
@@ -74,9 +75,16 @@ namespace mexTool.Core
 
             if (IsMeleeISO(fs))
             {
-                if(MessageBox.Show("Vanilla melee image detected.\nInstall m-ex system?", "Install m-ex?", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+                if (IsMeleeVersion120(fs, out string version))
                 {
-                    return MEXInstaller.InstallMEX(this);
+                    if (MessageBox.Show("Vanilla melee image detected.\nInstall m-ex system?", "Install m-ex?", MessageBoxButtons.YesNoCancel) == DialogResult.Yes)
+                    {
+                        return MEXInstaller.InstallMEX(this);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show($"Error: Only version 1.02 of Melee is currently supported\nFound: {version}\nExpected: 2001/11/14", "Version Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 
@@ -136,6 +144,22 @@ namespace mexTool.Core
                 fs.FileExists("audio/us/smash2.sem") &&
                 fs.FileExists("MnSlChr.usd") &&
                 fs.FileExists("MnSlMap.usd");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fs"></param>
+        /// <returns></returns>
+        private bool IsMeleeVersion120(IFS fs, out string version)
+        {
+            using (MemoryStream stream = new MemoryStream(fs.GetAppLoader()))
+            using (BinaryReaderExt f = new BinaryReaderExt(stream))
+            {
+                version = f.ReadString(0, -1);
+
+                return version.Equals("2001/11/14");
+            }
         }
 
 

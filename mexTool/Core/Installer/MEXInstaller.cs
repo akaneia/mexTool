@@ -22,35 +22,35 @@ namespace mexTool.Core.Installer
             // patch dol
             resource.SetDOL(MEXDolPatcher.ApplyPatch(resource.GetDOL(), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lib/dol.patch")));
 
-            /*using (var src = new MemoryStream(resource.GetDOL()))
-            using (System.Security.Cryptography.MD5CryptoServiceProvider md5 = new System.Security.Cryptography.MD5CryptoServiceProvider())
-            {
-                byte[] vanillaFullHash = new byte[] { 39, 123, 108, 9, 132, 118, 2, 32, 152, 149, 208, 17, 197, 163, 163, 139 };
-                byte[] vanillaDolHash = new byte[] { 135, 241, 17, 254, 252, 165, 45, 39, 50, 80, 104, 65, 216, 32, 142, 212 };
-                byte[] patchedHash = new byte[] { 220, 216, 224, 150, 88, 53, 129, 175, 54, 201, 175, 176, 53, 71, 167, 40 };
+            //using (var src = new MemoryStream(resource.GetDOL()))
+            //using (System.Security.Cryptography.MD5CryptoServiceProvider md5 = new System.Security.Cryptography.MD5CryptoServiceProvider())
+            //{
+            //    byte[] vanillaFullHash = new byte[] { 39, 123, 108, 9, 132, 118, 2, 32, 152, 149, 208, 17, 197, 163, 163, 139 };
+            //    byte[] vanillaDolHash = new byte[] { 135, 241, 17, 254, 252, 165, 45, 39, 50, 80, 104, 65, 216, 32, 142, 212 };
+            //    byte[] patchedHash = new byte[] { 220, 216, 224, 150, 88, 53, 129, 175, 54, 201, 175, 176, 53, 71, 167, 40 };
 
-                var hash = md5.ComputeHash(src);
+            //    var hash = md5.ComputeHash(src);
 
-                if (!hash.SequenceEqual(vanillaDolHash) && !hash.SequenceEqual(vanillaFullHash) && !hash.SequenceEqual(patchedHash))
-                    return false;
+            //    if (!hash.SequenceEqual(vanillaDolHash) && !hash.SequenceEqual(vanillaFullHash) && !hash.SequenceEqual(patchedHash))
+            //        return false;
 
-                if (!hash.SequenceEqual(patchedHash))
-                    using (var dest = new MemoryStream())
-                    {
-                        src.Position = 0;
-                        GCILib.BZip2.BinaryPatchUtility.Apply(src, () => new FileStream(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lib/dol.patch"), FileMode.Open, FileAccess.Read, FileShare.Read), dest);
+            //    if (!hash.SequenceEqual(patchedHash))
+            //        using (var dest = new MemoryStream())
+            //        {
+            //            src.Position = 0;
+            //            GCILib.BZip2.BinaryPatchUtility.Apply(src, () => new FileStream(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lib/dol.patch"), FileMode.Open, FileAccess.Read, FileShare.Read), dest);
                         
-                        dest.Position = 0;
-                        hash = md5.ComputeHash(dest);
+            //            dest.Position = 0;
+            //            hash = md5.ComputeHash(dest);
 
-                        if (!hash.SequenceEqual(patchedHash))
-                            return false;
+            //            if (!hash.SequenceEqual(patchedHash))
+            //                return false;
 
-                        System.Diagnostics.Debug.WriteLine(string.Join(", ", patchedHash) + " " + hash.SequenceEqual(vanillaDolHash));
+            //            System.Diagnostics.Debug.WriteLine(string.Join(", ", patchedHash) + " " + hash.SequenceEqual(vanillaDolHash));
 
-                        resource.SetDOL(dest.ToArray());
-                    }
-            }*/
+            //            resource.SetDOL(dest.ToArray());
+            //        }
+            //}
 
             // generate mex files
             using (MEXDOLScrubber dol = new MEXDOLScrubber(resource.GetDOL()))

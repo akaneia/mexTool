@@ -33,7 +33,7 @@ namespace mexTool.Core.FileSystem
             using (var _iso = new GCISO(_isoPath))
             {
                 dol = _iso.DOLData;
-                appLoader = _iso.AppLoaderData;
+                appLoader = _iso.AppLoader;
                 boot = _iso.Boot;
                 bin2 = _iso.Boot2;
                 banner = _iso.FindBanner();
@@ -66,7 +66,6 @@ namespace mexTool.Core.FileSystem
                 HashSet<string> newFiles = new HashSet<string>();
 
                 _iso.DOLData = dol;
-                _iso.AppLoaderData = appLoader;
                 _iso.SetBanner(banner);
 
                 // remove
