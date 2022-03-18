@@ -159,8 +159,12 @@ namespace mexTool.Core
                 if (s.Length < 0x14)
                     return;
 
-                if (new string(r.ReadChars(4)) != "SPKG")
+                if (new string(r.ReadChars(3)) != "SPK")
                     return;
+
+                int version = 1;
+                if (r.ReadChar() == '2')
+                    version = 2;
 
                 GroupFlags = r.ReadUInt32();
                 Flags = r.ReadUInt32();
@@ -173,9 +177,17 @@ namespace mexTool.Core
                 {
                     ScriptBank.Scripts[i] = new SEMBankScript();
                     ScriptBank.Scripts[i].Decompile(r.GetSection(r.ReadUInt32(), r.ReadInt32()));
+
+                    if (version > 1)
+                    {
+                        var temp = r.Position + 4;
+                        r.Position = r.ReadUInt32();
+                        ScriptBank.Scripts[i].Name = r.ReadString(r.ReadChar());
+                        r.Position = temp;
+                    }
                 }
 
-                var name = r.ReadString(r.ReadByte());
+                var name = r.ReadString(r.ReadChar());
 
                 if (ssmSize == 0)
                 {
@@ -206,14 +218,16 @@ namespace mexTool.Core
         {
             using (BinaryWriter w = new BinaryWriter(s))
             {
-                w.Write(new char[] { 'S', 'P', 'K', 'G' });
+                w.Write(new char[] { 'S', 'P', 'K', '2' });
+
+                int version = 2;
 
                 w.Write(GroupFlags);
                 w.Write(Flags);
                 w.Write(0);
                 w.Write(ScriptBank.Scripts.Length);
 
-                w.Write(new byte[ScriptBank.Scripts.Length * 8]);
+                w.Write(new byte[ScriptBank.Scripts.Length * 0xC]);
 
                 w.Write(SoundBank != null ? SoundBank.Name : "");
 
@@ -234,14 +248,19 @@ namespace mexTool.Core
                     var commandData = ScriptBank.Scripts[i].Compile();
 
                     var temp = s.Position;
-                    s.Position = 0x14 + 8 * i;
+                    s.Position = 0x14 + 0x0C * i;
 
+                    // write header info
                     w.Write((int)temp);
                     w.Write(commandData.Length);
+                    if (version > 1)
+                        w.Write((uint)(temp + commandData.Length));
 
+                    // write data to stream
                     s.Position = temp;
-
                     w.Write(commandData);
+                    if (version > 1)
+                        w.Write(ScriptBank.Scripts[i].Name);
                 }
             }
         }

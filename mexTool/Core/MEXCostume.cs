@@ -113,7 +113,7 @@ namespace mexTool.Core
                 SX = 1,
                 SY = 1,
                 SZ = 1,
-                GXTexGenSrc = 4,
+                GXTexGenSrc = GXTexGenSrc.GX_TG_TEX0,
                 Blending = 1
             };
 

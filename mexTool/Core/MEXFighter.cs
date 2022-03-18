@@ -659,16 +659,16 @@ namespace mexTool.Core
         public uint EnterTether { get; set; }
 
         [TypeConverter(typeof(HexType)), Category("Fighter"), Description("")]
-        public uint OnThrowFw { get; set; }
+        public uint OnIntroL { get; set; }
 
         [TypeConverter(typeof(HexType)), Category("Fighter"), Description("")]
-        public uint OnThrowBk { get; set; }
+        public uint OnIntroR { get; set; }
 
         [TypeConverter(typeof(HexType)), Category("Fighter"), Description("")]
-        public uint OnThrowHi { get; set; }
+        public uint OnCatch { get; set; }
 
         [TypeConverter(typeof(HexType)), Category("Fighter"), Description("")]
-        public uint OnThrowLw { get; set; }
+        public uint OnAppeal { get; set; }
 
         [TypeConverter(typeof(HexType)), Category("Fighter"), Description("")]
         public uint GetSwordTrail { get; set; }

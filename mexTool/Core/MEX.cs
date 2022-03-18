@@ -493,10 +493,10 @@ namespace mexTool.Core
                     EnterFloat = ftFunc.enterFloat[internalId],
                     EnterDoubleJump = ftFunc.enterSpecialDoubleJump[internalId],
                     EnterTether = ftFunc.enterTether[internalId],
-                    OnThrowBk = ftFunc.onThrowBk[internalId],
-                    OnThrowFw = ftFunc.onThrowFw[internalId],
-                    OnThrowHi = ftFunc.onThrowHi[internalId],
-                    OnThrowLw = ftFunc.onThrowLw[internalId],
+                    OnIntroL = ftFunc.onIntroL != null && internalId < ftFunc.onIntroL.Length ? ftFunc.onIntroL[internalId] : 0,
+                    OnIntroR = ftFunc.onIntroR != null && internalId < ftFunc.onIntroR.Length ? ftFunc.onIntroR[internalId] : 0,
+                    OnCatch = ftFunc.onCatch != null && internalId < ftFunc.onCatch.Length ? ftFunc.onCatch[internalId] : 0,
+                    OnAppeal = ftFunc.onAppeal != null && internalId < ftFunc.onAppeal.Length ? ftFunc.onAppeal[internalId] : 0,
                     GetSwordTrail = ftFunc.getTrailData[internalId],
 
                     KirbyOnHit = kbFunc.KirbyOnHit[internalId],
@@ -971,10 +971,10 @@ namespace mexTool.Core
                 ff.enterFloat[internalId] = func.EnterFloat;
                 ff.enterSpecialDoubleJump[internalId] = func.EnterDoubleJump;
                 ff.enterTether[internalId] = func.EnterTether;
-                ff.onThrowBk[internalId] = func.OnThrowBk;
-                ff.onThrowFw[internalId] = func.OnThrowFw;
-                ff.onThrowHi[internalId] = func.OnThrowHi;
-                ff.onThrowLw[internalId] = func.OnThrowLw;
+                ff.onIntroL[internalId] = func.OnIntroL;
+                ff.onIntroR[internalId] = func.OnIntroR;
+                ff.onCatch[internalId] = func.OnCatch;
+                ff.onAppeal[internalId] = func.OnAppeal;
                 ff.getTrailData[internalId] = func.GetSwordTrail;
 
                 var kff = mxdt.KirbyFunctions;

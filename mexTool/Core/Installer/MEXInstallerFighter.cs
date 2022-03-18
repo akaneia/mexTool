@@ -136,10 +136,10 @@ namespace mexTool.Core.Installer
             data.FighterFunctions.onSmashDown.Array = new uint[33];
             data.FighterFunctions.onSmashForward.Array = new uint[33];
             data.FighterFunctions.onSmashUp.Array = new uint[33];
-            data.FighterFunctions.onThrowBk.Array = new uint[33];
-            data.FighterFunctions.onThrowFw.Array = new uint[33];
-            data.FighterFunctions.onThrowHi.Array = new uint[33];
-            data.FighterFunctions.onThrowLw.Array = new uint[33];
+            data.FighterFunctions.onIntroL.Array = new uint[33];
+            data.FighterFunctions.onIntroR.Array = new uint[33];
+            data.FighterFunctions.onCatch.Array = new uint[33];
+            data.FighterFunctions.onAppeal.Array = new uint[33];
             data.FighterFunctions.getTrailData.Array = new uint[33];
 
             // special double jump code
