@@ -400,14 +400,14 @@
             // 
             this.openISOToolStripMenuItem.Name = "openISOToolStripMenuItem";
             this.openISOToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openISOToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.openISOToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openISOToolStripMenuItem.Text = "Open ISO";
             this.openISOToolStripMenuItem.Click += new System.EventHandler(this.openISOToolStripMenuItem_Click);
             // 
             // openFileSystemToolStripMenuItem
             // 
             this.openFileSystemToolStripMenuItem.Name = "openFileSystemToolStripMenuItem";
-            this.openFileSystemToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.openFileSystemToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openFileSystemToolStripMenuItem.Text = "Open File System";
             this.openFileSystemToolStripMenuItem.Click += new System.EventHandler(this.openFileSystemToolStripMenuItem_Click);
             // 
@@ -415,22 +415,22 @@
             // 
             this.closeFileSystemToolStripMenuItem.Enabled = false;
             this.closeFileSystemToolStripMenuItem.Name = "closeFileSystemToolStripMenuItem";
-            this.closeFileSystemToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.closeFileSystemToolStripMenuItem.Text = "Close File System";
+            this.closeFileSystemToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.closeFileSystemToolStripMenuItem.Text = "Close";
             this.closeFileSystemToolStripMenuItem.Click += new System.EventHandler(this.closeFileSystemToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(164, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Enabled = false;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -440,7 +440,7 @@
             this.iSOToolStripMenuItem,
             this.fileSystemToolStripMenuItem});
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveAsToolStripMenuItem.Text = "Export As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 

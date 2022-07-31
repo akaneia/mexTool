@@ -105,6 +105,8 @@
     <Compile Include="Core\MEXPlaylist.cs" />
     <Compile Include="Core\MEXCostume.cs" />
     <Compile Include="Core\MEXStageIcon.cs" />
+    <Compile Include="Core\Updates\IMEXUpdate.cs" />
+    <Compile Include="Core\Updates\UpdateV_1_1.cs" />
     <Compile Include="GUI\About.cs">
       <SubType>Form</SubType>
     </Compile>

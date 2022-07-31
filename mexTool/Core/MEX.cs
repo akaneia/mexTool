@@ -2,6 +2,7 @@
 using HSDRaw.Common;
 using HSDRaw.Common.Animation;
 using HSDRaw.Melee;
+using HSDRaw.Melee.Mn;
 using HSDRaw.MEX;
 using HSDRaw.MEX.Menus;
 using HSDRaw.MEX.Misc;
@@ -11,6 +12,7 @@ using HSDRaw.MEX.Stages;
 using HSDRaw.Tools;
 using MeleeMedia.Audio;
 using MeleeMedia.IO;
+using mexTool.Core.Updates;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -41,7 +43,7 @@ namespace mexTool.Core
     {
         private static byte VersionMajor = 1;
 
-        private static byte VersionMinor = 0;
+        private static byte VersionMinor = 1;
 
         /// <summary>
         /// 
@@ -168,6 +170,9 @@ namespace mexTool.Core
 
         public static List<MEX_GawColor> GaWColors = new List<MEX_GawColor>();
 
+        private static int TrophyCount;
+        private static int TrophySDOffset;
+
         /// <summary>
         /// 
         /// </summary>
@@ -216,6 +221,35 @@ namespace mexTool.Core
             GC.Collect();
         }
 
+        public static IMEXUpdate[] Updates =
+        {
+            new UpdateV_1_1(),
+        };
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mex"></param>
+        private static bool UpdateMxDt(MEX_Data mex)
+        {
+            // check if no update needed
+            if (mex.MetaData.VersionMajor == VersionMajor && mex.MetaData.VersionMinor == VersionMinor)
+                return false;
+
+            // check and apply updates in order
+            bool update_applied = false;
+            foreach (var update in Updates)
+            {
+                if (mex.MetaData.VersionMajor <= update.GetUpdateMajor() && mex.MetaData.VersionMinor < update.GetUpdateMinor())
+                {
+                    update_applied = true;
+                    update.Update(mex, _imageResource);
+                }
+            }
+
+            return update_applied;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -250,14 +284,23 @@ namespace mexTool.Core
             // load mex data
             var _mexData = new HSDRawFile(_imageResource.GetFileData("MxDt.dat")).Roots[0].Data as MEX_Data;
 
+            // perform update
+            if (UpdateMxDt(_mexData))
+            {
+                System.Windows.Forms.MessageBox.Show($"MxDt version has been updated to V{VersionMajor}.{VersionMinor}", 
+                    "MxDt Update", 
+                    System.Windows.Forms.MessageBoxButtons.OK, 
+                    System.Windows.Forms.MessageBoxIcon.Exclamation);
+            }
 
             // meta data
             StartingScene = _mexData.MetaData.EnterScene;
 
-
             // scene data
             LastMajorSceneID = _mexData.MetaData.LastMajor;
             LastMinorSceneID = _mexData.MetaData.LastMinor;
+            TrophyCount = _mexData.MetaData.TrophyCount;
+            TrophySDOffset = _mexData.MetaData.TrophySDOffset;
             SceneData = _mexData.SceneData;
 
 
@@ -442,6 +485,9 @@ namespace mexTool.Core
                 ft.EndAllStarFile = externalId < ftData.EndAllStarFiles.Length ? ftData.EndAllStarFiles[externalId].Value : "";
                 ft.EndMovieFile = externalId < ftData.EndMovieFiles.Length ? ftData.EndMovieFiles[externalId].Value : "";
 
+                ft.ClassicTrophyId = ftData.ClassicTrophyLookup != null && externalId < ftData.ClassicTrophyLookup.Length ? ftData.ClassicTrophyLookup[externalId] : (short)0;
+                ft.AdventureTrophyId = ftData.AdventureTrophyLookup != null && externalId < ftData.AdventureTrophyLookup.Length ? ftData.AdventureTrophyLookup[externalId] : (short)0;
+                ft.AllStarTrophyId = ftData.AllStarTrophyLookup != null && externalId < ftData.AllStarTrophyLookup.Length ? ftData.AllStarTrophyLookup[externalId] : (short)0;
 
                 ft.Functions = new MEXFighterFunctions()
                 {
@@ -737,7 +783,9 @@ namespace mexTool.Core
                 NumOfExternalStage = StageIDs.Count,
                 EnterScene = StartingScene,
                 LastMajor = LastMajorSceneID,
-                LastMinor = LastMinorSceneID
+                LastMinor = LastMinorSceneID,
+                TrophyCount = TrophyCount,
+                TrophySDOffset = TrophySDOffset,
             };
             mxdt.MetaData._s.SetByte(0, VersionMajor);
             mxdt.MetaData._s.SetByte(1, VersionMinor);
@@ -905,6 +953,10 @@ namespace mexTool.Core
                 fd.EndAdventureFiles.Set(externalId, new HSD_String(f.EndAdventureFile));
                 fd.EndAllStarFiles.Set(externalId, new HSD_String(f.EndAllStarFile));
                 fd.EndMovieFiles.Set(externalId, new HSD_String(f.EndMovieFile));
+
+                fd.ClassicTrophyLookup[externalId] = f.ClassicTrophyId;
+                fd.AdventureTrophyLookup[externalId] = f.AdventureTrophyId;
+                fd.AllStarTrophyLookup[externalId] = f.AllStarTrophyId;
 
                 // Kirby
                 kb.CapFiles.Set(internalId, new MEX_KirbyCapFiles() { FileName = f.KirbyCapFileName, Symbol = f.KirbyCapSymbol });
@@ -1172,6 +1224,23 @@ namespace mexTool.Core
 
             CSSFile["mexSelectChr"].Data = mexSelectChr;
 
+            // update css file tex anim pointers
+            var tbl = CSSFile["MnSelectChrDataTable"].Data as SBM_SelectChrDataTable;
+            if (tbl != null)
+            {
+                // main model
+                foreach (var m in tbl.MenuMaterialAnimation.Children[6].Children)
+                    m.MaterialAnimation.TextureAnimation = anim.TextureAnimation;
+
+                // portrait model
+                foreach (var m in tbl.PortraitMaterialAnimation.Children[2].Children)
+                    m.MaterialAnimation.TextureAnimation = anim.TextureAnimation;
+
+                // single model
+                foreach (var m in tbl.SingleMenuMaterialAnimation.Children[6].Children)
+                    m.MaterialAnimation.TextureAnimation = anim.TextureAnimation;
+            }
+
 
             // generate stage select data
             var mexMapData = SSSFile["mexMapData"].Data as MEX_mexMapData;
@@ -1317,7 +1386,7 @@ namespace mexTool.Core
 
             var success = _imageResource.OpenISO(isoPath);
             if (success)
-                if(!Init())
+                if (!Init())
                 {
                     Close();
                     return false;

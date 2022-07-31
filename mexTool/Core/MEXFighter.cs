@@ -78,6 +78,16 @@ namespace mexTool.Core
         public string EndMovieFile { get; set; }
 
 
+        [Category("2 - Demo"), DisplayName(""), Description("")]
+        public short ClassicTrophyId { get; set; }
+
+        [Category("2 - Demo"), DisplayName(""), Description("")]
+        public short AdventureTrophyId { get; set; }
+
+        [Category("2 - Demo"), DisplayName(""), Description("")]
+        public short AllStarTrophyId { get; set; }
+
+
 
         [Category("3 - Sounds"), DisplayName("SoundBank"), Description("Soundbank to load for fighter")]
         [TypeConverter(typeof(SoundFileConverter))]

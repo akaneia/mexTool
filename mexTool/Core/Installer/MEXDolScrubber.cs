@@ -35,9 +35,9 @@ namespace mexTool.Core.Installer
             { "SSMFileIDs", new Tuple<int, int>(0x3B83C0, 0x210) },
             { "RstRuntime", new Tuple<int, int>(0x3BF5F4, 0x110) },
             { "FighterSongIDs", new Tuple<int, int>(0x3B94A0, 0x40) },
-            //{ "ClassicTrophyLookup", new Tuple<int, int>(0x3B49BC, 0x34) },
-            //{ "AdventureTrophyLookup", new Tuple<int, int>(0x3B4978, 0x34) },
-            //{ "AllStarTrophyLookup", new Tuple<int, int>(0x3B4A00, 0x34) },
+            { "ClassicTrophyLookup", new Tuple<int, int>(0x3B4978, 0x34) },
+            { "AdventureTrophyLookup", new Tuple<int, int>(0x3B49BC, 0x34) },
+            { "AllStarTrophyLookup", new Tuple<int, int>(0x3B4A00, 0x34) },
            
 
 	    // Fighter Functions

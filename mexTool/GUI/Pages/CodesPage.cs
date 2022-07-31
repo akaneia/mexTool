@@ -270,7 +270,7 @@ namespace mexTool.GUI.Pages
         /// <param name="e"></param>
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            Codes.Add(new AddCode());
+            Codes.Add(new AddCode() { Enabled = true });
         }
 
         /// <summary>
@@ -280,7 +280,8 @@ namespace mexTool.GUI.Pages
         /// <param name="e"></param>
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            if (codeList.SelectedItem is AddCode c)
+            if (codeList.SelectedItem is AddCode c &&
+                MessageBox.Show("Are you sure you want to remove this code?", "Remove Code", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Codes.Remove(c);
             }

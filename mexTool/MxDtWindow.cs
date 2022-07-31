@@ -178,6 +178,7 @@ namespace mexTool
         {
             if (worker.IsBusy)
                 return;
+
             using (OpenFileDialog d = new OpenFileDialog())
             {
                 d.Filter = "Gamecube ISO (*.iso)|*.iso";
@@ -189,12 +190,6 @@ namespace mexTool
                     {
                         if (Core.MEX.InitFromISO(d.FileName))
                         {
-                            fileSystemToolStripMenuItem.Enabled = true;
-                            iSOToolStripMenuItem.Enabled = true;
-                            saveAsToolStripMenuItem.Enabled = true;
-                            saveToolStripMenuItem.Enabled = true;
-
-
                             FileSystemLoaded(d.FileName);
                         }
                     }
@@ -222,12 +217,6 @@ namespace mexTool
                     {
                         if (Core.MEX.InitFromFileSystem(d.SelectedPath))
                         {
-                            fileSystemToolStripMenuItem.Enabled = false;
-                            iSOToolStripMenuItem.Enabled = true;
-                            saveAsToolStripMenuItem.Enabled = true;
-                            saveToolStripMenuItem.Enabled = true;
-                            closeFileSystemToolStripMenuItem.Enabled = true;
-
                             FileSystemLoaded(d.SelectedPath);
                         }
                     }
@@ -240,8 +229,13 @@ namespace mexTool
         /// </summary>
         private void FileSystemLoaded(string path)
         {
-
             CloseFileSystem(false);
+
+            fileSystemToolStripMenuItem.Enabled = true;
+            iSOToolStripMenuItem.Enabled = true;
+            closeFileSystemToolStripMenuItem.Enabled = true;
+            saveAsToolStripMenuItem.Enabled = true;
+            saveToolStripMenuItem.Enabled = true;
 
             openedPath = path;
 
@@ -541,7 +535,7 @@ namespace mexTool
                 }
                 catch (IOException)
                 {
-                    MessageBox.Show("File location is already in use!\nYou cannot overrwrite the current ISO and make sure the destination is not open in another program.", "Save Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("File location is already in use!\nYou cannot overwrite the current ISO and make sure the destination is not open in another program.", "Save Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
             }
