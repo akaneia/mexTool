@@ -749,8 +749,8 @@ namespace mexTool.Core
                 Name = "mexData",
                 Data = mxdt
             });
-            f.Save("MxDt.dat");
-            ImageResource.AddFile("MxDt.dat", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MxDt.dat"));
+            f.Save("temp//MxDt.dat");
+            ImageResource.AddFile("MxDt.dat", "temp//MxDt.dat"); //  Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ));
 
             progress(null, new ProgressChangedEventArgs(10, null));
         }

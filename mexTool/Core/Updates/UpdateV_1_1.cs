@@ -40,6 +40,7 @@ namespace mexTool.Core.Updates
             {
                 MEX_FighterData fd = new MEX_FighterData();
                 dol.ExtractDataFromMap(fd);
+                mex.FighterData._s.Resize(mex.FighterData.TrimmedSize);
                 mex.FighterData.AllStarTrophyLookup = fd.AllStarTrophyLookup;
                 mex.FighterData.ClassicTrophyLookup = fd.ClassicTrophyLookup;
                 mex.FighterData.AdventureTrophyLookup = fd.AdventureTrophyLookup;
