@@ -13,6 +13,7 @@ using System.Linq;
 using MeleeMedia.Audio;
 using System;
 using HSDRaw.GX;
+using System.Collections.Generic;
 
 namespace mexTool.Core
 {
@@ -317,6 +318,32 @@ namespace mexTool.Core
                 InstallFighterFromStream(zipToOpen);
         }
 
+
+        private static Dictionary<string, string> YamlCompatbility = new Dictionary<string, string>()
+        {
+            { "onDeath:", "onRespawn:"  },
+            { "onUnk:", "onDestroy:"    },
+            { "smashUp:", "onSmashHi:"    },
+            { "smashDown:", "onSmashLw:"    },
+            { "smashSide:", "onSmashF:"    },
+            { "onItemDrop:", "onItemRelease:"    },
+            { "onUnknownCharacterFlags1:", "onApplyHeadItem:"    },
+            { "onUnknownCharacterFlags2:", "onRemoveHeadItem:"    },
+            { "onHit:", "eyeTextureDamaged:"    },
+            { "onUnknownEyeTextureRelated:", "eyeTextureNormal:"    },
+            { "onActionStateChangeWhileEyeTextureIsChanged:", "onActionStateChangeWhileEyeTextureIsChanged1:"    },
+            { "onLand:", "onLanding:"    },
+        };
+
+        private static string UpdateYamlCompatibility(string yml)
+        {
+            foreach (var v in YamlCompatbility)
+            {
+                yml = yml.Replace(v.Key, v.Value);
+            }
+            return yml;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -331,17 +358,25 @@ namespace mexTool.Core
                 var serializer = new DeserializerBuilder()
                 .WithNamingConvention(CamelCaseNamingConvention.Instance)
                 .WithTypeInspector(inspector => new MEXTypeInspector(inspector))
+                .IgnoreUnmatchedProperties()
                 .Build();
 
                 MEXFighter fighter = null;
 
-                using (StreamReader r = new StreamReader(stageEntry.Open()))
-                    fighter = serializer.Deserialize<MEXFighter>(r.ReadToEnd());
+                try
+                {
+                    using (StreamReader r = new StreamReader(stageEntry.Open()))
+                        fighter = serializer.Deserialize<MEXFighter>(UpdateYamlCompatibility(r.ReadToEnd()));
+                } catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
 
                 if (fighter == null)
+                {
+                    MessageBox.Show("Fighter failed to install.\nIt may have been exported with an earlier build of mexTool.", "Fighter Install Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
-
-
+                }
 
                 // effect file (as dat files)
                 InstallFile(archive, fighter.EffectFile);
@@ -536,6 +571,9 @@ namespace mexTool.Core
     /// </summary>
     public class MEXFighterFunctions
     {
+        [Browsable(false)]
+        public int Version { get; } = 1;
+
         [TypeConverter(typeof(HexType)), Category("Fighter")]
         public uint OnLoad { get; set; }
 
