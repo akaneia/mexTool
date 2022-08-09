@@ -219,6 +219,9 @@ namespace mexTool.Core
             using (FileStream zipToOpen = new FileStream(filePath, FileMode.OpenOrCreate))
             using (ZipArchive archive = new ZipArchive(zipToOpen, ZipArchiveMode.Create))
             {
+                // set export version
+                Functions.Version = 1;
+
                 // serialize fighter data
                 var serializer = new SerializerBuilder()
                 .WithNamingConvention(CamelCaseNamingConvention.Instance)
@@ -319,8 +322,9 @@ namespace mexTool.Core
         }
 
 
-        private static Dictionary<string, string> YamlCompatbility = new Dictionary<string, string>()
+        private static Dictionary<string, string> YamlCompatbilityV0 = new Dictionary<string, string>()
         {
+            { "onRespawn:", "resetAttribute:"  },
             { "onDeath:", "onRespawn:"  },
             { "onUnk:", "onDestroy:"    },
             { "smashUp:", "onSmashHi:"    },
@@ -337,9 +341,12 @@ namespace mexTool.Core
 
         private static string UpdateYamlCompatibility(string yml)
         {
-            foreach (var v in YamlCompatbility)
+            if (yml.Contains("version: 0") || !yml.Contains("version:"))
             {
-                yml = yml.Replace(v.Key, v.Value);
+                foreach (var v in YamlCompatbilityV0)
+                {
+                    yml = yml.Replace(v.Key, v.Value);
+                }
             }
             return yml;
         }
@@ -572,7 +579,7 @@ namespace mexTool.Core
     public class MEXFighterFunctions
     {
         [Browsable(false)]
-        public int Version { get; } = 1;
+        public int Version { get; set; } = 0;
 
         [TypeConverter(typeof(HexType)), Category("Fighter")]
         public uint OnLoad { get; set; }
