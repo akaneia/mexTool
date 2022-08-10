@@ -12,6 +12,7 @@ using HSDRaw.MEX.Stages;
 using HSDRaw.Tools;
 using MeleeMedia.Audio;
 using MeleeMedia.IO;
+using mexTool.Core.Installer;
 using mexTool.Core.Updates;
 using System;
 using System.Collections.Generic;
@@ -429,6 +430,13 @@ namespace mexTool.Core
             var kbData = _mexData.KirbyData;
             var kbFunc = _mexData.KirbyFunctions;
 
+            // extract info for potential update
+            MEX_FighterData updateftData = new MEX_FighterData();
+            using (MEXDOLScrubber dol = new MEXDOLScrubber(_imageResource.GetDOL()))
+            {
+                dol.ExtractDataFromMap(updateftData);
+            }
+
             for (int i = 0; i < _mexData.MetaData.NumOfInternalIDs; i++)
             {
                 // get ids
@@ -488,6 +496,18 @@ namespace mexTool.Core
                 ft.ClassicTrophyId = ftData.ClassicTrophyLookup != null && externalId < ftData.ClassicTrophyLookup.Length ? ftData.ClassicTrophyLookup[externalId] : (short)0;
                 ft.AdventureTrophyId = ftData.AdventureTrophyLookup != null && externalId < ftData.AdventureTrophyLookup.Length ? ftData.AdventureTrophyLookup[externalId] : (short)0;
                 ft.AllStarTrophyId = ftData.AllStarTrophyLookup != null && externalId < ftData.AllStarTrophyLookup.Length ? ftData.AllStarTrophyLookup[externalId] : (short)0;
+
+                if (ftData.EndingFallScale != null && externalId < ftData.EndingFallScale.Length)
+                {
+                    ft.EndingScreenScale = ftData.EndingFallScale[externalId];
+                }
+                else
+                {
+                    if (updateftData.EndingFallScale != null && 
+                        externalId < updateftData.EndingFallScale.Length && 
+                        !ft.IsMEXFighter)
+                        ft.EndingScreenScale = updateftData.EndingFallScale[externalId];
+                }
 
                 ft.Functions = new MEXFighterFunctions()
                 {
@@ -957,6 +977,7 @@ namespace mexTool.Core
                 fd.ClassicTrophyLookup[externalId] = f.ClassicTrophyId;
                 fd.AdventureTrophyLookup[externalId] = f.AdventureTrophyId;
                 fd.AllStarTrophyLookup[externalId] = f.AllStarTrophyId;
+                fd.EndingFallScale[externalId] = f.EndingScreenScale;
 
                 // Kirby
                 kb.CapFiles.Set(internalId, new MEX_KirbyCapFiles() { FileName = f.KirbyCapFileName, Symbol = f.KirbyCapSymbol });

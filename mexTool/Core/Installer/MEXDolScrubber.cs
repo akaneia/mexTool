@@ -38,6 +38,7 @@ namespace mexTool.Core.Installer
             { "ClassicTrophyLookup", new Tuple<int, int>(0x3B4978, 0x34) },
             { "AdventureTrophyLookup", new Tuple<int, int>(0x3B49BC, 0x34) },
             { "AllStarTrophyLookup", new Tuple<int, int>(0x3B4A00, 0x34) },
+            { "EndingFallScale", new Tuple<int, int>(0x3D82EC, 0x84) },
            
 
 	    // Fighter Functions

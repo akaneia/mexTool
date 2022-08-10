@@ -147,6 +147,9 @@ namespace mexTool.Core
         [Category("6 - Misc"), DisplayName("Result Screen Scale"), Description("Amount to scale model on result screen")]
         public float ResultScreenScale { get; set; }
 
+        [Category("6 - Misc"), DisplayName("Ending Screen Scale"), Description("Amount to scale model on trophy fall screen")]
+        public float EndingScreenScale { get; set; }
+
         [Category("6 - Misc"), DisplayName("Can Wall Jump"), Description("Determines if fighter can wall jump")]
         public bool CanWallJump { get; set; }
 

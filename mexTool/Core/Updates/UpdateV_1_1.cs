@@ -44,6 +44,7 @@ namespace mexTool.Core.Updates
                 mex.FighterData.AllStarTrophyLookup = fd.AllStarTrophyLookup;
                 mex.FighterData.ClassicTrophyLookup = fd.ClassicTrophyLookup;
                 mex.FighterData.AdventureTrophyLookup = fd.AdventureTrophyLookup;
+                mex.FighterData.EndingFallScale = fd.EndingFallScale;
             }
         }
     }
