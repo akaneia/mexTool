@@ -30,7 +30,28 @@ namespace mexTool.Core
         public void FromPlaylistStruct(MEX_Playlist playlist)
         {
             if (playlist.MenuPlaylist != null && playlist.MenuPlayListCount > 0)
-                Entries.AddRange(playlist.MenuPlaylist.Array.Select(e => new MEXPlaylistEntry() { Music = MEX.BackgroundMusic[e.HPSID], PlayChance = e.ChanceToPlay }));
+            {
+                foreach (var v in playlist.MenuPlaylist.Array)
+                {
+                    MEXMusic music = null;
+
+                    if (v.HPSID < MEX.BackgroundMusic.Count)
+                        music = MEX.BackgroundMusic[v.HPSID];
+                    else
+                    if (MEX.BackgroundMusic.Count > 0)
+                        music = MEX.BackgroundMusic[0];
+
+                    if (music != null)
+                    {
+                        var e = new MEXPlaylistEntry()
+                        {
+                            Music = music,
+                            PlayChance = v.ChanceToPlay
+                        };
+                        Entries.Add(e);
+                    }
+                }
+            }
         }
 
         /// <summary>
