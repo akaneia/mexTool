@@ -38,8 +38,7 @@ namespace mexTool.Tools
             set
             {
                 if (_waveSource != null && 
-                    value < _waveSource.GetLength() && 
-                    value > TimeSpan.Zero)
+                    value < _waveSource.GetLength())
                     _waveSource.SetPosition(value);
             }
         }
@@ -80,7 +79,7 @@ namespace mexTool.Tools
 
                 _soundOut.Stopped += (sender, args) =>
                 {
-                    if (LoopPlayback && LoopPoint.TotalMilliseconds != 0 && _soundOut != null && _waveSource.Position == _waveSource.Length)
+                    if (LoopPlayback && _soundOut != null && _waveSource.Position == _waveSource.Length)
                     {
                         Position = LoopPoint;
                         Play();
@@ -140,6 +139,7 @@ namespace mexTool.Tools
                 return;
 
             LoopPoint = TimeSpan.Parse(dsp.LoopPoint);
+            LoopPlayback = dsp.LoopSound;
 
             var data = dsp.ToWAVE();
 

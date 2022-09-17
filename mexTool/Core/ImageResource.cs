@@ -445,5 +445,20 @@ namespace mexTool.Core
         {
             return _tempManager.IsNewFile(path);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string[] GetAddressOrder()
+        {
+            if (_fileSystem == null)
+                return null;
+
+            if (_fileSystem is FS_Extracted ext)
+                return ext.GetAddressOrder();
+
+            return null;
+        }
     }
 }

@@ -635,12 +635,24 @@ namespace mexTool
 
                     using (GCILib.GCISO iso = new GCILib.GCISO(Core.MEX.ImageResource.GetBoot(), Core.MEX.ImageResource.GetBin2(), Core.MEX.ImageResource.GetAppLoader(), Core.MEX.ImageResource.GetDOL()))
                     {
+                        // put files in specific order
+                        var file_order = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lib\\file_order.txt");
+                        if (File.Exists(file_order))
+                        {
+                            var filelist = File.ReadAllLines(file_order);
+                            //foreach (var v in filelist)
+                            //    System.Diagnostics.Debug.WriteLine(Core.MEX.ImageResource.FileExists(v) + " " + v);
+                            iso.SetAddressTable(filelist);
+                        }
+                        
+                        // add files to iso
                         foreach (var file in Core.MEX.ImageResource.GetAllFiles())
                         {
                             //Console.WriteLine(Core.MEX.ImageResource.GetRealFilePath(file));
                             iso.AddFile(file, Core.MEX.ImageResource.GetRealFilePath(file));
                         }
 
+                        // rebuild iso
                         iso.Rebuild(rebuildPath, ReportProgress);
                     }
                 }

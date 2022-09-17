@@ -40,8 +40,12 @@ namespace mexTool.GUI.Controls
                     soundProgressBar.Maximum = _player.Length.Milliseconds;
 
                     soundProgressBar.LoopPosition = 0;
+                    soundProgressBar.EnableLoop = false;
                     if (_dsp != null)
+                    {
+                        soundProgressBar.EnableLoop = _dsp.LoopSound;
                         soundProgressBar.LoopPosition = (int)(_dsp.Channels[0].LoopStart / 2 / (double)_dsp.Frequency * 1.75f * 1000);
+                    }
 
                     // try to cleanup removing old dsp
                     GC.Collect();

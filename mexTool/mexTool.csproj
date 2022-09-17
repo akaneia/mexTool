@@ -428,6 +428,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="lib\file_order.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="lib\gaw_csp_fill_mask.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -151,6 +151,18 @@ namespace mexTool.Core.FileSystem
         /// <summary>
         /// 
         /// </summary>
+        /// <returns></returns>
+        public string[] GetAddressOrder()
+        {
+            var path = _folderPath + @"\sys\file_order.txt";
+            if (File.Exists(path))
+                return File.ReadAllLines(path);
+            return null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
         public byte[] GetFileData(string path)

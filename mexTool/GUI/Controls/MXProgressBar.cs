@@ -54,6 +54,8 @@ namespace mexTool.GUI.Controls
 
         public int LoopPosition { get; set; } = 0;
 
+        public bool EnableLoop { get; set; } = false;
+
         private int _loopPosition
         {
             get => (int)(((LoopPosition - Minimum) / (float)(Maximum - Minimum)) * Width);
@@ -86,7 +88,7 @@ namespace mexTool.GUI.Controls
             using (var brush = new SolidBrush(BarProgressColor))
                 e.Graphics.FillRectangle(brush, new RectangleF(0, 0, _progressWidth, _displayHeight));
 
-            if(LoopPosition != 0)
+            if(EnableLoop)
             {
                 using (var brush = new SolidBrush(Color.FromArgb(100, 80, 80, 80)))
                     e.Graphics.FillRectangle(brush, new RectangleF(_loopPosition, 0, Width, _displayHeight));
