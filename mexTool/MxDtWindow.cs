@@ -640,8 +640,6 @@ namespace mexTool
                         if (File.Exists(file_order))
                         {
                             var filelist = File.ReadAllLines(file_order);
-                            //foreach (var v in filelist)
-                            //    System.Diagnostics.Debug.WriteLine(Core.MEX.ImageResource.FileExists(v) + " " + v);
                             iso.SetAddressTable(filelist);
                         }
                         
@@ -910,6 +908,43 @@ namespace mexTool
                         RefreshBanner();
                     }
                 }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void verifyISOContentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!Core.MEX.Initialized)
+                return;
+
+            var file_order = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lib\\file_order.txt");
+
+            if (File.Exists(file_order))
+            {
+                var filelist = File.ReadAllLines(file_order);
+                var files = Core.MEX.ImageResource.GetAllFiles();
+                var hash = new System.Collections.Generic.HashSet<string>();
+                foreach (var v in files)
+                    hash.Add(v);
+
+                var missing = new System.Collections.Generic.List<string>();
+                foreach (var v in filelist)
+                {
+                    if (!hash.Contains(v.Substring(1).Replace("/", "\\")))
+                    {
+                        missing.Add(v);
+                    }
+                }
+
+                if (missing.Count > 0)
+                    MessageBox.Show("Missing File(s):\n" + String.Join("\n", missing), "Verify ISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                else
+                    MessageBox.Show("No missing files detected!", "Verify ISO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+            }
         }
     }
 }
