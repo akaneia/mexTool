@@ -1355,7 +1355,7 @@ namespace mexTool.Core
                 }
 
                 // save sound bank
-                var tempPath = path + "audio/" + SoundBanks[i].SoundBank.Name;
+                var tempPath = path + SoundBanks[i].SoundBank.Name;
                 Directory.CreateDirectory(System.IO.Path.GetDirectoryName(tempPath));
                 SoundBanks[i].SoundBank.Save(tempPath, out int bufferSize);
                 ImageResource.AddFile(@"audio\us\" + SoundBanks[i].SoundBank.Name, tempPath);
