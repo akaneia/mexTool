@@ -68,7 +68,7 @@ namespace mexTool.Core
                 using (ZipArchive archive = new ZipArchive(zipToOpen, ZipArchiveMode.Create))
                 {
                     {
-                        var dat = MEX.ImageResource.GetFileData(FileName);
+                        var dat = GetCostumeFileData();
                         ZipArchiveEntry file = archive.CreateEntry(FileName);
                         if (dat != null && dat.Length > 0)
                             using (var o = file.Open())
@@ -94,6 +94,15 @@ namespace mexTool.Core
 
                 return zipToOpen.ToArray();
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public byte[] GetCostumeFileData()
+        {
+            return MEX.ImageResource.GetFileData(FileName);
         }
 
         /// <summary>

@@ -33,6 +33,8 @@ namespace mexTool.Core.FileSystem
             }
         }
 
+        public static string TempFileLocation { get => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp\\"); }
+
         private List<string> tempPaths = new List<string>();
         private List<FileRename> toRename = new List<FileRename>();
         private List<FileAdd> toAdd = new List<FileAdd>();
@@ -265,7 +267,7 @@ namespace mexTool.Core.FileSystem
         /// <returns></returns>
         private string GenerateTempFile(string sourceName)
         {
-            var tempdir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "temp\\");
+            var tempdir = TempFileLocation;
 
             var fname = Path.GetFileName(sourceName);
             int index = 0;

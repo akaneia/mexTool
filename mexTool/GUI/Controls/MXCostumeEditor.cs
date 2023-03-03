@@ -21,6 +21,8 @@ namespace mexTool.GUI.Controls
         private BindingList<MEXCostume> _costumes;
         private BindingList<MEXCostume> _kirbyCostumes;
 
+        private static string CostumeFileFilter = @"Costume DAT or Package (*.dat, *.zip)|*.dat;*.zip;";
+
         public bool KirbyEnabled
         {
             get
@@ -439,7 +441,7 @@ namespace mexTool.GUI.Controls
         {
             using (OpenFileDialog d = new OpenFileDialog())
             {
-                d.Filter = "Costume DAT or Package (*.dat, *.zip)|*.dat;*.zip;";
+                d.Filter = CostumeFileFilter;
 
                 if(d.ShowDialog() == DialogResult.OK)
                 {
@@ -624,16 +626,6 @@ namespace mexTool.GUI.Controls
             e.Effect = DragDropEffects.None;
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void gawButton_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-        }
-
         /// <summary>
         /// 
         /// </summary>
@@ -652,6 +644,36 @@ namespace mexTool.GUI.Controls
                     costume.FromImage(bmp);
 
                 RefreshSelected();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonExportCostume_Click(object sender, EventArgs e)
+        {
+            if (mxListBox1.SelectedItem is MEXCostume c)
+            {
+                using (SaveFileDialog d = new SaveFileDialog())
+                {
+                    d.FileName = Path.GetFileNameWithoutExtension(c.FileName) + ".zip";
+                    d.Filter = CostumeFileFilter;
+
+                    if (d.ShowDialog() == DialogResult.OK)
+                    {
+                        switch (Path.GetExtension(d.FileName).ToLower())
+                        {
+                            case ".zip":
+                                File.WriteAllBytes(d.FileName, c.ToPackage());
+                                break;
+                            case ".dat":
+                                File.WriteAllBytes(d.FileName, c.GetCostumeFileData());
+                                break;
+                        }
+                    }
+                }
             }
         }
     }

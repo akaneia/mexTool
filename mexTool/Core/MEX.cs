@@ -737,30 +737,31 @@ namespace mexTool.Core
 
             progress(null, new ProgressChangedEventArgs(5, null));
 
-            SaveSoundBanks(mxdt, "temp//");
+            var tempPath = Core.FileSystem.TempFileManager.TempFileLocation;
+            SaveSoundBanks(mxdt, tempPath);
 
             progress(null, new ProgressChangedEventArgs(8, null));
 
             // save files to temp directory
-            PlCoFile.Save("temp//PlCo.dat", trim: true);
-            ImageResource.AddFile("PlCo.dat", "temp//PlCo.dat");
+            PlCoFile.Save(tempPath + "PlCo.dat", trim: true);
+            ImageResource.AddFile("PlCo.dat", tempPath + "PlCo.dat");
 
-            IfAllFile.Save("temp//IfAll.usd", trim: true);
-            ImageResource.AddFile("IfAll.usd", "temp//IfAll.usd");
+            IfAllFile.Save(tempPath + "IfAll.usd", trim: true);
+            ImageResource.AddFile("IfAll.usd", tempPath + "IfAll.usd");
 
-            CSSFile.Save("temp//MnSlChr.usd", trim: true);
-            ImageResource.AddFile("MnSlChr.usd", "temp//MnSlChr.usd");
+            CSSFile.Save(tempPath + "MnSlChr.usd", trim: true);
+            ImageResource.AddFile("MnSlChr.usd", tempPath + "MnSlChr.usd");
 
-            SSSFile.Save("temp//MnSlMap.usd", trim: true);
-            ImageResource.AddFile("MnSlMap.usd", "temp//MnSlMap.usd");
+            SSSFile.Save(tempPath + "MnSlMap.usd", trim: true);
+            ImageResource.AddFile("MnSlMap.usd", tempPath + "MnSlMap.usd");
 
-            SmSt.Save("temp//SmSt.dat");
-            ImageResource.AddFile("SmSt.dat", "temp//SmSt.dat");
+            SmSt.Save(tempPath + "SmSt.dat");
+            ImageResource.AddFile("SmSt.dat", tempPath + "SmSt.dat");
 
             HSDRawFile cssSymbol = new HSDRawFile();
             cssSymbol.Roots.Add(new HSDRootNode() { Name = "mexSelectChr", Data = CSSFile["mexSelectChr"].Data });
-            cssSymbol.Save("temp//mexSelectChr.dat", trim: true);
-            ImageResource.AddFile("mexSelectChr.dat", "temp//mexSelectChr.dat");
+            cssSymbol.Save(tempPath + "mexSelectChr.dat", trim: true);
+            ImageResource.AddFile("mexSelectChr.dat", tempPath + "mexSelectChr.dat");
 
             // generate mxdt
             HSDRawFile f = new HSDRawFile();
@@ -769,8 +770,8 @@ namespace mexTool.Core
                 Name = "mexData",
                 Data = mxdt
             });
-            f.Save("temp//MxDt.dat");
-            ImageResource.AddFile("MxDt.dat", "temp//MxDt.dat"); //  Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ));
+            f.Save(tempPath + "MxDt.dat");
+            ImageResource.AddFile("MxDt.dat", tempPath + "MxDt.dat"); //  Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ));
 
             progress(null, new ProgressChangedEventArgs(10, null));
         }

@@ -59,6 +59,7 @@ namespace mexTool.GUI.Controls
             this.moveDown = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.enableKirbyButton = new System.Windows.Forms.ToolStripButton();
+            this.buttonExportCostume = new System.Windows.Forms.ToolStripButton();
             this.kirbyPanel.SuspendLayout();
             this.fighterPanel.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -132,9 +133,11 @@ namespace mexTool.GUI.Controls
             // 
             // kirbyListbox
             // 
+            this.kirbyListbox.CheckboxSize = new System.Drawing.Size(24, 24);
             this.kirbyListbox.DataSource = null;
             this.kirbyListbox.DisplayItemIndices = true;
             this.kirbyListbox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.kirbyListbox.EnableCheckBoxes = false;
             this.kirbyListbox.EnableDragReorder = false;
             this.kirbyListbox.EnableTOBJ = false;
             this.kirbyListbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -267,9 +270,11 @@ namespace mexTool.GUI.Controls
             // 
             // mxListBox1
             // 
+            this.mxListBox1.CheckboxSize = new System.Drawing.Size(24, 24);
             this.mxListBox1.DataSource = null;
             this.mxListBox1.DisplayItemIndices = true;
             this.mxListBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mxListBox1.EnableCheckBoxes = false;
             this.mxListBox1.EnableDragReorder = false;
             this.mxListBox1.EnableTOBJ = false;
             this.mxListBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -337,6 +342,7 @@ namespace mexTool.GUI.Controls
             this.mxToolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.mxToolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addPackage,
+            this.buttonExportCostume,
             this.toolStripSeparator3,
             this.buttonAdd,
             this.buttonClone,
@@ -359,7 +365,7 @@ namespace mexTool.GUI.Controls
             this.addPackage.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addPackage.Name = "addPackage";
             this.addPackage.Size = new System.Drawing.Size(36, 41);
-            this.addPackage.Text = "Add From File";
+            this.addPackage.Text = "Import Costume";
             this.addPackage.Click += new System.EventHandler(this.addPackage_Click);
             // 
             // toolStripSeparator3
@@ -440,6 +446,16 @@ namespace mexTool.GUI.Controls
             this.enableKirbyButton.Text = "Enable/Disable Kirby Costumes";
             this.enableKirbyButton.Click += new System.EventHandler(this.enableKirbyButton_Click);
             // 
+            // buttonExportCostume
+            // 
+            this.buttonExportCostume.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonExportCostume.Image = global::mexTool.Properties.Resources.export;
+            this.buttonExportCostume.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonExportCostume.Name = "buttonExportCostume";
+            this.buttonExportCostume.Size = new System.Drawing.Size(36, 41);
+            this.buttonExportCostume.Text = "Export Costume";
+            this.buttonExportCostume.Click += new System.EventHandler(this.buttonExportCostume_Click);
+            // 
             // MXCostumeEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -497,5 +513,6 @@ namespace mexTool.GUI.Controls
         private MXToolStrip mxToolStrip2;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStripButton toolStripButton5;
+        private System.Windows.Forms.ToolStripButton buttonExportCostume;
     }
 }
