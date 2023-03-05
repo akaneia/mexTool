@@ -1379,8 +1379,8 @@ namespace mexTool.Core
             smst.SoundBankNames = SoundBanks.Select(e => e.SoundBank.Name).ToArray();
 
             // save sem
-            SEM.SaveSEMFile(path + "audio/smash2.sem", SoundBanks.Select(e => e.ScriptBank).ToList());
-            ImageResource.AddFile("audio/us/smash2.sem", path + "audio/smash2.sem");
+            SEM.SaveSEMFile(path + "smash2.sem", SoundBanks.Select(e => e.ScriptBank).ToList());
+            ImageResource.AddFile("audio/us/smash2.sem", path + "smash2.sem");
 
 
             // adjust sound id to relative again
