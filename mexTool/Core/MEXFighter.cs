@@ -216,6 +216,40 @@ namespace mexTool.Core
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="sourceDat"></param>
+        /// <param name="symbol"></param>
+        /// <returns></returns>
+        private static byte[] ExtractEmbeddedSymbol(string sourceDat, string symbol)
+        {
+            if (MEX.ImageResource.FileExists(sourceDat))
+            {
+                // check for embedded files
+                var dat = new HSDRaw.HSDRawFile(MEX.ImageResource.GetFileData(sourceDat));
+
+                // search for symbol
+                var root = dat.Roots.Find(e => e.Name.Equals(symbol));
+
+                // symbol found, so extract it and adjust filename
+                if (root != null)
+                {
+                    // (Remove "MotionFile" from symbol)
+                    root.Name = root.Name.Replace("MotionFile", "");
+
+                    // export
+                    using (MemoryStream stream = new MemoryStream())
+                    {
+                        new HSDRaw.HSDRawFile() { Roots = new List<HSDRaw.HSDRootNode>() { root } }.Save(stream);
+                        return stream.ToArray();
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="filePath"></param>
         public void SaveFighterToPackage(string filePath)
         {
@@ -226,6 +260,12 @@ namespace mexTool.Core
                 Functions.Version = 1;
 
                 // serialize fighter data
+                var introBackup = DemoIntro;
+                var endingBackup = DemoEnding;
+
+                DemoIntro = DemoIntro.Replace("MotionFile", "");
+                DemoEnding = DemoEnding.Replace("MotionFile", "");
+
                 var serializer = new SerializerBuilder()
                 .WithNamingConvention(CamelCaseNamingConvention.Instance)
                 .WithTypeInspector(inspector => new MEXTypeInspector(inspector))
@@ -233,6 +273,9 @@ namespace mexTool.Core
                 ZipArchiveEntry fighter = archive.CreateEntry("fighter.yml");
                 using (StreamWriter writer = new StreamWriter(fighter.Open()))
                     writer.Write(serializer.Serialize(this));
+
+                DemoIntro = introBackup;
+                DemoEnding = endingBackup;
 
 
                 // effect file (as dat files)
@@ -269,7 +312,30 @@ namespace mexTool.Core
                 archive.AddFile(EndAllStarFile, MEX.ImageResource.GetFileData(EndAllStarFile));
                 archive.AddFile(EndClassicFile, MEX.ImageResource.GetFileData(EndClassicFile));
 
-                // TODO: demo symbols (these are embedded in certain files)
+                // check for loose demo files and add them if they exist
+                // if the demo files are not loose, then check the embedded ones and convert them to loose
+
+                // demo intro
+                var introFile = DemoIntro + ".dat";
+                if (MEX.ImageResource.FileExists(introFile))
+                {
+                    archive.AddFile(introFile, MEX.ImageResource.GetFileData(introFile));
+                }
+                else
+                {
+                    archive.AddFile(introFile.Replace("MotionFile", ""), ExtractEmbeddedSymbol("IrAls.dat", DemoIntro));
+                }
+
+                // demo ending
+                var endingFile = DemoEnding + ".dat";
+                if (MEX.ImageResource.FileExists(endingFile))
+                {
+                    archive.AddFile(endingFile, MEX.ImageResource.GetFileData(endingFile));
+                }
+                else
+                {
+                    archive.AddFile(endingFile.Replace("MotionFile", ""), ExtractEmbeddedSymbol("GmRegEnd.dat", DemoEnding));
+                }
 
 
                 // announcer call (have to extract this dsp)
@@ -365,6 +431,12 @@ namespace mexTool.Core
             {
                 var stageEntry = archive.GetEntry("fighter.yml");
 
+                if (stageEntry == null)
+                {
+                    MessageBox.Show("Fighter failed to install.\n\"fighter.yml\" is missing from the archive!", "Fighter Install Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 var serializer = new DeserializerBuilder()
                 .WithNamingConvention(CamelCaseNamingConvention.Instance)
                 .WithTypeInspector(inspector => new MEXTypeInspector(inspector))
@@ -443,9 +515,9 @@ namespace mexTool.Core
                 InstallFile(archive, fighter.EndAllStarFile);
                 InstallFile(archive, fighter.EndClassicFile);
 
-
-                // TODO: demo symbols (these are embedded in certain files)
-
+                // check for demo intro and demo ending
+                InstallFile(archive, fighter.DemoIntro + ".dat");
+                InstallFile(archive, fighter.DemoEnding + ".dat");
 
                 // announcer call (have to extract this dsp)
                 var entry = archive.GetFile("namecall.wav");

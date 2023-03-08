@@ -215,27 +215,38 @@ namespace mexTool.Core
                 if (stage == null)
                     return;
 
+                // get all dat files in archive
+                List<string> datFiles = archive.Entries.Where(e => Path.GetExtension(e.Name).ToLower() == ".dat").Select(e=>e.Name).ToList();
+
                 // check if stage already exists
                 foreach (var mstage in MEX.Stages)
                 {
-                    if (mstage.FileName == stage.FileName)
+                    if (datFiles.Contains(Path.GetFileName(mstage.FileName)))
                     {
-                        if (MessageBox.Show($"A stage with the filename {stage.FileName} already exists.\nWould you like to overwrite?", "Stage Import", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question) != DialogResult.Yes)
+                        if (index != -1)
+                        {
+                            MessageBox.Show("There was an issue installing the stages files.\nInstallation was canceled.", "Stage Import", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        else
+                        if (MessageBox.Show($"A stage with the filename {mstage.FileName} already exists.\nWould you like to overwrite?", "Stage Import", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question) != DialogResult.Yes)
                         {
                             return;
                         }
                         else
                         {
                             index = MEX.Stages.IndexOf(mstage);
-                            break;
                         }    
                     }
                 }
     
                 // add stage file to file system
-                    var stageFile = archive.GetFile(Path.GetFileName(stage.Stage.StageFileName));
-                if(stageFile != null)
-                    MEX.ImageResource.AddFile(Path.GetFileName(stage.Stage.StageFileName), stageFile);
+                foreach (var stageFile in datFiles)
+                {
+                    var data = archive.GetFile(Path.GetFileName(stageFile));
+                    if (data != null)
+                        MEX.ImageResource.AddFile(Path.GetFileName(stageFile), data);
+                }
 
                 // don't add vanilla soundbanks
                 stage.SoundBank = MEX.SoundBanks[55];
@@ -279,7 +290,7 @@ namespace mexTool.Core
                     }
                 }
 
-                // add stage file
+                // add stage
                 if (index == -1)
                     MEX.Stages.Add(stage);
                 else
