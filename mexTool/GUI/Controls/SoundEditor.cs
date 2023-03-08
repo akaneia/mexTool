@@ -247,6 +247,9 @@ namespace mexTool.GUI.Controls
         /// <returns></returns>
         private TimeSpan GetSeekTime(int mousePosition)
         {
+            // clamp mouse position
+            mousePosition = Math.Min(Math.Max(mousePosition, 0), panel1.Width);
+
             percent = mousePosition / (float)panel1.Width;
             if (!double.IsNaN(_player.Length.TotalMilliseconds * percent))
                 return TimeSpan.FromMilliseconds(_player.Length.TotalMilliseconds * percent);
@@ -280,6 +283,7 @@ namespace mexTool.GUI.Controls
                 if (Math.Abs(e.X - HandleRightPosition) < 4f)
                 {
                     HandleRightSelected = true;
+                    HandleLeftSelected = false;
                     Cursor = Cursors.SizeWE;
                 }
             }
