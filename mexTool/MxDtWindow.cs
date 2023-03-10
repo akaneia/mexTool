@@ -28,6 +28,8 @@ namespace mexTool
         {
             InitializeComponent();
 
+            Maximize();
+
             menuStrip1.RenderMode = ToolStripRenderMode.Professional;
             menuStrip1.Renderer = new ToolStripProfessionalRenderer(new MenuColorTable());
             foreach (ToolStripMenuItem mi in menuStrip1.Items)
