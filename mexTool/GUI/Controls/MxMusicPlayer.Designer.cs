@@ -37,6 +37,7 @@ namespace mexTool.GUI.Controls
             this.buttonStop = new mexTool.GUI.Controls.MXButton();
             this.buttonPause = new mexTool.GUI.Controls.MXButton();
             this.buttonPlay = new mexTool.GUI.Controls.MXButton();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -73,7 +74,9 @@ namespace mexTool.GUI.Controls
             this.soundProgressBar.BarBackColor = System.Drawing.Color.White;
             this.soundProgressBar.BarLineColor = System.Drawing.Color.Black;
             this.soundProgressBar.BarProgressColor = System.Drawing.Color.LightGray;
+            this.soundProgressBar.EnableLoop = false;
             this.soundProgressBar.Location = new System.Drawing.Point(3, 49);
+            this.soundProgressBar.LoopPosition = 0;
             this.soundProgressBar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.soundProgressBar.Maximum = 100;
             this.soundProgressBar.Minimum = 0;
@@ -138,11 +141,21 @@ namespace mexTool.GUI.Controls
             this.buttonPlay.TabIndex = 1;
             this.buttonPlay.Click += new System.EventHandler(this.buttonPlay_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(106, 31);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(61, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Loop Point:";
+            // 
             // MxMusicPlayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.labelNowPlaying);
             this.Controls.Add(this.soundProgressBar);
             this.Controls.Add(this.label1);
@@ -167,5 +180,6 @@ namespace mexTool.GUI.Controls
         private MXProgressBar soundProgressBar;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label labelNowPlaying;
+        private System.Windows.Forms.Label label2;
     }
 }

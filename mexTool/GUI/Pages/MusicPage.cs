@@ -78,13 +78,16 @@ namespace mexTool.GUI.Pages
                     }
                     else
                     {
-                        var temp = Path.GetTempFileName();
-
                         var dsp = Tools.DSPExtensions.FromFile(d.FileName);
-                        HPS.SaveDSPAsHPS(dsp, temp);
+                        if (dsp != null)
+                        {
+                            var temp = Path.GetTempFileName();
 
-                        MEX.ImageResource.AddFile(newFilePath, temp);
-                        MEX.BackgroundMusic.Add(new MEXMusic() { FileName = newFileName, Label = Path.GetFileNameWithoutExtension(d.FileName) });
+                            HPS.SaveDSPAsHPS(dsp, temp);
+
+                            MEX.ImageResource.AddFile(newFilePath, temp);
+                            MEX.BackgroundMusic.Add(new MEXMusic() { FileName = newFileName, Label = Path.GetFileNameWithoutExtension(d.FileName) });
+                        }
                     }
                 }
             }
@@ -164,6 +167,31 @@ namespace mexTool.GUI.Pages
         private void mxListBox1_DoubleClicked(object sender, System.EventArgs e)
         {
             soundPlayer.PlaySound();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void editButton_Click(object sender, System.EventArgs e)
+        {
+            if (mxListBox1.SelectedItem is MEXMusic music)
+                using (var d = new SoundEditorDialog())
+                {
+                    var data = MEX.ImageResource.GetFileData("audio\\" + music.FileName);
+                    var dsp = HPS.ToDSP(data);
+                    d.SetSound(dsp);
+
+                    if (d.ShowDialog() == DialogResult.OK)
+                    {
+                        var temp = Path.GetTempFileName();
+
+                        HPS.SaveDSPAsHPS(dsp, temp);
+
+                        MEX.ImageResource.AddFile("audio\\" + music.FileName, temp);
+                    }
+                }
         }
     }
 }

@@ -45,6 +45,8 @@ namespace mexTool.GUI.Controls
                     {
                         soundProgressBar.EnableLoop = _dsp.LoopSound;
                         soundProgressBar.LoopPosition = (int)(_dsp.Channels[0].LoopStart / 2 / (double)_dsp.Frequency * 1.75f * 1000);
+
+                        label2.Text = "Loop Point: " + DSP.LoopPoint;
                     }
 
                     // try to cleanup removing old dsp

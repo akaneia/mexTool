@@ -105,17 +105,20 @@ namespace mexTool.GUI.Controls
                     // import sound file
                     var dsp = Tools.DSPExtensions.FromFile(d.FileName);
 
-                    // add dsp
-                    var sounds = _ssm.Sounds;
-                    Array.Resize(ref sounds, sounds.Length + 1);
-                    sounds[sounds.Length - 1] = dsp;
+                    if (dsp != null)
+                    {
+                        // add dsp
+                        var sounds = _ssm.Sounds;
+                        Array.Resize(ref sounds, sounds.Length + 1);
+                        sounds[sounds.Length - 1] = dsp;
 
-                    // reset bindings
-                    _ssm.Sounds = sounds;
-                    mxListBox1.DataSource = _ssm.Sounds;
+                        // reset bindings
+                        _ssm.Sounds = sounds;
+                        mxListBox1.DataSource = _ssm.Sounds;
 
-                    // select added dsp
-                    mxListBox1.SelectedItem = dsp;
+                        // select added dsp
+                        mxListBox1.SelectedItem = dsp;
+                    }
                 }
             }
         }

@@ -31,6 +31,7 @@ namespace mexTool.GUI.Pages
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.editButton = new mexTool.GUI.Controls.MXButton();
             this.deleteButton = new mexTool.GUI.Controls.MXButton();
             this.buttonExport = new mexTool.GUI.Controls.MXButton();
             this.replaceButton = new mexTool.GUI.Controls.MXButton();
@@ -64,8 +65,32 @@ namespace mexTool.GUI.Pages
             this.label2.Text = "Music Info:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // editButton
+            // 
+            this.editButton.BackColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
+            this.editButton.BackColorLight = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(140)))));
+            this.editButton.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(100)))));
+            this.editButton.BorderColor = System.Drawing.Color.Black;
+            this.editButton.CornerRadius = 20;
+            this.editButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editButton.ForeColor = System.Drawing.Color.White;
+            this.editButton.Image = global::mexTool.Properties.Resources.sound_wave;
+            this.editButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.editButton.ImageHeight = 30;
+            this.editButton.ImageWidth = 30;
+            this.editButton.Location = new System.Drawing.Point(258, 10);
+            this.editButton.Name = "editButton";
+            this.editButton.Size = new System.Drawing.Size(116, 50);
+            this.editButton.TabIndex = 8;
+            this.editButton.Text = "Edit";
+            this.editButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.editButton.Click += new System.EventHandler(this.editButton_Click);
+            // 
             // deleteButton
             // 
+            this.deleteButton.BackColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
+            this.deleteButton.BackColorLight = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(140)))));
+            this.deleteButton.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(100)))));
             this.deleteButton.BorderColor = System.Drawing.Color.Black;
             this.deleteButton.CornerRadius = 20;
             this.deleteButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -74,7 +99,7 @@ namespace mexTool.GUI.Pages
             this.deleteButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.deleteButton.ImageHeight = 32;
             this.deleteButton.ImageWidth = 32;
-            this.deleteButton.Location = new System.Drawing.Point(380, 10);
+            this.deleteButton.Location = new System.Drawing.Point(504, 10);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(116, 50);
             this.deleteButton.TabIndex = 5;
@@ -84,6 +109,9 @@ namespace mexTool.GUI.Pages
             // 
             // buttonExport
             // 
+            this.buttonExport.BackColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
+            this.buttonExport.BackColorLight = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(140)))));
+            this.buttonExport.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(100)))));
             this.buttonExport.BorderColor = System.Drawing.Color.Black;
             this.buttonExport.CornerRadius = 20;
             this.buttonExport.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -102,6 +130,9 @@ namespace mexTool.GUI.Pages
             // 
             // replaceButton
             // 
+            this.replaceButton.BackColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
+            this.replaceButton.BackColorLight = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(140)))));
+            this.replaceButton.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(100)))));
             this.replaceButton.BorderColor = System.Drawing.Color.Black;
             this.replaceButton.CornerRadius = 20;
             this.replaceButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -110,7 +141,7 @@ namespace mexTool.GUI.Pages
             this.replaceButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.replaceButton.ImageHeight = 30;
             this.replaceButton.ImageWidth = 30;
-            this.replaceButton.Location = new System.Drawing.Point(258, 10);
+            this.replaceButton.Location = new System.Drawing.Point(380, 10);
             this.replaceButton.Name = "replaceButton";
             this.replaceButton.Size = new System.Drawing.Size(116, 50);
             this.replaceButton.TabIndex = 4;
@@ -120,6 +151,9 @@ namespace mexTool.GUI.Pages
             // 
             // importButton
             // 
+            this.importButton.BackColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
+            this.importButton.BackColorLight = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(140)))));
+            this.importButton.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(100)))));
             this.importButton.BorderColor = System.Drawing.Color.Black;
             this.importButton.CornerRadius = 20;
             this.importButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -141,8 +175,10 @@ namespace mexTool.GUI.Pages
             this.mxListBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.mxListBox1.CheckboxSize = new System.Drawing.Size(24, 24);
             this.mxListBox1.DataSource = null;
             this.mxListBox1.DisplayItemIndices = true;
+            this.mxListBox1.EnableCheckBoxes = false;
             this.mxListBox1.EnableDragReorder = false;
             this.mxListBox1.EnableTOBJ = false;
             this.mxListBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -195,6 +231,7 @@ namespace mexTool.GUI.Pages
             this.soundPlayer.ForeColor = System.Drawing.Color.White;
             this.soundPlayer.Location = new System.Drawing.Point(14, 490);
             this.soundPlayer.Name = "soundPlayer";
+            this.soundPlayer.ProgressBarVisible = true;
             this.soundPlayer.Radius = 10;
             this.soundPlayer.RoundBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(0)))), ((int)(((byte)(115)))));
             this.soundPlayer.Size = new System.Drawing.Size(462, 78);
@@ -205,6 +242,7 @@ namespace mexTool.GUI.Pages
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.editButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.deleteButton);
@@ -233,5 +271,6 @@ namespace mexTool.GUI.Pages
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private Controls.MXButton replaceButton;
+        private Controls.MXButton editButton;
     }
 }

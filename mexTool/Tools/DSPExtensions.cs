@@ -52,10 +52,11 @@ namespace mexTool.Tools
             {
                 d.SetSound(dsp);
 
-                d.ShowDialog();
+                if (d.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    return dsp;
+                else
+                    return null;
             }
-
-            return dsp;
         }
 
         public enum BRSTM_CODEC
