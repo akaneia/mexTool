@@ -128,7 +128,7 @@ namespace mexTool.Core
 
             if (bmp.Width > 24 || bmp.Height > 24)
             {
-                using (var resize = bmp.Resize(24, 24))
+                using (var resize = bmp.Resize(24, 24, System.Drawing.Drawing2D.InterpolationMode.Default))
                     Icon.EncodeImageData(resize.GetBGRAData(), bmp.Width, bmp.Height, GXTexFmt.CI4, GXTlutFmt.RGB5A3);
             }
             else

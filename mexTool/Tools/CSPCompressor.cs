@@ -1,6 +1,7 @@
 ﻿using HSDRaw.Common;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace mexTool.Tools
 {
@@ -16,6 +17,9 @@ namespace mexTool.Tools
 
         [DisplayName("Preserve Aspect Ratio")]
         public bool PreserveAspect { get; set; } = true;
+
+        [DisplayName("Interpolation Mode")]
+        public InterpolationMode interpolationMode { get; set; } = InterpolationMode.Default;
     }
 
     public class CSPCompressor
@@ -61,20 +65,20 @@ namespace mexTool.Tools
                 {
                     if (settings.MaxWidth > settings.MaxHeight)
                     {
-                        return bmp.Resize(false, true, settings.MaxWidth, settings.MaxHeight);
+                        return bmp.Resize(false, true, settings.MaxWidth, settings.MaxHeight, settings.interpolationMode);
                     }
                     else
                     {
-                        return bmp.Resize(true, false, settings.MaxWidth, settings.MaxHeight);
+                        return bmp.Resize(true, false, settings.MaxWidth, settings.MaxHeight, settings.interpolationMode);
                     }
                 }
                 else
                 {
-                    return bmp.Resize(settings.MaxWidth, settings.MaxHeight);
+                    return bmp.Resize(settings.MaxWidth, settings.MaxHeight, settings.interpolationMode);
                 }
             }
 
-            return bmp.Resize(bmp.Width, bmp.Height);
+            return bmp.Resize(bmp.Width, bmp.Height, settings.interpolationMode);
         }
 
 

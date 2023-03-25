@@ -50,14 +50,14 @@ namespace System.Drawing
         /// <param name="new_width"></param>
         /// <param name="new_height"></param>
         /// <returns></returns>
-        public static Bitmap Resize(this Bitmap bm, bool set_width, bool set_height, int new_width, int new_height)
+        public static Bitmap Resize(this Bitmap bm, bool set_width, bool set_height, int new_width, int new_height, InterpolationMode interpolationMode)
         {
             // Calculate the new width and height.
             if (!set_width) new_width = bm.Width * new_height / bm.Height;
             if (!set_height) new_height = bm.Height * new_width / bm.Width;
 
             // Resize and return the image.
-            return bm.Resize(new_width, new_height);
+            return bm.Resize(new_width, new_height, interpolationMode);
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace System.Drawing
         /// <param name="new_width"></param>
         /// <param name="new_height"></param>
         /// <returns></returns>
-        public static Bitmap Resize(this Bitmap bm, int new_width, int new_height)
+        public static Bitmap Resize(this Bitmap bm, int new_width, int new_height, InterpolationMode interpolationMode)
         {
             // Make rectangles representing the original and new dimensions.
             Rectangle src_rect = new Rectangle(0, 0, bm.Width, bm.Height);
@@ -77,10 +77,8 @@ namespace System.Drawing
             Bitmap bm2 = new Bitmap(new_width, new_height);
             using (Graphics gr = Graphics.FromImage(bm2))
             {
-                gr.InterpolationMode =
-                    InterpolationMode.HighQualityBicubic;
-                gr.DrawImage(bm, dest_rect, src_rect,
-                    GraphicsUnit.Pixel);
+                gr.InterpolationMode = interpolationMode;
+                gr.DrawImage(bm, dest_rect, src_rect, GraphicsUnit.Pixel);
             }
 
             return bm2;

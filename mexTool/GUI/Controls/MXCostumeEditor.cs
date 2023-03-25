@@ -521,7 +521,7 @@ namespace mexTool.GUI.Controls
                             if ((bmp.Width > 256 || bmp.Height > 256) &&
                                 MessageBox.Show("Resize Image?", "Image is too large", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) == DialogResult.Yes)
                             {
-                                using (var resize = bmp.Resize(true, false, CSPWidth, 0))
+                                using (var resize = bmp.Resize(true, false, CSPWidth, 0, System.Drawing.Drawing2D.InterpolationMode.Default))
                                     costume.CSP = resize.ToTOBJ(HSDRaw.GX.GXTexFmt.CI8, HSDRaw.GX.GXTlutFmt.RGB5A3);
                             }
                             else
@@ -576,7 +576,7 @@ namespace mexTool.GUI.Controls
                                 if ((bmp.Width > 256 || bmp.Height > 256) &&
                                     MessageBox.Show("Resize Image?", "Image is too large", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) == DialogResult.Yes)
                                 {
-                                    using (var resize = bmp.Resize(true, false, CSPWidth, 0))
+                                    using (var resize = bmp.Resize(true, false, CSPWidth, 0, System.Drawing.Drawing2D.InterpolationMode.Default))
                                         costume.CSP = resize.ToTOBJ(HSDRaw.GX.GXTexFmt.CI8, HSDRaw.GX.GXTlutFmt.RGB5A3);
                                 }
                                 else
