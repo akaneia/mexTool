@@ -1116,10 +1116,6 @@ namespace mexTool.Core
                 Stages[i].Reverb.SSMID = (byte)SoundBanks.IndexOf(Stages[i].SoundBank);
                 mxdt.StageData.ReverbTable.Set(i, Stages[i].Reverb);
 
-                // mex stages need at least one song to work
-                if (Stages[i].IsMEXStage && Stages[i].Playlist.Entries.Count == 0)
-                    Stages[i].Playlist.Entries.Add(new MEXPlaylistEntry() { Music = BackgroundMusic[0], PlayChance = 50 });
-
                 // save playlist 
                 mxdt.StageData.StagePlaylists.Set(i, Stages[i].Playlist.ToPlaylistStruct());
 
