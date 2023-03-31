@@ -42,9 +42,9 @@ namespace mexTool.Core
 
     public class MEX
     {
-        private static byte VersionMajor = 1;
+        public static byte VersionMajor { get; } = 1;
 
-        private static byte VersionMinor = 1;
+        public static byte VersionMinor { get; } = 1;
 
         /// <summary>
         /// 
@@ -822,6 +822,7 @@ namespace mexTool.Core
             foreach (var v in sortedIcons)
                 v.Icon.ExternalCharID = (byte)MEXFighterIDConverter.ToExternalID(Fighters.IndexOf(v.Fighter), Fighters.Count);
             mxdt.MenuTable.CSSIconData = new MEX_IconData() { Icons = sortedIcons.Select(e => e.Icon).ToArray() };
+            mxdt.MenuTable.CSSIconData._s.Resize(mxdt.MenuTable.CSSIconData._s.Length + 0x1C);
 
 
 
@@ -1451,7 +1452,7 @@ namespace mexTool.Core
             var keys = mexSlcChar.CSPMatAnim.TextureAnimation.AnimationObject.FObjDesc.GetDecodedKeys();
             var cspStride = mexSlcChar.CSPStride;
 
-            for (int i = 0; i < CSSIcons.Length; i++)
+            for (int i = 0; i < Math.Min(CSSIcons.Length, cssjoints.Length); i++)
             {
                 var icos = new MEXFighterIcon();
                 icos.Icon = CSSIcons[i];

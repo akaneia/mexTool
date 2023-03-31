@@ -76,8 +76,10 @@ namespace mexTool.Core.Installer
                     LastMajor = 45, //?
                     LastMinor = 45,
                 };
+
                 // Version
-                data.MetaData._s.SetInt16(0x00, 0x0100);
+                data.MetaData._s.SetByte(0x00, MEX.VersionMajor);
+                data.MetaData._s.SetByte(0x01, MEX.VersionMinor);
 
 
                 // fighter table
