@@ -59,12 +59,14 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.editBannerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cSPCompressorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.verifyISOContentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.labelSaving = new System.Windows.Forms.Label();
             this.progressBarSaving = new System.Windows.Forms.ProgressBar();
             this.savePanel = new System.Windows.Forms.Panel();
-            this.verifyISOContentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.exportCSPsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importCSPsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBanner)).BeginInit();
             this.headerPanel.SuspendLayout();
@@ -471,6 +473,8 @@
             this.toolStripSeparator2,
             this.editBannerToolStripMenuItem,
             this.cSPCompressorToolStripMenuItem,
+            this.importCSPsToolStripMenuItem,
+            this.exportCSPsToolStripMenuItem,
             this.toolStripSeparator3,
             this.verifyISOContentsToolStripMenuItem});
             this.optionsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
@@ -503,6 +507,19 @@
             this.cSPCompressorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cSPCompressorToolStripMenuItem.Text = "Compress CSPs";
             this.cSPCompressorToolStripMenuItem.Click += new System.EventHandler(this.cSPCompressorToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+            // 
+            // verifyISOContentsToolStripMenuItem
+            // 
+            this.verifyISOContentsToolStripMenuItem.Name = "verifyISOContentsToolStripMenuItem";
+            this.verifyISOContentsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.verifyISOContentsToolStripMenuItem.Text = "Verify ISO Contents";
+            this.verifyISOContentsToolStripMenuItem.ToolTipText = "Checks to make sure all files from vanilla game are present";
+            this.verifyISOContentsToolStripMenuItem.Click += new System.EventHandler(this.verifyISOContentsToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -547,18 +564,19 @@
             this.savePanel.TabIndex = 2;
             this.savePanel.Visible = false;
             // 
-            // verifyISOContentsToolStripMenuItem
+            // exportCSPsToolStripMenuItem
             // 
-            this.verifyISOContentsToolStripMenuItem.Name = "verifyISOContentsToolStripMenuItem";
-            this.verifyISOContentsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.verifyISOContentsToolStripMenuItem.Text = "Verify ISO Contents";
-            this.verifyISOContentsToolStripMenuItem.ToolTipText = "Checks to make sure all files from vanilla game are present";
-            this.verifyISOContentsToolStripMenuItem.Click += new System.EventHandler(this.verifyISOContentsToolStripMenuItem_Click);
+            this.exportCSPsToolStripMenuItem.Name = "exportCSPsToolStripMenuItem";
+            this.exportCSPsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportCSPsToolStripMenuItem.Text = "Batch Export CSPs";
+            this.exportCSPsToolStripMenuItem.Click += new System.EventHandler(this.exportCSPsToolStripMenuItem_Click);
             // 
-            // toolStripSeparator3
+            // importCSPsToolStripMenuItem
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+            this.importCSPsToolStripMenuItem.Name = "importCSPsToolStripMenuItem";
+            this.importCSPsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.importCSPsToolStripMenuItem.Text = "Batch Import CSPs";
+            this.importCSPsToolStripMenuItem.Click += new System.EventHandler(this.importCSPsToolStripMenuItem_Click);
             // 
             // MxDtWindow
             // 
@@ -627,5 +645,7 @@
         private System.Windows.Forms.Button buttonCodes;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem verifyISOContentsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importCSPsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportCSPsToolStripMenuItem;
     }
 }

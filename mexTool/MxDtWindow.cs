@@ -948,5 +948,98 @@ namespace mexTool
 
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void importCSPsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!Core.MEX.Initialized)
+                return;
+
+            using (var d = new OpenFolderDialog())
+            {
+                if (d.ShowDialog() == DialogResult.OK)
+                {
+                    var files = Directory.GetFiles(d.SelectedPath);
+
+                    int toProcess = files.Length;
+                    using (ManualResetEvent resetEvent = new ManualResetEvent(false))
+                    {
+                        foreach (var f in Directory.GetFiles(d.SelectedPath))
+                        {
+                            if (Path.GetExtension(f) == ".png")
+                            {
+                                var costume = Path.GetFileNameWithoutExtension(f).Replace("csp_", "");
+
+                                foreach (var fi in Core.MEX.Fighters)
+                                {
+                                    foreach (var c in fi.Costumes)
+                                    {
+                                        if (c.FileName.StartsWith(costume))
+                                        {
+                                            ThreadPool.QueueUserWorkItem(
+                                               new WaitCallback(x =>
+                                               {
+                                                   using (var bmp = new Bitmap(f))
+                                                       c.CSP = bmp.ToTOBJ(HSDRaw.GX.GXTexFmt.CI8, HSDRaw.GX.GXTlutFmt.RGB5A3);
+
+                                                   if (Interlocked.Decrement(ref toProcess) == 0)
+                                                       resetEvent.Set();
+
+                                               }));
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        resetEvent.WaitOne();
+                    }
+
+
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void exportCSPsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!Core.MEX.Initialized)
+                return;
+
+            using (var d = new OpenFolderDialog())
+            {
+                if (d.ShowDialog() == DialogResult.OK)
+                {
+                    var path = d.SelectedPath;
+
+                    foreach (var f in Core.MEX.Fighters)
+                    {
+                        foreach (var c in f.Costumes)
+                        {
+                            // skip game and watch
+                            if (c.FileName.Contains("PlGwNr"))
+                                continue;
+
+                            var export_name = path + "\\" + Path.GetFileNameWithoutExtension(c.FileName) + ".png";
+
+                            using (var b = c.CSP.ToBitmap())
+                            {
+                                if (b != null)
+                                    b.Save(export_name);
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
