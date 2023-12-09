@@ -857,18 +857,9 @@ namespace mexTool.Core
             // update external stage ids
             mxdt.MenuTable.SSSIconData = new HSDArrayAccessor<MEX_StageIconData>() { Array = StageIcons.Select(e => e._icon).ToArray() };
             mxdt.MenuTable.Parameters = MenuParameters;
-            
-            // random stage select bitfield
-            mxdt.MenuTable.SSSBitField = new SSSBitfield() { _s = new HSDStruct(StageIcons.Count / 8 + 1) };
-
-            // store random enabled
-            for (int i = 0; i < StageIcons.Count; i++)
-                mxdt.MenuTable.SSSBitField.SetField(i, StageIcons[i].RandomEnabled);
-
 
             // scene data
             mxdt.SceneData = SceneData;
-
 
             // save music table
             mxdt.MusicTable = new MEX_BGMStruct();
@@ -877,10 +868,7 @@ namespace mexTool.Core
             mxdt.MusicTable.MenuPlaylist = new HSDArrayAccessor<HSDRaw.MEX.Sounds.MEX_PlaylistItem>() { Array = MainMenuPlaylist.Entries.Select(e => new MEX_PlaylistItem() { HPSID = (ushort)BackgroundMusic.IndexOf(e.Music), ChanceToPlay = (short)e.PlayChance }).ToArray() };
             mxdt.MusicTable.MenuPlayListCount = MainMenuPlaylist.Entries.Count;
 
-
-
             // save fighter data
-
             mxdt.FighterData = new MEX_FighterData();
             mxdt.FighterFunctions = new MEX_FighterFunctionTable();
             mxdt.KirbyData = new MEX_KirbyTable();
@@ -1527,9 +1515,6 @@ namespace mexTool.Core
 
                 if (i < previews.Length)
                     icos._previewText = previews[i];
-
-                if (_mexData.MenuTable._s.Length > 0 && _mexData.MenuTable.SSSBitField != null)
-                    icos.RandomEnabled = _mexData.MenuTable.SSSBitField.GetField(i);
 
                 StageIcons.Add(icos);
             }

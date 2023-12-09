@@ -295,6 +295,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools\CodesINI.cs" />
     <Compile Include="Tools\CSPCompressor.cs" />
     <Compile Include="Tools\DSPExtensions.cs" />
     <Compile Include="Tools\DSPPlayer.cs" />
@@ -398,7 +399,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="lib\codes.gct">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="lib\codes.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="lib\dol.patch">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -20,7 +20,7 @@ namespace mexTool.Core
 
 
         [Category("0 - General"), DisplayName("Random Enabled"), Description("Determines if this stage can be selected by random by default.")]
-        public bool RandomEnabled { get; set; }
+        public bool RandomEnabled { get => _icon.RandomEnabled; set => _icon.RandomEnabled = value; }
 
 
         [Category("2 - End Location"), DisplayName("Width"), Description("")]

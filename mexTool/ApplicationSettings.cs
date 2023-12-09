@@ -13,7 +13,9 @@ namespace mexTool
     {
         private static List<MMDevice> AudioDevices = new List<MMDevice>();
 
-        public static string MexCodePath;
+        public static string MexCodePath { get; set; }
+
+        public static string MexAddCodePath { get; set; }
 
         public static string YAMLFilter { get; } = "YAML (*.yml)|*.yml";
 
@@ -79,6 +81,7 @@ namespace mexTool
             }
 
             MexCodePath = Path.Combine(ExecutablePath, "lib/codes.gct");
+            MexAddCodePath = Path.Combine(ExecutablePath, "lib/codes.ini");
             AddFont(Path.Combine(ExecutablePath, "lib/A-OTF_Folk_Pro_H.otf"));
             AddFont(Path.Combine(ExecutablePath, "lib/Palatino Linotype.ttf"));
         }

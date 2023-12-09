@@ -25,16 +25,30 @@ namespace mexTool
         public static bool UpdateCodes()
         {
             // https://github.com/akaneia/m-ex/raw/master/asm/codes.gct
+            // https://github.com/akaneia/m-ex/raw/master/asm/codes.ini
 
-            if (!File.Exists(ApplicationSettings.MexCodePath))
+            return 
+                UpdateCodesFromURL(ApplicationSettings.MexCodePath, @"https://github.com/akaneia/m-ex/raw/master/asm/codes.gct") || 
+                UpdateCodesFromURL(ApplicationSettings.MexAddCodePath, @"https://github.com/akaneia/m-ex/raw/master/asm/codes.ini");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mexPath"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        private static bool UpdateCodesFromURL(string mexPath, string url)
+        {
+            if (!File.Exists(mexPath))
                 return false;
 
-            var mxhash = HashGen.ComputeSHA256Hash(File.ReadAllBytes(ApplicationSettings.MexCodePath));
+            var mxhash = HashGen.ComputeSHA256Hash(File.ReadAllBytes(mexPath));
 
             using (var client = new WebClient())
-                client.DownloadFile(@"https://github.com/akaneia/m-ex/raw/master/asm/codes.gct", ApplicationSettings.MexCodePath);
-            
-            var newhash = HashGen.ComputeSHA256Hash(File.ReadAllBytes(ApplicationSettings.MexCodePath));
+                client.DownloadFile(url, mexPath);
+
+            var newhash = HashGen.ComputeSHA256Hash(File.ReadAllBytes(mexPath));
 
             if (!mxhash.Equals(newhash))
                 return true;

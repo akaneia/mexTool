@@ -73,34 +73,24 @@ namespace mexTool.Core
         /// <param name="data"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public bool CheckCodeConflicts(byte[] data, out string error)
+        public bool CheckCodeConflicts(uint addr, out string error)
         {
             List<Code> codes = new List<Code>();
 
-            error = "";
-
-            if (TryLoadCodes(data, codes, false, out error))
+            // check for code conflicts with m-ex codes
+            foreach (var c in Codes)
             {
-                // check for code conflicts with m-ex codes
-                foreach (var c in Codes)
+                // offset conflict found
+                if (addr == c.Offset)
                 {
-                    foreach (var n in codes)
-                    {
-                        // offset conflict found
-                        if (n.Offset == c.Offset)
-                        {
-                            error = $"MEX injection point conflict found with address {n.Offset.ToString("X")}";
-                            return true;
-                        }
-                    }
+                    error = $"MEX injection point conflict found with address {c.Offset.ToString("X")}";
+                    return true;
                 }
-
-                // no conflict found
-                return false;
             }
 
-            // invalid code
-            return true;
+            // no conflict found
+            error = "";
+            return false;
         }
 
         /// <summary>

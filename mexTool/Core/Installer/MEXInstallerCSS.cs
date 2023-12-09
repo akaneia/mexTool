@@ -86,8 +86,8 @@ namespace mexTool.Core.Installer
             HSD_MatAnimJoint matanim_joint = new HSD_MatAnimJoint();
 
             // create icon data
-            var joints = table.MenuModel.BreathFirstList;
-            var matanims = table.MenuAnimation.BreathFirstList;
+            var joints = table.MenuModel.TreeList;
+            var matanims = table.MenuAnimation.TreeList;
             foreach (var ico in cssIcons)
             {
                 if (joints[ico.JointID].Dobj == null)
@@ -328,8 +328,6 @@ namespace mexTool.Core.Installer
             return mapdata;
         }
 
-
-
         /// <summary>
         /// 
         /// </summary>
@@ -339,7 +337,7 @@ namespace mexTool.Core.Installer
             GXVector3 Min = new GXVector3(float.MaxValue, float.MaxValue, float.MaxValue);
             GXVector3 Max = new GXVector3(float.MinValue, float.MinValue, float.MinValue);
 
-            foreach (var jobj in rootJOBJ.BreathFirstList)
+            foreach (var jobj in rootJOBJ.TreeList)
                 if (jobj.Dobj != null)
                     foreach (var dobj in jobj.Dobj.List)
                         if (dobj.Pobj != null)
@@ -357,7 +355,7 @@ namespace mexTool.Core.Installer
             var center = new GXVector3((Min.X + Max.X) / 2, (Min.Y + Max.Y) / 2, (Min.Z + Max.Z) / 2);
 
             var compressor = new POBJ_Generator();
-            foreach (var jobj in rootJOBJ.BreathFirstList)
+            foreach (var jobj in rootJOBJ.TreeList)
             {
                 if (jobj.Dobj != null)
                     foreach (var dobj in jobj.Dobj.List)

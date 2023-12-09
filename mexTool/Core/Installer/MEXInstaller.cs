@@ -183,7 +183,7 @@ namespace mexTool.Core.Installer
                 return false;*/
 #endif
 
-                // add  files to resource
+                // add files to resource
                 resource.AddFile("codes.gct", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lib\\codes.gct"));
 
                 // null ssm file

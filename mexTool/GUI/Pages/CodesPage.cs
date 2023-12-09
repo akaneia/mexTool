@@ -4,8 +4,9 @@ using System.Windows.Forms;
 using mexTool.Core;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.RegularExpressions;
 using System.Drawing;
+using mexTool.Tools;
+using System.Linq;
 
 namespace mexTool.GUI.Pages
 {
@@ -15,94 +16,8 @@ namespace mexTool.GUI.Pages
 
         private BindingListExt<AddCode> Codes = new BindingListExt<AddCode>();
 
-        private static Regex RegHEX = new Regex(@"[0-9a-fA-F]+");
-
         private static Color ValidBackColor = Color.FromArgb(64, 64, 64);
         private static Color InvalidBackColor = Color.FromArgb(128, 64, 64);
-
-        public class AddCodeError
-        {
-            public string Description;
-
-            public int LineIndex;
-        }
-
-        private class AddCode : ICheckable
-        {
-            public bool Enabled = false;
-
-            public string Name = "";
-
-            public string Creator = "";
-
-            public string Description = "";
-
-            public string Code = "";
-
-            public bool IsChecked()
-            {
-                return Enabled;
-            }
-
-            public void SetCheckState(bool state)
-            {
-                Enabled = state;
-            }
-
-            // public List<byte> Data = new List<byte>();
-
-            public override string ToString()
-            {
-                return Name;
-            }
-
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <returns></returns>
-            public bool TryCompileCode(out byte[] code, out AddCodeError error)
-            {
-                code = null;
-                error = new AddCodeError();
-                error.Description = "";
-                error.LineIndex = 0;
-
-                var lines = Code.Split(
-                    new string[] { "\r\n", "\r", "\n" },
-                    StringSplitOptions.None
-                    );
-
-                List<byte> data = new List<byte>();
-
-                foreach (var l in lines)
-                {
-                    if (string.IsNullOrEmpty(l))
-                    {
-                        error.LineIndex += 1;
-                        continue;
-                    }
-
-                    // remove spaces
-                    var trimmed = Regex.Replace(l.Trim(), @"\s+", "");
-
-                    // check if valid code line
-                    // check if in hex format
-                    if (trimmed.Length == 16 && RegHEX.Match(trimmed).Success)
-                    {
-                        data.AddRange(StringToByteArray(trimmed));
-                    }
-                    else
-                    {
-                        error.Description = "Invalid HEX Format";
-                        return false;
-                    }
-                    error.LineIndex += 1;
-                }
-
-                code = data.ToArray();
-                return true;
-            }
-        }
 
         public CodesPage()
         {
@@ -110,148 +25,49 @@ namespace mexTool.GUI.Pages
 
             InitMEXCodes();
 
-            LoadCodeINI();
+            if (MEX.ImageResource.FileExists("codes.ini"))
+            {
+                foreach (var c in CodesINI.LoadCodeINI(MEX.ImageResource.GetFileData("codes.ini")))
+                    Codes.Add(c);
+            }
+            else
+            {
+                if (File.Exists(ApplicationSettings.MexAddCodePath))
+                    foreach (var c in CodesINI.LoadCodeINI(File.ReadAllBytes(ApplicationSettings.MexAddCodePath)))
+                    {
+                        c.SetCheckState(true);
+                        Codes.Add(c);
+                    }
+            }
 
             codeList.DataSource = Codes;
             codeList.SelectedIndex = -1;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void InitMEXCodes()
         {
             MEXCodes.LoadCodesGCT(System.IO.File.ReadAllBytes(ApplicationSettings.MexCodePath));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="failedCodes"></param>
         public void SaveCodes(out string[] failedCodes)
         {
             failedCodes = null;
             MEX.ImageResource?.AddFile("codes.gct", MEXCodes.GenerateCodes(CompileCodeList(false, true, out failedCodes)));
-            MEX.ImageResource?.AddFile("codes.ini", GenerateCodeINI());
-        }
-
-        private static byte[] StringToByteArray(string hex)
-        {
-            if (hex.Length % 2 == 1)
-                throw new Exception("The binary key cannot have an odd number of digits");
-
-            byte[] arr = new byte[hex.Length >> 1];
-
-            for (int i = 0; i < hex.Length >> 1; ++i)
-            {
-                arr[i] = (byte)((GetHexVal(hex[i << 1]) << 4) + (GetHexVal(hex[(i << 1) + 1])));
-            }
-
-            return arr;
-        }
-
-        public static int GetHexVal(char hex)
-        {
-            int val = (int)hex;
-            //For uppercase A-F letters:
-            //return val - (val < 58 ? 48 : 55);
-            //For lowercase a-f letters:
-            //return val - (val < 58 ? 48 : 87);
-            //Or the two combined, but a bit slower:
-            return val - (val < 58 ? 48 : (val < 97 ? 55 : 87));
+            MEX.ImageResource?.AddFile("codes.ini", CodesINI.GenerateCodeINI(Codes));
         }
 
         /// <summary>
         /// 
         /// </summary>
-        private void LoadCodeINI()
-        {
-            if (MEX.ImageResource.FileExists("codes.ini"))
-            {
-                using (MemoryStream s = new MemoryStream(MEX.ImageResource.GetFileData("codes.ini")))
-                using (StreamReader r = new StreamReader(s))
-                {
-                    AddCode c = null;
-
-                    while (!r.EndOfStream)
-                    {
-                        var line = r.ReadLine();
-
-                        if (line.StartsWith("$"))
-                        {
-                            if (c != null && c.Code.Length > 0)
-                                Codes.Add(c);
-
-                            c = new AddCode();
-
-                            var l = line.Substring(1);
-
-                            if (l.StartsWith("!"))
-                            {
-                                c.Enabled = true;
-                                l = l.Substring(1);
-                            }
-
-                            var name = Regex.Match(l, @"(?<=\[).+?(?=\]\s*$)");
-
-                            if (name.Success)
-                            {
-                                c.Name = l.Substring(0, name.Groups[0].Index - 1).Trim();
-                                c.Creator = name.Value;
-                            }
-                            else
-                            {
-                                c.Name = l;
-                                c.Creator = "";
-                            }
-                        }
-
-                        if (c != null)
-                        {
-                            if (line.StartsWith("*"))
-                                c.Description += line.Substring(1).Trim() + Environment.NewLine;
-                            else
-                            {
-                                var trimmed = Regex.Replace(line, @"\s+", "");
-
-                                // check if valid code line
-                                if (trimmed.Length == 16 && RegHEX.Match(trimmed).Success)
-                                    c.Code += line + Environment.NewLine;
-                            }
-                        }
-                    }
-
-                    if (c != null && c.Code.Length > 0)
-                        Codes.Add(c);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        private byte[] GenerateCodeINI()
-        {
-            using (MemoryStream s = new MemoryStream())
-            using (StreamWriter w = new StreamWriter(s) { AutoFlush = true })
-            {
-                foreach (var c in Codes)
-                {
-                    w.WriteLine($"${(c.Enabled ? "!" : "")}{c.Name}{(string.IsNullOrEmpty(c.Creator) ? "" : $" [{c.Creator}]")}");
-
-                    var desc_lines = c.Description.Split(
-                        new string[] { "\r\n", "\r", "\n" },
-                        StringSplitOptions.None
-                        );
-
-                    foreach (var l in desc_lines)
-                    {
-                        if (string.IsNullOrEmpty(l))
-                            continue;
-                        w.WriteLine($"*{l}");
-                    }
-
-                    w.WriteLine(c.Code);
-                }
-
-                return s.ToArray();
-            }
-        }
-
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void codeList_SelectedValueChanged(object sender, EventArgs e)
         {
             if (codeList.SelectedItem is AddCode code)
@@ -295,6 +111,30 @@ namespace mexTool.GUI.Pages
         /// <returns></returns>
         private bool CheckCodeConflicts(AddCode code, out string error)
         {
+            foreach (var addr in code.UsedAddresses())
+            {
+                // check conflicts with mex codes
+                if (MEXCodes.CheckCodeConflicts(addr, out error))
+                {
+                    return true;
+                }
+
+                // check for additional code conflicts
+                foreach (var c in Codes)
+                {
+                    if (c == code)
+                        continue;
+
+                    foreach (var addr2 in c.UsedAddresses())
+                    {
+                        if (addr == addr2)
+                        {
+                            error = $"Injection Address Conflict Code: {c.Name} Address: {addr.ToString("X")}";
+                            return true;
+                        }
+                    }
+                }
+            }
             error = "";
             return false;
         }
@@ -313,19 +153,11 @@ namespace mexTool.GUI.Pages
                 if (c.TryCompileCode(out byte[] data, out AddCodeError error))
                 {
                     // check conflicts with other codes
-                    if (CheckCodeConflicts(c, out string errormessage1))
-                    {
-                        labelError.Text = errormessage1;
-                        tbCodeData.BackColor = InvalidBackColor;
-                    }
-                    else
-                    // check conflicts with mex codes
-                    if (MEXCodes.CheckCodeConflicts(data, out string errormessage))
+                    if (CheckCodeConflicts(c, out string errormessage))
                     {
                         labelError.Text = errormessage;
                         tbCodeData.BackColor = InvalidBackColor;
                     }
-                    // no errors found
                     else
                     {
                         labelError.Text = $"Success: Code appears valid";
@@ -381,21 +213,36 @@ namespace mexTool.GUI.Pages
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
             File.WriteAllBytes("test.gct", MEXCodes.GenerateCodes(CompileCodeList(true, true, out string[] failed)));
-            File.WriteAllBytes("test.ini", GenerateCodeINI());
+            File.WriteAllBytes("test.ini", CodesINI.GenerateCodeINI(Codes));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tbCodeName_TextChanged(object sender, EventArgs e)
         {
             if (codeList.SelectedItem is AddCode c)
                 c.Name = tbCodeName.Text;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tbCreator_TextChanged(object sender, EventArgs e)
         {
             if (codeList.SelectedItem is AddCode c)
                 c.Creator = tbCreator.Text;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tbCodeDescription_TextChanged(object sender, EventArgs e)
         {
             if (codeList.SelectedItem is AddCode c)
