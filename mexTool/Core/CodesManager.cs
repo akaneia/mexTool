@@ -10,6 +10,20 @@ namespace mexTool.Core
 
         private List<Code> Codes = new List<Code>();
 
+        public IEnumerable<uint> Addresses
+        {
+            get
+            {
+                foreach (var code in Codes)
+                    yield return code.Offset;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="additional"></param>
+        /// <returns></returns>
         public byte[] GenerateCodes(List<Code> additional)
         {
             using (MemoryStream stream = new MemoryStream())

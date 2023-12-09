@@ -93,8 +93,8 @@ namespace mexTool.Tools
                                 i += ((((code[i] & 0xFF) << 24)) | (((code[i + 1] & 0xFF) << 16)) | (((code[i + 2] & 0xFF) << 8)) | (code[i + 3] & 0xFF)) * 8 + 4;
                             }
                             break;
-                        default:
-                            throw new NotSupportedException($"Code type unknown: 0x{code[i].ToString("X2")}");
+                        //default:
+                        //    throw new NotSupportedException($"Code type unknown: 0x{code[i].ToString("X2")}");
                     }
                 }
             }
@@ -168,8 +168,8 @@ namespace mexTool.Tools
                                 // compress this code
                                 var comp = new byte[]
                                     {
-                                        0x04, code[1], code[2], code[3],
-                                        code[8], code[9], code[10], code[11]
+                                        0x04, code[i + 1], code[i + 2], code[i + 3],
+                                        code[i + 8], code[i + 9], code[i + 10], code[i + 11]
                                     };
                                 code = ReplaceRange(code, start, 8 + count * 8, comp);
                                 i += 8;
