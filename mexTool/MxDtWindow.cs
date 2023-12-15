@@ -787,7 +787,7 @@ namespace mexTool
                 MessageBox.Show("Codes updated!", "Update Codes", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 if (_codesPage != null)
-                    _codesPage.InitMEXCodes();
+                    _codesPage.ReloadCodes();
 
                 if (Core.MEX.Initialized)
                     CheckCodeUpdate();

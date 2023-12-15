@@ -29,9 +29,11 @@ namespace mexTool.GUI.Pages
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CodesPage));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.codeList = new mexTool.GUI.MXListBox();
+            this.toolStripAddCode = new mexTool.GUI.Controls.MXToolStrip();
+            this.toolStripButtonAddCode = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonRemoveCode = new System.Windows.Forms.ToolStripButton();
             this.label4 = new System.Windows.Forms.Label();
             this.labelError = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -42,16 +44,14 @@ namespace mexTool.GUI.Pages
             this.tbCodeData = new System.Windows.Forms.TextBox();
             this.tbCreator = new System.Windows.Forms.TextBox();
             this.tbCodeName = new System.Windows.Forms.TextBox();
-            this.mxToolStrip2 = new mexTool.GUI.Controls.MXToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.mxToolStrip1 = new mexTool.GUI.Controls.MXToolStrip();
+            this.buttonCustom = new mexTool.GUI.Controls.MXButton();
+            this.buttonMEX = new mexTool.GUI.Controls.MXButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.mxToolStrip2.SuspendLayout();
+            this.toolStripAddCode.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -65,6 +65,7 @@ namespace mexTool.GUI.Pages
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.codeList);
+            this.splitContainer1.Panel1.Controls.Add(this.toolStripAddCode);
             this.splitContainer1.Panel1.Controls.Add(this.label4);
             // 
             // splitContainer1.Panel2
@@ -79,7 +80,7 @@ namespace mexTool.GUI.Pages
             this.splitContainer1.Panel2.Controls.Add(this.tbCreator);
             this.splitContainer1.Panel2.Controls.Add(this.tbCodeName);
             this.splitContainer1.Size = new System.Drawing.Size(766, 485);
-            this.splitContainer1.SplitterDistance = 226;
+            this.splitContainer1.SplitterDistance = 259;
             this.splitContainer1.TabIndex = 3;
             // 
             // codeList
@@ -95,16 +96,49 @@ namespace mexTool.GUI.Pages
             this.codeList.ForeColor = System.Drawing.Color.White;
             this.codeList.ImageHeight = 24;
             this.codeList.ItemHeight = 24;
-            this.codeList.Location = new System.Drawing.Point(0, 20);
+            this.codeList.Location = new System.Drawing.Point(0, 51);
             this.codeList.Name = "codeList";
             this.codeList.SelectedIndex = -1;
             this.codeList.SelectedItem = null;
             this.codeList.SelectionMode = System.Windows.Forms.SelectionMode.One;
             this.codeList.ShowScrollbar = false;
-            this.codeList.Size = new System.Drawing.Size(226, 465);
+            this.codeList.Size = new System.Drawing.Size(259, 434);
             this.codeList.StartingItemIndex = 0;
             this.codeList.TabIndex = 0;
             this.codeList.SelectedValueChanged += new System.EventHandler(this.codeList_SelectedValueChanged);
+            // 
+            // toolStripAddCode
+            // 
+            this.toolStripAddCode.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.toolStripAddCode.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButtonAddCode,
+            this.toolStripButtonRemoveCode});
+            this.toolStripAddCode.Location = new System.Drawing.Point(0, 20);
+            this.toolStripAddCode.Name = "toolStripAddCode";
+            this.toolStripAddCode.Size = new System.Drawing.Size(259, 31);
+            this.toolStripAddCode.Stretch = true;
+            this.toolStripAddCode.TabIndex = 9;
+            this.toolStripAddCode.Text = "mxToolStrip2";
+            // 
+            // toolStripButtonAddCode
+            // 
+            this.toolStripButtonAddCode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAddCode.Image = global::mexTool.Properties.Resources.plus;
+            this.toolStripButtonAddCode.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAddCode.Name = "toolStripButtonAddCode";
+            this.toolStripButtonAddCode.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButtonAddCode.Text = "Add Code";
+            this.toolStripButtonAddCode.Click += new System.EventHandler(this.toolStripButtonAddCode_Click);
+            // 
+            // toolStripButtonRemoveCode
+            // 
+            this.toolStripButtonRemoveCode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonRemoveCode.Image = global::mexTool.Properties.Resources.minus;
+            this.toolStripButtonRemoveCode.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonRemoveCode.Name = "toolStripButtonRemoveCode";
+            this.toolStripButtonRemoveCode.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButtonRemoveCode.Text = "Remove Code";
+            this.toolStripButtonRemoveCode.Click += new System.EventHandler(this.toolStripButtonRemoveCode_Click);
             // 
             // label4
             // 
@@ -186,7 +220,7 @@ namespace mexTool.GUI.Pages
             this.tbCodeDescription.Multiline = true;
             this.tbCodeDescription.Name = "tbCodeDescription";
             this.tbCodeDescription.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbCodeDescription.Size = new System.Drawing.Size(503, 66);
+            this.tbCodeDescription.Size = new System.Drawing.Size(470, 66);
             this.tbCodeDescription.TabIndex = 1;
             this.tbCodeDescription.TextChanged += new System.EventHandler(this.tbCodeDescription_TextChanged);
             // 
@@ -203,7 +237,7 @@ namespace mexTool.GUI.Pages
             this.tbCodeData.Multiline = true;
             this.tbCodeData.Name = "tbCodeData";
             this.tbCodeData.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbCodeData.Size = new System.Drawing.Size(503, 257);
+            this.tbCodeData.Size = new System.Drawing.Size(470, 257);
             this.tbCodeData.TabIndex = 1;
             this.tbCodeData.TextChanged += new System.EventHandler(this.tbCodeData_TextChanged);
             // 
@@ -217,7 +251,7 @@ namespace mexTool.GUI.Pages
             this.tbCreator.ForeColor = System.Drawing.Color.White;
             this.tbCreator.Location = new System.Drawing.Point(85, 44);
             this.tbCreator.Name = "tbCreator";
-            this.tbCreator.Size = new System.Drawing.Size(435, 26);
+            this.tbCreator.Size = new System.Drawing.Size(402, 26);
             this.tbCreator.TabIndex = 0;
             this.tbCreator.TextChanged += new System.EventHandler(this.tbCreator_TextChanged);
             // 
@@ -231,54 +265,9 @@ namespace mexTool.GUI.Pages
             this.tbCodeName.ForeColor = System.Drawing.Color.White;
             this.tbCodeName.Location = new System.Drawing.Point(85, 12);
             this.tbCodeName.Name = "tbCodeName";
-            this.tbCodeName.Size = new System.Drawing.Size(435, 26);
+            this.tbCodeName.Size = new System.Drawing.Size(402, 26);
             this.tbCodeName.TabIndex = 0;
             this.tbCodeName.TextChanged += new System.EventHandler(this.tbCodeName_TextChanged);
-            // 
-            // mxToolStrip2
-            // 
-            this.mxToolStrip2.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.mxToolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripButton2,
-            this.toolStripButton3});
-            this.mxToolStrip2.Location = new System.Drawing.Point(0, 0);
-            this.mxToolStrip2.Name = "mxToolStrip2";
-            this.mxToolStrip2.Size = new System.Drawing.Size(766, 31);
-            this.mxToolStrip2.Stretch = true;
-            this.mxToolStrip2.TabIndex = 7;
-            this.mxToolStrip2.Text = "mxToolStrip2";
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::mexTool.Properties.Resources.plus;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(28, 28);
-            this.toolStripButton1.Text = "Add Code";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = global::mexTool.Properties.Resources.minus;
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(28, 28);
-            this.toolStripButton2.Text = "Remove Code";
-            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
-            // 
-            // toolStripButton3
-            // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(28, 28);
-            this.toolStripButton3.Text = "toolStripButton3";
-            this.toolStripButton3.Visible = false;
-            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
             // mxToolStrip1
             // 
@@ -289,13 +278,46 @@ namespace mexTool.GUI.Pages
             this.mxToolStrip1.Text = "mxToolStrip1";
             this.mxToolStrip1.Visible = false;
             // 
+            // buttonCustom
+            // 
+            this.buttonCustom.BackColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
+            this.buttonCustom.BackColorLight = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(140)))));
+            this.buttonCustom.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(100)))));
+            this.buttonCustom.BorderColor = System.Drawing.Color.Black;
+            this.buttonCustom.CornerRadius = 2;
+            this.buttonCustom.ForeColor = System.Drawing.Color.White;
+            this.buttonCustom.Location = new System.Drawing.Point(85, 0);
+            this.buttonCustom.Name = "buttonCustom";
+            this.buttonCustom.Size = new System.Drawing.Size(75, 23);
+            this.buttonCustom.TabIndex = 3;
+            this.buttonCustom.Text = "Custom";
+            this.buttonCustom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonCustom.Click += new System.EventHandler(this.buttonCustom_Click);
+            // 
+            // buttonMEX
+            // 
+            this.buttonMEX.BackColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
+            this.buttonMEX.BackColorLight = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(140)))));
+            this.buttonMEX.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(100)))));
+            this.buttonMEX.BorderColor = System.Drawing.Color.Black;
+            this.buttonMEX.CornerRadius = 2;
+            this.buttonMEX.ForeColor = System.Drawing.Color.White;
+            this.buttonMEX.Location = new System.Drawing.Point(4, 0);
+            this.buttonMEX.Name = "buttonMEX";
+            this.buttonMEX.Size = new System.Drawing.Size(75, 23);
+            this.buttonMEX.TabIndex = 4;
+            this.buttonMEX.Text = "MEX";
+            this.buttonMEX.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonMEX.Click += new System.EventHandler(this.buttonMEX_Click);
+            // 
             // CodesPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.Controls.Add(this.mxToolStrip2);
+            this.Controls.Add(this.buttonCustom);
             this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.buttonMEX);
             this.Controls.Add(this.mxToolStrip1);
             this.Name = "CodesPage";
             this.Size = new System.Drawing.Size(766, 513);
@@ -305,8 +327,8 @@ namespace mexTool.GUI.Pages
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.mxToolStrip2.ResumeLayout(false);
-            this.mxToolStrip2.PerformLayout();
+            this.toolStripAddCode.ResumeLayout(false);
+            this.toolStripAddCode.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -324,12 +346,13 @@ namespace mexTool.GUI.Pages
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbCodeDescription;
-        private Controls.MXToolStrip mxToolStrip2;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox tbCreator;
         private System.Windows.Forms.Label labelError;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private Controls.MXToolStrip toolStripAddCode;
+        private System.Windows.Forms.ToolStripButton toolStripButtonAddCode;
+        private System.Windows.Forms.ToolStripButton toolStripButtonRemoveCode;
+        private Controls.MXButton buttonCustom;
+        private Controls.MXButton buttonMEX;
     }
 }

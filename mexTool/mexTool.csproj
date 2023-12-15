@@ -76,7 +76,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationSettings.cs" />
-    <Compile Include="Core\CodesManager.cs" />
+    <Compile Include="Tools\ArrayExtensions.cs" />
+    <Compile Include="Tools\CodeLoader.cs" />
     <Compile Include="Core\FileSystem\FS_Extracted.cs" />
     <Compile Include="Core\FileSystem\FS_ISO.cs" />
     <Compile Include="Core\FileSystem\FS_Base.cs" />
@@ -295,13 +296,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tools\CodesINI.cs" />
+    <Compile Include="Tools\Codes.cs" />
     <Compile Include="Tools\CSPCompressor.cs" />
     <Compile Include="Tools\DSPExtensions.cs" />
     <Compile Include="Tools\DSPPlayer.cs" />
     <Compile Include="Tools\GawUIGen.cs" />
     <Compile Include="Tools\GraphicExtensions.cs" />
     <Compile Include="Tools\HashGen.cs" />
+    <Compile Include="Tools\Hex.cs" />
     <Compile Include="Tools\ImageTools.cs" />
     <Compile Include="Tools\ObjectExtensions.cs" />
     <Compile Include="Tools\StageNameGenerator.cs" />
