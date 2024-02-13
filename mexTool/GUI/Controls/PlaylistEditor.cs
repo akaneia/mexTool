@@ -29,7 +29,25 @@ namespace mexTool.GUI.Controls
                     _player.Stop();
             };
 
-            Disposed += (sender, args) => { _player.Dispose(); timer.Stop(); timer.Dispose(); };
+            MEX.BackgroundMusic.ListChanged += RegenerateEditorCallback;
+
+            Disposed += (sender, args) =>
+            {
+                MEX.BackgroundMusic.ListChanged -= RegenerateEditorCallback;
+                _player.Dispose(); 
+                timer.Stop(); 
+                timer.Dispose(); 
+            };
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="e"></param>
+        private void RegenerateEditorCallback(object s, object e)
+        {
+            GenerateEditor();
         }
 
         /// <summary>
@@ -52,8 +70,9 @@ namespace mexTool.GUI.Controls
 
             panel1.Controls.Clear();
 
-            foreach(var entry in _playList.Entries)
-                AddEditor(entry);
+            if (_playList != null)
+                foreach (var entry in _playList.Entries)
+                    AddEditor(entry);
         }
 
         /// <summary>

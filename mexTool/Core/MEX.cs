@@ -379,7 +379,8 @@ namespace mexTool.Core
 
             // load main menu playlist
             MainMenuPlaylist = new MEXPlaylist();
-            MainMenuPlaylist.Entries.AddRange(_mexData.MusicTable.MenuPlaylist.Array.Select(e => new MEXPlaylistEntry() { Music = BackgroundMusic[e.HPSID], PlayChance = e.ChanceToPlay }));
+            foreach (var m in _mexData.MusicTable.MenuPlaylist.Array.Select(e => new MEXPlaylistEntry() { Music = BackgroundMusic[e.HPSID], PlayChance = e.ChanceToPlay }))
+                MainMenuPlaylist.Entries.Add(m);
 
 
             // load items

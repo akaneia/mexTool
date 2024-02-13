@@ -12,7 +12,7 @@ namespace mexTool.Core
     /// </summary>
     public class MEXPlaylist
     {
-        public List<MEXPlaylistEntry> Entries = new List<MEXPlaylistEntry>();
+        public List<MEXPlaylistEntry> Entries { get; internal set; } = new List<MEXPlaylistEntry>();
 
         /// <summary>
         /// 
