@@ -638,12 +638,12 @@ namespace mexTool
                     using (GCILib.GCISO iso = new GCILib.GCISO(Core.MEX.ImageResource.GetBoot(), Core.MEX.ImageResource.GetBin2(), Core.MEX.ImageResource.GetAppLoader(), Core.MEX.ImageResource.GetDOL()))
                     {
                         // put files in specific order
-                        var file_order = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lib\\file_order.txt");
-                        if (File.Exists(file_order))
-                        {
-                            var filelist = File.ReadAllLines(file_order);
-                            iso.SetAddressTable(filelist);
-                        }
+                        //var file_order = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lib\\file_order.txt");
+                        //if (File.Exists(file_order))
+                        //{
+                        //    var filelist = File.ReadAllLines(file_order);
+                        //    iso.SetAddressTable(filelist);
+                        //}
                         
                         // add files to iso
                         foreach (var file in Core.MEX.ImageResource.GetAllFiles())

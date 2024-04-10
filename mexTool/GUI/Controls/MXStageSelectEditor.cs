@@ -316,5 +316,27 @@ namespace mexTool.GUI.Controls
             foreach(var icon in toRemove)
                 MEX.StageIcons.Remove(icon);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonExportName_Click(object sender, EventArgs e)
+        {
+            if (stageListBox.SelectedItems.Count == 1 && stageListBox.SelectedItem is MEXStageIcon icon)
+            {
+                using (SaveFileDialog d = new SaveFileDialog())
+                {
+                    d.Filter = "PNG (*.png)|*.png";
+
+                    if (d.ShowDialog() == DialogResult.OK)
+                    {
+                        using (var bmp = icon._previewText.ToBitmap())
+                            bmp.Save(d.FileName);
+                    }
+                }
+            }
+        }
     }
 }

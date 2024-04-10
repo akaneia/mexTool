@@ -45,6 +45,7 @@ namespace mexTool.GUI.Controls
             this.addStage = new mexTool.GUI.Controls.MXButton();
             this.mxPropertyGrid1 = new mexTool.GUI.Controls.MXPropertyGrid();
             this.stageListBox = new mexTool.GUI.MXListBox();
+            this.buttonExportName = new mexTool.GUI.Controls.MXButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nameTagBox)).BeginInit();
@@ -60,7 +61,7 @@ namespace mexTool.GUI.Controls
             this.panel1.Controls.Add(this.renderer);
             this.panel1.Location = new System.Drawing.Point(209, 86);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(737, 502);
+            this.panel1.Size = new System.Drawing.Size(877, 502);
             this.panel1.TabIndex = 2;
             // 
             // renderer
@@ -72,13 +73,14 @@ namespace mexTool.GUI.Controls
             this.renderer.EnableSnap = true;
             this.renderer.Frame = 0;
             this.renderer.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.renderer.GridEnabled = false;
             this.renderer.GridHeight = 40;
             this.renderer.GridWidth = 40;
             this.renderer.Location = new System.Drawing.Point(0, 0);
             this.renderer.MaxFrame = 1600;
             this.renderer.Name = "renderer";
             this.renderer.ScreenSize = new System.Drawing.Size(64, 48);
-            this.renderer.Size = new System.Drawing.Size(737, 502);
+            this.renderer.Size = new System.Drawing.Size(877, 502);
             this.renderer.TabIndex = 0;
             this.renderer.Zoom = 7F;
             this.renderer.SelectedIconChanged += new System.EventHandler(this.renderer_SelectedIconChanged);
@@ -104,7 +106,7 @@ namespace mexTool.GUI.Controls
             // 
             // nameTagBox
             // 
-            this.nameTagBox.Location = new System.Drawing.Point(484, 5);
+            this.nameTagBox.Location = new System.Drawing.Point(311, 5);
             this.nameTagBox.Name = "nameTagBox";
             this.nameTagBox.Size = new System.Drawing.Size(224, 56);
             this.nameTagBox.TabIndex = 6;
@@ -112,6 +114,7 @@ namespace mexTool.GUI.Controls
             // 
             // imageEditPanel
             // 
+            this.imageEditPanel.Controls.Add(this.buttonExportName);
             this.imageEditPanel.Controls.Add(this.stageNameBox);
             this.imageEditPanel.Controls.Add(this.locationBox);
             this.imageEditPanel.Controls.Add(this.buttonGenerateTag);
@@ -122,20 +125,20 @@ namespace mexTool.GUI.Controls
             this.imageEditPanel.Controls.Add(this.iconBox);
             this.imageEditPanel.Location = new System.Drawing.Point(209, 16);
             this.imageEditPanel.Name = "imageEditPanel";
-            this.imageEditPanel.Size = new System.Drawing.Size(735, 67);
+            this.imageEditPanel.Size = new System.Drawing.Size(877, 67);
             this.imageEditPanel.TabIndex = 7;
             this.imageEditPanel.Visible = false;
             // 
             // stageNameBox
             // 
-            this.stageNameBox.Location = new System.Drawing.Point(311, 39);
+            this.stageNameBox.Location = new System.Drawing.Point(611, 35);
             this.stageNameBox.Name = "stageNameBox";
             this.stageNameBox.Size = new System.Drawing.Size(167, 20);
             this.stageNameBox.TabIndex = 7;
             // 
             // locationBox
             // 
-            this.locationBox.Location = new System.Drawing.Point(311, 9);
+            this.locationBox.Location = new System.Drawing.Point(611, 9);
             this.locationBox.Name = "locationBox";
             this.locationBox.Size = new System.Drawing.Size(167, 20);
             this.locationBox.TabIndex = 7;
@@ -147,11 +150,11 @@ namespace mexTool.GUI.Controls
             this.buttonGenerateTag.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.buttonGenerateTag.BorderColor = System.Drawing.Color.Black;
             this.buttonGenerateTag.ForeColor = System.Drawing.Color.White;
-            this.buttonGenerateTag.Location = new System.Drawing.Point(192, 3);
+            this.buttonGenerateTag.Location = new System.Drawing.Point(541, 5);
             this.buttonGenerateTag.Name = "buttonGenerateTag";
-            this.buttonGenerateTag.Size = new System.Drawing.Size(113, 26);
+            this.buttonGenerateTag.Size = new System.Drawing.Size(64, 56);
             this.buttonGenerateTag.TabIndex = 4;
-            this.buttonGenerateTag.Text = "Generate Tag";
+            this.buttonGenerateTag.Text = "Generate";
             this.buttonGenerateTag.Click += new System.EventHandler(this.buttonGenerateTag_Click);
             // 
             // buttonImportIcon
@@ -175,11 +178,11 @@ namespace mexTool.GUI.Controls
             this.buttonExportNameTag.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.buttonExportNameTag.BorderColor = System.Drawing.Color.Black;
             this.buttonExportNameTag.ForeColor = System.Drawing.Color.White;
-            this.buttonExportNameTag.Location = new System.Drawing.Point(192, 35);
+            this.buttonExportNameTag.Location = new System.Drawing.Point(192, 5);
             this.buttonExportNameTag.Name = "buttonExportNameTag";
             this.buttonExportNameTag.Size = new System.Drawing.Size(113, 26);
             this.buttonExportNameTag.TabIndex = 4;
-            this.buttonExportNameTag.Text = "Import Custom";
+            this.buttonExportNameTag.Text = "Import Name";
             this.buttonExportNameTag.Click += new System.EventHandler(this.imageNameTagClick);
             // 
             // buttonExportIcon
@@ -256,8 +259,10 @@ namespace mexTool.GUI.Controls
             // 
             // stageListBox
             // 
+            this.stageListBox.CheckboxSize = new System.Drawing.Size(24, 24);
             this.stageListBox.DataSource = null;
             this.stageListBox.DisplayItemIndices = true;
+            this.stageListBox.EnableCheckBoxes = false;
             this.stageListBox.EnableDragReorder = false;
             this.stageListBox.EnableTOBJ = false;
             this.stageListBox.ForeColor = System.Drawing.Color.White;
@@ -274,6 +279,20 @@ namespace mexTool.GUI.Controls
             this.stageListBox.TabIndex = 1;
             this.stageListBox.SelectedValueChanged += new System.EventHandler(this.stageListBox_SelectedValueChanged);
             // 
+            // buttonExportName
+            // 
+            this.buttonExportName.BackColorDark = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
+            this.buttonExportName.BackColorLight = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(140)))));
+            this.buttonExportName.BackFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.buttonExportName.BorderColor = System.Drawing.Color.Black;
+            this.buttonExportName.ForeColor = System.Drawing.Color.White;
+            this.buttonExportName.Location = new System.Drawing.Point(192, 35);
+            this.buttonExportName.Name = "buttonExportName";
+            this.buttonExportName.Size = new System.Drawing.Size(113, 26);
+            this.buttonExportName.TabIndex = 8;
+            this.buttonExportName.Text = "Export Name";
+            this.buttonExportName.Click += new System.EventHandler(this.buttonExportName_Click);
+            // 
             // MXStageSelectEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -286,7 +305,7 @@ namespace mexTool.GUI.Controls
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.stageListBox);
             this.Name = "MXStageSelectEditor";
-            this.Size = new System.Drawing.Size(950, 591);
+            this.Size = new System.Drawing.Size(1090, 591);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.iconBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nameTagBox)).EndInit();
@@ -315,5 +334,6 @@ namespace mexTool.GUI.Controls
         private MXButton buttonExportNameTag;
         private System.Windows.Forms.TextBox stageNameBox;
         private System.Windows.Forms.TextBox locationBox;
+        private MXButton buttonExportName;
     }
 }
