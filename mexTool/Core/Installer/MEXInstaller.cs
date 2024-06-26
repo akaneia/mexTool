@@ -75,6 +75,9 @@ namespace mexTool.Core.Installer
                     EnterScene = 2,
                     LastMajor = 45, //?
                     LastMinor = 45,
+
+                    TrophyCount = 0x125,
+                    TrophySDOffset = 302,
                 };
 
                 // Version

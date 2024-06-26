@@ -115,7 +115,9 @@ namespace mexTool
             else
             if (WindowState == FormWindowState.Normal)
             {
-                MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+                var prim = Screen.PrimaryScreen.WorkingArea;
+                var win = Screen.FromHandle(this.Handle).WorkingArea;
+                MaximizedBounds = new Rectangle(prim.X, prim.Y, win.Width, win.Height);
                 WindowState = FormWindowState.Maximized;
             }
         }
